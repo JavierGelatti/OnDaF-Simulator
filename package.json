@@ -1,0 +1,42 @@
+{
+  "name": "ondafsimulator",
+  "title": "OnDaF Simulator",
+  "description": "An application that helps students practice for the onDaF online test",
+  "version": "0.1.0",
+  "homepage": "https://github.com/javierGelatti/OnDaF-Simulator",
+  "author": {
+    "name": "Facundo Javier Gelatti",
+    "email": "javiergelatti@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:javierGelatti/OnDaF-Simulator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/javierGelatti/OnDaF-Simulator/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/javierGelatti/OnDaF-Simulator/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": "0.10.x || 0.12.x || >=4.0.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "amber-dev": "^0.8.5",
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.7.0",
+    "grunt-contrib-requirejs": "^0.4.4",
+    "grunt-execute": "^0.2.2",
+    "requirejs": "^2.1.15"
+  },
+  "keywords": [
+    "Amber",
+    "Smalltalk"
+  ]
+}
