@@ -1,0 +1,3 @@
+Beispieltest
+
+Nach einem Klick auf „Deutsch" oder „Englisch" wird zue{rst} automatisch geprüft, ob Ihre Browser-Einstell{ungen} für die Durchführung des Beispieltests geeignet sind. Falls eine Fehler{meldung} erscheint, ändern Sie bitte die entspre{chende} Einstellung. 

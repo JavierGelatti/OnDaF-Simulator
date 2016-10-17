@@ -6,6 +6,13 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="Facundo Javier Gelatti" />
     <script type='text/javascript' src='the.js'></script>
+    <style type="text/css">
+      .text-file-target {
+        height: 200px;
+        width: 200px;
+        border: 3px dashed gray;
+      }
+    </style>
   </head>
 
   <body>
@@ -20,13 +27,16 @@
   <button id="jquery-append">Hello from jQuery append</button>
   <ol id="output-list"></ol>
   <!-- EXAMPLE APP END -->
+
+
   <script type='text/javascript'>
       require(['app'], function (amber) {
           amber.initialize({
             //used for all new packages in IDE
             'transport.defaultAmdNamespace': "amber-ondafsimulator"
           }).then(function () {
-              require(["amber-ide-starter-dialog"], function (dlg) { dlg.start(); });
+              require('amber/helpers').popupHelios();
+              //require(["amber-ide-starter-dialog"], function (dlg) { dlg.start(); });
               amber.globals.OndafSimulator._start();
           });
       });
