@@ -1,0 +1,19 @@
+body {
+    background: whitesmoke;
+    font-family: sans-serif;
+    /* position: relative; */
+}
+.text-file-target {
+    height: 200px;
+    width: 200px;
+    border: 3px dashed gray;
+}
+.text-card {
+    background: white;
+    min-width: 200px;
+    padding: 1em;
+    display: inline-block;
+    margin: .5em;
+    box-shadow: 2px 2px 5px gray;
+    text-align: center;
+}

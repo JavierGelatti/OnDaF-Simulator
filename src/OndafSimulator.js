@@ -20,7 +20,6 @@ selector: "augmentPage",
 protocol: 'starting',
 fn: function (){
 var self=this;
-var receptorTextos;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -62,12 +61,12 @@ return self._doJQueryAppend();
 $recv($globals.TextFileTarget)._newIn_("body");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"augmentPage",{receptorTextos:receptorTextos},$globals.OndafSimulator)});
+}, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.OndafSimulator)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09| receptorTextos |\x0a\x09'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09\x0a\x09TextFileTarget newIn: 'body'.",
+source: "augmentPage\x0a\x09'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09\x0a\x09TextFileTarget newIn: 'body'.",
 referencedClasses: ["TextFileTarget"],
 //>>excludeEnd("ide");
 messageSends: ["click:", "asJQuery", "doAmberWith", "on:bind:", "asSilk", "doSilkTAG", "doJQueryAppend", "newIn:"]
@@ -636,6 +635,7 @@ referencedClasses: ["ReadableCollection"],
 messageSends: ["with:", "div", "class:", "asJQuery", "on:do:", "preventDefault", "addClass:", "removeClass:", "dropEffect:", "dataTransfer", "originalEvent", "stopPropagation", "handleDrop:", "of:", "files"]
 }),
 $globals.TextFileTarget);
+
 
 $core.addMethod(
 $core.method({
