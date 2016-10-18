@@ -41,7 +41,7 @@ return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1,$2;
 $1=self["@theExamDesigner"];
-$2=$recv("Title".__comma($recv($globals.String)._cr())).__comma("Content");
+$2=$recv("Title".__comma($recv($globals.String)._lf())).__comma("Content");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -55,10 +55,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test01\x0a\x09| anExam |\x0a\x09theExamDesigner considerText: 'Title', String cr, 'Content'.\x0a\x09anExam := theExamDesigner designExam.\x0a\x09self assert: anExam numberOfTexts equals: 1.",
+source: "test01\x0a\x09| anExam |\x0a\x09theExamDesigner considerText: 'Title', String lf, 'Content'.\x0a\x09anExam := theExamDesigner designExam.\x0a\x09self assert: anExam numberOfTexts equals: 1.",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: ["considerText:", ",", "cr", "designExam", "assert:equals:", "numberOfTexts"]
+messageSends: ["considerText:", ",", "lf", "designExam", "assert:equals:", "numberOfTexts"]
 }),
 $globals.ExamDesignerTest);
 
@@ -74,9 +74,9 @@ return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1,$4,$3,$2,$5,$6;
 $1=self["@theExamDesigner"];
-$4=$recv($globals.String)._cr();
+$4=$recv($globals.String)._lf();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["cr"]=1;
+$ctx1.sendIdx["lf"]=1;
 //>>excludeEnd("ctx");
 $3="Title A".__comma($4);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -91,7 +91,7 @@ $recv($1)._considerText_($2);
 $ctx1.sendIdx["considerText:"]=1;
 //>>excludeEnd("ctx");
 $5=self["@theExamDesigner"];
-$6=$recv("Title B".__comma($recv($globals.String)._cr())).__comma("Content 2");
+$6=$recv("Title B".__comma($recv($globals.String)._lf())).__comma("Content 2");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
@@ -105,10 +105,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test02\x0a\x09| anExam |\x0a\x09theExamDesigner considerText: 'Title A', String cr, 'Content 1'.\x0a\x09theExamDesigner considerText: 'Title B', String cr, 'Content 2'.\x0a\x09anExam := theExamDesigner designExam.\x0a\x09self assert: anExam numberOfTexts equals: 2.",
+source: "test02\x0a\x09| anExam |\x0a\x09theExamDesigner considerText: 'Title A', String lf, 'Content 1'.\x0a\x09theExamDesigner considerText: 'Title B', String lf, 'Content 2'.\x0a\x09anExam := theExamDesigner designExam.\x0a\x09self assert: anExam numberOfTexts equals: 2.",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: ["considerText:", ",", "cr", "designExam", "assert:equals:", "numberOfTexts"]
+messageSends: ["considerText:", ",", "lf", "designExam", "assert:equals:", "numberOfTexts"]
 }),
 $globals.ExamDesignerTest);
 
@@ -134,9 +134,9 @@ return $recv(titles)._add_(title);
 //>>excludeEnd("ctx");
 }));
 $1=self["@theExamDesigner"];
-$4=$recv($globals.String)._cr();
+$4=$recv($globals.String)._lf();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["cr"]=1;
+$ctx1.sendIdx["lf"]=1;
 //>>excludeEnd("ctx");
 $3="Title A".__comma($4);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -151,7 +151,7 @@ $recv($1)._considerText_($2);
 $ctx1.sendIdx["considerText:"]=1;
 //>>excludeEnd("ctx");
 $5=self["@theExamDesigner"];
-$6=$recv("Title B".__comma($recv($globals.String)._cr())).__comma("Content 2");
+$6=$recv("Title B".__comma($recv($globals.String)._lf())).__comma("Content 2");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
@@ -164,10 +164,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test03\x0a\x09| titles |\x0a\x09titles := OrderedCollection new.\x0a\x09\x0a\x09theExamDesigner informProgressTo: [ :title | titles add: title ].\x0a\x09theExamDesigner considerText: 'Title A', String cr, 'Content 1'.\x0a\x09theExamDesigner considerText: 'Title B', String cr, 'Content 2'.\x0a\x09\x0a\x09self assert: titles asArray equals: #('Title A' 'Title B').",
+source: "test03\x0a\x09| titles |\x0a\x09titles := OrderedCollection new.\x0a\x09\x0a\x09theExamDesigner informProgressTo: [ :title | titles add: title ].\x0a\x09theExamDesigner considerText: 'Title A', String lf, 'Content 1'.\x0a\x09theExamDesigner considerText: 'Title B', String lf, 'Content 2'.\x0a\x09\x0a\x09self assert: titles asArray equals: #('Title A' 'Title B').",
 referencedClasses: ["OrderedCollection", "String"],
 //>>excludeEnd("ide");
-messageSends: ["new", "informProgressTo:", "add:", "considerText:", ",", "cr", "assert:equals:", "asArray"]
+messageSends: ["new", "informProgressTo:", "add:", "considerText:", ",", "lf", "assert:equals:", "asArray"]
 }),
 $globals.ExamDesignerTest);
 
@@ -267,9 +267,9 @@ var aSubmission,aResult;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $3,$2,$1,$4;
-$3=$recv($globals.String)._cr();
+$3=$recv($globals.String)._lf();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["cr"]=1;
+$ctx1.sendIdx["lf"]=1;
 //>>excludeEnd("ctx");
 $2="Title A".__comma($3);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -279,7 +279,7 @@ $1=$recv($2).__comma("he{llo} wor{ld}");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
-$4=$recv("Title B".__comma($recv($globals.String)._cr())).__comma("loca{tion}");
+$4=$recv("Title B".__comma($recv($globals.String)._lf())).__comma("loca{tion}");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
@@ -294,10 +294,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test03\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String cr, 'he{llo} wor{ld}'\x0a\x09                   and: 'Title B', String cr, 'loca{tion}'.\x0a\x09\x0a\x09aSubmission := #('llo' 'ld' 'tion').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true true true).",
+source: "test03\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'he{llo} wor{ld}'\x0a\x09                   and: 'Title B', String lf, 'loca{tion}'.\x0a\x09\x0a\x09aSubmission := #('llo' 'ld' 'tion').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true true true).",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: ["givenExamWithText:and:", ",", "cr", "evaluate:", "assert:equals:", "individualResults"]
+messageSends: ["givenExamWithText:and:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
 }),
 $globals.ExamTest);
 
@@ -312,7 +312,7 @@ var aSubmission,aResult;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._cr())).__comma("And the text said: he{llo} wor{ld}.");
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -327,10 +327,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test04\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String cr, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('llo' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true true).",
+source: "test04\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('llo' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true true).",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "cr", "evaluate:", "assert:equals:", "individualResults"]
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
 }),
 $globals.ExamTest);
 
@@ -345,7 +345,7 @@ var aSubmission,aResult;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._cr())).__comma("And the text said: he{llo} wor{ld}.");
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -360,10 +360,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test05\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String cr, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'answer').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(false false).",
+source: "test05\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'answer').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(false false).",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "cr", "evaluate:", "assert:equals:", "individualResults"]
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
 }),
 $globals.ExamTest);
 
@@ -378,7 +378,7 @@ var aSubmission,aResult;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._cr())).__comma("And the text said: he{llo} wor{ld}.");
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -393,10 +393,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test06\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String cr, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('llo').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true false).",
+source: "test06\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('llo').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true false).",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "cr", "evaluate:", "assert:equals:", "individualResults"]
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
 }),
 $globals.ExamTest);
 
@@ -411,7 +411,7 @@ var aSubmission,aResult;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._cr())).__comma("And the text said: he{llo} wor{ld}.");
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -426,10 +426,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test07\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String cr, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(false true).",
+source: "test07\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(false true).",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "cr", "evaluate:", "assert:equals:", "individualResults"]
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
 }),
 $globals.ExamTest);
 
@@ -444,7 +444,7 @@ var aSubmission,aResult;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._cr())).__comma("And the text said: he{llo} wor{ld}.");
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -459,10 +459,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test08\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String cr, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult percentage equals: 50.",
+source: "test08\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult percentage equals: 50.",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "cr", "evaluate:", "assert:equals:", "percentage"]
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "percentage"]
 }),
 $globals.ExamTest);
 
@@ -477,7 +477,7 @@ var aPrinter;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._cr())).__comma("And the text said: he{llo} wor{ld}.");
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -492,10 +492,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test09\x0a\x09| aPrinter |\x0a\x09self givenExamWithText: 'Title A', String cr, 'And the text said: he{llo} wor{ld}.'.\x0a\x09aPrinter := TestPrinter new.\x0a\x09\x0a\x09theExam copyOn: aPrinter.\x0a\x09\x0a\x09self assert: aPrinter printedText equals: '|Title A| And the text said: he_ wor_ . '.",
+source: "test09\x0a\x09| aPrinter |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09aPrinter := TestPrinter new.\x0a\x09\x0a\x09theExam copyOn: aPrinter.\x0a\x09\x0a\x09self assert: aPrinter printedText equals: '|Title A| And the text said: he_ wor_ . '.",
 referencedClasses: ["String", "TestPrinter"],
 //>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "cr", "new", "copyOn:", "assert:equals:", "printedText"]
+messageSends: ["givenExamWithText:", ",", "lf", "new", "copyOn:", "assert:equals:", "printedText"]
 }),
 $globals.ExamTest);
 
@@ -596,12 +596,12 @@ return $core.withContext(function($ctx1) {
 var $1,$4,$3,$2;
 anInterpreter=$recv($globals.CTestInterpreter)._new();
 $1=anInterpreter;
-$4=$recv($globals.String)._cr();
+$4=$recv($globals.String)._lf();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["cr"]=1;
+$ctx1.sendIdx["lf"]=1;
 //>>excludeEnd("ctx");
 $3=$recv($4).__comma(" The Title ");
-$2=$recv($3).__comma($recv($globals.String)._cr());
+$2=$recv($3).__comma($recv($globals.String)._lf());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -614,10 +614,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test4\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: String cr, ' The Title ', String cr.\x0a\x09self assert: aText title equals: 'The Title'.",
+source: "test4\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: String lf, ' The Title ', String lf.\x0a\x09self assert: aText title equals: 'The Title'.",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
-messageSends: ["new", "interpretText:", ",", "cr", "assert:equals:", "title"]
+messageSends: ["new", "interpretText:", ",", "lf", "assert:equals:", "title"]
 }),
 $globals.InterpreterText);
 
@@ -634,7 +634,7 @@ return $core.withContext(function($ctx1) {
 var $1,$2;
 anInterpreter=$recv($globals.CTestInterpreter)._new();
 $1=anInterpreter;
-$2=$recv("The Title".__comma($recv($globals.String)._cr())).__comma("The content");
+$2=$recv("The Title".__comma($recv($globals.String)._lf())).__comma("The content");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -651,10 +651,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test5\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: 'The Title', String cr, 'The content'.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The content'",
+source: "test5\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: 'The Title', String lf, 'The content'.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The content'",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
-messageSends: ["new", "interpretText:", ",", "cr", "assert:equals:", "title", "contentAsString"]
+messageSends: ["new", "interpretText:", ",", "lf", "assert:equals:", "title", "contentAsString"]
 }),
 $globals.InterpreterText);
 
@@ -671,7 +671,7 @@ return $core.withContext(function($ctx1) {
 var $1,$2;
 anInterpreter=$recv($globals.CTestInterpreter)._new();
 $1=anInterpreter;
-$2=$recv("The Title".__comma($recv($globals.String)._cr())).__comma("   The content  ");
+$2=$recv("The Title".__comma($recv($globals.String)._lf())).__comma("   The content  ");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -688,10 +688,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test6\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: 'The Title', String cr, '   The content  '.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The content'",
+source: "test6\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: 'The Title', String lf, '   The content  '.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The content'",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
-messageSends: ["new", "interpretText:", ",", "cr", "assert:equals:", "title", "contentAsString"]
+messageSends: ["new", "interpretText:", ",", "lf", "assert:equals:", "title", "contentAsString"]
 }),
 $globals.InterpreterText);
 
@@ -707,16 +707,16 @@ return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $4,$3,$2,$1;
 anInterpreter=$recv($globals.CTestInterpreter)._new();
-$4=$recv($globals.String)._cr();
+$4=$recv($globals.String)._lf();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["cr"]=1;
+$ctx1.sendIdx["lf"]=1;
 //>>excludeEnd("ctx");
 $3="The Title".__comma($4);
 $2=$recv($3).__comma("The content");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$1=$recv($2).__comma($recv($globals.String)._cr());
+$1=$recv($2).__comma($recv($globals.String)._lf());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=2;
 //>>excludeEnd("ctx");
@@ -737,10 +737,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test7\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String cr , 'The content' , String cr, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: \x09'The content More content'",
+source: "test7\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String lf , 'The content' , String lf, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: \x09'The content More content'",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
-messageSends: ["new", ",", "cr", "interpretText:", "assert:equals:", "title", "contentAsString"]
+messageSends: ["new", ",", "lf", "interpretText:", "assert:equals:", "title", "contentAsString"]
 }),
 $globals.InterpreterText);
 
@@ -756,16 +756,16 @@ return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $4,$3,$2,$1;
 anInterpreter=$recv($globals.CTestInterpreter)._new();
-$4=$recv($globals.String)._cr();
+$4=$recv($globals.String)._lf();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["cr"]=1;
+$ctx1.sendIdx["lf"]=1;
 //>>excludeEnd("ctx");
 $3="The Title".__comma($4);
 $2=$recv($3).__comma("The cont{ent}");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$1=$recv($2).__comma($recv($globals.String)._cr());
+$1=$recv($2).__comma($recv($globals.String)._lf());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=2;
 //>>excludeEnd("ctx");
@@ -786,10 +786,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test8\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String cr , 'The cont{ent}' , String cr, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The cont{ent} More content'",
+source: "test8\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String lf , 'The cont{ent}' , String lf, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The cont{ent} More content'",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
-messageSends: ["new", ",", "cr", "interpretText:", "assert:equals:", "title", "contentAsString"]
+messageSends: ["new", ",", "lf", "interpretText:", "assert:equals:", "title", "contentAsString"]
 }),
 $globals.InterpreterText);
 
@@ -912,7 +912,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@aParser"])._consumeAllIn_($recv(" ".__comma($recv($globals.String)._cr()))._readStream());
+$recv(self["@aParser"])._consumeAllIn_($recv(" ".__comma($recv($globals.String)._lf()))._readStream());
 self._assert_equals_($recv(self["@aParser"])._contents(),$recv($globals.OrderedCollection)._new());
 self._assertState_("Waiting");
 return self;
@@ -922,10 +922,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test03ReadBlankWhenWaiting\x0a\x09aParser consumeAllIn: (' ', String cr) readStream.\x0a\x09self assert: aParser contents equals: OrderedCollection new.\x0a\x09self assertState: 'Waiting'",
+source: "test03ReadBlankWhenWaiting\x0a\x09aParser consumeAllIn: (' ', String lf) readStream.\x0a\x09self assert: aParser contents equals: OrderedCollection new.\x0a\x09self assertState: 'Waiting'",
 referencedClasses: ["String", "OrderedCollection"],
 //>>excludeEnd("ide");
-messageSends: ["consumeAllIn:", "readStream", ",", "cr", "assert:equals:", "contents", "new", "assertState:"]
+messageSends: ["consumeAllIn:", "readStream", ",", "lf", "assert:equals:", "contents", "new", "assertState:"]
 }),
 $globals.ParserForContentTest);
 
@@ -1004,7 +1004,7 @@ var text;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1,$2;
-text=$recv($recv($recv($globals.String)._cr()).__comma("   asd   qwerty  ")).__comma($recv($globals.String)._tab());
+text=$recv($recv($recv($globals.String)._lf()).__comma("   asd   qwerty  ")).__comma($recv($globals.String)._tab());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -1023,10 +1023,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test06ParseTextWithSpaces\x0a\x09| text |\x0a\x09text := String cr, '   asd   qwerty  ', String tab.\x0a\x09aParser consumeAllIn: text readStream.\x0a\x09self assert: aParser contents equals: (OrderedCollection\x0a\x09\x09with: (CompletedText with: 'asd qwerty')\x0a\x09).\x0a\x09self assertState: 'WaitingForWord'",
+source: "test06ParseTextWithSpaces\x0a\x09| text |\x0a\x09text := String lf, '   asd   qwerty  ', String tab.\x0a\x09aParser consumeAllIn: text readStream.\x0a\x09self assert: aParser contents equals: (OrderedCollection\x0a\x09\x09with: (CompletedText with: 'asd qwerty')\x0a\x09).\x0a\x09self assertState: 'WaitingForWord'",
 referencedClasses: ["String", "OrderedCollection", "CompletedText"],
 //>>excludeEnd("ide");
-messageSends: [",", "cr", "tab", "consumeAllIn:", "readStream", "assert:equals:", "contents", "with:", "assertState:"]
+messageSends: [",", "lf", "tab", "consumeAllIn:", "readStream", "assert:equals:", "contents", "with:", "assertState:"]
 }),
 $globals.ParserForContentTest);
 
@@ -1137,9 +1137,9 @@ var text;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $5,$4,$3,$2,$1,$6,$8,$9,$7;
-$5=$recv($globals.String)._cr();
+$5=$recv($globals.String)._lf();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["cr"]=1;
+$ctx1.sendIdx["lf"]=1;
 //>>excludeEnd("ctx");
 $4=$recv($5).__comma("   pre  text  1 ");
 $3=$recv($4).__comma($recv($globals.String)._tab());
@@ -1150,7 +1150,7 @@ $2=$recv($3).__comma(" and   he{llo} post.  ");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$1=$recv($2).__comma($recv($globals.String)._cr());
+$1=$recv($2).__comma($recv($globals.String)._lf());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=2;
 //>>excludeEnd("ctx");
@@ -1177,10 +1177,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test10ParseTextWithOneOptionWordsToComplete\x0a\x09| text |\x0a\x09text := String cr, '   pre  text  1 ', String tab, ' and   he{llo} post.  ', String cr, ' text  anot{her}    '.\x0a\x09aParser consumeAllIn: text readStream.\x0a\x09self assert: aParser contents equals: (OrderedCollection\x0a\x09\x09with: (CompletedText with: 'pre text 1 and')\x0a\x09\x09with: (WordToComplete withPrefix: 'he' options: #('llo'))\x0a\x09\x09with: (CompletedText with: 'post. text')\x0a\x09\x09with: (WordToComplete withPrefix: 'anot' options: #('her'))\x0a\x09).",
+source: "test10ParseTextWithOneOptionWordsToComplete\x0a\x09| text |\x0a\x09text := String lf, '   pre  text  1 ', String tab, ' and   he{llo} post.  ', String lf, ' text  anot{her}    '.\x0a\x09aParser consumeAllIn: text readStream.\x0a\x09self assert: aParser contents equals: (OrderedCollection\x0a\x09\x09with: (CompletedText with: 'pre text 1 and')\x0a\x09\x09with: (WordToComplete withPrefix: 'he' options: #('llo'))\x0a\x09\x09with: (CompletedText with: 'post. text')\x0a\x09\x09with: (WordToComplete withPrefix: 'anot' options: #('her'))\x0a\x09).",
 referencedClasses: ["String", "OrderedCollection", "CompletedText", "WordToComplete"],
 //>>excludeEnd("ide");
-messageSends: [",", "cr", "tab", "consumeAllIn:", "readStream", "assert:equals:", "contents", "with:with:with:with:", "with:", "withPrefix:options:"]
+messageSends: [",", "lf", "tab", "consumeAllIn:", "readStream", "assert:equals:", "contents", "with:with:with:with:", "with:", "withPrefix:options:"]
 }),
 $globals.ParserForContentTest);
 
@@ -1297,7 +1297,7 @@ var text;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1,$2;
-text=$recv("some text.".__comma($recv($globals.String)._cr())).__comma("more text");
+text=$recv("some text.".__comma($recv($globals.String)._lf())).__comma("more text");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -1315,10 +1315,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test14ParseTextWithLineBreaks\x0a\x09| text |\x0a\x09text := 'some text.', String cr, 'more text'.\x0a\x09aParser consumeAllIn: text readStream.\x0a\x09self assert: aParser contents equals: (OrderedCollection\x0a\x09\x09with: (CompletedText with: 'some text. more text')\x0a\x09).",
+source: "test14ParseTextWithLineBreaks\x0a\x09| text |\x0a\x09text := 'some text.', String lf, 'more text'.\x0a\x09aParser consumeAllIn: text readStream.\x0a\x09self assert: aParser contents equals: (OrderedCollection\x0a\x09\x09with: (CompletedText with: 'some text. more text')\x0a\x09).",
 referencedClasses: ["String", "OrderedCollection", "CompletedText"],
 //>>excludeEnd("ide");
-messageSends: [",", "cr", "consumeAllIn:", "readStream", "assert:equals:", "contents", "with:"]
+messageSends: [",", "lf", "consumeAllIn:", "readStream", "assert:equals:", "contents", "with:"]
 }),
 $globals.ParserForContentTest);
 
@@ -1421,7 +1421,7 @@ $recv(self["@aParser"])._consume_(" ");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["consume:"]=1;
 //>>excludeEnd("ctx");
-$recv(self["@aParser"])._consume_($recv($globals.String)._cr());
+$recv(self["@aParser"])._consume_($recv($globals.String)._lf());
 self._assert_equals_($recv(self["@aParser"])._contents(),"");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["assert:equals:"]=1;
@@ -1434,10 +1434,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test03ReadBlankWhenWaiting\x0a\x09aParser consume: ' '.\x0a\x09aParser consume: String cr.\x0a\x09self assert: aParser contents equals: ''.\x0a\x09self assert: aParser state equals: 'Waiting'",
+source: "test03ReadBlankWhenWaiting\x0a\x09aParser consume: ' '.\x0a\x09aParser consume: String lf.\x0a\x09self assert: aParser contents equals: ''.\x0a\x09self assert: aParser state equals: 'Waiting'",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: ["consume:", "cr", "assert:equals:", "contents", "state"]
+messageSends: ["consume:", "lf", "assert:equals:", "contents", "state"]
 }),
 $globals.ParserForTitleTest);
 
@@ -1525,7 +1525,7 @@ var text;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-text=$recv($recv($recv($globals.String)._cr()).__comma("   asd   qwerty  ")).__comma($recv($globals.String)._tab());
+text=$recv($recv($recv($globals.String)._lf()).__comma("   asd   qwerty  ")).__comma($recv($globals.String)._tab());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -1550,10 +1550,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test06ParseTextWithSpaces\x0a\x09| text |\x0a\x09text := String cr, '   asd   qwerty  ', String tab.\x0a\x09text do: [ :c | aParser consume: c asString ].\x0a\x09self assert: aParser contents equals: 'asd qwerty'.\x0a\x09self assert: aParser state equals: 'WaitingForWord'",
+source: "test06ParseTextWithSpaces\x0a\x09| text |\x0a\x09text := String lf, '   asd   qwerty  ', String tab.\x0a\x09text do: [ :c | aParser consume: c asString ].\x0a\x09self assert: aParser contents equals: 'asd qwerty'.\x0a\x09self assert: aParser state equals: 'WaitingForWord'",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: [",", "cr", "tab", "do:", "consume:", "asString", "assert:equals:", "contents", "state"]
+messageSends: [",", "lf", "tab", "do:", "consume:", "asString", "assert:equals:", "contents", "state"]
 }),
 $globals.ParserForTitleTest);
 
@@ -1568,16 +1568,16 @@ var text;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $4,$3,$2,$1;
-$4=$recv($globals.String)._cr();
+$4=$recv($globals.String)._lf();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["cr"]=1;
+$ctx1.sendIdx["lf"]=1;
 //>>excludeEnd("ctx");
 $3=$recv($4).__comma("   asd   qwerty  ");
 $2=$recv($3).__comma($recv($globals.String)._tab());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$1=$recv($2).__comma($recv($globals.String)._cr());
+$1=$recv($2).__comma($recv($globals.String)._lf());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=2;
 //>>excludeEnd("ctx");
@@ -1606,10 +1606,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test07EndInNewLineWhenWaitingForWord\x0a\x09| text |\x0a\x09text := String cr, '   asd   qwerty  ', String tab, String cr, 'more content'.\x0a\x09text do: [ :c | aParser consume: c asString ].\x0a\x09self assert: aParser contents equals: 'asd qwerty'.\x0a\x09self assert: aParser state equals: 'End'",
+source: "test07EndInNewLineWhenWaitingForWord\x0a\x09| text |\x0a\x09text := String lf, '   asd   qwerty  ', String tab, String lf, 'more content'.\x0a\x09text do: [ :c | aParser consume: c asString ].\x0a\x09self assert: aParser contents equals: 'asd qwerty'.\x0a\x09self assert: aParser state equals: 'End'",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: [",", "cr", "tab", "do:", "consume:", "asString", "assert:equals:", "contents", "state"]
+messageSends: [",", "lf", "tab", "do:", "consume:", "asString", "assert:equals:", "contents", "state"]
 }),
 $globals.ParserForTitleTest);
 
@@ -1624,12 +1624,12 @@ var text;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $3,$2,$1;
-$3=$recv($globals.String)._cr();
+$3=$recv($globals.String)._lf();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["cr"]=1;
+$ctx1.sendIdx["lf"]=1;
 //>>excludeEnd("ctx");
 $2=$recv($3).__comma("   asd   qwerty");
-$1=$recv($2).__comma($recv($globals.String)._cr());
+$1=$recv($2).__comma($recv($globals.String)._lf());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=2;
 //>>excludeEnd("ctx");
@@ -1658,10 +1658,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test08EndInNewLineWhenReading\x0a\x09| text |\x0a\x09text := String cr, '   asd   qwerty', String cr, 'more content'.\x0a\x09text do: [ :c | aParser consume: c asString ].\x0a\x09self assert: aParser contents equals: 'asd qwerty'.\x0a\x09self assert: aParser state equals: 'End'",
+source: "test08EndInNewLineWhenReading\x0a\x09| text |\x0a\x09text := String lf, '   asd   qwerty', String lf, 'more content'.\x0a\x09text do: [ :c | aParser consume: c asString ].\x0a\x09self assert: aParser contents equals: 'asd qwerty'.\x0a\x09self assert: aParser state equals: 'End'",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: [",", "cr", "do:", "consume:", "asString", "assert:equals:", "contents", "state"]
+messageSends: [",", "lf", "do:", "consume:", "asString", "assert:equals:", "contents", "state"]
 }),
 $globals.ParserForTitleTest);
 
@@ -1675,7 +1675,7 @@ var text,textStream;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-text=$recv("123".__comma($recv($globals.String)._cr())).__comma("more content");
+text=$recv("123".__comma($recv($globals.String)._lf())).__comma("more content");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -1697,10 +1697,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test09DontKeepReadingIfAtEnd\x0a\x09| text textStream |\x0a\x09text := '123', String cr, 'more content'.\x0a\x09textStream := text readStream.\x0a\x09aParser consumeAllIn: textStream.\x0a\x09self assert: aParser contents equals: '123'.\x0a\x09self assert: aParser state equals: 'End'.\x0a\x09self assert: textStream position equals: 4",
+source: "test09DontKeepReadingIfAtEnd\x0a\x09| text textStream |\x0a\x09text := '123', String lf, 'more content'.\x0a\x09textStream := text readStream.\x0a\x09aParser consumeAllIn: textStream.\x0a\x09self assert: aParser contents equals: '123'.\x0a\x09self assert: aParser state equals: 'End'.\x0a\x09self assert: textStream position equals: 4",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: [",", "cr", "readStream", "consumeAllIn:", "assert:equals:", "contents", "state", "position"]
+messageSends: [",", "lf", "readStream", "consumeAllIn:", "assert:equals:", "contents", "state", "position"]
 }),
 $globals.ParserForTitleTest);
 
@@ -1742,7 +1742,7 @@ var text,textStream;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-text=$recv("   This    is  a 3 ".__comma($recv($globals.String)._cr())).__comma(" more content");
+text=$recv("   This    is  a 3 ".__comma($recv($globals.String)._lf())).__comma(" more content");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -1756,10 +1756,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test11ParseTitle\x0a\x09| text textStream |\x0a\x09text := '   This    is  a 3 ', String cr, ' more content'.\x0a\x09textStream := text readStream.\x0a\x09aParser consumeAllIn: textStream.\x0a\x09self assert: aParser contents equals: 'This is a 3'.",
+source: "test11ParseTitle\x0a\x09| text textStream |\x0a\x09text := '   This    is  a 3 ', String lf, ' more content'.\x0a\x09textStream := text readStream.\x0a\x09aParser consumeAllIn: textStream.\x0a\x09self assert: aParser contents equals: 'This is a 3'.",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: [",", "cr", "readStream", "consumeAllIn:", "assert:equals:", "contents"]
+messageSends: [",", "lf", "readStream", "consumeAllIn:", "assert:equals:", "contents"]
 }),
 $globals.ParserForTitleTest);
 

@@ -1210,17 +1210,17 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(aCharacter).__eq($recv($globals.String)._cr());
+return $recv(aCharacter).__eq($recv($globals.String)._lf());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"isEnter:",{aCharacter:aCharacter},$globals.CTestParserState)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aCharacter"],
-source: "isEnter: aCharacter\x0a\x09^ aCharacter = String cr",
+source: "isEnter: aCharacter\x0a\x09^ aCharacter = String lf",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: ["=", "cr"]
+messageSends: ["=", "lf"]
 }),
 $globals.CTestParserState);
 
@@ -1233,17 +1233,17 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv($recv($globals.Array)._with_with_with_($recv($globals.String)._cr(),$recv($globals.String)._tab(),$recv($globals.String)._space()))._includes_(aCharacter);
+return $recv($recv($globals.Array)._with_with_with_with_($recv($globals.String)._cr(),$recv($globals.String)._lf(),$recv($globals.String)._tab(),$recv($globals.String)._space()))._includes_(aCharacter);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"isWhiteSpace:",{aCharacter:aCharacter},$globals.CTestParserState)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aCharacter"],
-source: "isWhiteSpace: aCharacter\x0a\x09^ (Array with: String cr with: String tab with: String space) includes: aCharacter",
+source: "isWhiteSpace: aCharacter\x0a\x09^ (Array with: String cr with: String lf with: String tab with: String space) includes: aCharacter",
 referencedClasses: ["Array", "String"],
 //>>excludeEnd("ide");
-messageSends: ["includes:", "with:with:with:", "cr", "tab", "space"]
+messageSends: ["includes:", "with:with:with:with:", "cr", "lf", "tab", "space"]
 }),
 $globals.CTestParserState);
 
@@ -1384,7 +1384,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self._when_thenState_($recv($globals.String)._cr(),aState);
+self._when_thenState_($recv($globals.String)._lf(),aState);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"whenEnterState:",{aState:aState},$globals.CTestParserState)});
@@ -1392,10 +1392,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aState"],
-source: "whenEnterState: aState \x0a\x09self when: String cr thenState: aState.",
+source: "whenEnterState: aState \x0a\x09self when: String lf thenState: aState.",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
-messageSends: ["when:thenState:", "cr"]
+messageSends: ["when:thenState:", "lf"]
 }),
 $globals.CTestParserState);
 
