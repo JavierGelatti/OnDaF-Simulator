@@ -112,6 +112,65 @@ messageSends: ["considerText:", ",", "cr", "designExam", "assert:equals:", "numb
 }),
 $globals.ExamDesignerTest);
 
+$core.addMethod(
+$core.method({
+selector: "test03",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var titles;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$4,$3,$2,$5,$6;
+titles=$recv($globals.OrderedCollection)._new();
+$recv(self["@theExamDesigner"])._informProgressTo_((function(title){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(titles)._add_(title);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({title:title},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$1=self["@theExamDesigner"];
+$4=$recv($globals.String)._cr();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["cr"]=1;
+//>>excludeEnd("ctx");
+$3="Title A".__comma($4);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=2;
+//>>excludeEnd("ctx");
+$2=$recv($3).__comma("Content 1");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+$recv($1)._considerText_($2);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["considerText:"]=1;
+//>>excludeEnd("ctx");
+$5=self["@theExamDesigner"];
+$6=$recv("Title B".__comma($recv($globals.String)._cr())).__comma("Content 2");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=3;
+//>>excludeEnd("ctx");
+$recv($5)._considerText_($6);
+self._assert_equals_($recv(titles)._asArray(),["Title A", "Title B"]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test03",{titles:titles},$globals.ExamDesignerTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test03\x0a\x09| titles |\x0a\x09titles := OrderedCollection new.\x0a\x09\x0a\x09theExamDesigner informProgressTo: [ :title | titles add: title ].\x0a\x09theExamDesigner considerText: 'Title A', String cr, 'Content 1'.\x0a\x09theExamDesigner considerText: 'Title B', String cr, 'Content 2'.\x0a\x09\x0a\x09self assert: titles asArray equals: #('Title A' 'Title B').",
+referencedClasses: ["OrderedCollection", "String"],
+//>>excludeEnd("ide");
+messageSends: ["new", "informProgressTo:", "add:", "considerText:", ",", "cr", "assert:equals:", "asArray"]
+}),
+$globals.ExamDesignerTest);
+
 
 
 $core.addClass('ExamTest', $globals.TestCase, ['theExamDesigner', 'theExam'], 'OndafSimulator-Core-Tests');

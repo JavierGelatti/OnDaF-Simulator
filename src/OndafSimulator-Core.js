@@ -2001,28 +2001,31 @@ messageSends: ["initializeWithText:", "new"]
 $globals.CompletedText.klass);
 
 
-$core.addClass('ExamDesigner', $globals.Object, ['texts', 'interpreter'], 'OndafSimulator-Core');
+$core.addClass('ExamDesigner', $globals.Object, ['texts', 'interpreter', 'supervisor'], 'OndafSimulator-Core');
 $core.addMethod(
 $core.method({
 selector: "considerText:",
 protocol: 'as yet unclassified',
 fn: function (aString){
 var self=this;
+var text;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@texts"])._add_(aString);
+text=$recv(self["@interpreter"])._interpretText_(aString);
+$recv(self["@supervisor"])._value_($recv(text)._title());
+$recv(self["@texts"])._add_(text);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"considerText:",{aString:aString},$globals.ExamDesigner)});
+}, function($ctx1) {$ctx1.fill(self,"considerText:",{aString:aString,text:text},$globals.ExamDesigner)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aString"],
-source: "considerText: aString \x0a\x09texts add: aString",
+source: "considerText: aString\x0a\x09| text |\x0a\x09text := interpreter interpretText: aString.\x0a\x09supervisor value: text title.\x0a\x09texts add: text",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["add:"]
+messageSends: ["interpretText:", "value:", "title", "add:"]
 }),
 $globals.ExamDesigner);
 
@@ -2035,25 +2038,36 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv($globals.CTestExam)._withTexts_($recv(self["@texts"])._collect_((function(aText){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return $recv(self["@interpreter"])._interpretText_(aText);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({aText:aText},$ctx1,1)});
-//>>excludeEnd("ctx");
-})));
+return $recv($globals.CTestExam)._withTexts_(self["@texts"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"designExam",{},$globals.ExamDesigner)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "designExam\x0a\x09^ CTestExam withTexts:\x0a\x09\x09(texts collect: [ :aText | interpreter interpretText: aText ])",
+source: "designExam\x0a\x09^ CTestExam withTexts: texts",
 referencedClasses: ["CTestExam"],
 //>>excludeEnd("ide");
-messageSends: ["withTexts:", "collect:", "interpretText:"]
+messageSends: ["withTexts:"]
+}),
+$globals.ExamDesigner);
+
+$core.addMethod(
+$core.method({
+selector: "informProgressTo:",
+protocol: 'as yet unclassified',
+fn: function (aSupervisor){
+var self=this;
+self["@supervisor"]=aSupervisor;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aSupervisor"],
+source: "informProgressTo: aSupervisor\x0a\x09supervisor := aSupervisor",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
 }),
 $globals.ExamDesigner);
 
@@ -2071,6 +2085,9 @@ self["@texts"]=$recv($globals.OrderedCollection)._new();
 $ctx1.sendIdx["new"]=1;
 //>>excludeEnd("ctx");
 self["@interpreter"]=$recv($globals.CTestInterpreter)._new();
+self["@supervisor"]=(function(ignored){
+
+});
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.ExamDesigner)});
@@ -2078,7 +2095,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "initialize\x0a\x09texts := OrderedCollection new.\x0a\x09interpreter := CTestInterpreter new.",
+source: "initialize\x0a\x09texts := OrderedCollection new.\x0a\x09interpreter := CTestInterpreter new.\x0a\x09supervisor := [ :ignored | ]",
 referencedClasses: ["OrderedCollection", "CTestInterpreter"],
 //>>excludeEnd("ide");
 messageSends: ["new"]
