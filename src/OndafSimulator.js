@@ -23,11 +23,14 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
+var $1;
 $recv($recv(html)._header())._with_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return $recv($recv(html)._button())._with_("Start exam");
+$1=$recv(html)._a();
+$recv($1)._with_("Start exam");
+return $recv($1)._tabindex_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -42,13 +45,16 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderOn: html\x0a\x09html header\x0a\x09\x09with: [\x0a\x09\x09\x09html button with: 'Start exam'\x0a\x09\x09]",
+source: "renderOn: html\x0a\x09html header\x0a\x09\x09with: [\x0a\x09\x09\x09html a\x0a\x09\x09\x09\x09with: 'Start exam';\x0a\x09\x09\x09\x09tabindex: 0\x0a\x09\x09]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["with:", "header", "button"]
+messageSends: ["with:", "header", "a", "tabindex:"]
 }),
 $globals.Header);
 
+
+
+$core.addClass('MainScreen', $globals.Widget, [], 'OndafSimulator');
 
 
 $core.addClass('OndafSimulator', $globals.Object, [], 'OndafSimulator');
@@ -61,7 +67,20 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv($globals.TextFileDropTarget)._newIn_("body");
+var $1,$2;
+$1=$recv($globals.Header)._new();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["new"]=1;
+//>>excludeEnd("ctx");
+$2="body"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._appendToJQuery_($2);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["appendToJQuery:"]=1;
+//>>excludeEnd("ctx");
+$recv($recv($globals.TextFileDropTarget)._new())._appendToJQuery_("body"._asJQuery());
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.OndafSimulator)});
@@ -69,10 +88,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09TextFileDropTarget newIn: 'body'.",
-referencedClasses: ["TextFileDropTarget"],
+source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09Header new appendToJQuery: 'body' asJQuery.\x0a\x09TextFileDropTarget new appendToJQuery: 'body' asJQuery.",
+referencedClasses: ["Header", "TextFileDropTarget"],
 //>>excludeEnd("ide");
-messageSends: ["newIn:"]
+messageSends: ["appendToJQuery:", "new", "asJQuery"]
 }),
 $globals.OndafSimulator);
 

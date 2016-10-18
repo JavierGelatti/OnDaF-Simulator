@@ -1,12 +1,32 @@
 body {
     background: whitesmoke;
     font-family: sans-serif;
-    /* position: relative; */
 }
-.text-file-target {
-    height: 200px;
-    width: 200px;
-    border: 3px dashed gray;
+body > header {
+    background: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    text-align: right;
+}
+body > header > a {
+    background: green;
+    display: inline-block;
+    text-align: center;
+    padding: 0 1em;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+}
+body > .text-file-target {
+    background: orange;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 .text-card {
     background: white;

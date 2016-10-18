@@ -9,9 +9,15 @@ Widget subclass: #Header
 renderOn: html
 	html header
 		with: [
-			html button with: 'Start exam'
+			html a
+				with: 'Start exam';
+				tabindex: 0
 		]
 ! !
+
+Widget subclass: #MainScreen
+	instanceVariableNames: ''
+	package: 'OndafSimulator'!
 
 Object subclass: #OndafSimulator
 	instanceVariableNames: ''
@@ -40,7 +46,8 @@ augmentPage
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ]."
 	
-	TextFileDropTarget newIn: 'body'.
+	Header new appendToJQuery: 'body' asJQuery.
+	TextFileDropTarget new appendToJQuery: 'body' asJQuery.
 ! !
 
 !OndafSimulator class methodsFor: 'starting'!
