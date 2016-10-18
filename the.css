@@ -20,11 +20,21 @@ body > header > a {
     line-height: 50px;
     cursor: pointer;
 }
-body > .text-file-target {
-    background: orange;
+body > #content {
+    background: white;
     position: absolute;
     top: 50px;
     left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 11pt;
+    font-family: arial,helvetica,sans-serif;
+    font-style: normal;
+    font-weight: normal;
+}
+#content > .text-file-target {
+    background: blue;
+    position: absolute;
     width: 100%;
     height: 100%;
 }
@@ -36,4 +46,73 @@ body > .text-file-target {
     margin: .5em;
     box-shadow: 2px 2px 5px gray;
     text-align: center;
+}
+
+
+
+div.text {
+    margin: 8px auto 10px;
+    padding: 20px;
+    width: 680px;
+    /*height: 530px;*/
+    text-align: left;
+    border: 1px solid #92AAC1;
+    background-color: #EEF3F8;
+}
+
+
+div.text input[type="text"] {
+    border-top: 1px solid #E6E7E8;
+    border-bottom: 1px solid black;
+    border-left: 1px solid #E6E7E8;
+    border-right: 1px solid #E6E7E8;
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: normal;
+    font-size: 12pt;
+    height: 25px;
+    padding-top: 2px;
+    box-sizing: border-box;
+}
+nobr {
+    white-space: nowrap;
+}
+
+div.text span {
+    color: #666666;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 24px;
+}
+
+div.text .title {
+    color: black;
+    font-size: 11pt;
+    font-weight: bold;
+    line-height: 24px;
+    margin: 1em 0 3em;
+    text-align: center;
+}
+
+div.text div.info {
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+div.text div.info span {
+    display: block;
+    color: black;
+    font-size: 1em;
+    line-height: 1.1em;
+}
+
+div.text div.actions {
+    margin-left: 100px;
+    margin-top: 2em;
+}
+div.text div.actions img {
+    vertical-align: middle;
+}
+div.text div.actions .continue {
+    margin-left: 50px;
+    visibility: hidden;
 }

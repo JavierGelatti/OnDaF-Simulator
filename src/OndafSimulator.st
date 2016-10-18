@@ -1,18 +1,144 @@
 Smalltalk createPackage: 'OndafSimulator'!
 (Smalltalk packageAt: 'OndafSimulator') imports: {'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
+Object subclass: #ExamPrinter
+	instanceVariableNames: 'textViews'
+	package: 'OndafSimulator'!
+
+!ExamPrinter methodsFor: 'as yet unclassified'!
+
+currentTextView
+	^ textViews last
+!
+
+initialize
+	super initialize.
+	textViews := OrderedCollection new.
+!
+
+printText: aString
+	self currentTextView addText: aString
+!
+
+printTitle: aString
+	textViews add: ExamTextView new.
+	self currentTextView title: aString.
+!
+
+printWordToComplete: aString
+	self currentTextView addWordToComplete: aString
+!
+
+renderContentOn: aSelector
+	textViews do: [ :tv | tv appendToJQuery: aSelector asJQuery ]
+! !
+
+Widget subclass: #ExamTextView
+	instanceVariableNames: 'title content'
+	package: 'OndafSimulator'!
+
+!ExamTextView methodsFor: 'as yet unclassified'!
+
+addText: aString
+	content add: [ :html | html span with: aString, ' ' ]
+!
+
+addWordToComplete: aString
+	content add: [ :html |
+		(html tag: 'nobr')
+			with: [
+				html span with: aString.
+				html input
+					type: 'text';
+					at: 'size' put: 10
+			];
+			with: ' '
+	]
+!
+
+initialize
+	super initialize.
+	content := OrderedCollection new.
+!
+
+renderOn: html
+	| continueCheckbox continueButton |
+	html div
+		class: 'text';
+		with: [
+			html p
+				class: 'title';
+				with: title
+		];
+		with: [
+			html p
+				class: 'content';
+				with: [	content do: [ :each | each value: html ] ]
+		];
+		with: [
+			html div
+				class: 'actions';
+				with: [
+					html label with: [
+						continueCheckbox := html input
+							type: 'checkbox';
+							onChange: [
+								(continueCheckbox is: ':checked')
+									ifTrue: [ continueButton css: 'visibility' value: 'visible' ]
+									ifFalse: [ continueButton css: 'visibility' value: 'hidden' ]
+								];
+							asJQuery.
+						html img
+							src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif';
+							width: 190
+					].
+					continueButton := html a
+						href: '#';
+						class: 'continue';
+						with: [
+							html img
+								src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif';
+								width: 256
+						];
+						asJQuery
+				]
+		];
+		with: [
+			html div
+				class: 'info';
+				with: [
+					html span class: 'text-number'; with: 'Text 1 of 4'.
+					html span class: 'time'; with: 'Seconds remaining: 0'.
+				]
+		]
+!
+
+title: aString
+	title := aString
+! !
+
 Widget subclass: #Header
-	instanceVariableNames: ''
+	instanceVariableNames: 'startExamHandler'
 	package: 'OndafSimulator'!
 
 !Header methodsFor: 'as yet unclassified'!
+
+initialize
+	super initialize.
+	startExamHandler := [].
+!
 
 renderOn: html
 	html header
 		with: [
 			html a
 				with: 'Start exam';
-				tabindex: 0
+				tabindex: 0;
+				onClick: startExamHandler
 		]
+!
+
+whenStartExam: aBlock
+	startExamHandler := aBlock
 ! !
 
 Widget subclass: #MainScreen
@@ -20,7 +146,7 @@ Widget subclass: #MainScreen
 	package: 'OndafSimulator'!
 
 Object subclass: #OndafSimulator
-	instanceVariableNames: 'fileDropTarget'
+	instanceVariableNames: 'fileDropTarget examDesigner'
 	package: 'OndafSimulator'!
 
 !OndafSimulator methodsFor: 'action'!
@@ -42,15 +168,13 @@ doSilkTAG
 !OndafSimulator methodsFor: 'starting'!
 
 addText: aString
-	| examDesigner |
-	examDesigner := ExamDesigner new.
 	examDesigner
-		informProgressTo: [ :title |
-			TextCard newIn: 'body > .text-file-target' title: title
-		].
+		informProgressTo: [ :title | self addToList: title ].
 	examDesigner considerText: aString.
-		
-	console log: aString.
+!
+
+addToList: aTitle
+	TextCard newIn: '#content > .text-file-target' title: aTitle
 !
 
 augmentPage
@@ -58,10 +182,29 @@ augmentPage
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ]."
 	
-	Header new appendToJQuery: 'body' asJQuery.
+	Header new
+		whenStartExam: [ self startExam ];
+		appendToJQuery: 'body' asJQuery.
+	
+	(HTMLCanvas onJQuery: 'body' asJQuery) section id: 'content'.
+		
 	fileDropTarget := TextFileDropTarget
-		newIn: 'body'
+		newIn: '#content'
 		handler: [ :txt | self addText: txt ]
+!
+
+initialize
+	super initialize.
+	examDesigner := ExamDesigner new
+!
+
+startExam
+	| theExam aPrinter |
+	fileDropTarget hide.
+	theExam := examDesigner designExam.
+	aPrinter := ExamPrinter new.
+	theExam copyOn: aPrinter.
+	aPrinter renderContentOn: '#content'
 ! !
 
 !OndafSimulator class methodsFor: 'starting'!
@@ -119,6 +262,10 @@ handleDrop: files
 
 handler: aBlock
 	handler := aBlock
+!
+
+hide
+	dropArea hide
 !
 
 renderOn: html
