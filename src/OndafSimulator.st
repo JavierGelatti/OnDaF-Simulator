@@ -123,7 +123,6 @@ handler: aBlock
 
 renderOn: html
 	dropArea := html div
-		with: 'drop files here';
 		class: 'text-file-target';
 		asJQuery.
 	
