@@ -64,22 +64,33 @@ selector: "addText:",
 protocol: 'starting',
 fn: function (aString){
 var self=this;
+var examDesigner;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
+examDesigner=$recv($globals.ExamDesigner)._new();
+$recv(examDesigner)._informProgressTo_((function(title){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv($globals.TextCard)._newIn_title_("body > .text-file-target",title);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({title:title},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$recv(examDesigner)._considerText_(aString);
 $recv(console)._log_(aString);
-$recv($globals.TextCard)._newIn_title_("body > .text-file-target",aString);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"addText:",{aString:aString},$globals.OndafSimulator)});
+}, function($ctx1) {$ctx1.fill(self,"addText:",{aString:aString,examDesigner:examDesigner},$globals.OndafSimulator)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aString"],
-source: "addText: aString\x0a\x09console log: aString.\x0a\x09TextCard newIn: 'body > .text-file-target' title: aString",
-referencedClasses: ["TextCard"],
+source: "addText: aString\x0a\x09| examDesigner |\x0a\x09examDesigner := ExamDesigner new.\x0a\x09examDesigner\x0a\x09\x09informProgressTo: [ :title |\x0a\x09\x09\x09TextCard newIn: 'body > .text-file-target' title: title\x0a\x09\x09].\x0a\x09examDesigner considerText: aString.\x0a\x09\x09\x0a\x09console log: aString.\x0a\x09",
+referencedClasses: ["ExamDesigner", "TextCard"],
 //>>excludeEnd("ide");
-messageSends: ["log:", "newIn:title:"]
+messageSends: ["new", "informProgressTo:", "newIn:title:", "considerText:", "log:"]
 }),
 $globals.OndafSimulator);
 

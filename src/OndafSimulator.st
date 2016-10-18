@@ -42,8 +42,15 @@ doSilkTAG
 !OndafSimulator methodsFor: 'starting'!
 
 addText: aString
+	| examDesigner |
+	examDesigner := ExamDesigner new.
+	examDesigner
+		informProgressTo: [ :title |
+			TextCard newIn: 'body > .text-file-target' title: title
+		].
+	examDesigner considerText: aString.
+		
 	console log: aString.
-	TextCard newIn: 'body > .text-file-target' title: aString
 !
 
 augmentPage
