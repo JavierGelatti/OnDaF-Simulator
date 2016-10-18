@@ -44,6 +44,45 @@ $globals.Array);
 
 $core.addMethod(
 $core.method({
+selector: "select:thenDo:",
+protocol: '*PharoCompat',
+fn: function (selectBlock,doBlock){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+self._do_((function(each){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$1=$recv(selectBlock)._value_(each);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["value:"]=1;
+//>>excludeEnd("ctx");
+if($core.assert($1)){
+return $recv(doBlock)._value_(each);
+};
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"select:thenDo:",{selectBlock:selectBlock,doBlock:doBlock},$globals.Array)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["selectBlock", "doBlock"],
+source: "select: selectBlock thenDo: doBlock\x0a    \x22Utility method to improve readability.\x0a\x09Do not create the intermediate collection.\x22\x0a\x0a    self do: [: each |\x0a        ( selectBlock value: each ) \x0a\x09\x09\x09ifTrue: [ doBlock value: each ]\x0a    ].",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["do:", "ifTrue:", "value:"]
+}),
+$globals.Array);
+
+$core.addMethod(
+$core.method({
 selector: "newFrom:",
 protocol: '*PharoCompat',
 fn: function (aCollection){

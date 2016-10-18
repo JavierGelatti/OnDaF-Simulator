@@ -175,7 +175,7 @@ renderOn: html
 		event preventDefault.
 		event stopPropagation.
 		dropArea removeClass: 'dragover'.
-		self handleDrop: (ReadableCollection of: event originalEvent dataTransfer files).
+		self handleDrop: (Array ofNative: event originalEvent dataTransfer files).
 	].
 ! !
 
@@ -183,5 +183,16 @@ renderOn: html
 
 newIn: aSelector
 	^ self new appendToJQuery: aSelector asJQuery; yourself
+! !
+
+!Array class methodsFor: '*OndafSimulator'!
+
+ofNative: aCollection 
+	"Answer an instance of me containing the same elements as aCollection.
+	 aCollection must be a native collection, with .length and [] operator"
+	| newArray |
+	newArray := self new: aCollection length.
+	1 to: aCollection length do: [:i | newArray at: i put: (aCollection at: i - 1)].
+	^ newArray
 ! !
 

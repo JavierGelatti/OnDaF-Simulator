@@ -706,7 +706,7 @@ return $core.withContext(function($ctx2) {
 $recv(event)._preventDefault();
 $recv(event)._stopPropagation();
 $recv(self["@dropArea"])._removeClass_("dragover");
-return self._handleDrop_($recv($globals.ReadableCollection)._of_($recv($recv($recv(event)._originalEvent())._dataTransfer())._files()));
+return self._handleDrop_($recv($globals.Array)._ofNative_($recv($recv($recv(event)._originalEvent())._dataTransfer())._files()));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({event:event},$ctx1,4)});
 //>>excludeEnd("ctx");
@@ -718,10 +718,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderOn: html\x0a\x09dropArea := html div\x0a\x09\x09with: 'drop files here';\x0a\x09\x09class: 'text-file-target';\x0a\x09\x09asJQuery.\x0a\x09\x0a\x09dropArea on: 'dragenter' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09dropArea addClass: 'dragover'.\x0a\x09].\x0a\x09dropArea on: 'dragleave' do: [ :event |\x0a\x09\x09dropArea removeClass: 'dragover'.\x0a\x09].\x0a\x09dropArea on: 'dragover' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09event originalEvent dataTransfer dropEffect: 'copy'.\x0a\x09].\x0a\x09\x0a\x09dropArea on: 'drop' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09event stopPropagation.\x0a\x09\x09dropArea removeClass: 'dragover'.\x0a\x09\x09self handleDrop: (ReadableCollection of: event originalEvent dataTransfer files).\x0a\x09].",
-referencedClasses: ["ReadableCollection"],
+source: "renderOn: html\x0a\x09dropArea := html div\x0a\x09\x09with: 'drop files here';\x0a\x09\x09class: 'text-file-target';\x0a\x09\x09asJQuery.\x0a\x09\x0a\x09dropArea on: 'dragenter' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09dropArea addClass: 'dragover'.\x0a\x09].\x0a\x09dropArea on: 'dragleave' do: [ :event |\x0a\x09\x09dropArea removeClass: 'dragover'.\x0a\x09].\x0a\x09dropArea on: 'dragover' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09event originalEvent dataTransfer dropEffect: 'copy'.\x0a\x09].\x0a\x09\x0a\x09dropArea on: 'drop' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09event stopPropagation.\x0a\x09\x09dropArea removeClass: 'dragover'.\x0a\x09\x09self handleDrop: (Array ofNative: event originalEvent dataTransfer files).\x0a\x09].",
+referencedClasses: ["Array"],
 //>>excludeEnd("ide");
-messageSends: ["with:", "div", "class:", "asJQuery", "on:do:", "preventDefault", "addClass:", "removeClass:", "dropEffect:", "dataTransfer", "originalEvent", "stopPropagation", "handleDrop:", "of:", "files"]
+messageSends: ["with:", "div", "class:", "asJQuery", "on:do:", "preventDefault", "addClass:", "removeClass:", "dropEffect:", "dataTransfer", "originalEvent", "stopPropagation", "handleDrop:", "ofNative:", "files"]
 }),
 $globals.TextFileDropTarget);
 
@@ -751,5 +751,44 @@ referencedClasses: [],
 messageSends: ["appendToJQuery:", "new", "asJQuery", "yourself"]
 }),
 $globals.TextFileDropTarget.klass);
+
+$core.addMethod(
+$core.method({
+selector: "ofNative:",
+protocol: '*OndafSimulator',
+fn: function (aCollection){
+var self=this;
+var newArray;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(aCollection)._length();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["length"]=1;
+//>>excludeEnd("ctx");
+newArray=self._new_($1);
+(1)._to_do_($recv(aCollection)._length(),(function(i){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(newArray)._at_put_(i,$recv(aCollection)._at_($recv(i).__minus((1))));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({i:i},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return newArray;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"ofNative:",{aCollection:aCollection,newArray:newArray},$globals.Array.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aCollection"],
+source: "ofNative: aCollection \x0a\x09\x22Answer an instance of me containing the same elements as aCollection.\x0a\x09 aCollection must be a native collection, with .length and [] operator\x22\x0a\x09| newArray |\x0a\x09newArray := self new: aCollection length.\x0a\x091 to: aCollection length do: [:i | newArray at: i put: (aCollection at: i - 1)].\x0a\x09^ newArray",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["new:", "length", "to:do:", "at:put:", "at:", "-"]
+}),
+$globals.Array.klass);
 
 });

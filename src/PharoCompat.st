@@ -11,6 +11,16 @@ flatCollect: aBlock
 	stream := (Array new: 0) writeStream.
 	self do: [ :each | stream nextPutAll: (aBlock value: each) ].
 	^ stream contents
+!
+
+select: selectBlock thenDo: doBlock
+    "Utility method to improve readability.
+	Do not create the intermediate collection."
+
+    self do: [: each |
+        ( selectBlock value: each ) 
+			ifTrue: [ doBlock value: each ]
+    ].
 ! !
 
 !Array class methodsFor: '*PharoCompat'!
