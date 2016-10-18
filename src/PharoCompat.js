@@ -5,6 +5,45 @@ $core.packages["PharoCompat"].innerEval = function (expr) { return eval(expr); }
 $core.packages["PharoCompat"].transport = {"type":"amd","amdNamespace":"amber-ondafsimulator"};
 $core.addMethod(
 $core.method({
+selector: "flatCollect:",
+protocol: '*PharoCompat',
+fn: function (aBlock){
+var self=this;
+var stream;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._isEmpty();
+if($core.assert($1)){
+return self._copy();
+};
+stream=$recv($recv($globals.Array)._new_((0)))._writeStream();
+self._do_((function(each){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(stream)._nextPutAll_($recv(aBlock)._value_(each));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,2)});
+//>>excludeEnd("ctx");
+}));
+return $recv(stream)._contents();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"flatCollect:",{aBlock:aBlock,stream:stream},$globals.Array)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aBlock"],
+source: "flatCollect: aBlock \x0a\x09\x22Evaluate aBlock for each of the receiver's elements and answer the\x0a\x09list of all resulting values flatten one level. Assumes that aBlock returns some kind\x0a\x09of collection for each element. Equivalent to the lisp's mapcan\x22\x0a\x09\x0a\x09| stream |\x0a\x09self isEmpty ifTrue: [ ^ self copy ].\x0a\x09stream := (Array new: 0) writeStream.\x0a\x09self do: [ :each | stream nextPutAll: (aBlock value: each) ].\x0a\x09^ stream contents",
+referencedClasses: ["Array"],
+//>>excludeEnd("ide");
+messageSends: ["ifTrue:", "isEmpty", "copy", "writeStream", "new:", "do:", "nextPutAll:", "value:", "contents"]
+}),
+$globals.Array);
+
+$core.addMethod(
+$core.method({
 selector: "newFrom:",
 protocol: '*PharoCompat',
 fn: function (aCollection){
