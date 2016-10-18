@@ -67,20 +67,16 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$2;
-$1=$recv($globals.Header)._new();
+$recv($recv($globals.Header)._new())._appendToJQuery_("body"._asJQuery());
+$recv($globals.TextFileDropTarget)._newIn_handler_("body",(function(result){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["new"]=1;
+return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$2="body"._asJQuery();
+return $recv(console)._log_(result);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["asJQuery"]=1;
+}, function($ctx2) {$ctx2.fillBlock({result:result},$ctx1,1)});
 //>>excludeEnd("ctx");
-$recv($1)._appendToJQuery_($2);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["appendToJQuery:"]=1;
-//>>excludeEnd("ctx");
-$recv($recv($globals.TextFileDropTarget)._new())._appendToJQuery_("body"._asJQuery());
+}));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.OndafSimulator)});
@@ -88,10 +84,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09Header new appendToJQuery: 'body' asJQuery.\x0a\x09TextFileDropTarget new appendToJQuery: 'body' asJQuery.",
+source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09Header new appendToJQuery: 'body' asJQuery.\x0a\x09TextFileDropTarget newIn: 'body' handler: [:result | console log: result]",
 referencedClasses: ["Header", "TextFileDropTarget"],
 //>>excludeEnd("ide");
-messageSends: ["appendToJQuery:", "new", "asJQuery"]
+messageSends: ["appendToJQuery:", "new", "asJQuery", "newIn:handler:", "log:"]
 }),
 $globals.OndafSimulator);
 
@@ -206,310 +202,6 @@ messageSends: ["augmentPage", "new"]
 $globals.OndafSimulator.klass);
 
 
-$core.addClass('ReadableCollection', $globals.Collection, ['source'], 'OndafSimulator');
-$core.addMethod(
-$core.method({
-selector: "add:",
-protocol: 'as yet unclassified',
-fn: function (anObject){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-self._onlyReadError();
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"add:",{anObject:anObject},$globals.ReadableCollection)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["anObject"],
-source: "add: anObject\x0a\x09self onlyReadError",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["onlyReadError"]
-}),
-$globals.ReadableCollection);
-
-$core.addMethod(
-$core.method({
-selector: "detect:ifNone:",
-protocol: 'as yet unclassified',
-fn: function (aBlock,anotherBlock){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-var $early={};
-try {
-self._do_((function(each){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-$1=$recv(aBlock)._value_(each);
-if($core.assert($1)){
-throw $early=[each];
-};
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)});
-//>>excludeEnd("ctx");
-}));
-return $recv(anotherBlock)._value();
-}
-catch(e) {if(e===$early)return e[0]; throw e}
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"detect:ifNone:",{aBlock:aBlock,anotherBlock:anotherBlock},$globals.ReadableCollection)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aBlock", "anotherBlock"],
-source: "detect: aBlock ifNone: anotherBlock\x0a\x09self do: [ :each | (aBlock value: each) ifTrue: [ ^each ] ].\x0a\x09\x09^ anotherBlock value",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["do:", "ifTrue:", "value:", "value"]
-}),
-$globals.ReadableCollection);
-
-$core.addMethod(
-$core.method({
-selector: "do:",
-protocol: 'as yet unclassified',
-fn: function (aBlock){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-(0)._to_do_($recv(self._size()).__minus((1)),(function(i){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return $recv(aBlock)._value_($recv(self["@source"])._at_(i));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({i:i},$ctx1,1)});
-//>>excludeEnd("ctx");
-}));
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"do:",{aBlock:aBlock},$globals.ReadableCollection)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aBlock"],
-source: "do: aBlock\x0a\x090 to: (self size - 1) do: [ :i |\x0a\x09\x09aBlock value: (source at: i)\x0a\x09].",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["to:do:", "-", "size", "value:", "at:"]
-}),
-$globals.ReadableCollection);
-
-$core.addMethod(
-$core.method({
-selector: "onlyReadError",
-protocol: 'as yet unclassified',
-fn: function (){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-self._error_("This is a readable collection (you can only read)");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"onlyReadError",{},$globals.ReadableCollection)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "onlyReadError\x0a\x09self error: 'This is a readable collection (you can only read)'",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["error:"]
-}),
-$globals.ReadableCollection);
-
-$core.addMethod(
-$core.method({
-selector: "remove:ifAbsent:",
-protocol: 'as yet unclassified',
-fn: function (anObject,aBlock){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-self._onlyReadError();
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"remove:ifAbsent:",{anObject:anObject,aBlock:aBlock},$globals.ReadableCollection)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["anObject", "aBlock"],
-source: "remove: anObject ifAbsent: aBlock\x0a\x09self onlyReadError",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["onlyReadError"]
-}),
-$globals.ReadableCollection);
-
-$core.addMethod(
-$core.method({
-selector: "removeAll",
-protocol: 'as yet unclassified',
-fn: function (){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-self._onlyReadError();
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"removeAll",{},$globals.ReadableCollection)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "removeAll\x0a\x09self onlyReadError",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["onlyReadError"]
-}),
-$globals.ReadableCollection);
-
-$core.addMethod(
-$core.method({
-selector: "select:thenDo:",
-protocol: 'as yet unclassified',
-fn: function (selectBlock,doBlock){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv(self._select_(selectBlock))._do_(doBlock);
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"select:thenDo:",{selectBlock:selectBlock,doBlock:doBlock},$globals.ReadableCollection)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["selectBlock", "doBlock"],
-source: "select: selectBlock thenDo: doBlock\x0a\x09(self select: selectBlock) do: doBlock",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["do:", "select:"]
-}),
-$globals.ReadableCollection);
-
-$core.addMethod(
-$core.method({
-selector: "size",
-protocol: 'as yet unclassified',
-fn: function (){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-return $recv(self["@source"])._length();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"size",{},$globals.ReadableCollection)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "size\x0a\x09^ source length",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["length"]
-}),
-$globals.ReadableCollection);
-
-$core.addMethod(
-$core.method({
-selector: "source",
-protocol: 'as yet unclassified',
-fn: function (){
-var self=this;
-return self["@source"];
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "source\x0a\x09^ source",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.ReadableCollection);
-
-$core.addMethod(
-$core.method({
-selector: "source:",
-protocol: 'as yet unclassified',
-fn: function (anObject){
-var self=this;
-self["@source"]=anObject;
-return self;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["anObject"],
-source: "source: anObject\x0a\x09source := anObject",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.ReadableCollection);
-
-$core.addMethod(
-$core.method({
-selector: "writeStream",
-protocol: 'as yet unclassified',
-fn: function (){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-return $recv($recv($globals.Array)._new())._writeStream();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"writeStream",{},$globals.ReadableCollection)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "writeStream\x0a\x09^ Array new writeStream",
-referencedClasses: ["Array"],
-//>>excludeEnd("ide");
-messageSends: ["writeStream", "new"]
-}),
-$globals.ReadableCollection);
-
-
-$core.addMethod(
-$core.method({
-selector: "of:",
-protocol: 'as yet unclassified',
-fn: function (aSource){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1=self._new();
-$recv($1)._source_(aSource);
-return $recv($1)._yourself();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"of:",{aSource:aSource},$globals.ReadableCollection.klass)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aSource"],
-source: "of: aSource\x0a\x09^ self new source: aSource; yourself",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["source:", "new", "yourself"]
-}),
-$globals.ReadableCollection.klass);
-
-
 $core.addClass('TextCard', $globals.Widget, ['card', 'title'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
@@ -577,7 +269,7 @@ $globals.TextCard);
 
 
 
-$core.addClass('TextFileDropTarget', $globals.Widget, ['dropArea'], 'OndafSimulator');
+$core.addClass('TextFileDropTarget', $globals.Widget, ['dropArea', 'handler'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "handleDrop:",
@@ -606,7 +298,7 @@ $recv(reader)._addEventListener_do_("loadend",(function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx3) {
 //>>excludeEnd("ctx");
-return $recv(console)._log_($recv(reader)._result());
+return $recv(self["@handler"])._value_($recv(reader)._result());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)});
 //>>excludeEnd("ctx");
@@ -623,10 +315,29 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["files"],
-source: "handleDrop: files\x0a\x09| reader |\x0a\x09files select: [ :file | file type = 'text/plain' ]\x0a\x09\x09thenDo: [ :file |\x0a\x09\x09\x09reader := FileReader new.\x0a\x09\x09\x09reader addEventListener: 'loadend' do: [\x0a\x09\x09\x09\x09console log: reader result\x0a\x09\x09\x09].\x0a\x09\x09\x09reader readAsText: file\x0a\x09\x09].",
+source: "handleDrop: files\x0a\x09| reader |\x0a\x09files select: [ :file | file type = 'text/plain' ]\x0a\x09\x09thenDo: [ :file |\x0a\x09\x09\x09reader := FileReader new.\x0a\x09\x09\x09reader addEventListener: 'loadend' do: [\x0a\x09\x09\x09\x09handler value: reader result\x0a\x09\x09\x09].\x0a\x09\x09\x09reader readAsText: file\x0a\x09\x09].",
 referencedClasses: ["FileReader"],
 //>>excludeEnd("ide");
-messageSends: ["select:thenDo:", "=", "type", "new", "addEventListener:do:", "log:", "result", "readAsText:"]
+messageSends: ["select:thenDo:", "=", "type", "new", "addEventListener:do:", "value:", "result", "readAsText:"]
+}),
+$globals.TextFileDropTarget);
+
+$core.addMethod(
+$core.method({
+selector: "handler:",
+protocol: 'as yet unclassified',
+fn: function (aBlock){
+var self=this;
+self["@handler"]=aBlock;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aBlock"],
+source: "handler: aBlock\x0a\x09handler := aBlock",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
 }),
 $globals.TextFileDropTarget);
 
@@ -735,20 +446,46 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1;
-$1=self._new();
-$recv($1)._appendToJQuery_($recv(aSelector)._asJQuery());
-return $recv($1)._yourself();
+return self._newIn_handler_(aSelector,(function(){
+
+}));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"newIn:",{aSelector:aSelector},$globals.TextFileDropTarget.klass)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aSelector"],
-source: "newIn: aSelector\x0a\x09^ self new appendToJQuery: aSelector asJQuery; yourself",
+source: "newIn: aSelector\x0a\x09^ self newIn: aSelector handler: []",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["appendToJQuery:", "new", "asJQuery", "yourself"]
+messageSends: ["newIn:handler:"]
+}),
+$globals.TextFileDropTarget.klass);
+
+$core.addMethod(
+$core.method({
+selector: "newIn:handler:",
+protocol: 'as yet unclassified',
+fn: function (aSelector,aBlock){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._new();
+$recv($1)._handler_(aBlock);
+$recv($1)._appendToJQuery_($recv(aSelector)._asJQuery());
+return $recv($1)._yourself();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"newIn:handler:",{aSelector:aSelector,aBlock:aBlock},$globals.TextFileDropTarget.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aSelector", "aBlock"],
+source: "newIn: aSelector handler: aBlock\x0a\x09^ self new handler: aBlock;\x0a\x09\x09appendToJQuery: aSelector asJQuery;\x0a\x09\x09yourself",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["handler:", "new", "appendToJQuery:", "asJQuery", "yourself"]
 }),
 $globals.TextFileDropTarget.klass);
 

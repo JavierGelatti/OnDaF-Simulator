@@ -47,72 +47,13 @@ augmentPage
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ]."
 	
 	Header new appendToJQuery: 'body' asJQuery.
-	TextFileDropTarget new appendToJQuery: 'body' asJQuery.
+	TextFileDropTarget newIn: 'body' handler: [:result | console log: result]
 ! !
 
 !OndafSimulator class methodsFor: 'starting'!
 
 start
 	self new augmentPage
-! !
-
-Collection subclass: #ReadableCollection
-	instanceVariableNames: 'source'
-	package: 'OndafSimulator'!
-
-!ReadableCollection methodsFor: 'as yet unclassified'!
-
-add: anObject
-	self onlyReadError
-!
-
-detect: aBlock ifNone: anotherBlock
-	self do: [ :each | (aBlock value: each) ifTrue: [ ^each ] ].
-		^ anotherBlock value
-!
-
-do: aBlock
-	0 to: (self size - 1) do: [ :i |
-		aBlock value: (source at: i)
-	].
-!
-
-onlyReadError
-	self error: 'This is a readable collection (you can only read)'
-!
-
-remove: anObject ifAbsent: aBlock
-	self onlyReadError
-!
-
-removeAll
-	self onlyReadError
-!
-
-select: selectBlock thenDo: doBlock
-	(self select: selectBlock) do: doBlock
-!
-
-size
-	^ source length
-!
-
-source
-	^ source
-!
-
-source: anObject
-	source := anObject
-!
-
-writeStream
-	^ Array new writeStream
-! !
-
-!ReadableCollection class methodsFor: 'as yet unclassified'!
-
-of: aSource
-	^ self new source: aSource; yourself
 ! !
 
 Widget subclass: #TextCard
@@ -136,7 +77,7 @@ title
 ! !
 
 Widget subclass: #TextFileDropTarget
-	instanceVariableNames: 'dropArea'
+	instanceVariableNames: 'dropArea handler'
 	package: 'OndafSimulator'!
 
 !TextFileDropTarget methodsFor: 'as yet unclassified'!
@@ -147,10 +88,14 @@ handleDrop: files
 		thenDo: [ :file |
 			reader := FileReader new.
 			reader addEventListener: 'loadend' do: [
-				console log: reader result
+				handler value: reader result
 			].
 			reader readAsText: file
 		].
+!
+
+handler: aBlock
+	handler := aBlock
 !
 
 renderOn: html
@@ -182,7 +127,13 @@ renderOn: html
 !TextFileDropTarget class methodsFor: 'as yet unclassified'!
 
 newIn: aSelector
-	^ self new appendToJQuery: aSelector asJQuery; yourself
+	^ self newIn: aSelector handler: []
+!
+
+newIn: aSelector handler: aBlock
+	^ self new handler: aBlock;
+		appendToJQuery: aSelector asJQuery;
+		yourself
 ! !
 
 !Array class methodsFor: '*OndafSimulator'!
