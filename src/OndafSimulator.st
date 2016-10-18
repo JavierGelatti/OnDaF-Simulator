@@ -20,7 +20,7 @@ Widget subclass: #MainScreen
 	package: 'OndafSimulator'!
 
 Object subclass: #OndafSimulator
-	instanceVariableNames: ''
+	instanceVariableNames: 'fileDropTarget'
 	package: 'OndafSimulator'!
 
 !OndafSimulator methodsFor: 'action'!
@@ -41,13 +41,20 @@ doSilkTAG
 
 !OndafSimulator methodsFor: 'starting'!
 
+addText: aString
+	console log: aString.
+	TextCard newIn: 'body > .text-file-target' title: aString
+!
+
 augmentPage
 	"'#amber-with' asJQuery click: [ self doAmberWith ].
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ]."
 	
 	Header new appendToJQuery: 'body' asJQuery.
-	TextFileDropTarget newIn: 'body' handler: [:result | console log: result]
+	fileDropTarget := TextFileDropTarget
+		newIn: 'body'
+		handler: [ :txt | self addText: txt ]
 ! !
 
 !OndafSimulator class methodsFor: 'starting'!
@@ -74,6 +81,15 @@ renderOn: html
 
 title
 	^ title
+! !
+
+!TextCard class methodsFor: 'as yet unclassified'!
+
+newIn: aSelector title: aString
+	^ self new
+		initializeWith: aString;
+		appendToJQuery: aSelector asJQuery;
+		yourself
 ! !
 
 Widget subclass: #TextFileDropTarget

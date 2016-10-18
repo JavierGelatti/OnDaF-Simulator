@@ -57,7 +57,32 @@ $globals.Header);
 $core.addClass('MainScreen', $globals.Widget, [], 'OndafSimulator');
 
 
-$core.addClass('OndafSimulator', $globals.Object, [], 'OndafSimulator');
+$core.addClass('OndafSimulator', $globals.Object, ['fileDropTarget'], 'OndafSimulator');
+$core.addMethod(
+$core.method({
+selector: "addText:",
+protocol: 'starting',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(console)._log_(aString);
+$recv($globals.TextCard)._newIn_title_("body > .text-file-target",aString);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"addText:",{aString:aString},$globals.OndafSimulator)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "addText: aString\x0a\x09console log: aString.\x0a\x09TextCard newIn: 'body > .text-file-target' title: aString",
+referencedClasses: ["TextCard"],
+//>>excludeEnd("ide");
+messageSends: ["log:", "newIn:title:"]
+}),
+$globals.OndafSimulator);
+
 $core.addMethod(
 $core.method({
 selector: "augmentPage",
@@ -68,13 +93,13 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 $recv($recv($globals.Header)._new())._appendToJQuery_("body"._asJQuery());
-$recv($globals.TextFileDropTarget)._newIn_handler_("body",(function(result){
+self["@fileDropTarget"]=$recv($globals.TextFileDropTarget)._newIn_handler_("body",(function(txt){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return $recv(console)._log_(result);
+return self._addText_(txt);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({result:result},$ctx1,1)});
+}, function($ctx2) {$ctx2.fillBlock({txt:txt},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
 return self;
@@ -84,10 +109,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09Header new appendToJQuery: 'body' asJQuery.\x0a\x09TextFileDropTarget newIn: 'body' handler: [:result | console log: result]",
+source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09Header new appendToJQuery: 'body' asJQuery.\x0a\x09fileDropTarget := TextFileDropTarget\x0a\x09\x09newIn: 'body'\x0a\x09\x09handler: [ :txt | self addText: txt ]",
 referencedClasses: ["Header", "TextFileDropTarget"],
 //>>excludeEnd("ide");
-messageSends: ["appendToJQuery:", "new", "asJQuery", "newIn:handler:", "log:"]
+messageSends: ["appendToJQuery:", "new", "asJQuery", "newIn:handler:", "addText:"]
 }),
 $globals.OndafSimulator);
 
@@ -267,6 +292,33 @@ messageSends: []
 }),
 $globals.TextCard);
 
+
+$core.addMethod(
+$core.method({
+selector: "newIn:title:",
+protocol: 'as yet unclassified',
+fn: function (aSelector,aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._new();
+$recv($1)._initializeWith_(aString);
+$recv($1)._appendToJQuery_($recv(aSelector)._asJQuery());
+return $recv($1)._yourself();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"newIn:title:",{aSelector:aSelector,aString:aString},$globals.TextCard.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aSelector", "aString"],
+source: "newIn: aSelector title: aString\x0a\x09^ self new\x0a\x09\x09initializeWith: aString;\x0a\x09\x09appendToJQuery: aSelector asJQuery;\x0a\x09\x09yourself",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["initializeWith:", "new", "appendToJQuery:", "asJQuery", "yourself"]
+}),
+$globals.TextCard.klass);
 
 
 $core.addClass('TextFileDropTarget', $globals.Widget, ['dropArea', 'handler'], 'OndafSimulator');
