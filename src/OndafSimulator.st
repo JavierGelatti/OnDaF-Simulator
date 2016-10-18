@@ -1,5 +1,18 @@
 Smalltalk createPackage: 'OndafSimulator'!
 (Smalltalk packageAt: 'OndafSimulator') imports: {'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
+Widget subclass: #Header
+	instanceVariableNames: ''
+	package: 'OndafSimulator'!
+
+!Header methodsFor: 'as yet unclassified'!
+
+renderOn: html
+	html header
+		with: [
+			html button with: 'Start exam'
+		]
+! !
+
 Object subclass: #OndafSimulator
 	instanceVariableNames: ''
 	package: 'OndafSimulator'!
@@ -27,7 +40,7 @@ augmentPage
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ]."
 	
-	TextFileTarget newIn: 'body'.
+	TextFileDropTarget newIn: 'body'.
 ! !
 
 !OndafSimulator class methodsFor: 'starting'!
@@ -95,11 +108,31 @@ of: aSource
 	^ self new source: aSource; yourself
 ! !
 
-Widget subclass: #TextFileTarget
+Widget subclass: #TextCard
+	instanceVariableNames: 'card title'
+	package: 'OndafSimulator'!
+
+!TextCard methodsFor: 'as yet unclassified'!
+
+initializeWith: aTitle
+	title := aTitle
+!
+
+renderOn: html
+	card := html div
+		with: self title;
+		class: 'text-card'
+!
+
+title
+	^ title
+! !
+
+Widget subclass: #TextFileDropTarget
 	instanceVariableNames: 'dropArea'
 	package: 'OndafSimulator'!
 
-!TextFileTarget methodsFor: 'as yet unclassified'!
+!TextFileDropTarget methodsFor: 'as yet unclassified'!
 
 handleDrop: files
 	| reader |
@@ -139,7 +172,7 @@ renderOn: html
 	].
 ! !
 
-!TextFileTarget class methodsFor: 'as yet unclassified'!
+!TextFileDropTarget class methodsFor: 'as yet unclassified'!
 
 newIn: aSelector
 	^ self new appendToJQuery: aSelector asJQuery; yourself

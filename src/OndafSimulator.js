@@ -2,7 +2,7 @@ define("amber-ondafsimulator/OndafSimulator", ["amber/boot"
 //>>excludeStart("imports", pragmas.excludeImports);
 , "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"
 //>>excludeEnd("imports");
-, "amber_core/Kernel-Objects", "amber_core/Kernel-Collections", "amber/web/Web"], function($boot
+, "amber/web/Web", "amber_core/Kernel-Objects", "amber_core/Kernel-Collections"], function($boot
 //>>excludeStart("imports", pragmas.excludeImports);
 
 //>>excludeEnd("imports");
@@ -12,6 +12,44 @@ $core.addPackage('OndafSimulator');
 $core.packages["OndafSimulator"].innerEval = function (expr) { return eval(expr); };
 $core.packages["OndafSimulator"].imports = ["amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"];
 $core.packages["OndafSimulator"].transport = {"type":"amd","amdNamespace":"amber-ondafsimulator"};
+
+$core.addClass('Header', $globals.Widget, [], 'OndafSimulator');
+$core.addMethod(
+$core.method({
+selector: "renderOn:",
+protocol: 'as yet unclassified',
+fn: function (html){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv($recv(html)._header())._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv($recv(html)._button())._with_("Start exam");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["with:"]=1;
+//>>excludeEnd("ctx");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},$globals.Header)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["html"],
+source: "renderOn: html\x0a\x09html header\x0a\x09\x09with: [\x0a\x09\x09\x09html button with: 'Start exam'\x0a\x09\x09]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["with:", "header", "button"]
+}),
+$globals.Header);
+
+
 
 $core.addClass('OndafSimulator', $globals.Object, [], 'OndafSimulator');
 $core.addMethod(
@@ -23,7 +61,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv($globals.TextFileTarget)._newIn_("body");
+$recv($globals.TextFileDropTarget)._newIn_("body");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"augmentPage",{},$globals.OndafSimulator)});
@@ -31,8 +69,8 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09TextFileTarget newIn: 'body'.",
-referencedClasses: ["TextFileTarget"],
+source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09TextFileDropTarget newIn: 'body'.",
+referencedClasses: ["TextFileDropTarget"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:"]
 }),
@@ -453,7 +491,74 @@ messageSends: ["source:", "new", "yourself"]
 $globals.ReadableCollection.klass);
 
 
-$core.addClass('TextFileTarget', $globals.Widget, ['dropArea'], 'OndafSimulator');
+$core.addClass('TextCard', $globals.Widget, ['card', 'title'], 'OndafSimulator');
+$core.addMethod(
+$core.method({
+selector: "initializeWith:",
+protocol: 'as yet unclassified',
+fn: function (aTitle){
+var self=this;
+self["@title"]=aTitle;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aTitle"],
+source: "initializeWith: aTitle\x0a\x09title := aTitle",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextCard);
+
+$core.addMethod(
+$core.method({
+selector: "renderOn:",
+protocol: 'as yet unclassified',
+fn: function (html){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(html)._div();
+$recv($1)._with_(self._title());
+self["@card"]=$recv($1)._class_("text-card");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},$globals.TextCard)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["html"],
+source: "renderOn: html\x0a\x09card := html div\x0a\x09\x09with: self title;\x0a\x09\x09class: 'text-card'",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["with:", "div", "title", "class:"]
+}),
+$globals.TextCard);
+
+$core.addMethod(
+$core.method({
+selector: "title",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@title"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "title\x0a\x09^ title",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextCard);
+
+
+
+$core.addClass('TextFileDropTarget', $globals.Widget, ['dropArea'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "handleDrop:",
@@ -494,7 +599,7 @@ return $recv(reader)._readAsText_(file);
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"handleDrop:",{files:files,reader:reader},$globals.TextFileTarget)});
+}, function($ctx1) {$ctx1.fill(self,"handleDrop:",{files:files,reader:reader},$globals.TextFileDropTarget)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -504,7 +609,7 @@ referencedClasses: ["FileReader"],
 //>>excludeEnd("ide");
 messageSends: ["select:thenDo:", "=", "type", "new", "addEventListener:do:", "log:", "result", "readAsText:"]
 }),
-$globals.TextFileTarget);
+$globals.TextFileDropTarget);
 
 $core.addMethod(
 $core.method({
@@ -589,7 +694,7 @@ return self._handleDrop_($recv($globals.ReadableCollection)._of_($recv($recv($re
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},$globals.TextFileTarget)});
+}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},$globals.TextFileDropTarget)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -599,7 +704,7 @@ referencedClasses: ["ReadableCollection"],
 //>>excludeEnd("ide");
 messageSends: ["with:", "div", "class:", "asJQuery", "on:do:", "preventDefault", "addClass:", "removeClass:", "dropEffect:", "dataTransfer", "originalEvent", "stopPropagation", "handleDrop:", "of:", "files"]
 }),
-$globals.TextFileTarget);
+$globals.TextFileDropTarget);
 
 
 $core.addMethod(
@@ -616,7 +721,7 @@ $1=self._new();
 $recv($1)._appendToJQuery_($recv(aSelector)._asJQuery());
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"newIn:",{aSelector:aSelector},$globals.TextFileTarget.klass)});
+}, function($ctx1) {$ctx1.fill(self,"newIn:",{aSelector:aSelector},$globals.TextFileDropTarget.klass)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -626,6 +731,6 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["appendToJQuery:", "new", "asJQuery", "yourself"]
 }),
-$globals.TextFileTarget.klass);
+$globals.TextFileDropTarget.klass);
 
 });
