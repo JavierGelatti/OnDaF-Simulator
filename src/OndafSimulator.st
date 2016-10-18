@@ -23,9 +23,9 @@ doSilkTAG
 !OndafSimulator methodsFor: 'starting'!
 
 augmentPage
-	'#amber-with' asJQuery click: [ self doAmberWith ].
+	"'#amber-with' asJQuery click: [ self doAmberWith ].
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
-	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
+	'#jquery-append' asJQuery click: [ self doJQueryAppend ]."
 	
 	TextFileTarget newIn: 'body'.
 ! !
