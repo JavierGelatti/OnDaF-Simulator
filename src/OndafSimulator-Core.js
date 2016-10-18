@@ -7,6 +7,38 @@ $core.packages["OndafSimulator-Core"].transport = {"type":"amd","amdNamespace":"
 $core.addClass('CTestExam', $globals.Object, ['texts'], 'OndafSimulator-Core');
 $core.addMethod(
 $core.method({
+selector: "copyOn:",
+protocol: 'as yet unclassified',
+fn: function (aPrinter){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@texts"])._do_((function(text){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(text)._copyOn_(aPrinter);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({text:text},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"copyOn:",{aPrinter:aPrinter},$globals.CTestExam)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aPrinter"],
+source: "copyOn: aPrinter \x0a\x09texts do: [ :text |\x0a\x09\x09text copyOn: aPrinter\x0a\x09]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["do:", "copyOn:"]
+}),
+$globals.CTestExam);
+
+$core.addMethod(
+$core.method({
 selector: "evaluate:",
 protocol: 'as yet unclassified',
 fn: function (aSubmission){
@@ -1622,6 +1654,39 @@ $globals.CTestText);
 
 $core.addMethod(
 $core.method({
+selector: "copyOn:",
+protocol: 'as yet unclassified',
+fn: function (aPrinter){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(aPrinter)._printTitle_(self["@title"]);
+$recv(self["@content"])._do_((function(each){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(each)._copyOn_(aPrinter);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"copyOn:",{aPrinter:aPrinter},$globals.CTestText)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aPrinter"],
+source: "copyOn: aPrinter \x0a\x09aPrinter printTitle: title.\x0a\x09content do: [ :each | each copyOn: aPrinter ]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["printTitle:", "do:", "copyOn:"]
+}),
+$globals.CTestText);
+
+$core.addMethod(
+$core.method({
 selector: "evaluate:",
 protocol: 'as yet unclassified',
 fn: function (anAnswerStream){
@@ -1792,6 +1857,30 @@ source: "asString\x0a\x09^ self text",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["text"]
+}),
+$globals.CompletedText);
+
+$core.addMethod(
+$core.method({
+selector: "copyOn:",
+protocol: 'as yet unclassified',
+fn: function (aPrinter){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(aPrinter)._printText_(self["@text"]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"copyOn:",{aPrinter:aPrinter},$globals.CompletedText)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aPrinter"],
+source: "copyOn: aPrinter \x0a\x09aPrinter printText: text",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["printText:"]
 }),
 $globals.CompletedText);
 
@@ -2060,6 +2149,30 @@ source: "asString\x0a\x09^ ' ', prefix, '{', (',' join: suffixOptions), '} '",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: [",", "join:"]
+}),
+$globals.WordToComplete);
+
+$core.addMethod(
+$core.method({
+selector: "copyOn:",
+protocol: 'as yet unclassified',
+fn: function (aPrinter){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(aPrinter)._printWordToComplete_(self["@prefix"]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"copyOn:",{aPrinter:aPrinter},$globals.WordToComplete)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aPrinter"],
+source: "copyOn: aPrinter \x0a\x09aPrinter printWordToComplete: prefix",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["printWordToComplete:"]
 }),
 $globals.WordToComplete);
 
