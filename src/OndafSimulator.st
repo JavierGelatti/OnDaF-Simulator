@@ -33,7 +33,7 @@ printWordToComplete: aString
 ! !
 
 Widget subclass: #ExamTextView
-	instanceVariableNames: 'title content continueCheckbox continueButton inputs'
+	instanceVariableNames: 'title content continueCheckbox continueButton inputs container'
 	package: 'OndafSimulator'!
 
 !ExamTextView methodsFor: 'as yet unclassified'!
@@ -66,10 +66,19 @@ initialize
 	inputs := OrderedCollection new.
 !
 
+initializeWithTitle: aString selector: aSelector
+	title := aString.
+	container := aSelector
+!
+
 onContinueCheckboxChanged
 	(continueCheckbox is: ':checked')
 		ifTrue: [ continueButton css: 'visibility' value: 'visible' ]
 		ifFalse: [ continueButton css: 'visibility' value: 'hidden' ]
+!
+
+render
+	self appendToJQuery: container asJQuery
 !
 
 renderOn: html
@@ -118,10 +127,14 @@ renderOn: html
 					html span class: 'time'; with: 'Verbleibende Sekunden: 0'.
 				]
 		]
-!
+! !
 
-title: aString
-	title := aString
+!ExamTextView class methodsFor: 'as yet unclassified'!
+
+newIn: aSelector title: aString
+	^ self new
+		initializeWithTitle: aString selector: aSelector;
+		yourself
 ! !
 
 Widget subclass: #Header
@@ -148,10 +161,6 @@ renderOn: html
 whenStartExam: aBlock
 	startExamHandler := aBlock.
 ! !
-
-Widget subclass: #MainScreen
-	instanceVariableNames: ''
-	package: 'OndafSimulator'!
 
 Object subclass: #OndafSimulator
 	instanceVariableNames: 'fileDropTarget examDesigner theExam'
@@ -216,7 +225,15 @@ startExam
 	Teacher new startExam: theExam withCopy: aPrinter copies.
 !
 
-test	
+test
+
+	'body' asJQuery empty.
+	
+	(ExamTextView newIn: 'body' title: 'a Title')
+		addText: 'Hello ';
+		addWordToComplete: 'Wor';
+		render.
+	
 	Header new
 		whenStartExam: [ window alert: 'start exam' ];
 		appendToJQuery: 'body' asJQuery.
@@ -227,7 +244,9 @@ test
 	'.text-file-target' asJQuery
 		css: 'height' put: '100px';
 		css: 'border' put: '3px dashed gray';
-		css: 'background' put: 'white'
+		css: 'background' put: 'white'.
+		
+	TextCard newIn: 'body' title: 'a Title'.
 ! !
 
 OndafSimulator class instanceVariableNames: 'currentInstance'!

@@ -162,7 +162,7 @@ $globals.ExamPrinter);
 
 
 
-$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs'], 'OndafSimulator');
+$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "addText:",
@@ -309,6 +309,26 @@ $globals.ExamTextView);
 
 $core.addMethod(
 $core.method({
+selector: "initializeWithTitle:selector:",
+protocol: 'as yet unclassified',
+fn: function (aString,aSelector){
+var self=this;
+self["@title"]=aString;
+self["@container"]=aSelector;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString", "aSelector"],
+source: "initializeWithTitle: aString selector: aSelector\x0a\x09title := aString.\x0a\x09container := aSelector",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
 selector: "onContinueCheckboxChanged",
 protocol: 'as yet unclassified',
 fn: function (){
@@ -337,6 +357,30 @@ source: "onContinueCheckboxChanged\x0a\x09(continueCheckbox is: ':checked')\x0a\
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["ifTrue:ifFalse:", "is:", "css:value:"]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
+selector: "render",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._appendToJQuery_($recv(self["@container"])._asJQuery());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"render",{},$globals.ExamTextView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "render\x0a\x09self appendToJQuery: container asJQuery",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["appendToJQuery:", "asJQuery"]
 }),
 $globals.ExamTextView);
 
@@ -580,25 +624,32 @@ messageSends: ["class:", "div", "with:", "p", "do:", "value:", "label", "type:",
 }),
 $globals.ExamTextView);
 
+
 $core.addMethod(
 $core.method({
-selector: "title:",
+selector: "newIn:title:",
 protocol: 'as yet unclassified',
-fn: function (aString){
+fn: function (aSelector,aString){
 var self=this;
-self["@title"]=aString;
-return self;
-
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._new();
+$recv($1)._initializeWithTitle_selector_(aString,aSelector);
+return $recv($1)._yourself();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"newIn:title:",{aSelector:aSelector,aString:aString},$globals.ExamTextView.klass)});
+//>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aString"],
-source: "title: aString\x0a\x09title := aString",
+args: ["aSelector", "aString"],
+source: "newIn: aSelector title: aString\x0a\x09^ self new\x0a\x09\x09initializeWithTitle: aString selector: aSelector;\x0a\x09\x09yourself",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: []
+messageSends: ["initializeWithTitle:selector:", "new", "yourself"]
 }),
-$globals.ExamTextView);
-
+$globals.ExamTextView.klass);
 
 
 $core.addClass('Header', $globals.Widget, ['startExamHandler'], 'OndafSimulator');
@@ -694,9 +745,6 @@ messageSends: []
 }),
 $globals.Header);
 
-
-
-$core.addClass('MainScreen', $globals.Widget, [], 'OndafSimulator');
 
 
 $core.addClass('OndafSimulator', $globals.Object, ['fileDropTarget', 'examDesigner', 'theExam'], 'OndafSimulator');
@@ -978,9 +1026,21 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$2,$3;
-$1=$recv($globals.Header)._new();
-$recv($1)._whenStartExam_((function(){
+var $1,$2,$3,$4,$5;
+$1="body"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._empty();
+$2=$recv($globals.ExamTextView)._newIn_title_("body","a Title");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["newIn:title:"]=1;
+//>>excludeEnd("ctx");
+$recv($2)._addText_("Hello ");
+$recv($2)._addWordToComplete_("Wor");
+$recv($2)._render();
+$3=$recv($globals.Header)._new();
+$recv($3)._whenStartExam_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -992,11 +1052,11 @@ $ctx2.sendIdx["alert:"]=1;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
-$2="body"._asJQuery();
+$4="body"._asJQuery();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["asJQuery"]=1;
+$ctx1.sendIdx["asJQuery"]=2;
 //>>excludeEnd("ctx");
-$recv($1)._appendToJQuery_($2);
+$recv($3)._appendToJQuery_($4);
 $recv($globals.TextFileDropTarget)._newIn_handler_("body",(function(txt){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -1006,16 +1066,17 @@ return $recv(window)._alert_(txt);
 }, function($ctx2) {$ctx2.fillBlock({txt:txt},$ctx1,2)});
 //>>excludeEnd("ctx");
 }));
-$3=".text-file-target"._asJQuery();
-$recv($3)._css_put_("height","100px");
+$5=".text-file-target"._asJQuery();
+$recv($5)._css_put_("height","100px");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["css:put:"]=1;
 //>>excludeEnd("ctx");
-$recv($3)._css_put_("border","3px dashed gray");
+$recv($5)._css_put_("border","3px dashed gray");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["css:put:"]=2;
 //>>excludeEnd("ctx");
-$recv($3)._css_put_("background","white");
+$recv($5)._css_put_("background","white");
+$recv($globals.TextCard)._newIn_title_("body","a Title");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"test",{},$globals.OndafSimulator)});
@@ -1023,10 +1084,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ window alert: 'start exam' ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x09\x0a\x09TextFileDropTarget\x0a\x09\x09newIn: 'body'\x0a\x09\x09handler: [ :txt | window alert: txt ].\x0a\x09'.text-file-target' asJQuery\x0a\x09\x09css: 'height' put: '100px';\x0a\x09\x09css: 'border' put: '3px dashed gray';\x0a\x09\x09css: 'background' put: 'white'",
-referencedClasses: ["Header", "TextFileDropTarget"],
+source: "test\x0a\x0a\x09'body' asJQuery empty.\x0a\x09\x0a\x09(ExamTextView newIn: 'body' title: 'a Title')\x0a\x09\x09addText: 'Hello ';\x0a\x09\x09addWordToComplete: 'Wor';\x0a\x09\x09render.\x0a\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ window alert: 'start exam' ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x09\x0a\x09TextFileDropTarget\x0a\x09\x09newIn: 'body'\x0a\x09\x09handler: [ :txt | window alert: txt ].\x0a\x09'.text-file-target' asJQuery\x0a\x09\x09css: 'height' put: '100px';\x0a\x09\x09css: 'border' put: '3px dashed gray';\x0a\x09\x09css: 'background' put: 'white'.\x0a\x09\x09\x0a\x09TextCard newIn: 'body' title: 'a Title'.",
+referencedClasses: ["ExamTextView", "Header", "TextFileDropTarget", "TextCard"],
 //>>excludeEnd("ide");
-messageSends: ["whenStartExam:", "new", "alert:", "appendToJQuery:", "asJQuery", "newIn:handler:", "css:put:"]
+messageSends: ["empty", "asJQuery", "addText:", "newIn:title:", "addWordToComplete:", "render", "whenStartExam:", "new", "alert:", "appendToJQuery:", "newIn:handler:", "css:put:"]
 }),
 $globals.OndafSimulator);
 
