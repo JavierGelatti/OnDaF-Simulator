@@ -250,31 +250,6 @@ initialize
 	examDesigner := ExamDesigner new.
 	examDesigner
 		informProgressTo: [ :title | self addToList: title ]
-!
-
-test
-
-	'body' asJQuery empty.
-	
-	(ExamTextView newIn: 'body' title: 'a Title' text: 2 of: 3)
-		addText: 'Hello ';
-		addWordToComplete: 'Wor';
-		showSeconds: 99;
-		render.
-	
-	Header new
-		whenStartExam: [ window alert: 'start exam' ];
-		appendToJQuery: 'body' asJQuery.
-		
-	TextFileDropTarget
-		newIn: 'body'
-		handler: [ :txt | window alert: txt ].
-	'.text-file-target' asJQuery
-		css: 'height' put: '100px';
-		css: 'border' put: '3px dashed gray';
-		css: 'background' put: 'white'.
-		
-	TextCard newIn: 'body' title: 'a Title'
 ! !
 
 OndafSimulator class instanceVariableNames: 'currentInstance'!
