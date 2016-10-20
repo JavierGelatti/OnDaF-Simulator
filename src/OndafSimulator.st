@@ -214,12 +214,33 @@ startExam
 	theExam copyOn: aPrinter.
 	aPrinter copies do: [ :tv | tv appendToJQuery: '#content' asJQuery ].
 	Teacher new startExam: theExam withCopy: aPrinter copies.
+!
+
+test	
+	Header new
+		whenStartExam: [ window alert: 'start exam' ];
+		appendToJQuery: 'body' asJQuery.
+		
+	TextFileDropTarget
+		newIn: 'body'
+		handler: [ :txt | window alert: txt ].
+	'.text-file-target' asJQuery
+		css: 'height' put: '100px';
+		css: 'border' put: '3px dashed gray';
+		css: 'background' put: 'white'
 ! !
+
+OndafSimulator class instanceVariableNames: 'currentInstance'!
 
 !OndafSimulator class methodsFor: 'starting'!
 
+current
+	^ currentInstance
+!
+
 start
-	self new augmentPage
+	currentInstance := self new.
+	"self current augmentPage"
 ! !
 
 Widget subclass: #TextCard

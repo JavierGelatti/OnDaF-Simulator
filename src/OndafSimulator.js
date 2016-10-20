@@ -969,6 +969,86 @@ messageSends: ["hide", "designExam", "new", "copyOn:", "do:", "copies", "appendT
 }),
 $globals.OndafSimulator);
 
+$core.addMethod(
+$core.method({
+selector: "test",
+protocol: 'starting',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$2,$3;
+$1=$recv($globals.Header)._new();
+$recv($1)._whenStartExam_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(window)._alert_("start exam");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["alert:"]=1;
+//>>excludeEnd("ctx");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$2="body"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._appendToJQuery_($2);
+$recv($globals.TextFileDropTarget)._newIn_handler_("body",(function(txt){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(window)._alert_(txt);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({txt:txt},$ctx1,2)});
+//>>excludeEnd("ctx");
+}));
+$3=".text-file-target"._asJQuery();
+$recv($3)._css_put_("height","100px");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["css:put:"]=1;
+//>>excludeEnd("ctx");
+$recv($3)._css_put_("border","3px dashed gray");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["css:put:"]=2;
+//>>excludeEnd("ctx");
+$recv($3)._css_put_("background","white");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test",{},$globals.OndafSimulator)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ window alert: 'start exam' ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x09\x0a\x09TextFileDropTarget\x0a\x09\x09newIn: 'body'\x0a\x09\x09handler: [ :txt | window alert: txt ].\x0a\x09'.text-file-target' asJQuery\x0a\x09\x09css: 'height' put: '100px';\x0a\x09\x09css: 'border' put: '3px dashed gray';\x0a\x09\x09css: 'background' put: 'white'",
+referencedClasses: ["Header", "TextFileDropTarget"],
+//>>excludeEnd("ide");
+messageSends: ["whenStartExam:", "new", "alert:", "appendToJQuery:", "asJQuery", "newIn:handler:", "css:put:"]
+}),
+$globals.OndafSimulator);
+
+
+$globals.OndafSimulator.klass.iVarNames = ['currentInstance'];
+$core.addMethod(
+$core.method({
+selector: "current",
+protocol: 'starting',
+fn: function (){
+var self=this;
+return self["@currentInstance"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "current\x0a\x09^ currentInstance",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.OndafSimulator.klass);
 
 $core.addMethod(
 $core.method({
@@ -979,7 +1059,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self._new())._augmentPage();
+self["@currentInstance"]=self._new();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"start",{},$globals.OndafSimulator.klass)});
@@ -987,10 +1067,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "start\x0a\x09self new augmentPage",
+source: "start\x0a\x09currentInstance := self new.\x0a\x09\x22self current augmentPage\x22",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["augmentPage", "new"]
+messageSends: ["new"]
 }),
 $globals.OndafSimulator.klass);
 
