@@ -1176,7 +1176,6 @@ selector: "handleDrop:",
 protocol: 'as yet unclassified',
 fn: function (files){
 var self=this;
-var reader;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -1189,6 +1188,7 @@ return $recv($recv(file)._type()).__eq("text/plain");
 }, function($ctx2) {$ctx2.fillBlock({file:file},$ctx1,1)});
 //>>excludeEnd("ctx");
 }),(function(file){
+var reader;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1205,17 +1205,17 @@ return $recv(self["@handler"])._value_($recv(reader)._result());
 }));
 return $recv(reader)._readAsText_(file);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({file:file},$ctx1,2)});
+}, function($ctx2) {$ctx2.fillBlock({file:file,reader:reader},$ctx1,2)});
 //>>excludeEnd("ctx");
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"handleDrop:",{files:files,reader:reader},$globals.TextFileDropTarget)});
+}, function($ctx1) {$ctx1.fill(self,"handleDrop:",{files:files},$globals.TextFileDropTarget)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["files"],
-source: "handleDrop: files\x0a\x09| reader |\x0a\x09files select: [ :file | file type = 'text/plain' ]\x0a\x09\x09thenDo: [ :file |\x0a\x09\x09\x09reader := FileReader new.\x0a\x09\x09\x09reader addEventListener: 'loadend' do: [\x0a\x09\x09\x09\x09handler value: reader result\x0a\x09\x09\x09].\x0a\x09\x09\x09reader readAsText: file\x0a\x09\x09].",
+source: "handleDrop: files\x0a\x09files select: [ :file | file type = 'text/plain' ]\x0a\x09\x09thenDo: [ :file | | reader |\x0a\x09\x09\x09reader := FileReader new.\x0a\x09\x09\x09reader addEventListener: 'loadend' do: [\x0a\x09\x09\x09\x09handler value: reader result\x0a\x09\x09\x09].\x0a\x09\x09\x09reader readAsText: file\x0a\x09\x09].",
 referencedClasses: ["FileReader"],
 //>>excludeEnd("ide");
 messageSends: ["select:thenDo:", "=", "type", "new", "addEventListener:do:", "value:", "result", "readAsText:"]

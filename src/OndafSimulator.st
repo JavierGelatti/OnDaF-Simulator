@@ -279,9 +279,8 @@ Widget subclass: #TextFileDropTarget
 !TextFileDropTarget methodsFor: 'as yet unclassified'!
 
 handleDrop: files
-	| reader |
 	files select: [ :file | file type = 'text/plain' ]
-		thenDo: [ :file |
+		thenDo: [ :file | | reader |
 			reader := FileReader new.
 			reader addEventListener: 'loadend' do: [
 				handler value: reader result
