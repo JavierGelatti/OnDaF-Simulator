@@ -162,7 +162,7 @@ $globals.ExamPrinter);
 
 
 
-$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container'], 'OndafSimulator');
+$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container', 'textNumber', 'numberOfTexts'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "addText:",
@@ -291,18 +291,20 @@ $globals.ExamTextView);
 
 $core.addMethod(
 $core.method({
-selector: "initializeWithTitle:selector:",
+selector: "initializeWithTitle:selector:number:of:",
 protocol: 'initialization',
-fn: function (aString,aSelector){
+fn: function (aString,aSelector,aNumber,totalNumber){
 var self=this;
 self["@title"]=aString;
 self["@container"]=aSelector;
+self["@textNumber"]=aNumber;
+self["@numberOfTexts"]=totalNumber;
 return self;
 
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aString", "aSelector"],
-source: "initializeWithTitle: aString selector: aSelector\x0a\x09title := aString.\x0a\x09container := aSelector",
+args: ["aString", "aSelector", "aNumber", "totalNumber"],
+source: "initializeWithTitle: aString selector: aSelector number: aNumber of: totalNumber\x0a\x09title := aString.\x0a\x09container := aSelector.\x0a\x09textNumber := aNumber.\x0a\x09numberOfTexts := totalNumber",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
@@ -368,6 +370,227 @@ $globals.ExamTextView);
 
 $core.addMethod(
 $core.method({
+selector: "renderActionsOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$3,$4,$5,$6,$7,$8,$2;
+$1=$recv(html)._div();
+$recv($1)._class_("actions");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["class:"]=1;
+//>>excludeEnd("ctx");
+$2=$recv($1)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$recv($recv(html)._label())._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+$3=$recv(html)._input();
+$recv($3)._type_("checkbox");
+$recv($3)._onChange_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx4) {
+//>>excludeEnd("ctx");
+return self._onContinueCheckboxChanged();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)});
+//>>excludeEnd("ctx");
+}));
+$4=$recv($3)._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+self["@continueCheckbox"]=$4;
+self["@continueCheckbox"];
+$5=$recv(html)._img();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx["img"]=1;
+//>>excludeEnd("ctx");
+$recv($5)._src_("https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx["src:"]=1;
+//>>excludeEnd("ctx");
+$6=$recv($5)._width_((190));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx["width:"]=1;
+//>>excludeEnd("ctx");
+return $6;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["with:"]=2;
+//>>excludeEnd("ctx");
+$7=$recv(html)._a();
+$recv($7)._href_("#");
+$recv($7)._class_("continue");
+$recv($7)._onClick_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+return self._continue();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,4)});
+//>>excludeEnd("ctx");
+}));
+$recv($7)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+$8=$recv(html)._img();
+$recv($8)._src_("https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif");
+return $recv($8)._width_((256));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,5)});
+//>>excludeEnd("ctx");
+}));
+self["@continueButton"]=$recv($7)._asJQuery();
+return self["@continueButton"];
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["with:"]=1;
+//>>excludeEnd("ctx");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"renderActionsOn:",{html:html},$globals.ExamTextView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["html"],
+source: "renderActionsOn: html\x0a\x09html div\x0a\x09\x09class: 'actions';\x0a\x09\x09with: [\x0a\x09\x09\x09html label with: [\x0a\x09\x09\x09\x09continueCheckbox := html input\x0a\x09\x09\x09\x09\x09type: 'checkbox';\x0a\x09\x09\x09\x09\x09onChange: [ self onContinueCheckboxChanged ];\x0a\x09\x09\x09\x09\x09asJQuery.\x0a\x09\x09\x09\x09html img\x0a\x09\x09\x09\x09\x09src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif';\x0a\x09\x09\x09\x09\x09width: 190\x0a\x09\x09\x09].\x0a\x09\x09\x09continueButton := html a\x0a\x09\x09\x09\x09href: '#';\x0a\x09\x09\x09\x09class: 'continue';\x0a\x09\x09\x09\x09onClick: [ self continue ];\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html img\x0a\x09\x09\x09\x09\x09src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif';\x0a\x09\x09\x09\x09\x09width: 256\x0a\x09\x09\x09\x09];\x0a\x09\x09\x09\x09asJQuery\x0a\x09\x09]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["class:", "div", "with:", "label", "type:", "input", "onChange:", "onContinueCheckboxChanged", "asJQuery", "src:", "img", "width:", "href:", "a", "onClick:", "continue"]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
+selector: "renderContentOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(html)._p();
+$recv($1)._class_("content");
+$recv($1)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(self["@content"])._do_((function(each){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+return $recv(each)._value_(html);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({each:each},$ctx2,2)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"renderContentOn:",{html:html},$globals.ExamTextView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["html"],
+source: "renderContentOn: html\x0a\x09html p\x0a\x09\x09class: 'content';\x0a\x09\x09with: [\x09content do: [ :each | each value: html ] ]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["class:", "p", "with:", "do:", "value:"]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
+selector: "renderInfoOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$3,$4,$5,$2;
+$1=$recv(html)._div();
+$recv($1)._class_("info");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["class:"]=1;
+//>>excludeEnd("ctx");
+$2=$recv($1)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$3=$recv(html)._span();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["span"]=1;
+//>>excludeEnd("ctx");
+$recv($3)._class_("text-number");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["class:"]=2;
+//>>excludeEnd("ctx");
+$recv($3)._with_("Text ");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["with:"]=2;
+//>>excludeEnd("ctx");
+$recv($3)._with_(self["@textNumber"]);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["with:"]=3;
+//>>excludeEnd("ctx");
+$recv($3)._with_(" von ");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["with:"]=4;
+//>>excludeEnd("ctx");
+$4=$recv($3)._with_(self["@numberOfTexts"]);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["with:"]=5;
+//>>excludeEnd("ctx");
+$4;
+$5=$recv(html)._span();
+$recv($5)._class_("time");
+$recv($5)._with_("Verbleibende Sekunden: ");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["with:"]=6;
+//>>excludeEnd("ctx");
+return $recv($5)._with_("0");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["with:"]=1;
+//>>excludeEnd("ctx");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"renderInfoOn:",{html:html},$globals.ExamTextView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["html"],
+source: "renderInfoOn: html\x0a\x09html div\x0a\x09\x09class: 'info';\x0a\x09\x09with: [\x0a\x09\x09\x09html span class: 'text-number';\x0a\x09\x09\x09\x09with: 'Text ';\x0a\x09\x09\x09\x09with: textNumber;\x0a\x09\x09\x09\x09with: ' von ';\x0a\x09\x09\x09\x09with: numberOfTexts.\x0a\x09\x09\x09html span class: 'time';\x0a\x09\x09\x09\x09with: 'Verbleibende Sekunden: ';\x0a\x09\x09\x09\x09with: '0'.\x0a\x09\x09]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["class:", "div", "with:", "span"]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
 selector: "renderOn:",
 protocol: 'rendering',
 fn: function (html){
@@ -375,32 +598,14 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$2,$3,$4,$5,$6,$8,$9,$10,$11,$12,$13,$7,$15,$17,$18,$19,$16,$14;
+var $1;
 $1=$recv(html)._div();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["div"]=1;
-//>>excludeEnd("ctx");
 $recv($1)._class_("text");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["class:"]=1;
-//>>excludeEnd("ctx");
 $recv($1)._with_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$2=$recv(html)._p();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["p"]=1;
-//>>excludeEnd("ctx");
-$recv($2)._class_("title");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["class:"]=2;
-//>>excludeEnd("ctx");
-$3=$recv($2)._with_(self["@title"]);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["with:"]=2;
-//>>excludeEnd("ctx");
-return $3;
+return self._renderTitleOn_(html);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -412,34 +617,21 @@ $recv($1)._with_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$4=$recv(html)._p();
-$recv($4)._class_("content");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["class:"]=3;
-//>>excludeEnd("ctx");
-$5=$recv($4)._with_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx3) {
-//>>excludeEnd("ctx");
-return $recv(self["@content"])._do_((function(each){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx4) {
-//>>excludeEnd("ctx");
-return $recv(each)._value_(html);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx4) {$ctx4.fillBlock({each:each},$ctx3,4)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["with:"]=4;
-//>>excludeEnd("ctx");
-return $5;
+return self._renderContentOn_(html);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["with:"]=2;
+//>>excludeEnd("ctx");
+$recv($1)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return self._renderActionsOn_(html);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,3)});
 //>>excludeEnd("ctx");
 }));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -449,149 +641,11 @@ $recv($1)._with_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$6=$recv(html)._div();
+return self._renderInfoOn_(html);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["div"]=2;
-//>>excludeEnd("ctx");
-$recv($6)._class_("actions");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["class:"]=4;
-//>>excludeEnd("ctx");
-$7=$recv($6)._with_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx3) {
-//>>excludeEnd("ctx");
-$recv($recv(html)._label())._with_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx4) {
-//>>excludeEnd("ctx");
-$8=$recv(html)._input();
-$recv($8)._type_("checkbox");
-$recv($8)._onChange_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx5) {
-//>>excludeEnd("ctx");
-return self._onContinueCheckboxChanged();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx5) {$ctx5.fillBlock({},$ctx4,8)});
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,4)});
 //>>excludeEnd("ctx");
 }));
-$9=$recv($8)._asJQuery();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx4.sendIdx["asJQuery"]=1;
-//>>excludeEnd("ctx");
-self["@continueCheckbox"]=$9;
-self["@continueCheckbox"];
-$10=$recv(html)._img();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx4.sendIdx["img"]=1;
-//>>excludeEnd("ctx");
-$recv($10)._src_("https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx4.sendIdx["src:"]=1;
-//>>excludeEnd("ctx");
-$11=$recv($10)._width_((190));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx4.sendIdx["width:"]=1;
-//>>excludeEnd("ctx");
-return $11;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,7)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx3.sendIdx["with:"]=7;
-//>>excludeEnd("ctx");
-$12=$recv(html)._a();
-$recv($12)._href_("#");
-$recv($12)._class_("continue");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx3.sendIdx["class:"]=5;
-//>>excludeEnd("ctx");
-$recv($12)._onClick_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx4) {
-//>>excludeEnd("ctx");
-return self._continue();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,9)});
-//>>excludeEnd("ctx");
-}));
-$recv($12)._with_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx4) {
-//>>excludeEnd("ctx");
-$13=$recv(html)._img();
-$recv($13)._src_("https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif");
-return $recv($13)._width_((256));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,10)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx3.sendIdx["with:"]=8;
-//>>excludeEnd("ctx");
-self["@continueButton"]=$recv($12)._asJQuery();
-return self["@continueButton"];
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,6)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["with:"]=6;
-//>>excludeEnd("ctx");
-return $7;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,5)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["with:"]=5;
-//>>excludeEnd("ctx");
-$14=$recv($1)._with_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-$15=$recv(html)._div();
-$recv($15)._class_("info");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["class:"]=6;
-//>>excludeEnd("ctx");
-$16=$recv($15)._with_((function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx3) {
-//>>excludeEnd("ctx");
-$17=$recv(html)._span();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx3.sendIdx["span"]=1;
-//>>excludeEnd("ctx");
-$recv($17)._class_("text-number");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx3.sendIdx["class:"]=7;
-//>>excludeEnd("ctx");
-$18=$recv($17)._with_("Text 1 von 4");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx3.sendIdx["with:"]=11;
-//>>excludeEnd("ctx");
-$18;
-$19=$recv(html)._span();
-$recv($19)._class_("time");
-return $recv($19)._with_("Verbleibende Sekunden: 0");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,12)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["with:"]=10;
-//>>excludeEnd("ctx");
-return $16;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,11)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["with:"]=9;
-//>>excludeEnd("ctx");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},$globals.ExamTextView)});
@@ -599,37 +653,82 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderOn: html\x0a\x09html div\x0a\x09\x09class: 'text';\x0a\x09\x09with: [\x0a\x09\x09\x09html p\x0a\x09\x09\x09\x09class: 'title';\x0a\x09\x09\x09\x09with: title\x0a\x09\x09];\x0a\x09\x09with: [\x0a\x09\x09\x09html p\x0a\x09\x09\x09\x09class: 'content';\x0a\x09\x09\x09\x09with: [\x09content do: [ :each | each value: html ] ]\x0a\x09\x09];\x0a\x09\x09with: [\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'actions';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html label with: [\x0a\x09\x09\x09\x09\x09\x09continueCheckbox := html input\x0a\x09\x09\x09\x09\x09\x09\x09type: 'checkbox';\x0a\x09\x09\x09\x09\x09\x09\x09onChange: [ self onContinueCheckboxChanged ];\x0a\x09\x09\x09\x09\x09\x09\x09asJQuery.\x0a\x09\x09\x09\x09\x09\x09html img\x0a\x09\x09\x09\x09\x09\x09\x09src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif';\x0a\x09\x09\x09\x09\x09\x09\x09width: 190\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09continueButton := html a\x0a\x09\x09\x09\x09\x09\x09href: '#';\x0a\x09\x09\x09\x09\x09\x09class: 'continue';\x0a\x09\x09\x09\x09\x09\x09onClick: [ self continue ];\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html img\x0a\x09\x09\x09\x09\x09\x09\x09\x09src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif';\x0a\x09\x09\x09\x09\x09\x09\x09\x09width: 256\x0a\x09\x09\x09\x09\x09\x09];\x0a\x09\x09\x09\x09\x09\x09asJQuery\x0a\x09\x09\x09\x09]\x0a\x09\x09];\x0a\x09\x09with: [\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'info';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span class: 'text-number'; with: 'Text 1 von 4'.\x0a\x09\x09\x09\x09\x09html span class: 'time'; with: 'Verbleibende Sekunden: 0'.\x0a\x09\x09\x09\x09]\x0a\x09\x09]",
+source: "renderOn: html\x0a\x09html div\x0a\x09\x09class: 'text';\x0a\x09\x09with: [ self renderTitleOn: html ];\x0a\x09\x09with: [ self renderContentOn: html ];\x0a\x09\x09with: [ self renderActionsOn: html ];\x0a\x09\x09with: [ self renderInfoOn: html ]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["class:", "div", "with:", "p", "do:", "value:", "label", "type:", "input", "onChange:", "onContinueCheckboxChanged", "asJQuery", "src:", "img", "width:", "href:", "a", "onClick:", "continue", "span"]
+messageSends: ["class:", "div", "with:", "renderTitleOn:", "renderContentOn:", "renderActionsOn:", "renderInfoOn:"]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
+selector: "renderTitleOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(html)._p();
+$recv($1)._class_("title");
+$recv($1)._with_(self["@title"]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"renderTitleOn:",{html:html},$globals.ExamTextView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["html"],
+source: "renderTitleOn: html\x0a\x09html p\x0a\x09\x09class: 'title';\x0a\x09\x09with: title",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["class:", "p", "with:"]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
+selector: "showSeconds:",
+protocol: 'actions',
+fn: function (seconds){
+var self=this;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["seconds"],
+source: "showSeconds: seconds",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
 }),
 $globals.ExamTextView);
 
 
 $core.addMethod(
 $core.method({
-selector: "newIn:title:",
+selector: "newIn:title:text:of:",
 protocol: 'as yet unclassified',
-fn: function (aSelector,aString){
+fn: function (aSelector,aString,number,totalNumber){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
 $1=self._new();
-$recv($1)._initializeWithTitle_selector_(aString,aSelector);
+$recv($1)._initializeWithTitle_selector_number_of_(aString,aSelector,number,totalNumber);
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"newIn:title:",{aSelector:aSelector,aString:aString},$globals.ExamTextView.klass)});
+}, function($ctx1) {$ctx1.fill(self,"newIn:title:text:of:",{aSelector:aSelector,aString:aString,number:number,totalNumber:totalNumber},$globals.ExamTextView.klass)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aSelector", "aString"],
-source: "newIn: aSelector title: aString\x0a\x09^ self new\x0a\x09\x09initializeWithTitle: aString selector: aSelector;\x0a\x09\x09yourself",
+args: ["aSelector", "aString", "number", "totalNumber"],
+source: "newIn: aSelector title: aString text: number of: totalNumber\x0a\x09^ self new\x0a\x09\x09initializeWithTitle: aString selector: aSelector number: number of: totalNumber;\x0a\x09\x09yourself",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["initializeWithTitle:selector:", "new", "yourself"]
+messageSends: ["initializeWithTitle:selector:number:of:", "new", "yourself"]
 }),
 $globals.ExamTextView.klass);
 
@@ -1014,12 +1113,10 @@ $1="body"._asJQuery();
 $ctx1.sendIdx["asJQuery"]=1;
 //>>excludeEnd("ctx");
 $recv($1)._empty();
-$2=$recv($globals.ExamTextView)._newIn_title_("body","a Title");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["newIn:title:"]=1;
-//>>excludeEnd("ctx");
+$2=$recv($globals.ExamTextView)._newIn_title_text_of_("body","a Title",(2),(3));
 $recv($2)._addText_("Hello ");
 $recv($2)._addWordToComplete_("Wor");
+$recv($2)._showSeconds_((99));
 $recv($2)._render();
 $3=$recv($globals.Header)._new();
 $recv($3)._whenStartExam_((function(){
@@ -1066,10 +1163,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test\x0a\x0a\x09'body' asJQuery empty.\x0a\x09\x0a\x09(ExamTextView newIn: 'body' title: 'a Title')\x0a\x09\x09addText: 'Hello ';\x0a\x09\x09addWordToComplete: 'Wor';\x0a\x09\x09render.\x0a\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ window alert: 'start exam' ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x09\x0a\x09TextFileDropTarget\x0a\x09\x09newIn: 'body'\x0a\x09\x09handler: [ :txt | window alert: txt ].\x0a\x09'.text-file-target' asJQuery\x0a\x09\x09css: 'height' put: '100px';\x0a\x09\x09css: 'border' put: '3px dashed gray';\x0a\x09\x09css: 'background' put: 'white'.\x0a\x09\x09\x0a\x09TextCard newIn: 'body' title: 'a Title'",
+source: "test\x0a\x0a\x09'body' asJQuery empty.\x0a\x09\x0a\x09(ExamTextView newIn: 'body' title: 'a Title' text: 2 of: 3)\x0a\x09\x09addText: 'Hello ';\x0a\x09\x09addWordToComplete: 'Wor';\x0a\x09\x09showSeconds: 99;\x0a\x09\x09render.\x0a\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ window alert: 'start exam' ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x09\x0a\x09TextFileDropTarget\x0a\x09\x09newIn: 'body'\x0a\x09\x09handler: [ :txt | window alert: txt ].\x0a\x09'.text-file-target' asJQuery\x0a\x09\x09css: 'height' put: '100px';\x0a\x09\x09css: 'border' put: '3px dashed gray';\x0a\x09\x09css: 'background' put: 'white'.\x0a\x09\x09\x0a\x09TextCard newIn: 'body' title: 'a Title'",
 referencedClasses: ["ExamTextView", "Header", "TextFileDropTarget", "TextCard"],
 //>>excludeEnd("ide");
-messageSends: ["empty", "asJQuery", "addText:", "newIn:title:", "addWordToComplete:", "render", "whenStartExam:", "new", "alert:", "appendToJQuery:", "newIn:handler:", "css:put:"]
+messageSends: ["empty", "asJQuery", "addText:", "newIn:title:text:of:", "addWordToComplete:", "showSeconds:", "render", "whenStartExam:", "new", "alert:", "appendToJQuery:", "newIn:handler:", "css:put:", "newIn:title:"]
 }),
 $globals.OndafSimulator);
 

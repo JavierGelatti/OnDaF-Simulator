@@ -33,8 +33,13 @@ printWordToComplete: aString
 ! !
 
 Widget subclass: #ExamTextView
-	instanceVariableNames: 'title content continueCheckbox continueButton inputs container'
+	instanceVariableNames: 'title content continueCheckbox continueButton inputs container textNumber numberOfTexts'
 	package: 'OndafSimulator'!
+
+!ExamTextView methodsFor: 'actions'!
+
+showSeconds: seconds
+! !
 
 !ExamTextView methodsFor: 'building'!
 
@@ -64,9 +69,11 @@ initialize
 	inputs := OrderedCollection new
 !
 
-initializeWithTitle: aString selector: aSelector
+initializeWithTitle: aString selector: aSelector number: aNumber of: totalNumber
 	title := aString.
-	container := aSelector
+	container := aSelector.
+	textNumber := aNumber.
+	numberOfTexts := totalNumber
 ! !
 
 !ExamTextView methodsFor: 'private'!
@@ -83,59 +90,73 @@ render
 	self appendToJQuery: container asJQuery
 !
 
+renderActionsOn: html
+	html div
+		class: 'actions';
+		with: [
+			html label with: [
+				continueCheckbox := html input
+					type: 'checkbox';
+					onChange: [ self onContinueCheckboxChanged ];
+					asJQuery.
+				html img
+					src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif';
+					width: 190
+			].
+			continueButton := html a
+				href: '#';
+				class: 'continue';
+				onClick: [ self continue ];
+				with: [
+					html img
+					src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif';
+					width: 256
+				];
+				asJQuery
+		]
+!
+
+renderContentOn: html
+	html p
+		class: 'content';
+		with: [	content do: [ :each | each value: html ] ]
+!
+
+renderInfoOn: html
+	html div
+		class: 'info';
+		with: [
+			html span class: 'text-number';
+				with: 'Text ';
+				with: textNumber;
+				with: ' von ';
+				with: numberOfTexts.
+			html span class: 'time';
+				with: 'Verbleibende Sekunden: ';
+				with: '0'.
+		]
+!
+
 renderOn: html
 	html div
 		class: 'text';
-		with: [
-			html p
-				class: 'title';
-				with: title
-		];
-		with: [
-			html p
-				class: 'content';
-				with: [	content do: [ :each | each value: html ] ]
-		];
-		with: [
-			html div
-				class: 'actions';
-				with: [
-					html label with: [
-						continueCheckbox := html input
-							type: 'checkbox';
-							onChange: [ self onContinueCheckboxChanged ];
-							asJQuery.
-						html img
-							src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif';
-							width: 190
-					].
-					continueButton := html a
-						href: '#';
-						class: 'continue';
-						onClick: [ self continue ];
-						with: [
-							html img
-								src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif';
-								width: 256
-						];
-						asJQuery
-				]
-		];
-		with: [
-			html div
-				class: 'info';
-				with: [
-					html span class: 'text-number'; with: 'Text 1 von 4'.
-					html span class: 'time'; with: 'Verbleibende Sekunden: 0'.
-				]
-		]
+		with: [ self renderTitleOn: html ];
+		with: [ self renderContentOn: html ];
+		with: [ self renderActionsOn: html ];
+		with: [ self renderInfoOn: html ]
+!
+
+renderTitleOn: html
+	html p
+		class: 'title';
+		with: title
 ! !
 
 !ExamTextView class methodsFor: 'as yet unclassified'!
 
-newIn: aSelector title: aString
+newIn: aSelector title: aString text: number of: totalNumber
 	^ self new
-		initializeWithTitle: aString selector: aSelector;
+		initializeWithTitle: aString selector: aSelector number: number of: totalNumber;
 		yourself
 ! !
 
@@ -235,9 +256,10 @@ test
 
 	'body' asJQuery empty.
 	
-	(ExamTextView newIn: 'body' title: 'a Title')
+	(ExamTextView newIn: 'body' title: 'a Title' text: 2 of: 3)
 		addText: 'Hello ';
 		addWordToComplete: 'Wor';
+		showSeconds: 99;
 		render.
 	
 	Header new
