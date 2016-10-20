@@ -6,6 +6,10 @@ Object subclass: #ExamPrinter
 
 !ExamPrinter methodsFor: 'as yet unclassified'!
 
+copies
+	^ textViews
+!
+
 currentTextView
 	^ textViews last
 !
@@ -26,14 +30,10 @@ printTitle: aString
 
 printWordToComplete: aString
 	self currentTextView addWordToComplete: aString
-!
-
-renderContentOn: aSelector
-	textViews do: [ :tv | tv appendToJQuery: aSelector asJQuery ]
 ! !
 
 Widget subclass: #ExamTextView
-	instanceVariableNames: 'title content'
+	instanceVariableNames: 'title content continueCheckbox continueButton inputs'
 	package: 'OndafSimulator'!
 
 !ExamTextView methodsFor: 'as yet unclassified'!
@@ -47,21 +47,32 @@ addWordToComplete: aString
 		(html tag: 'nobr')
 			with: [
 				html span with: aString.
-				html input
+				inputs add: (html input
 					type: 'text';
-					at: 'size' put: 10
+					at: 'size' put: 10;
+					asJQuery)
 			];
 			with: ' '
 	]
 !
 
+continue
+	"?"
+!
+
 initialize
 	super initialize.
 	content := OrderedCollection new.
+	inputs := OrderedCollection new.
+!
+
+onContinueCheckboxChanged
+	(continueCheckbox is: ':checked')
+		ifTrue: [ continueButton css: 'visibility' value: 'visible' ]
+		ifFalse: [ continueButton css: 'visibility' value: 'hidden' ]
 !
 
 renderOn: html
-	| continueCheckbox continueButton |
 	html div
 		class: 'text';
 		with: [
@@ -81,11 +92,7 @@ renderOn: html
 					html label with: [
 						continueCheckbox := html input
 							type: 'checkbox';
-							onChange: [
-								(continueCheckbox is: ':checked')
-									ifTrue: [ continueButton css: 'visibility' value: 'visible' ]
-									ifFalse: [ continueButton css: 'visibility' value: 'hidden' ]
-								];
+							onChange: [ self onContinueCheckboxChanged ];
 							asJQuery.
 						html img
 							src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif';
@@ -94,6 +101,7 @@ renderOn: html
 					continueButton := html a
 						href: '#';
 						class: 'continue';
+						onClick: [ self continue ];
 						with: [
 							html img
 								src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif';
@@ -106,8 +114,8 @@ renderOn: html
 			html div
 				class: 'info';
 				with: [
-					html span class: 'text-number'; with: 'Text 1 of 4'.
-					html span class: 'time'; with: 'Seconds remaining: 0'.
+					html span class: 'text-number'; with: 'Text 1 von 4'.
+					html span class: 'time'; with: 'Verbleibende Sekunden: 0'.
 				]
 		]
 !
@@ -138,7 +146,7 @@ renderOn: html
 !
 
 whenStartExam: aBlock
-	startExamHandler := aBlock
+	startExamHandler := aBlock.
 ! !
 
 Widget subclass: #MainScreen
@@ -146,7 +154,7 @@ Widget subclass: #MainScreen
 	package: 'OndafSimulator'!
 
 Object subclass: #OndafSimulator
-	instanceVariableNames: 'fileDropTarget examDesigner'
+	instanceVariableNames: 'fileDropTarget examDesigner theExam'
 	package: 'OndafSimulator'!
 
 !OndafSimulator methodsFor: 'action'!
@@ -168,8 +176,6 @@ doSilkTAG
 !OndafSimulator methodsFor: 'starting'!
 
 addText: aString
-	examDesigner
-		informProgressTo: [ :title | self addToList: title ].
 	examDesigner considerText: aString.
 !
 
@@ -195,16 +201,19 @@ augmentPage
 
 initialize
 	super initialize.
-	examDesigner := ExamDesigner new
+	examDesigner := ExamDesigner new.
+	examDesigner
+		informProgressTo: [ :title | self addToList: title ].
 !
 
 startExam
-	| theExam aPrinter |
+	| aPrinter |
 	fileDropTarget hide.
 	theExam := examDesigner designExam.
 	aPrinter := ExamPrinter new.
 	theExam copyOn: aPrinter.
-	aPrinter renderContentOn: '#content'
+	aPrinter copies do: [ :tv | tv appendToJQuery: '#content' asJQuery ].
+	Teacher new startExam: theExam withCopy: aPrinter copies.
 ! !
 
 !OndafSimulator class methodsFor: 'starting'!
