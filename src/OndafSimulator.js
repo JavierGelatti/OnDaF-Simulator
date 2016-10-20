@@ -166,7 +166,7 @@ $core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCh
 $core.addMethod(
 $core.method({
 selector: "addText:",
-protocol: 'as yet unclassified',
+protocol: 'building',
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -198,7 +198,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "addWordToComplete:",
-protocol: 'as yet unclassified',
+protocol: 'building',
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -255,26 +255,8 @@ $globals.ExamTextView);
 
 $core.addMethod(
 $core.method({
-selector: "continue",
-protocol: 'as yet unclassified',
-fn: function (){
-var self=this;
-return self;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "continue\x0a\x09\x22?\x22",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.ExamTextView);
-
-$core.addMethod(
-$core.method({
 selector: "initialize",
-protocol: 'as yet unclassified',
+protocol: 'initialization',
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -300,7 +282,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09content := OrderedCollection new.\x0a\x09inputs := OrderedCollection new.",
+source: "initialize\x0a\x09super initialize.\x0a\x09content := OrderedCollection new.\x0a\x09inputs := OrderedCollection new",
 referencedClasses: ["OrderedCollection"],
 //>>excludeEnd("ide");
 messageSends: ["initialize", "new"]
@@ -310,7 +292,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "initializeWithTitle:selector:",
-protocol: 'as yet unclassified',
+protocol: 'initialization',
 fn: function (aString,aSelector){
 var self=this;
 self["@title"]=aString;
@@ -330,7 +312,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "onContinueCheckboxChanged",
-protocol: 'as yet unclassified',
+protocol: 'private',
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -363,7 +345,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "render",
-protocol: 'as yet unclassified',
+protocol: 'rendering',
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -387,7 +369,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "renderOn:",
-protocol: 'as yet unclassified',
+protocol: 'rendering',
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -656,7 +638,7 @@ $core.addClass('Header', $globals.Widget, ['startExamHandler'], 'OndafSimulator'
 $core.addMethod(
 $core.method({
 selector: "initialize",
-protocol: 'as yet unclassified',
+protocol: 'initialization',
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -680,7 +662,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09startExamHandler := [].",
+source: "initialize\x0a\x09super initialize.\x0a\x09startExamHandler := []",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initialize"]
@@ -690,7 +672,7 @@ $globals.Header);
 $core.addMethod(
 $core.method({
 selector: "renderOn:",
-protocol: 'as yet unclassified',
+protocol: 'rendering',
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -729,7 +711,7 @@ $globals.Header);
 $core.addMethod(
 $core.method({
 selector: "whenStartExam:",
-protocol: 'as yet unclassified',
+protocol: 'events',
 fn: function (aBlock){
 var self=this;
 self["@startExamHandler"]=aBlock;
@@ -738,7 +720,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aBlock"],
-source: "whenStartExam: aBlock\x0a\x09startExamHandler := aBlock.",
+source: "whenStartExam: aBlock\x0a\x09startExamHandler := aBlock",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
@@ -751,7 +733,7 @@ $core.addClass('OndafSimulator', $globals.Object, ['fileDropTarget', 'examDesign
 $core.addMethod(
 $core.method({
 selector: "addText:",
-protocol: 'starting',
+protocol: 'action',
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -765,7 +747,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aString"],
-source: "addText: aString\x0a\x09examDesigner considerText: aString.",
+source: "addText: aString\x0a\x09examDesigner considerText: aString",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["considerText:"]
@@ -775,7 +757,7 @@ $globals.OndafSimulator);
 $core.addMethod(
 $core.method({
 selector: "addToList:",
-protocol: 'starting',
+protocol: 'action',
 fn: function (aTitle){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -964,7 +946,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09examDesigner := ExamDesigner new.\x0a\x09examDesigner\x0a\x09\x09informProgressTo: [ :title | self addToList: title ].\x0a\x09",
+source: "initialize\x0a\x09super initialize.\x0a\x09examDesigner := ExamDesigner new.\x0a\x09examDesigner\x0a\x09\x09informProgressTo: [ :title | self addToList: title ]\x0a\x09",
 referencedClasses: ["ExamDesigner"],
 //>>excludeEnd("ide");
 messageSends: ["initialize", "new", "informProgressTo:", "addToList:"]
@@ -974,7 +956,7 @@ $globals.OndafSimulator);
 $core.addMethod(
 $core.method({
 selector: "startExam",
-protocol: 'starting',
+protocol: 'action',
 fn: function (){
 var self=this;
 var aPrinter;
@@ -1010,7 +992,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter new.\x0a\x09theExam copyOn: aPrinter.\x0a\x09aPrinter copies do: [ :tv | tv appendToJQuery: '#content' asJQuery ].\x0a\x09Teacher new startExam: theExam withCopy: aPrinter copies.",
+source: "startExam\x0a\x09| aPrinter |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter new.\x0a\x09theExam copyOn: aPrinter.\x0a\x09aPrinter copies do: [ :tv | tv appendToJQuery: '#content' asJQuery ].\x0a\x09Teacher new startExam: theExam withCopy: aPrinter copies",
 referencedClasses: ["ExamPrinter", "Teacher"],
 //>>excludeEnd("ide");
 messageSends: ["hide", "designExam", "new", "copyOn:", "do:", "copies", "appendToJQuery:", "asJQuery", "startExam:withCopy:"]
@@ -1084,7 +1066,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test\x0a\x0a\x09'body' asJQuery empty.\x0a\x09\x0a\x09(ExamTextView newIn: 'body' title: 'a Title')\x0a\x09\x09addText: 'Hello ';\x0a\x09\x09addWordToComplete: 'Wor';\x0a\x09\x09render.\x0a\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ window alert: 'start exam' ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x09\x0a\x09TextFileDropTarget\x0a\x09\x09newIn: 'body'\x0a\x09\x09handler: [ :txt | window alert: txt ].\x0a\x09'.text-file-target' asJQuery\x0a\x09\x09css: 'height' put: '100px';\x0a\x09\x09css: 'border' put: '3px dashed gray';\x0a\x09\x09css: 'background' put: 'white'.\x0a\x09\x09\x0a\x09TextCard newIn: 'body' title: 'a Title'.",
+source: "test\x0a\x0a\x09'body' asJQuery empty.\x0a\x09\x0a\x09(ExamTextView newIn: 'body' title: 'a Title')\x0a\x09\x09addText: 'Hello ';\x0a\x09\x09addWordToComplete: 'Wor';\x0a\x09\x09render.\x0a\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ window alert: 'start exam' ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x09\x0a\x09TextFileDropTarget\x0a\x09\x09newIn: 'body'\x0a\x09\x09handler: [ :txt | window alert: txt ].\x0a\x09'.text-file-target' asJQuery\x0a\x09\x09css: 'height' put: '100px';\x0a\x09\x09css: 'border' put: '3px dashed gray';\x0a\x09\x09css: 'background' put: 'white'.\x0a\x09\x09\x0a\x09TextCard newIn: 'body' title: 'a Title'",
 referencedClasses: ["ExamTextView", "Header", "TextFileDropTarget", "TextCard"],
 //>>excludeEnd("ide");
 messageSends: ["empty", "asJQuery", "addText:", "newIn:title:", "addWordToComplete:", "render", "whenStartExam:", "new", "alert:", "appendToJQuery:", "newIn:handler:", "css:put:"]
@@ -1140,7 +1122,7 @@ $core.addClass('TextCard', $globals.Widget, ['card', 'title'], 'OndafSimulator')
 $core.addMethod(
 $core.method({
 selector: "initializeWith:",
-protocol: 'as yet unclassified',
+protocol: 'initialization',
 fn: function (aTitle){
 var self=this;
 self["@title"]=aTitle;
@@ -1159,7 +1141,7 @@ $globals.TextCard);
 $core.addMethod(
 $core.method({
 selector: "renderOn:",
-protocol: 'as yet unclassified',
+protocol: 'rendering',
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1167,7 +1149,7 @@ return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
 $1=$recv(html)._div();
-$recv($1)._with_(self._title());
+$recv($1)._with_(self["@title"]);
 self["@card"]=$recv($1)._class_("text-card");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1176,28 +1158,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderOn: html\x0a\x09card := html div\x0a\x09\x09with: self title;\x0a\x09\x09class: 'text-card'",
+source: "renderOn: html\x0a\x09card := html div\x0a\x09\x09with: title;\x0a\x09\x09class: 'text-card'",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["with:", "div", "title", "class:"]
-}),
-$globals.TextCard);
-
-$core.addMethod(
-$core.method({
-selector: "title",
-protocol: 'as yet unclassified',
-fn: function (){
-var self=this;
-return self["@title"];
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "title\x0a\x09^ title",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
+messageSends: ["with:", "div", "class:"]
 }),
 $globals.TextCard);
 
@@ -1234,7 +1198,7 @@ $core.addClass('TextFileDropTarget', $globals.Widget, ['dropArea', 'handler'], '
 $core.addMethod(
 $core.method({
 selector: "handleDrop:",
-protocol: 'as yet unclassified',
+protocol: 'private',
 fn: function (files){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1276,7 +1240,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["files"],
-source: "handleDrop: files\x0a\x09files select: [ :file | file type = 'text/plain' ]\x0a\x09\x09thenDo: [ :file | | reader |\x0a\x09\x09\x09reader := FileReader new.\x0a\x09\x09\x09reader addEventListener: 'loadend' do: [\x0a\x09\x09\x09\x09handler value: reader result\x0a\x09\x09\x09].\x0a\x09\x09\x09reader readAsText: file\x0a\x09\x09].",
+source: "handleDrop: files\x0a\x09files select: [ :file | file type = 'text/plain' ]\x0a\x09\x09thenDo: [ :file | | reader |\x0a\x09\x09\x09reader := FileReader new.\x0a\x09\x09\x09reader addEventListener: 'loadend' do: [\x0a\x09\x09\x09\x09handler value: reader result\x0a\x09\x09\x09].\x0a\x09\x09\x09reader readAsText: file\x0a\x09\x09]",
 referencedClasses: ["FileReader"],
 //>>excludeEnd("ide");
 messageSends: ["select:thenDo:", "=", "type", "new", "addEventListener:do:", "value:", "result", "readAsText:"]
@@ -1286,7 +1250,7 @@ $globals.TextFileDropTarget);
 $core.addMethod(
 $core.method({
 selector: "handler:",
-protocol: 'as yet unclassified',
+protocol: 'events',
 fn: function (aBlock){
 var self=this;
 self["@handler"]=aBlock;
@@ -1305,7 +1269,7 @@ $globals.TextFileDropTarget);
 $core.addMethod(
 $core.method({
 selector: "hide",
-protocol: 'as yet unclassified',
+protocol: 'actions',
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1329,7 +1293,7 @@ $globals.TextFileDropTarget);
 $core.addMethod(
 $core.method({
 selector: "renderOn:",
-protocol: 'as yet unclassified',
+protocol: 'rendering',
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1413,7 +1377,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderOn: html\x0a\x09dropArea := html div\x0a\x09\x09class: 'text-file-target';\x0a\x09\x09asJQuery.\x0a\x09\x0a\x09dropArea on: 'dragenter' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09dropArea addClass: 'dragover'.\x0a\x09].\x0a\x09dropArea on: 'dragleave' do: [ :event |\x0a\x09\x09dropArea removeClass: 'dragover'.\x0a\x09].\x0a\x09dropArea on: 'dragover' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09event originalEvent dataTransfer dropEffect: 'copy'.\x0a\x09].\x0a\x09\x0a\x09dropArea on: 'drop' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09event stopPropagation.\x0a\x09\x09dropArea removeClass: 'dragover'.\x0a\x09\x09self handleDrop: (Array ofNative: event originalEvent dataTransfer files).\x0a\x09].",
+source: "renderOn: html\x0a\x09dropArea := html div\x0a\x09\x09class: 'text-file-target';\x0a\x09\x09asJQuery.\x0a\x09\x0a\x09dropArea on: 'dragenter' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09dropArea addClass: 'dragover'.\x0a\x09].\x0a\x09dropArea on: 'dragleave' do: [ :event |\x0a\x09\x09dropArea removeClass: 'dragover'.\x0a\x09].\x0a\x09dropArea on: 'dragover' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09event originalEvent dataTransfer dropEffect: 'copy'.\x0a\x09].\x0a\x09\x0a\x09dropArea on: 'drop' do: [ :event |\x0a\x09\x09event preventDefault.\x0a\x09\x09event stopPropagation.\x0a\x09\x09dropArea removeClass: 'dragover'.\x0a\x09\x09self handleDrop: (Array ofNative: event originalEvent dataTransfer files).\x0a\x09]",
 referencedClasses: ["Array"],
 //>>excludeEnd("ide");
 messageSends: ["class:", "div", "asJQuery", "on:do:", "preventDefault", "addClass:", "removeClass:", "dropEffect:", "dataTransfer", "originalEvent", "stopPropagation", "handleDrop:", "ofNative:", "files"]

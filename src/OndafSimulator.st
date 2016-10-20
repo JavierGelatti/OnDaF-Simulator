@@ -36,7 +36,7 @@ Widget subclass: #ExamTextView
 	instanceVariableNames: 'title content continueCheckbox continueButton inputs container'
 	package: 'OndafSimulator'!
 
-!ExamTextView methodsFor: 'as yet unclassified'!
+!ExamTextView methodsFor: 'building'!
 
 addText: aString
 	content add: [ :html | html span with: aString, ' ' ]
@@ -54,28 +54,30 @@ addWordToComplete: aString
 			];
 			with: ' '
 	]
-!
+! !
 
-continue
-	"?"
-!
+!ExamTextView methodsFor: 'initialization'!
 
 initialize
 	super initialize.
 	content := OrderedCollection new.
-	inputs := OrderedCollection new.
+	inputs := OrderedCollection new
 !
 
 initializeWithTitle: aString selector: aSelector
 	title := aString.
 	container := aSelector
-!
+! !
+
+!ExamTextView methodsFor: 'private'!
 
 onContinueCheckboxChanged
 	(continueCheckbox is: ':checked')
 		ifTrue: [ continueButton css: 'visibility' value: 'visible' ]
 		ifFalse: [ continueButton css: 'visibility' value: 'hidden' ]
-!
+! !
+
+!ExamTextView methodsFor: 'rendering'!
 
 render
 	self appendToJQuery: container asJQuery
@@ -141,12 +143,20 @@ Widget subclass: #Header
 	instanceVariableNames: 'startExamHandler'
 	package: 'OndafSimulator'!
 
-!Header methodsFor: 'as yet unclassified'!
+!Header methodsFor: 'events'!
+
+whenStartExam: aBlock
+	startExamHandler := aBlock
+! !
+
+!Header methodsFor: 'initialization'!
 
 initialize
 	super initialize.
-	startExamHandler := [].
-!
+	startExamHandler := []
+! !
+
+!Header methodsFor: 'rendering'!
 
 renderOn: html
 	html header
@@ -156,10 +166,6 @@ renderOn: html
 				tabindex: 0;
 				onClick: startExamHandler
 		]
-!
-
-whenStartExam: aBlock
-	startExamHandler := aBlock.
 ! !
 
 Object subclass: #OndafSimulator
@@ -167,6 +173,14 @@ Object subclass: #OndafSimulator
 	package: 'OndafSimulator'!
 
 !OndafSimulator methodsFor: 'action'!
+
+addText: aString
+	examDesigner considerText: aString
+!
+
+addToList: aTitle
+	TextCard newIn: '#content > .text-file-target' title: aTitle
+!
 
 doAmberWith
 	| tag |
@@ -180,17 +194,19 @@ doJQueryAppend
 
 doSilkTAG
 	'#output-list' asSilk LI: 'Silk TAG: added me!!'
+!
+
+startExam
+	| aPrinter |
+	fileDropTarget hide.
+	theExam := examDesigner designExam.
+	aPrinter := ExamPrinter new.
+	theExam copyOn: aPrinter.
+	aPrinter copies do: [ :tv | tv appendToJQuery: '#content' asJQuery ].
+	Teacher new startExam: theExam withCopy: aPrinter copies
 ! !
 
 !OndafSimulator methodsFor: 'starting'!
-
-addText: aString
-	examDesigner considerText: aString.
-!
-
-addToList: aTitle
-	TextCard newIn: '#content > .text-file-target' title: aTitle
-!
 
 augmentPage
 	"'#amber-with' asJQuery click: [ self doAmberWith ].
@@ -212,17 +228,7 @@ initialize
 	super initialize.
 	examDesigner := ExamDesigner new.
 	examDesigner
-		informProgressTo: [ :title | self addToList: title ].
-!
-
-startExam
-	| aPrinter |
-	fileDropTarget hide.
-	theExam := examDesigner designExam.
-	aPrinter := ExamPrinter new.
-	theExam copyOn: aPrinter.
-	aPrinter copies do: [ :tv | tv appendToJQuery: '#content' asJQuery ].
-	Teacher new startExam: theExam withCopy: aPrinter copies.
+		informProgressTo: [ :title | self addToList: title ]
 !
 
 test
@@ -246,7 +252,7 @@ test
 		css: 'border' put: '3px dashed gray';
 		css: 'background' put: 'white'.
 		
-	TextCard newIn: 'body' title: 'a Title'.
+	TextCard newIn: 'body' title: 'a Title'
 ! !
 
 OndafSimulator class instanceVariableNames: 'currentInstance'!
@@ -266,20 +272,18 @@ Widget subclass: #TextCard
 	instanceVariableNames: 'card title'
 	package: 'OndafSimulator'!
 
-!TextCard methodsFor: 'as yet unclassified'!
+!TextCard methodsFor: 'initialization'!
 
 initializeWith: aTitle
 	title := aTitle
-!
+! !
+
+!TextCard methodsFor: 'rendering'!
 
 renderOn: html
 	card := html div
-		with: self title;
+		with: title;
 		class: 'text-card'
-!
-
-title
-	^ title
 ! !
 
 !TextCard class methodsFor: 'as yet unclassified'!
@@ -295,7 +299,19 @@ Widget subclass: #TextFileDropTarget
 	instanceVariableNames: 'dropArea handler'
 	package: 'OndafSimulator'!
 
-!TextFileDropTarget methodsFor: 'as yet unclassified'!
+!TextFileDropTarget methodsFor: 'actions'!
+
+hide
+	dropArea hide
+! !
+
+!TextFileDropTarget methodsFor: 'events'!
+
+handler: aBlock
+	handler := aBlock
+! !
+
+!TextFileDropTarget methodsFor: 'private'!
 
 handleDrop: files
 	files select: [ :file | file type = 'text/plain' ]
@@ -305,16 +321,10 @@ handleDrop: files
 				handler value: reader result
 			].
 			reader readAsText: file
-		].
-!
+		]
+! !
 
-handler: aBlock
-	handler := aBlock
-!
-
-hide
-	dropArea hide
-!
+!TextFileDropTarget methodsFor: 'rendering'!
 
 renderOn: html
 	dropArea := html div
@@ -338,7 +348,7 @@ renderOn: html
 		event stopPropagation.
 		dropArea removeClass: 'dragover'.
 		self handleDrop: (Array ofNative: event originalEvent dataTransfer files).
-	].
+	]
 ! !
 
 !TextFileDropTarget class methodsFor: 'as yet unclassified'!
