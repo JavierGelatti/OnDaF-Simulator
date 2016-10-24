@@ -2,7 +2,7 @@ define("amber-ondafsimulator/OndafSimulator", ["amber/boot"
 //>>excludeStart("imports", pragmas.excludeImports);
 , "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"
 //>>excludeEnd("imports");
-, "amber_core/Kernel-Objects", "amber/web/Web", "amber_core/Kernel-Collections"], function($boot
+, "amber_core/Kernel-Objects", "amber/web/Web", "amber_core/Kernel-Methods", "amber_core/Kernel-Collections"], function($boot
 //>>excludeStart("imports", pragmas.excludeImports);
 
 //>>excludeEnd("imports");
@@ -120,8 +120,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@textViews"])._add_($recv($globals.ExamTextView)._new());
-$recv(self._currentTextView())._title_(aString);
+$recv(self["@textViews"])._add_($recv($globals.ExamTextView)._newIn_title_text_of_("#content",aString,(1),(1)));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"printTitle:",{aString:aString},$globals.ExamPrinter)});
@@ -129,10 +128,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aString"],
-source: "printTitle: aString\x0a\x09textViews add: ExamTextView new.\x0a\x09self currentTextView title: aString.",
+source: "printTitle: aString\x0a\x09textViews add: (ExamTextView newIn: '#content' title: aString text: 1 of: 1)",
 referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
-messageSends: ["add:", "new", "title:", "currentTextView"]
+messageSends: ["add:", "newIn:title:text:of:"]
 }),
 $globals.ExamPrinter);
 
@@ -1062,19 +1061,11 @@ var aPrinter;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1;
 $recv(self["@fileDropTarget"])._hide();
 self["@theExam"]=$recv(self["@examDesigner"])._designExam();
 aPrinter=$recv($globals.ExamPrinter)._new();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["new"]=1;
-//>>excludeEnd("ctx");
 $recv(self["@theExam"])._copyOn_(aPrinter);
-$1=$recv(aPrinter)._copies();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["copies"]=1;
-//>>excludeEnd("ctx");
-$recv($1)._do_((function(tv){
+$recv($recv(aPrinter)._copies())._do_((function(tv){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1083,7 +1074,6 @@ return $recv(tv)._appendToJQuery_("#content"._asJQuery());
 }, function($ctx2) {$ctx2.fillBlock({tv:tv},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
-$recv($recv($globals.Teacher)._new())._startExam_withCopy_(self["@theExam"],$recv(aPrinter)._copies());
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter},$globals.OndafSimulator)});
@@ -1091,10 +1081,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter new.\x0a\x09theExam copyOn: aPrinter.\x0a\x09aPrinter copies do: [ :tv | tv appendToJQuery: '#content' asJQuery ].\x0a\x09Teacher new startExam: theExam withCopy: aPrinter copies",
-referencedClasses: ["ExamPrinter", "Teacher"],
+source: "startExam\x0a\x09| aPrinter |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter new.\x0a\x09theExam copyOn: aPrinter.\x0a\x09aPrinter copies do: [ :tv | tv appendToJQuery: '#content' asJQuery ]",
+referencedClasses: ["ExamPrinter"],
 //>>excludeEnd("ide");
-messageSends: ["hide", "designExam", "new", "copyOn:", "do:", "copies", "appendToJQuery:", "asJQuery", "startExam:withCopy:"]
+messageSends: ["hide", "designExam", "new", "copyOn:", "do:", "copies", "appendToJQuery:", "asJQuery"]
 }),
 $globals.OndafSimulator);
 
@@ -1500,5 +1490,32 @@ referencedClasses: [],
 messageSends: ["new:", "length", "to:do:", "at:put:", "at:", "-"]
 }),
 $globals.Array.klass);
+
+$core.addMethod(
+$core.method({
+selector: "newWithValues:",
+protocol: '*OndafSimulator',
+fn: function (aCollection){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+
+		aCollection.unshift(self);
+		return new (Function.prototype.bind.apply(self, aCollection));
+	;
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"newWithValues:",{aCollection:aCollection},$globals.BlockClosure)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aCollection"],
+source: "newWithValues: aCollection\x0a\x09\x22Alternative implementation that works with Blob\x22\x0a\x09<\x0a\x09\x09aCollection.unshift(self);\x0a\x09\x09return new (Function.prototype.bind.apply(self, aCollection));\x0a\x09>",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.BlockClosure);
 
 });

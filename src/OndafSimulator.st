@@ -24,8 +24,7 @@ printText: aString
 !
 
 printTitle: aString
-	textViews add: ExamTextView new.
-	self currentTextView title: aString.
+	textViews add: (ExamTextView newIn: '#content' title: aString text: 1 of: 1)
 !
 
 printWordToComplete: aString
@@ -223,8 +222,7 @@ startExam
 	theExam := examDesigner designExam.
 	aPrinter := ExamPrinter new.
 	theExam copyOn: aPrinter.
-	aPrinter copies do: [ :tv | tv appendToJQuery: '#content' asJQuery ].
-	Teacher new startExam: theExam withCopy: aPrinter copies
+	aPrinter copies do: [ :tv | tv appendToJQuery: '#content' asJQuery ]
 ! !
 
 !OndafSimulator methodsFor: 'starting'!
@@ -369,5 +367,15 @@ ofNative: aCollection
 	newArray := self new: aCollection length.
 	1 to: aCollection length do: [:i | newArray at: i put: (aCollection at: i - 1)].
 	^ newArray
+! !
+
+!BlockClosure methodsFor: '*OndafSimulator'!
+
+newWithValues: aCollection
+	"Alternative implementation that works with Blob"
+	<
+		aCollection.unshift(self);
+		return new (Function.prototype.bind.apply(self, aCollection));
+	>
 ! !
 
