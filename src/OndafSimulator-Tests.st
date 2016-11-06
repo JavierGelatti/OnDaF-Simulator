@@ -103,6 +103,40 @@ setUp
 	'body' asJQuery empty
 ! !
 
+WidgetTest subclass: #ExamPrinterTest
+	instanceVariableNames: ''
+	package: 'OndafSimulator-Tests'!
+
+!ExamPrinterTest methodsFor: 'as yet unclassified'!
+
+test01PrintsATextCorrectly
+	| printer |
+	printer := ExamPrinter newOn: 'body'.
+	printer printTitle: 'A title'.
+	printer printText: 'Example text. '.
+	printer printWordToComplete: 'Hel'.
+
+	printer copies do: #render.
+	
+	self assertPageContains: 'A title'.
+	self assertPageContains: 'Example text.'.
+	self assertPageContains: 'Hel'.
+	self assert: 'input[type="text"]' asJQuery length equals: 1
+!
+
+test02IfThereAre2TitlesItRenders2Texts
+	| printer |
+	printer := ExamPrinter newOn: 'body'.
+	printer printTitle: 'A title 1'.
+	printer printTitle: 'A title 2'.
+
+	printer copies do: #render.
+	
+	self assert: printer copies size equals: 2.
+	self assertPageContains: 'A title 1'.
+	self assertPageContains: 'A title 2'
+! !
+
 WidgetTest subclass: #ExamTestViewTest
 	instanceVariableNames: ''
 	package: 'OndafSimulator-Tests'!

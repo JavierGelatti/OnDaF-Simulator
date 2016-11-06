@@ -407,6 +407,90 @@ $globals.WidgetTest);
 
 
 
+$core.addClass('ExamPrinterTest', $globals.WidgetTest, [], 'OndafSimulator-Tests');
+$core.addMethod(
+$core.method({
+selector: "test01PrintsATextCorrectly",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+var printer;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+printer=$recv($globals.ExamPrinter)._newOn_("body");
+$recv(printer)._printTitle_("A title");
+$recv(printer)._printText_("Example text. ");
+$recv(printer)._printWordToComplete_("Hel");
+$recv($recv(printer)._copies())._do_("render");
+self._assertPageContains_("A title");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assertPageContains:"]=1;
+//>>excludeEnd("ctx");
+self._assertPageContains_("Example text.");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assertPageContains:"]=2;
+//>>excludeEnd("ctx");
+self._assertPageContains_("Hel");
+self._assert_equals_($recv("input[type=\x22text\x22]"._asJQuery())._length(),(1));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test01PrintsATextCorrectly",{printer:printer},$globals.ExamPrinterTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test01PrintsATextCorrectly\x0a\x09| printer |\x0a\x09printer := ExamPrinter newOn: 'body'.\x0a\x09printer printTitle: 'A title'.\x0a\x09printer printText: 'Example text. '.\x0a\x09printer printWordToComplete: 'Hel'.\x0a\x0a\x09printer copies do: #render.\x0a\x09\x0a\x09self assertPageContains: 'A title'.\x0a\x09self assertPageContains: 'Example text.'.\x0a\x09self assertPageContains: 'Hel'.\x0a\x09self assert: 'input[type=\x22text\x22]' asJQuery length equals: 1",
+referencedClasses: ["ExamPrinter"],
+//>>excludeEnd("ide");
+messageSends: ["newOn:", "printTitle:", "printText:", "printWordToComplete:", "do:", "copies", "assertPageContains:", "assert:equals:", "length", "asJQuery"]
+}),
+$globals.ExamPrinterTest);
+
+$core.addMethod(
+$core.method({
+selector: "test02IfThereAre2TitlesItRenders2Texts",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+var printer;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+printer=$recv($globals.ExamPrinter)._newOn_("body");
+$recv(printer)._printTitle_("A title 1");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["printTitle:"]=1;
+//>>excludeEnd("ctx");
+$recv(printer)._printTitle_("A title 2");
+$1=$recv(printer)._copies();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["copies"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._do_("render");
+self._assert_equals_($recv($recv(printer)._copies())._size(),(2));
+self._assertPageContains_("A title 1");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assertPageContains:"]=1;
+//>>excludeEnd("ctx");
+self._assertPageContains_("A title 2");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test02IfThereAre2TitlesItRenders2Texts",{printer:printer},$globals.ExamPrinterTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test02IfThereAre2TitlesItRenders2Texts\x0a\x09| printer |\x0a\x09printer := ExamPrinter newOn: 'body'.\x0a\x09printer printTitle: 'A title 1'.\x0a\x09printer printTitle: 'A title 2'.\x0a\x0a\x09printer copies do: #render.\x0a\x09\x0a\x09self assert: printer copies size equals: 2.\x0a\x09self assertPageContains: 'A title 1'.\x0a\x09self assertPageContains: 'A title 2'",
+referencedClasses: ["ExamPrinter"],
+//>>excludeEnd("ide");
+messageSends: ["newOn:", "printTitle:", "do:", "copies", "assert:equals:", "size", "assertPageContains:"]
+}),
+$globals.ExamPrinterTest);
+
+
+
 $core.addClass('ExamTestViewTest', $globals.WidgetTest, [], 'OndafSimulator-Tests');
 $core.addMethod(
 $core.method({

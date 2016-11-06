@@ -1,7 +1,7 @@
 Smalltalk createPackage: 'OndafSimulator'!
 (Smalltalk packageAt: 'OndafSimulator') imports: {'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
 Object subclass: #ExamPrinter
-	instanceVariableNames: 'textViews'
+	instanceVariableNames: 'textViews selector'
 	package: 'OndafSimulator'!
 
 !ExamPrinter methodsFor: 'as yet unclassified'!
@@ -19,16 +19,33 @@ initialize
 	textViews := OrderedCollection new.
 !
 
+print: anExam
+	anExam copyOn: self.
+	^ self copies
+!
+
 printText: aString
 	self currentTextView addText: aString
 !
 
 printTitle: aString
-	textViews add: (ExamTextView newIn: '#content' title: aString text: 1 of: 1)
+	textViews add: (ExamTextView newIn: selector title: aString text: 1 of: 1)
 !
 
 printWordToComplete: aString
 	self currentTextView addWordToComplete: aString
+!
+
+selector: aSelector
+	selector := aSelector
+! !
+
+!ExamPrinter class methodsFor: 'instance creation'!
+
+newOn: aSelector
+	^ self new
+		selector: aSelector;
+		yourself
 ! !
 
 Widget subclass: #ExamTextView
@@ -231,12 +248,12 @@ doSilkTAG
 !
 
 startExam
-	| aPrinter |
+	| aPrinter copies |
 	fileDropTarget hide.
 	theExam := examDesigner designExam.
-	aPrinter := ExamPrinter new.
-	theExam copyOn: aPrinter.
-	aPrinter copies do: [ :tv | tv appendToJQuery: '#content' asJQuery ]
+	aPrinter := ExamPrinter newOn: '#content'.
+	copies := aPrinter print: theExam.
+	copies do: #render
 ! !
 
 !OndafSimulator methodsFor: 'starting'!
