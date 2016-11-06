@@ -118,7 +118,7 @@ test04TheContinueButtonIsShownWhenCheckingTheCheckbox
 !
 
 test05ShowsTheCompletedText
-	| examTextView continueVisible |
+	| examTextView |
 	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
 	
 	examTextView addText: 'Hello.'.
@@ -128,7 +128,7 @@ test05ShowsTheCompletedText
 !
 
 test06ShowsTheWordsToComplete
-	| examTextView continueVisible |
+	| examTextView |
 	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
 	
 	examTextView addWordToComplete: 'Hel'.
@@ -136,6 +136,20 @@ test06ShowsTheWordsToComplete
 	
 	self assertPageContains: 'Hel'.
 	self assert: 'input[type="text"]' asJQuery length equals: 1
+!
+
+test07CanProvideTheAnswers
+	| examTextView inputs |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	
+	examTextView addWordToComplete: 'Hel'.
+	examTextView addWordToComplete: ' Wo'.
+	examTextView render.
+	inputs := 'input[type="text"]' asJQuery.
+	(inputs at: 0) value: 'lo'.
+	(inputs at: 1) value: 'rld'.
+	
+	self assert: examTextView answers equals: #('lo' 'rld')
 ! !
 
 WidgetTest subclass: #HeaderTest

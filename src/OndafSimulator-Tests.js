@@ -396,7 +396,7 @@ selector: "test05ShowsTheCompletedText",
 protocol: 'tests',
 fn: function (){
 var self=this;
-var examTextView,continueVisible;
+var examTextView;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -406,12 +406,12 @@ $recv(examTextView)._render();
 self._assertPageContains_("Hello.");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test05ShowsTheCompletedText",{examTextView:examTextView,continueVisible:continueVisible},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test05ShowsTheCompletedText",{examTextView:examTextView},$globals.ExamTestViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test05ShowsTheCompletedText\x0a\x09| examTextView continueVisible |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView addText: 'Hello.'.\x0a\x09examTextView render.\x0a\x09\x0a\x09self assertPageContains: 'Hello.'",
+source: "test05ShowsTheCompletedText\x0a\x09| examTextView |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView addText: 'Hello.'.\x0a\x09examTextView render.\x0a\x09\x0a\x09self assertPageContains: 'Hello.'",
 referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "addText:", "render", "assertPageContains:"]
@@ -424,7 +424,7 @@ selector: "test06ShowsTheWordsToComplete",
 protocol: 'tests',
 fn: function (){
 var self=this;
-var examTextView,continueVisible;
+var examTextView;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -435,15 +435,58 @@ self._assertPageContains_("Hel");
 self._assert_equals_($recv("input[type=\x22text\x22]"._asJQuery())._length(),(1));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test06ShowsTheWordsToComplete",{examTextView:examTextView,continueVisible:continueVisible},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test06ShowsTheWordsToComplete",{examTextView:examTextView},$globals.ExamTestViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test06ShowsTheWordsToComplete\x0a\x09| examTextView continueVisible |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView addWordToComplete: 'Hel'.\x0a\x09examTextView render.\x0a\x09\x0a\x09self assertPageContains: 'Hel'.\x0a\x09self assert: 'input[type=\x22text\x22]' asJQuery length equals: 1",
+source: "test06ShowsTheWordsToComplete\x0a\x09| examTextView |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView addWordToComplete: 'Hel'.\x0a\x09examTextView render.\x0a\x09\x0a\x09self assertPageContains: 'Hel'.\x0a\x09self assert: 'input[type=\x22text\x22]' asJQuery length equals: 1",
 referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "addWordToComplete:", "render", "assertPageContains:", "assert:equals:", "length", "asJQuery"]
+}),
+$globals.ExamTestViewTest);
+
+$core.addMethod(
+$core.method({
+selector: "test07CanProvideTheAnswers",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var examTextView,inputs;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+examTextView=$recv($globals.ExamTextView)._newIn_title_text_of_("body","Text Title",(1),(2));
+$recv(examTextView)._addWordToComplete_("Hel");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["addWordToComplete:"]=1;
+//>>excludeEnd("ctx");
+$recv(examTextView)._addWordToComplete_(" Wo");
+$recv(examTextView)._render();
+inputs="input[type=\x22text\x22]"._asJQuery();
+$1=$recv(inputs)._at_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["at:"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._value_("lo");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["value:"]=1;
+//>>excludeEnd("ctx");
+$recv($recv(inputs)._at_((1)))._value_("rld");
+self._assert_equals_($recv(examTextView)._answers(),["lo", "rld"]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test07CanProvideTheAnswers",{examTextView:examTextView,inputs:inputs},$globals.ExamTestViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test07CanProvideTheAnswers\x0a\x09| examTextView inputs |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView addWordToComplete: 'Hel'.\x0a\x09examTextView addWordToComplete: ' Wo'.\x0a\x09examTextView render.\x0a\x09inputs := 'input[type=\x22text\x22]' asJQuery.\x0a\x09(inputs at: 0) value: 'lo'.\x0a\x09(inputs at: 1) value: 'rld'.\x0a\x09\x0a\x09self assert: examTextView answers equals: #('lo' 'rld')",
+referencedClasses: ["ExamTextView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:title:text:of:", "addWordToComplete:", "render", "asJQuery", "value:", "at:", "assert:equals:", "answers"]
 }),
 $globals.ExamTestViewTest);
 

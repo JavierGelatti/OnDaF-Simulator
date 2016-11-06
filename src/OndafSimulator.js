@@ -254,6 +254,37 @@ $globals.ExamTextView);
 
 $core.addMethod(
 $core.method({
+selector: "answers",
+protocol: 'actions',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+return $recv(self["@inputs"])._collect_((function(input){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(input)._val();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({input:input},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"answers",{},$globals.ExamTextView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "answers\x0a\x09^ inputs collect: [ :input | input val ]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["collect:", "val"]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
 selector: "initialize",
 protocol: 'initialization',
 fn: function (){

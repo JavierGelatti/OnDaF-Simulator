@@ -37,6 +37,10 @@ Widget subclass: #ExamTextView
 
 !ExamTextView methodsFor: 'actions'!
 
+answers
+	^ inputs collect: [ :input | input val ]
+!
+
 showSeconds: seconds
 ! !
 
