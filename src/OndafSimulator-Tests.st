@@ -15,8 +15,8 @@ examTextView
 	(ExamTextView newIn: 'body' title: 'a Title' text: 2 of: 3)
 		addText: 'Hello ';
 		addWordToComplete: 'Wor';
-		showSeconds: 99;
-		render.
+		render;
+		showSeconds: 99
 !
 
 header

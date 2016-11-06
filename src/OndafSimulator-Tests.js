@@ -22,8 +22,8 @@ $recv("body"._asJQuery())._empty();
 $1=$recv($globals.ExamTextView)._newIn_title_text_of_("body","a Title",(2),(3));
 $recv($1)._addText_("Hello ");
 $recv($1)._addWordToComplete_("Wor");
-$recv($1)._showSeconds_((99));
 $recv($1)._render();
+$recv($1)._showSeconds_((99));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"examTextView",{},$globals.WidgetPreviews)});
@@ -31,10 +31,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "examTextView\x0a\x09'body' asJQuery empty.\x0a\x09\x0a\x09(ExamTextView newIn: 'body' title: 'a Title' text: 2 of: 3)\x0a\x09\x09addText: 'Hello ';\x0a\x09\x09addWordToComplete: 'Wor';\x0a\x09\x09showSeconds: 99;\x0a\x09\x09render.",
+source: "examTextView\x0a\x09'body' asJQuery empty.\x0a\x09\x0a\x09(ExamTextView newIn: 'body' title: 'a Title' text: 2 of: 3)\x0a\x09\x09addText: 'Hello ';\x0a\x09\x09addWordToComplete: 'Wor';\x0a\x09\x09render;\x0a\x09\x09showSeconds: 99",
 referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
-messageSends: ["empty", "asJQuery", "addText:", "newIn:title:text:of:", "addWordToComplete:", "showSeconds:", "render"]
+messageSends: ["empty", "asJQuery", "addText:", "newIn:title:text:of:", "addWordToComplete:", "render", "showSeconds:"]
 }),
 $globals.WidgetPreviews);
 

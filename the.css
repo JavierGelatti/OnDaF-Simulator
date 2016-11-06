@@ -73,6 +73,12 @@ div.text input[type="text"] {
     padding-top: 2px;
     box-sizing: border-box;
 }
+div.text input[type="text"].incorrect {
+    background-color: #FCC;
+}
+div.text input[type="text"].correct {
+    background-color: #CFC;
+}
 div.text span {
     color: #666666;
     font-size: 1.1em;
