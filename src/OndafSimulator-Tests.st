@@ -3,6 +3,35 @@ TestCase subclass: #OndafSimulatorTest
 	instanceVariableNames: ''
 	package: 'OndafSimulator-Tests'!
 
+TestCase subclass: #TimerTest
+	instanceVariableNames: 'ctx'
+	package: 'OndafSimulator-Tests'!
+
+!TimerTest methodsFor: 'running'!
+
+setUp
+	super setUp.
+	ctx := context
+! !
+
+!TimerTest methodsFor: 'tests'!
+
+test01
+	| timer1 timer2 count |
+	self timeout: 150.
+	
+	count := 0.
+	timer1 := Timer each: 50  do: [ count := count + 1 ].
+	timer2 := Timer each: 110 do: [
+		timer1 stop.
+		timer2 stop.
+		ctx execute: [ self assert: count equals: 2. self finished ]
+	].
+	
+	timer1 start.
+	timer2 start
+! !
+
 Object subclass: #WidgetPreviews
 	instanceVariableNames: ''
 	package: 'OndafSimulator-Tests'!

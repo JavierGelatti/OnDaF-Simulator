@@ -372,6 +372,37 @@ newIn: aSelector handler: aBlock
 		yourself
 ! !
 
+Object subclass: #Timer
+	instanceVariableNames: 'action delay intervalId'
+	package: 'OndafSimulator'!
+
+!Timer methodsFor: 'as yet unclassified'!
+
+action: aBlock
+	action := aBlock
+!
+
+milliseconds: someMillis
+	delay := someMillis
+!
+
+start
+	intervalId := window setInterval: action withDelay: delay
+!
+
+stop
+	window clearInterval: intervalId
+! !
+
+!Timer class methodsFor: 'instance creation'!
+
+each: milliseconds do: aBlock
+	^ self new
+		milliseconds: milliseconds;
+		action: aBlock;
+		yourself
+! !
+
 !Array class methodsFor: '*OndafSimulator'!
 
 ofNative: aCollection 

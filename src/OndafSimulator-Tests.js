@@ -7,6 +7,108 @@ $core.packages["OndafSimulator-Tests"].transport = {"type":"amd","amdNamespace":
 $core.addClass('OndafSimulatorTest', $globals.TestCase, [], 'OndafSimulator-Tests');
 
 
+$core.addClass('TimerTest', $globals.TestCase, ['ctx'], 'OndafSimulator-Tests');
+$core.addMethod(
+$core.method({
+selector: "setUp",
+protocol: 'running',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true,
+//>>excludeEnd("ctx");
+($globals.TimerTest.superclass||$boot.nilAsClass).fn.prototype._setUp.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+self["@ctx"]=self["@context"];
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"setUp",{},$globals.TimerTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "setUp\x0a\x09super setUp.\x0a\x09ctx := context",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["setUp"]
+}),
+$globals.TimerTest);
+
+$core.addMethod(
+$core.method({
+selector: "test01",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var timer1,timer2,count;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._timeout_((150));
+count=(0);
+timer1=$recv($globals.Timer)._each_do_((50),(function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+count=$recv(count).__plus((1));
+return count;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["each:do:"]=1;
+//>>excludeEnd("ctx");
+timer2=$recv($globals.Timer)._each_do_((110),(function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$recv(timer1)._stop();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["stop"]=1;
+//>>excludeEnd("ctx");
+$recv(timer2)._stop();
+return $recv(self["@ctx"])._execute_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+self._assert_equals_(count,(2));
+return self._finished();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
+//>>excludeEnd("ctx");
+}));
+$recv(timer1)._start();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["start"]=1;
+//>>excludeEnd("ctx");
+$recv(timer2)._start();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test01",{timer1:timer1,timer2:timer2,count:count},$globals.TimerTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test01\x0a\x09| timer1 timer2 count |\x0a\x09self timeout: 150.\x0a\x09\x0a\x09count := 0.\x0a\x09timer1 := Timer each: 50  do: [ count := count + 1 ].\x0a\x09timer2 := Timer each: 110 do: [\x0a\x09\x09timer1 stop.\x0a\x09\x09timer2 stop.\x0a\x09\x09ctx execute: [ self assert: count equals: 2. self finished ]\x0a\x09].\x0a\x09\x0a\x09timer1 start.\x0a\x09timer2 start",
+referencedClasses: ["Timer"],
+//>>excludeEnd("ide");
+messageSends: ["timeout:", "each:do:", "+", "stop", "execute:", "assert:equals:", "finished", "start"]
+}),
+$globals.TimerTest);
+
+
+
 $core.addClass('WidgetPreviews', $globals.Object, [], 'OndafSimulator-Tests');
 $core.addMethod(
 $core.method({

@@ -1528,6 +1528,122 @@ messageSends: ["handler:", "new", "appendToJQuery:", "asJQuery", "yourself"]
 }),
 $globals.TextFileDropTarget.klass);
 
+
+$core.addClass('Timer', $globals.Object, ['action', 'delay', 'intervalId'], 'OndafSimulator');
+$core.addMethod(
+$core.method({
+selector: "action:",
+protocol: 'as yet unclassified',
+fn: function (aBlock){
+var self=this;
+self["@action"]=aBlock;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aBlock"],
+source: "action: aBlock\x0a\x09action := aBlock",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.Timer);
+
+$core.addMethod(
+$core.method({
+selector: "milliseconds:",
+protocol: 'as yet unclassified',
+fn: function (someMillis){
+var self=this;
+self["@delay"]=someMillis;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["someMillis"],
+source: "milliseconds: someMillis\x0a\x09delay := someMillis",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.Timer);
+
+$core.addMethod(
+$core.method({
+selector: "start",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self["@intervalId"]=$recv(window)._setInterval_withDelay_(self["@action"],self["@delay"]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"start",{},$globals.Timer)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "start\x0a\x09intervalId := window setInterval: action withDelay: delay",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["setInterval:withDelay:"]
+}),
+$globals.Timer);
+
+$core.addMethod(
+$core.method({
+selector: "stop",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(window)._clearInterval_(self["@intervalId"]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"stop",{},$globals.Timer)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "stop\x0a\x09window clearInterval: intervalId",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["clearInterval:"]
+}),
+$globals.Timer);
+
+
+$core.addMethod(
+$core.method({
+selector: "each:do:",
+protocol: 'instance creation',
+fn: function (milliseconds,aBlock){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._new();
+$recv($1)._milliseconds_(milliseconds);
+$recv($1)._action_(aBlock);
+return $recv($1)._yourself();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"each:do:",{milliseconds:milliseconds,aBlock:aBlock},$globals.Timer.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["milliseconds", "aBlock"],
+source: "each: milliseconds do: aBlock\x0a\x09^ self new\x0a\x09\x09milliseconds: milliseconds;\x0a\x09\x09action: aBlock;\x0a\x09\x09yourself",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["milliseconds:", "new", "action:", "yourself"]
+}),
+$globals.Timer.klass);
+
 $core.addMethod(
 $core.method({
 selector: "ofNative:",
