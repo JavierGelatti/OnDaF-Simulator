@@ -161,7 +161,7 @@ $globals.ExamPrinter);
 
 
 
-$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container', 'textNumber', 'numberOfTexts'], 'OndafSimulator');
+$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container', 'textNumber', 'numberOfTexts', 'infoSeconds'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "addText:",
@@ -556,7 +556,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$3,$4,$5,$2;
+var $1,$3,$4,$2;
 $1=$recv(html)._div();
 $recv($1)._class_("info");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -586,18 +586,11 @@ $recv($3)._with_(" von ");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["with:"]=4;
 //>>excludeEnd("ctx");
-$4=$recv($3)._with_(self["@numberOfTexts"]);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["with:"]=5;
-//>>excludeEnd("ctx");
-$4;
-$5=$recv(html)._span();
-$recv($5)._class_("time");
-$recv($5)._with_("Verbleibende Sekunden: ");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["with:"]=6;
-//>>excludeEnd("ctx");
-return $recv($5)._with_("0");
+$recv($3)._with_(self["@numberOfTexts"]);
+$4=$recv(html)._span();
+$recv($4)._class_("time");
+self["@infoSeconds"]=$recv($4)._asJQuery();
+return self["@infoSeconds"];
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -612,10 +605,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderInfoOn: html\x0a\x09html div\x0a\x09\x09class: 'info';\x0a\x09\x09with: [\x0a\x09\x09\x09html span class: 'text-number';\x0a\x09\x09\x09\x09with: 'Text ';\x0a\x09\x09\x09\x09with: textNumber;\x0a\x09\x09\x09\x09with: ' von ';\x0a\x09\x09\x09\x09with: numberOfTexts.\x0a\x09\x09\x09html span class: 'time';\x0a\x09\x09\x09\x09with: 'Verbleibende Sekunden: ';\x0a\x09\x09\x09\x09with: '0'.\x0a\x09\x09]",
+source: "renderInfoOn: html\x0a\x09html div\x0a\x09\x09class: 'info';\x0a\x09\x09with: [\x0a\x09\x09\x09html span class: 'text-number';\x0a\x09\x09\x09\x09with: 'Text ';\x0a\x09\x09\x09\x09with: textNumber;\x0a\x09\x09\x09\x09with: ' von ';\x0a\x09\x09\x09\x09with: numberOfTexts.\x0a\x09\x09\x09infoSeconds := html span class: 'time';\x0a\x09\x09\x09\x09asJQuery.\x0a\x09\x09]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["class:", "div", "with:", "span"]
+messageSends: ["class:", "div", "with:", "span", "asJQuery"]
 }),
 $globals.ExamTextView);
 
@@ -723,15 +716,21 @@ selector: "showSeconds:",
 protocol: 'actions',
 fn: function (seconds){
 var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@infoSeconds"])._text_("Verbleibende Sekunden: ".__comma(seconds));
 return self;
-
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"showSeconds:",{seconds:seconds},$globals.ExamTextView)});
+//>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["seconds"],
-source: "showSeconds: seconds",
+source: "showSeconds: seconds\x0a\x09infoSeconds text: 'Verbleibende Sekunden: ', seconds",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: []
+messageSends: ["text:", ","]
 }),
 $globals.ExamTextView);
 

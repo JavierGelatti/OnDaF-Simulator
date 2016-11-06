@@ -188,6 +188,38 @@ $globals.WidgetTest);
 
 $core.addMethod(
 $core.method({
+selector: "assertPageDoesNotContain:",
+protocol: 'gui testing',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $4,$3,$2,$1;
+$4=$recv(":contains(".__comma(aString)).__comma(")");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+$3=$recv($4)._asJQuery();
+$2=$recv($3)._length();
+$1=$recv($2).__eq_eq((0));
+self._assert_($1);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"assertPageDoesNotContain:",{aString:aString},$globals.WidgetTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "assertPageDoesNotContain: aString\x0a\x09self assert: ((':contains(', aString, ')') asJQuery length) == 0",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["assert:", "==", "length", "asJQuery", ","]
+}),
+$globals.WidgetTest);
+
+$core.addMethod(
+$core.method({
 selector: "clickOn:",
 protocol: 'gui testing',
 fn: function (aString){
@@ -487,6 +519,61 @@ source: "test07CanProvideTheAnswers\x0a\x09| examTextView inputs |\x0a\x09examTe
 referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "addWordToComplete:", "render", "asJQuery", "value:", "at:", "assert:equals:", "answers"]
+}),
+$globals.ExamTestViewTest);
+
+$core.addMethod(
+$core.method({
+selector: "test08CanDisplaySeconds",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var examTextView;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+examTextView=$recv($globals.ExamTextView)._newIn_title_text_of_("body","Text Title",(1),(2));
+$recv(examTextView)._render();
+$recv(examTextView)._showSeconds_((59));
+self._assertPageContains_("Verbleibende Sekunden: 59");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test08CanDisplaySeconds",{examTextView:examTextView},$globals.ExamTestViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test08CanDisplaySeconds\x0a\x09| examTextView |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView render.\x0a\x09\x0a\x09examTextView showSeconds: 59.\x0a\x09\x0a\x09self assertPageContains: 'Verbleibende Sekunden: 59'",
+referencedClasses: ["ExamTextView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:title:text:of:", "render", "showSeconds:", "assertPageContains:"]
+}),
+$globals.ExamTestViewTest);
+
+$core.addMethod(
+$core.method({
+selector: "test09ByDefaultSecondsAreNotDisplayed",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var examTextView;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+examTextView=$recv($globals.ExamTextView)._newIn_title_text_of_("body","Text Title",(1),(2));
+$recv(examTextView)._render();
+self._assertPageDoesNotContain_("Verbleibende Sekunden");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test09ByDefaultSecondsAreNotDisplayed",{examTextView:examTextView},$globals.ExamTestViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test09ByDefaultSecondsAreNotDisplayed\x0a\x09| examTextView |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView render.\x0a\x09\x0a\x09self assertPageDoesNotContain: 'Verbleibende Sekunden'",
+referencedClasses: ["ExamTextView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:title:text:of:", "render", "assertPageDoesNotContain:"]
 }),
 $globals.ExamTestViewTest);
 

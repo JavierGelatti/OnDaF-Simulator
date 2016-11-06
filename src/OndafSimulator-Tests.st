@@ -55,6 +55,10 @@ assertPageContains: aString
 	self assert: ((':contains(', aString, ')') asJQuery length) > 0
 !
 
+assertPageDoesNotContain: aString
+	self assert: ((':contains(', aString, ')') asJQuery length) == 0
+!
+
 clickOn: aString
 	(self elementWithText: 'Start exam') click.
 !
@@ -150,6 +154,26 @@ test07CanProvideTheAnswers
 	(inputs at: 1) value: 'rld'.
 	
 	self assert: examTextView answers equals: #('lo' 'rld')
+!
+
+test08CanDisplaySeconds
+	| examTextView |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	
+	examTextView render.
+	
+	examTextView showSeconds: 59.
+	
+	self assertPageContains: 'Verbleibende Sekunden: 59'
+!
+
+test09ByDefaultSecondsAreNotDisplayed
+	| examTextView |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	
+	examTextView render.
+	
+	self assertPageDoesNotContain: 'Verbleibende Sekunden'
 ! !
 
 WidgetTest subclass: #HeaderTest

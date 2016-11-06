@@ -32,7 +32,7 @@ printWordToComplete: aString
 ! !
 
 Widget subclass: #ExamTextView
-	instanceVariableNames: 'title content continueCheckbox continueButton inputs container textNumber numberOfTexts'
+	instanceVariableNames: 'title content continueCheckbox continueButton inputs container textNumber numberOfTexts infoSeconds'
 	package: 'OndafSimulator'!
 
 !ExamTextView methodsFor: 'actions'!
@@ -42,6 +42,7 @@ answers
 !
 
 showSeconds: seconds
+	infoSeconds text: 'Verbleibende Sekunden: ', seconds
 ! !
 
 !ExamTextView methodsFor: 'building'!
@@ -134,9 +135,8 @@ renderInfoOn: html
 				with: textNumber;
 				with: ' von ';
 				with: numberOfTexts.
-			html span class: 'time';
-				with: 'Verbleibende Sekunden: ';
-				with: '0'.
+			infoSeconds := html span class: 'time';
+				asJQuery.
 		]
 !
 
