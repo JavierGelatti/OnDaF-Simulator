@@ -70,6 +70,74 @@ setUp
 	'body' asJQuery empty
 ! !
 
+WidgetTest subclass: #ExamTestViewTest
+	instanceVariableNames: ''
+	package: 'OndafSimulator-Tests'!
+
+!ExamTestViewTest methodsFor: 'tests'!
+
+test01ShowsTheTextTitle
+	| examTextView |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	
+	examTextView render.
+	
+	self assertPageContains: 'Text Title'
+!
+
+test02ShowsTheTextNumberAndTotalNumber
+	| examTextView |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	
+	examTextView render.
+	
+	self assertPageContains: 'Text 1 von 2'
+!
+
+test03TheContinueButtonIsHiddenByDefault
+	| examTextView continueVisible |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	
+	examTextView render.
+	
+	continueVisible := ('.continue' asJQuery css: 'visibility') == 'visible'.
+	
+	self assert: continueVisible not
+!
+
+test04TheContinueButtonIsShownWhenCheckingTheCheckbox
+	| examTextView continueVisible |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	
+	examTextView render.
+	'input[type="checkbox"]' asJQuery click.
+	
+	continueVisible := ('.continue' asJQuery css: 'visibility') == 'visible'.
+	
+	self assert: continueVisible
+!
+
+test05ShowsTheCompletedText
+	| examTextView continueVisible |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	
+	examTextView addText: 'Hello.'.
+	examTextView render.
+	
+	self assertPageContains: 'Hello.'
+!
+
+test06ShowsTheWordsToComplete
+	| examTextView continueVisible |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	
+	examTextView addWordToComplete: 'Hel'.
+	examTextView render.
+	
+	self assertPageContains: 'Hel'.
+	self assert: 'input[type="text"]' asJQuery length equals: 1
+! !
+
 WidgetTest subclass: #HeaderTest
 	instanceVariableNames: ''
 	package: 'OndafSimulator-Tests'!

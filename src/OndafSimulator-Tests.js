@@ -273,6 +273,182 @@ $globals.WidgetTest);
 
 
 
+$core.addClass('ExamTestViewTest', $globals.WidgetTest, [], 'OndafSimulator-Tests');
+$core.addMethod(
+$core.method({
+selector: "test01ShowsTheTextTitle",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var examTextView;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+examTextView=$recv($globals.ExamTextView)._newIn_title_text_of_("body","Text Title",(1),(2));
+$recv(examTextView)._render();
+self._assertPageContains_("Text Title");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test01ShowsTheTextTitle",{examTextView:examTextView},$globals.ExamTestViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test01ShowsTheTextTitle\x0a\x09| examTextView |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView render.\x0a\x09\x0a\x09self assertPageContains: 'Text Title'",
+referencedClasses: ["ExamTextView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:title:text:of:", "render", "assertPageContains:"]
+}),
+$globals.ExamTestViewTest);
+
+$core.addMethod(
+$core.method({
+selector: "test02ShowsTheTextNumberAndTotalNumber",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var examTextView;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+examTextView=$recv($globals.ExamTextView)._newIn_title_text_of_("body","Text Title",(1),(2));
+$recv(examTextView)._render();
+self._assertPageContains_("Text 1 von 2");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test02ShowsTheTextNumberAndTotalNumber",{examTextView:examTextView},$globals.ExamTestViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test02ShowsTheTextNumberAndTotalNumber\x0a\x09| examTextView |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView render.\x0a\x09\x0a\x09self assertPageContains: 'Text 1 von 2'",
+referencedClasses: ["ExamTextView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:title:text:of:", "render", "assertPageContains:"]
+}),
+$globals.ExamTestViewTest);
+
+$core.addMethod(
+$core.method({
+selector: "test03TheContinueButtonIsHiddenByDefault",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var examTextView,continueVisible;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+examTextView=$recv($globals.ExamTextView)._newIn_title_text_of_("body","Text Title",(1),(2));
+$recv(examTextView)._render();
+continueVisible=$recv($recv(".continue"._asJQuery())._css_("visibility")).__eq_eq("visible");
+self._assert_($recv(continueVisible)._not());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test03TheContinueButtonIsHiddenByDefault",{examTextView:examTextView,continueVisible:continueVisible},$globals.ExamTestViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test03TheContinueButtonIsHiddenByDefault\x0a\x09| examTextView continueVisible |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView render.\x0a\x09\x0a\x09continueVisible := ('.continue' asJQuery css: 'visibility') == 'visible'.\x0a\x09\x0a\x09self assert: continueVisible not",
+referencedClasses: ["ExamTextView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:title:text:of:", "render", "==", "css:", "asJQuery", "assert:", "not"]
+}),
+$globals.ExamTestViewTest);
+
+$core.addMethod(
+$core.method({
+selector: "test04TheContinueButtonIsShownWhenCheckingTheCheckbox",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var examTextView,continueVisible;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+examTextView=$recv($globals.ExamTextView)._newIn_title_text_of_("body","Text Title",(1),(2));
+$recv(examTextView)._render();
+$1="input[type=\x22checkbox\x22]"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._click();
+continueVisible=$recv($recv(".continue"._asJQuery())._css_("visibility")).__eq_eq("visible");
+self._assert_(continueVisible);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test04TheContinueButtonIsShownWhenCheckingTheCheckbox",{examTextView:examTextView,continueVisible:continueVisible},$globals.ExamTestViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test04TheContinueButtonIsShownWhenCheckingTheCheckbox\x0a\x09| examTextView continueVisible |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView render.\x0a\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x0a\x09continueVisible := ('.continue' asJQuery css: 'visibility') == 'visible'.\x0a\x09\x0a\x09self assert: continueVisible",
+referencedClasses: ["ExamTextView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:title:text:of:", "render", "click", "asJQuery", "==", "css:", "assert:"]
+}),
+$globals.ExamTestViewTest);
+
+$core.addMethod(
+$core.method({
+selector: "test05ShowsTheCompletedText",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var examTextView,continueVisible;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+examTextView=$recv($globals.ExamTextView)._newIn_title_text_of_("body","Text Title",(1),(2));
+$recv(examTextView)._addText_("Hello.");
+$recv(examTextView)._render();
+self._assertPageContains_("Hello.");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test05ShowsTheCompletedText",{examTextView:examTextView,continueVisible:continueVisible},$globals.ExamTestViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test05ShowsTheCompletedText\x0a\x09| examTextView continueVisible |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView addText: 'Hello.'.\x0a\x09examTextView render.\x0a\x09\x0a\x09self assertPageContains: 'Hello.'",
+referencedClasses: ["ExamTextView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:title:text:of:", "addText:", "render", "assertPageContains:"]
+}),
+$globals.ExamTestViewTest);
+
+$core.addMethod(
+$core.method({
+selector: "test06ShowsTheWordsToComplete",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var examTextView,continueVisible;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+examTextView=$recv($globals.ExamTextView)._newIn_title_text_of_("body","Text Title",(1),(2));
+$recv(examTextView)._addWordToComplete_("Hel");
+$recv(examTextView)._render();
+self._assertPageContains_("Hel");
+self._assert_equals_($recv("input[type=\x22text\x22]"._asJQuery())._length(),(1));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test06ShowsTheWordsToComplete",{examTextView:examTextView,continueVisible:continueVisible},$globals.ExamTestViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test06ShowsTheWordsToComplete\x0a\x09| examTextView continueVisible |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView addWordToComplete: 'Hel'.\x0a\x09examTextView render.\x0a\x09\x0a\x09self assertPageContains: 'Hel'.\x0a\x09self assert: 'input[type=\x22text\x22]' asJQuery length equals: 1",
+referencedClasses: ["ExamTextView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:title:text:of:", "addWordToComplete:", "render", "assertPageContains:", "assert:equals:", "length", "asJQuery"]
+}),
+$globals.ExamTestViewTest);
+
+
+
 $core.addClass('HeaderTest', $globals.WidgetTest, [], 'OndafSimulator-Tests');
 $core.addMethod(
 $core.method({
