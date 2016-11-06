@@ -76,7 +76,7 @@ WidgetTest subclass: #HeaderTest
 
 !HeaderTest methodsFor: 'tests'!
 
-test01
+test01ByDefaultItDoesNotStartTheExam
 	| examStarted |
 	examStarted := false.
 	
@@ -87,7 +87,7 @@ test01
 	self assert: examStarted not
 !
 
-test02
+test02WhenStartExamIsClickedItStartsTheExam
 	| examStarted |
 	examStarted := false.
 	

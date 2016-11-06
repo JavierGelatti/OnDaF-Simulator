@@ -276,7 +276,7 @@ $globals.WidgetTest);
 $core.addClass('HeaderTest', $globals.WidgetTest, [], 'OndafSimulator-Tests');
 $core.addMethod(
 $core.method({
-selector: "test01",
+selector: "test01ByDefaultItDoesNotStartTheExam",
 protocol: 'tests',
 fn: function (){
 var self=this;
@@ -296,12 +296,12 @@ $recv($1)._appendToJQuery_("body"._asJQuery());
 self._assert_($recv(examStarted)._not());
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test01",{examStarted:examStarted},$globals.HeaderTest)});
+}, function($ctx1) {$ctx1.fill(self,"test01ByDefaultItDoesNotStartTheExam",{examStarted:examStarted},$globals.HeaderTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test01\x0a\x09| examStarted |\x0a\x09examStarted := false.\x0a\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ examStarted := true ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x0a\x09self assert: examStarted not",
+source: "test01ByDefaultItDoesNotStartTheExam\x0a\x09| examStarted |\x0a\x09examStarted := false.\x0a\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ examStarted := true ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x0a\x09self assert: examStarted not",
 referencedClasses: ["Header"],
 //>>excludeEnd("ide");
 messageSends: ["whenStartExam:", "new", "appendToJQuery:", "asJQuery", "assert:", "not"]
@@ -310,7 +310,7 @@ $globals.HeaderTest);
 
 $core.addMethod(
 $core.method({
-selector: "test02",
+selector: "test02WhenStartExamIsClickedItStartsTheExam",
 protocol: 'tests',
 fn: function (){
 var self=this;
@@ -331,12 +331,12 @@ self._clickOn_("Start exam");
 self._assert_(examStarted);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test02",{examStarted:examStarted},$globals.HeaderTest)});
+}, function($ctx1) {$ctx1.fill(self,"test02WhenStartExamIsClickedItStartsTheExam",{examStarted:examStarted},$globals.HeaderTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test02\x0a\x09| examStarted |\x0a\x09examStarted := false.\x0a\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ examStarted := true ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x0a\x09self clickOn: 'Start exam'.\x0a\x09\x0a\x09self assert: examStarted",
+source: "test02WhenStartExamIsClickedItStartsTheExam\x0a\x09| examStarted |\x0a\x09examStarted := false.\x0a\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ examStarted := true ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x0a\x09self clickOn: 'Start exam'.\x0a\x09\x0a\x09self assert: examStarted",
 referencedClasses: ["Header"],
 //>>excludeEnd("ide");
 messageSends: ["whenStartExam:", "new", "appendToJQuery:", "asJQuery", "clickOn:", "assert:"]
