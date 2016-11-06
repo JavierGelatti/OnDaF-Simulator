@@ -302,6 +302,49 @@ start
 	"self current augmentPage"
 ! !
 
+Widget subclass: #ResultView
+	instanceVariableNames: 'score totalScore percentage'
+	package: 'OndafSimulator'!
+
+!ResultView methodsFor: 'as yet unclassified'!
+
+percentage: aPercentage
+	percentage := aPercentage
+!
+
+renderOn: html
+	html div
+		class: 'text result';
+		with: [
+			html div
+				class: 'info';
+				with: [
+					html span with: 'Der Test ist beendet. Sie haben folgendes Ergebnis erzielt:'.
+					html span with: [ html span with: score. html span with: 'Punkte' ]; class: 'score'.
+					html span with: 'Dies sind ', percentage, ' % der maximal möglichen ', totalScore, ' Punkte.'
+				]
+		]
+!
+
+score: aScore
+	score := aScore
+!
+
+totalScore: aScore
+	totalScore := aScore
+! !
+
+!ResultView class methodsFor: 'as yet unclassified'!
+
+newIn: aSelector withScore: actualScore of: totalScore percentage: percentage
+	^ self new
+		score: actualScore;
+		totalScore: totalScore;
+		percentage: percentage;
+		appendToJQuery: aSelector asJQuery;
+		yourself
+! !
+
 Widget subclass: #TextCard
 	instanceVariableNames: 'card title'
 	package: 'OndafSimulator'!

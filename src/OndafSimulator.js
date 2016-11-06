@@ -1313,6 +1313,209 @@ messageSends: ["new"]
 $globals.OndafSimulator.klass);
 
 
+$core.addClass('ResultView', $globals.Widget, ['score', 'totalScore', 'percentage'], 'OndafSimulator');
+$core.addMethod(
+$core.method({
+selector: "percentage:",
+protocol: 'as yet unclassified',
+fn: function (aPercentage){
+var self=this;
+self["@percentage"]=aPercentage;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aPercentage"],
+source: "percentage: aPercentage\x0a\x09percentage := aPercentage",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.ResultView);
+
+$core.addMethod(
+$core.method({
+selector: "renderOn:",
+protocol: 'as yet unclassified',
+fn: function (html){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$3,$5,$6,$7,$8,$9,$12,$11,$10,$4,$2;
+$1=$recv(html)._div();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["div"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._class_("text result");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["class:"]=1;
+//>>excludeEnd("ctx");
+$2=$recv($1)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$3=$recv(html)._div();
+$recv($3)._class_("info");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["class:"]=2;
+//>>excludeEnd("ctx");
+$4=$recv($3)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+$5=$recv(html)._span();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx["span"]=1;
+//>>excludeEnd("ctx");
+$recv($5)._with_("Der Test ist beendet. Sie haben folgendes Ergebnis erzielt:");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx["with:"]=3;
+//>>excludeEnd("ctx");
+$6=$recv(html)._span();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx["span"]=2;
+//>>excludeEnd("ctx");
+$recv($6)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx4) {
+//>>excludeEnd("ctx");
+$7=$recv(html)._span();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx["span"]=3;
+//>>excludeEnd("ctx");
+$recv($7)._with_(self["@score"]);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx["with:"]=5;
+//>>excludeEnd("ctx");
+$8=$recv(html)._span();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx["span"]=4;
+//>>excludeEnd("ctx");
+return $recv($8)._with_("Punkte");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx["with:"]=6;
+//>>excludeEnd("ctx");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx["with:"]=4;
+//>>excludeEnd("ctx");
+$recv($6)._class_("score");
+$9=$recv(html)._span();
+$12=$recv("Dies sind ".__comma(self["@percentage"])).__comma(" % der maximal möglichen ");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx[","]=3;
+//>>excludeEnd("ctx");
+$11=$recv($12).__comma(self["@totalScore"]);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx[","]=2;
+//>>excludeEnd("ctx");
+$10=$recv($11).__comma(" Punkte.");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx3.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+return $recv($9)._with_($10);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["with:"]=2;
+//>>excludeEnd("ctx");
+return $4;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["with:"]=1;
+//>>excludeEnd("ctx");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},$globals.ResultView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["html"],
+source: "renderOn: html\x0a\x09html div\x0a\x09\x09class: 'text result';\x0a\x09\x09with: [\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'info';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span with: 'Der Test ist beendet. Sie haben folgendes Ergebnis erzielt:'.\x0a\x09\x09\x09\x09\x09html span with: [ html span with: score. html span with: 'Punkte' ]; class: 'score'.\x0a\x09\x09\x09\x09\x09html span with: 'Dies sind ', percentage, ' % der maximal möglichen ', totalScore, ' Punkte.'\x0a\x09\x09\x09\x09]\x0a\x09\x09]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["class:", "div", "with:", "span", ","]
+}),
+$globals.ResultView);
+
+$core.addMethod(
+$core.method({
+selector: "score:",
+protocol: 'as yet unclassified',
+fn: function (aScore){
+var self=this;
+self["@score"]=aScore;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aScore"],
+source: "score: aScore\x0a\x09score := aScore",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.ResultView);
+
+$core.addMethod(
+$core.method({
+selector: "totalScore:",
+protocol: 'as yet unclassified',
+fn: function (aScore){
+var self=this;
+self["@totalScore"]=aScore;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aScore"],
+source: "totalScore: aScore\x0a\x09totalScore := aScore",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.ResultView);
+
+
+$core.addMethod(
+$core.method({
+selector: "newIn:withScore:of:percentage:",
+protocol: 'as yet unclassified',
+fn: function (aSelector,actualScore,totalScore,percentage){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._new();
+$recv($1)._score_(actualScore);
+$recv($1)._totalScore_(totalScore);
+$recv($1)._percentage_(percentage);
+$recv($1)._appendToJQuery_($recv(aSelector)._asJQuery());
+return $recv($1)._yourself();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"newIn:withScore:of:percentage:",{aSelector:aSelector,actualScore:actualScore,totalScore:totalScore,percentage:percentage},$globals.ResultView.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aSelector", "actualScore", "totalScore", "percentage"],
+source: "newIn: aSelector withScore: actualScore of: totalScore percentage: percentage\x0a\x09^ self new\x0a\x09\x09score: actualScore;\x0a\x09\x09totalScore: totalScore;\x0a\x09\x09percentage: percentage;\x0a\x09\x09appendToJQuery: aSelector asJQuery;\x0a\x09\x09yourself",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["score:", "new", "totalScore:", "percentage:", "appendToJQuery:", "asJQuery", "yourself"]
+}),
+$globals.ResultView.klass);
+
+
 $core.addClass('TextCard', $globals.Widget, ['card', 'title'], 'OndafSimulator');
 $core.addMethod(
 $core.method({

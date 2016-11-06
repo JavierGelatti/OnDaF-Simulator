@@ -139,6 +139,13 @@ header
 		appendToJQuery: 'body' asJQuery.
 !
 
+resultView
+	'body' asJQuery empty.
+		
+	ResultView
+		newIn: 'body'.
+!
+
 textCard
 	'body' asJQuery empty.
 		
@@ -399,6 +406,20 @@ afterThat: aBlock
 setUp
 	super setUp.
 	ctx := context
+!
+
+test03
+	OndafSimulator start.
+	OndafSimulator current augmentPage.
+
+	FileDropper new dropText: 'Beispiel Text
+	Hello wor{ld}.' on: '.text-file-target'.
+	
+	self afterThat: [
+		':contains("Start exam")' asJQuery click.
+		'input[type="checkbox"]' asJQuery click.
+		'.continue' asJQuery click.
+	]
 ! !
 
 !OndafSimulatorTest methodsFor: 'tests'!
@@ -413,6 +434,35 @@ test01
 	self afterThat: [
 		self assertPageContains: 'Beispiel Text'
 	]
+!
+
+test02
+	OndafSimulator start.
+	OndafSimulator current augmentPage.
+
+	FileDropper new dropText: 'Beispiel Text
+	Hello wor{ld}.' on: '.text-file-target'.
+	
+	self afterThat: [
+		':contains("Start exam")' asJQuery click.
+		self assertPageContains: 'Beispiel Text'.
+		self assertPageContains: 'Hello wor'.
+		self assert: 'input[type="text"]' asJQuery length equals: 1.
+	]
+! !
+
+WidgetTest subclass: #ResultViewTest
+	instanceVariableNames: ''
+	package: 'OndafSimulator-Tests'!
+
+!ResultViewTest methodsFor: 'as yet unclassified'!
+
+test01
+	ResultView newIn: 'body' withScore: 123 of: 456 percentage: 78.99.
+		
+	self assertPageContains: '123'.
+	self assertPageContains: '78.99 %'.
+	self assertPageContains: '456 Punkte'
 ! !
 
 WidgetTest subclass: #TextCardTest

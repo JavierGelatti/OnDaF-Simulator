@@ -59,7 +59,6 @@ div.text {
     background-color: #EEF3F8;
 }
 
-
 div.text input[type="text"] {
     border-top: 1px solid #E6E7E8;
     border-bottom: 1px solid black;
@@ -116,4 +115,19 @@ div.text div.actions img {
 div.text div.actions .continue {
     margin-left: 50px;
     visibility: hidden;
+}
+
+div.result div > span {
+    display: block;
+    margin: 1em;
+}
+div.result span.score {
+    margin-left: 3em;
+}
+div.result span.score > span {
+    display: inline;
+    margin-left: 1em;
+}
+div.result span.score > span:first-child {
+    font-weight: bold;
 }

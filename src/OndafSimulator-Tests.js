@@ -512,6 +512,31 @@ $globals.WidgetPreviews);
 
 $core.addMethod(
 $core.method({
+selector: "resultView",
+protocol: 'widgets',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv("body"._asJQuery())._empty();
+$recv($globals.ResultView)._newIn_("body");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"resultView",{},$globals.WidgetPreviews)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "resultView\x0a\x09'body' asJQuery empty.\x0a\x09\x09\x0a\x09ResultView\x0a\x09\x09newIn: 'body'.",
+referencedClasses: ["ResultView"],
+//>>excludeEnd("ide");
+messageSends: ["empty", "asJQuery", "newIn:"]
+}),
+$globals.WidgetPreviews);
+
+$core.addMethod(
+$core.method({
 selector: "textCard",
 protocol: 'widgets',
 fn: function (){
@@ -1373,6 +1398,140 @@ referencedClasses: ["OndafSimulator", "FileDropper"],
 messageSends: ["start", "augmentPage", "current", "dropText:on:", "new", "afterThat:", "assertPageContains:"]
 }),
 $globals.OndafSimulatorTest);
+
+$core.addMethod(
+$core.method({
+selector: "test02",
+protocol: 'tests',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$recv($globals.OndafSimulator)._start();
+$recv($recv($globals.OndafSimulator)._current())._augmentPage();
+$recv($recv($globals.FileDropper)._new())._dropText_on_("Beispiel Text\x0a\x09Hello wor{ld}.",".text-file-target");
+self._afterThat_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$1=":contains(\x22Start exam\x22)"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._click();
+self._assertPageContains_("Beispiel Text");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["assertPageContains:"]=1;
+//>>excludeEnd("ctx");
+self._assertPageContains_("Hello wor");
+return self._assert_equals_($recv("input[type=\x22text\x22]"._asJQuery())._length(),(1));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test02",{},$globals.OndafSimulatorTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test02\x0a\x09OndafSimulator start.\x0a\x09OndafSimulator current augmentPage.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text\x0a\x09Hello wor{ld}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09self assertPageContains: 'Beispiel Text'.\x0a\x09\x09self assertPageContains: 'Hello wor'.\x0a\x09\x09self assert: 'input[type=\x22text\x22]' asJQuery length equals: 1.\x0a\x09]",
+referencedClasses: ["OndafSimulator", "FileDropper"],
+//>>excludeEnd("ide");
+messageSends: ["start", "augmentPage", "current", "dropText:on:", "new", "afterThat:", "click", "asJQuery", "assertPageContains:", "assert:equals:", "length"]
+}),
+$globals.OndafSimulatorTest);
+
+$core.addMethod(
+$core.method({
+selector: "test03",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$2;
+$recv($globals.OndafSimulator)._start();
+$recv($recv($globals.OndafSimulator)._current())._augmentPage();
+$recv($recv($globals.FileDropper)._new())._dropText_on_("Beispiel Text\x0a\x09Hello wor{ld}.",".text-file-target");
+self._afterThat_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$1=":contains(\x22Start exam\x22)"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._click();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["click"]=1;
+//>>excludeEnd("ctx");
+$2="input[type=\x22checkbox\x22]"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["asJQuery"]=2;
+//>>excludeEnd("ctx");
+$recv($2)._click();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["click"]=2;
+//>>excludeEnd("ctx");
+return $recv(".continue"._asJQuery())._click();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test03",{},$globals.OndafSimulatorTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test03\x0a\x09OndafSimulator start.\x0a\x09OndafSimulator current augmentPage.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text\x0a\x09Hello wor{ld}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09]",
+referencedClasses: ["OndafSimulator", "FileDropper"],
+//>>excludeEnd("ide");
+messageSends: ["start", "augmentPage", "current", "dropText:on:", "new", "afterThat:", "click", "asJQuery"]
+}),
+$globals.OndafSimulatorTest);
+
+
+
+$core.addClass('ResultViewTest', $globals.WidgetTest, [], 'OndafSimulator-Tests');
+$core.addMethod(
+$core.method({
+selector: "test01",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv($globals.ResultView)._newIn_withScore_of_percentage_("body",(123),(456),(78.99));
+self._assertPageContains_("123");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assertPageContains:"]=1;
+//>>excludeEnd("ctx");
+self._assertPageContains_("78.99 %");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assertPageContains:"]=2;
+//>>excludeEnd("ctx");
+self._assertPageContains_("456 Punkte");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test01",{},$globals.ResultViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test01\x0a\x09ResultView newIn: 'body' withScore: 123 of: 456 percentage: 78.99.\x0a\x09\x09\x0a\x09self assertPageContains: '123'.\x0a\x09self assertPageContains: '78.99 %'.\x0a\x09self assertPageContains: '456 Punkte'",
+referencedClasses: ["ResultView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:withScore:of:percentage:", "assertPageContains:"]
+}),
+$globals.ResultViewTest);
 
 
 
