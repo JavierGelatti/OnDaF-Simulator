@@ -1,4 +1,76 @@
 Smalltalk createPackage: 'OndafSimulator-Tests'!
+Object subclass: #FileDropper
+	instanceVariableNames: ''
+	package: 'OndafSimulator-Tests'!
+
+!FileDropper methodsFor: 'actions'!
+
+dropFileEventWith: aFile
+	^ self newObject
+		at: 'type' put: 'drop';
+		at: 'preventDefault' put: [];
+		at: 'stopPropagation' put: [];
+		at: 'originalEvent' put: (
+			self newObject at: 'dataTransfer' put: (
+				self newObject
+					at: 'files' put: (
+						self newObject
+							at: 0 put: aFile;
+							at: 'length' put: 1;
+							yourself
+					); yourself
+			); yourself
+		);
+		jsObject.
+!
+
+dropFileEventWith: aFile and: anotherFile
+	^ self newObject
+		at: 'type' put: 'drop';
+		at: 'preventDefault' put: [];
+		at: 'stopPropagation' put: [];
+		at: 'originalEvent' put: (
+			self newObject at: 'dataTransfer' put: (
+				self newObject
+					at: 'files' put: (
+						self newObject
+							at: 0 put: aFile;
+							at: 1 put: anotherFile;
+							at: 'length' put: 2;
+							yourself
+					); yourself
+			); yourself
+		);
+		jsObject.
+!
+
+dropText: aString and: anotherString on: aSelector
+	| file1 file2 event |
+	file1 := self textFileWith: aString.
+	file2 := self textFileWith: anotherString.
+	event := self dropFileEventWith: file1 and: file2.
+	
+	aSelector asJQuery trigger: event
+!
+
+dropText: aString on: aSelector
+	| file event |
+	file := self textFileWith: aString.
+	event := self dropFileEventWith: file.
+	
+	aSelector asJQuery trigger: event
+!
+
+textFileWith: aString
+	^ Blob newValue: (Array with: aString) value: #{'type' -> 'text/plain'}
+! !
+
+!FileDropper methodsFor: 'private'!
+
+newObject
+	^ JSON parse: '{}'
+! !
+
 TestCase subclass: #OndafSimulatorTest
 	instanceVariableNames: ''
 	package: 'OndafSimulator-Tests'!
@@ -309,90 +381,38 @@ test01TheTitleIsShown
 ! !
 
 WidgetTest subclass: #TextFileDropTargetTest
-	instanceVariableNames: 'droppedText ctx'
+	instanceVariableNames: 'droppedText ctx fileDropper'
 	package: 'OndafSimulator-Tests'!
-
-!TextFileDropTargetTest methodsFor: 'actions'!
-
-dropFileEventWith: aFile
-	^ self newObject
-		at: 'type' put: 'drop';
-		at: 'preventDefault' put: [];
-		at: 'stopPropagation' put: [];
-		at: 'originalEvent' put: (
-			self newObject at: 'dataTransfer' put: (
-				self newObject
-					at: 'files' put: (
-						self newObject
-							at: 0 put: aFile;
-							at: 'length' put: 1;
-							yourself
-					); yourself
-			); yourself
-		);
-		jsObject.
-!
-
-dropFileEventWith: aFile and: anotherFile
-	^ self newObject
-		at: 'type' put: 'drop';
-		at: 'preventDefault' put: [];
-		at: 'stopPropagation' put: [];
-		at: 'originalEvent' put: (
-			self newObject at: 'dataTransfer' put: (
-				self newObject
-					at: 'files' put: (
-						self newObject
-							at: 0 put: aFile;
-							at: 1 put: anotherFile;
-							at: 'length' put: 2;
-							yourself
-					); yourself
-			); yourself
-		);
-		jsObject.
-! !
 
 !TextFileDropTargetTest methodsFor: 'running'!
 
 setUp
 	super setUp.
-	ctx := context
+	ctx := context.
+	fileDropper := FileDropper new
 ! !
 
 !TextFileDropTargetTest methodsFor: 'tests'!
 
 test01ReadsDroppedFile
-	| file event |
-	file := Blob newValue: #('texto archivo') value: #{'type' -> 'text/plain'}.
-	event := self dropFileEventWith: file.
 	self timeout: 100.
 	
 	TextFileDropTarget
 		newIn: 'body'
 		handler: [ :txt | ctx execute: [ self assert: txt equals: 'texto archivo'. self finished ] ].
-	
-	'.text-file-target' asJQuery trigger: event
+		
+	fileDropper dropText: 'texto archivo' on: '.text-file-target'
 !
 
 test02CanDropMoreThanOneFile
-	| file1 file2 event expected |
-	file1 := Blob newValue: #('texto archivo 1') value: #{'type' -> 'text/plain'}.
-	file2 := Blob newValue: #('texto archivo 2') value: #{'type' -> 'text/plain'}.
+	| expected |
 	expected := #('texto archivo 1' 'texto archivo 2').
-	event := self dropFileEventWith: file1 and: file2.
 	self timeout: 100.
 	
 	TextFileDropTarget
 		newIn: 'body'
 		handler: [ :txt | ctx execute: [ expected remove: txt ifAbsent: [ self fail ]. expected ifEmpty: [ self finished ] ] ].
-	
-	'.text-file-target' asJQuery trigger: event
-! !
 
-!TextFileDropTargetTest methodsFor: 'util'!
-
-newObject
-	^ JSON parse: '{}'
+	fileDropper dropText: 'texto archivo 1' and: 'texto archivo 2' on: '.text-file-target'
 ! !
 
