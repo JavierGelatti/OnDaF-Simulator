@@ -1750,6 +1750,44 @@ $globals.Timer.klass);
 
 $core.addMethod(
 $core.method({
+selector: "on:do:",
+protocol: 'instance creation',
+fn: function (milliseconds,aBlock){
+var self=this;
+var newTimer;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._new();
+$recv($1)._milliseconds_(milliseconds);
+newTimer=$recv($1)._yourself();
+$recv(newTimer)._action_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$recv(aBlock)._value();
+return $recv(newTimer)._stop();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return newTimer;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"on:do:",{milliseconds:milliseconds,aBlock:aBlock,newTimer:newTimer},$globals.Timer.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["milliseconds", "aBlock"],
+source: "on: milliseconds do: aBlock\x0a\x09| newTimer |\x0a\x09newTimer := self new\x0a\x09\x09milliseconds: milliseconds;\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09newTimer action: [\x0a\x09\x09aBlock value.\x0a\x09\x09newTimer stop\x0a\x09].\x0a\x09\x0a\x09^ newTimer",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["milliseconds:", "new", "yourself", "action:", "value", "stop"]
+}),
+$globals.Timer.klass);
+
+$core.addMethod(
+$core.method({
 selector: "ofNative:",
 protocol: '*OndafSimulator',
 fn: function (aCollection){

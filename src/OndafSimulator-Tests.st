@@ -71,10 +71,6 @@ newObject
 	^ JSON parse: '{}'
 ! !
 
-TestCase subclass: #OndafSimulatorTest
-	instanceVariableNames: ''
-	package: 'OndafSimulator-Tests'!
-
 TestCase subclass: #TimerTest
 	instanceVariableNames: 'ctx'
 	package: 'OndafSimulator-Tests'!
@@ -98,6 +94,21 @@ test01
 		timer1 stop.
 		timer2 stop.
 		ctx execute: [ self assert: count equals: 2. self finished ]
+	].
+	
+	timer1 start.
+	timer2 start
+!
+
+test02
+	| timer1 timer2 count |
+	self timeout: 150.
+	
+	count := 0.
+	timer1 := Timer on: 50  do: [ count := count + 1 ].
+	timer2 := Timer each: 110 do: [
+		timer2 stop.
+		ctx execute: [ self assert: count equals: 1. self finished ]
 	].
 	
 	timer1 start.
@@ -367,6 +378,41 @@ test02WhenStartExamIsClickedItStartsTheExam
 	self clickOn: 'Start exam'.
 	
 	self assert: examStarted
+! !
+
+WidgetTest subclass: #OndafSimulatorTest
+	instanceVariableNames: 'ctx'
+	package: 'OndafSimulator-Tests'!
+
+!OndafSimulatorTest methodsFor: 'as yet unclassified'!
+
+afterThat: aBlock
+	self timeout: 100.
+	(Timer on: 50 do: [
+		ctx execute: [
+			aBlock value.
+			self finished.
+		]
+	]) start
+!
+
+setUp
+	super setUp.
+	ctx := context
+! !
+
+!OndafSimulatorTest methodsFor: 'tests'!
+
+test01
+	OndafSimulator start.
+	OndafSimulator current augmentPage.
+
+	FileDropper new dropText: 'Beispiel Text
+	Hello wor{ld}.' on: '.text-file-target'.
+	
+	self afterThat: [
+		self assertPageContains: 'Beispiel Text'
+	]
 ! !
 
 WidgetTest subclass: #TextCardTest

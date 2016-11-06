@@ -426,6 +426,20 @@ each: milliseconds do: aBlock
 		milliseconds: milliseconds;
 		action: aBlock;
 		yourself
+!
+
+on: milliseconds do: aBlock
+	| newTimer |
+	newTimer := self new
+		milliseconds: milliseconds;
+		yourself.
+		
+	newTimer action: [
+		aBlock value.
+		newTimer stop
+	].
+	
+	^ newTimer
 ! !
 
 !Array class methodsFor: '*OndafSimulator'!
