@@ -174,6 +174,21 @@ test09ByDefaultSecondsAreNotDisplayed
 	examTextView render.
 	
 	self assertPageDoesNotContain: 'Verbleibende Sekunden'
+!
+
+test10CanShowTheResults
+	| examTextView inputs |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	
+	examTextView addWordToComplete: 'Hel'.
+	examTextView addWordToComplete: ' Wo'.
+	examTextView render.
+	
+	examTextView showResults: #(false true).
+	
+	inputs := 'input[type="text"]' asJQuery.	
+	self assert: ((inputs at: 0) asJQuery attr: 'class') equals: 'incorrect'.
+	self assert: ((inputs at: 1) asJQuery attr: 'class') equals: 'correct'.
 ! !
 
 WidgetTest subclass: #HeaderTest

@@ -577,6 +577,60 @@ messageSends: ["newIn:title:text:of:", "render", "assertPageDoesNotContain:"]
 }),
 $globals.ExamTestViewTest);
 
+$core.addMethod(
+$core.method({
+selector: "test10CanShowTheResults",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var examTextView,inputs;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $3,$2,$1;
+examTextView=$recv($globals.ExamTextView)._newIn_title_text_of_("body","Text Title",(1),(2));
+$recv(examTextView)._addWordToComplete_("Hel");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["addWordToComplete:"]=1;
+//>>excludeEnd("ctx");
+$recv(examTextView)._addWordToComplete_(" Wo");
+$recv(examTextView)._render();
+$recv(examTextView)._showResults_([false, true]);
+inputs="input[type=\x22text\x22]"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+$3=$recv(inputs)._at_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["at:"]=1;
+//>>excludeEnd("ctx");
+$2=$recv($3)._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=2;
+//>>excludeEnd("ctx");
+$1=$recv($2)._attr_("class");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["attr:"]=1;
+//>>excludeEnd("ctx");
+self._assert_equals_($1,"incorrect");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assert:equals:"]=1;
+//>>excludeEnd("ctx");
+self._assert_equals_($recv($recv($recv(inputs)._at_((1)))._asJQuery())._attr_("class"),"correct");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test10CanShowTheResults",{examTextView:examTextView,inputs:inputs},$globals.ExamTestViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test10CanShowTheResults\x0a\x09| examTextView inputs |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09\x0a\x09examTextView addWordToComplete: 'Hel'.\x0a\x09examTextView addWordToComplete: ' Wo'.\x0a\x09examTextView render.\x0a\x09\x0a\x09examTextView showResults: #(false true).\x0a\x09\x0a\x09inputs := 'input[type=\x22text\x22]' asJQuery.\x09\x0a\x09self assert: ((inputs at: 0) asJQuery attr: 'class') equals: 'incorrect'.\x0a\x09self assert: ((inputs at: 1) asJQuery attr: 'class') equals: 'correct'.",
+referencedClasses: ["ExamTextView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:title:text:of:", "addWordToComplete:", "render", "showResults:", "asJQuery", "assert:equals:", "attr:", "at:"]
+}),
+$globals.ExamTestViewTest);
+
 
 
 $core.addClass('HeaderTest', $globals.WidgetTest, [], 'OndafSimulator-Tests');

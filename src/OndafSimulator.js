@@ -712,6 +712,52 @@ $globals.ExamTextView);
 
 $core.addMethod(
 $core.method({
+selector: "showResults:",
+protocol: 'actions',
+fn: function (results){
+var self=this;
+var classes;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+classes=$recv(results)._collect_((function(result){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+if($core.assert(result)){
+return "correct";
+} else {
+return "incorrect";
+};
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({result:result},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$recv(self["@inputs"])._with_do_(classes,(function(input,class_){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(input)._addClass_(class_);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({input:input,class_:class_},$ctx1,4)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"showResults:",{results:results,classes:classes},$globals.ExamTextView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["results"],
+source: "showResults: results\x0a\x09| classes |\x0a\x09classes := results collect: [ :result |\x0a\x09\x09result ifTrue: [ 'correct' ] ifFalse: [ 'incorrect' ]\x0a\x09].\x0a\x09inputs with: classes do: [ :input :class |\x0a\x09\x09input addClass: class\x0a\x09]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["collect:", "ifTrue:ifFalse:", "with:do:", "addClass:"]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
 selector: "showSeconds:",
 protocol: 'actions',
 fn: function (seconds){

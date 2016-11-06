@@ -41,6 +41,16 @@ answers
 	^ inputs collect: [ :input | input val ]
 !
 
+showResults: results
+	| classes |
+	classes := results collect: [ :result |
+		result ifTrue: [ 'correct' ] ifFalse: [ 'incorrect' ]
+	].
+	inputs with: classes do: [ :input :class |
+		input addClass: class
+	]
+!
+
 showSeconds: seconds
 	infoSeconds text: 'Verbleibende Sekunden: ', seconds
 ! !
