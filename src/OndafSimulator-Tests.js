@@ -817,6 +817,49 @@ messageSends: ["newIn:title:text:of:", "addWordToComplete:", "render", "showResu
 }),
 $globals.ExamTestViewTest);
 
+$core.addMethod(
+$core.method({
+selector: "test11ContinuesWhenContinueClicked",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var examTextView,executed;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+examTextView=$recv($globals.ExamTextView)._newIn_title_text_of_("body","Text Title",(1),(2));
+executed=false;
+$recv(examTextView)._whenContinueDo_((function(){
+executed=true;
+return executed;
+
+}));
+$recv(examTextView)._render();
+$1="input[type=\x22checkbox\x22]"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._click();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["click"]=1;
+//>>excludeEnd("ctx");
+$recv(".continue"._asJQuery())._click();
+self._assert_(executed);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test11ContinuesWhenContinueClicked",{examTextView:examTextView,executed:executed},$globals.ExamTestViewTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test11ContinuesWhenContinueClicked\x0a\x09| examTextView executed |\x0a\x09examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.\x0a\x09executed := false.\x0a\x09\x0a\x09examTextView whenContinueDo: [ executed := true ].\x0a\x09examTextView render.\x0a\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09'.continue' asJQuery click.\x0a\x09\x0a\x09self assert: executed.",
+referencedClasses: ["ExamTextView"],
+//>>excludeEnd("ide");
+messageSends: ["newIn:title:text:of:", "whenContinueDo:", "render", "click", "asJQuery", "assert:"]
+}),
+$globals.ExamTestViewTest);
+
 
 
 $core.addClass('HeaderTest', $globals.WidgetTest, [], 'OndafSimulator-Tests');

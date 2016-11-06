@@ -230,7 +230,7 @@ messageSends: ["selector:", "new", "yourself"]
 $globals.ExamPrinter.klass);
 
 
-$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container', 'textNumber', 'numberOfTexts', 'infoSeconds'], 'OndafSimulator');
+$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container', 'textNumber', 'numberOfTexts', 'infoSeconds', 'continueAction'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "addText:",
@@ -349,6 +349,30 @@ source: "answers\x0a\x09^ inputs collect: [ :input | input val ]",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["collect:", "val"]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
+selector: "continue",
+protocol: 'rendering',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@continueAction"])._value();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"continue",{},$globals.ExamTextView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "continue\x0a\x09continueAction value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value"]
 }),
 $globals.ExamTextView);
 
@@ -846,6 +870,25 @@ source: "showSeconds: seconds\x0a\x09infoSeconds text: 'Verbleibende Sekunden: '
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["text:", ","]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
+selector: "whenContinueDo:",
+protocol: 'rendering',
+fn: function (aBlock){
+var self=this;
+self["@continueAction"]=aBlock;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aBlock"],
+source: "whenContinueDo: aBlock\x0a\x09continueAction := aBlock",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
 }),
 $globals.ExamTextView);
 

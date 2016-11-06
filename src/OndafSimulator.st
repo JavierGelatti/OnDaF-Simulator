@@ -49,7 +49,7 @@ newOn: aSelector
 ! !
 
 Widget subclass: #ExamTextView
-	instanceVariableNames: 'title content continueCheckbox continueButton inputs container textNumber numberOfTexts infoSeconds'
+	instanceVariableNames: 'title content continueCheckbox continueButton inputs container textNumber numberOfTexts infoSeconds continueAction'
 	package: 'OndafSimulator'!
 
 !ExamTextView methodsFor: 'actions'!
@@ -117,6 +117,10 @@ onContinueCheckboxChanged
 
 !ExamTextView methodsFor: 'rendering'!
 
+continue
+	continueAction value
+!
+
 render
 	self appendToJQuery: container asJQuery
 !
@@ -180,6 +184,10 @@ renderTitleOn: html
 	html p
 		class: 'title';
 		with: title
+!
+
+whenContinueDo: aBlock
+	continueAction := aBlock
 ! !
 
 !ExamTextView class methodsFor: 'as yet unclassified'!

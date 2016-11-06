@@ -252,6 +252,19 @@ test10CanShowTheResults
 	inputs := 'input[type="text"]' asJQuery.	
 	self assert: ((inputs at: 0) asJQuery attr: 'class') equals: 'incorrect'.
 	self assert: ((inputs at: 1) asJQuery attr: 'class') equals: 'correct'.
+!
+
+test11ContinuesWhenContinueClicked
+	| examTextView executed |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	executed := false.
+	
+	examTextView whenContinueDo: [ executed := true ].
+	examTextView render.
+	'input[type="checkbox"]' asJQuery click.
+	'.continue' asJQuery click.
+	
+	self assert: executed.
 ! !
 
 WidgetTest subclass: #HeaderTest
