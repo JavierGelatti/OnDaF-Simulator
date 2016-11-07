@@ -620,15 +620,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $4,$3,$2,$1;
-$4=$recv(":contains(".__comma(aString)).__comma(")");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-$3=$recv($4)._asJQuery();
-$2=$recv($3)._length();
-$1=$recv($2).__gt((0));
-self._assert_($1);
+self._assert_($recv(self._visibleElementsWithText_(aString)).__gt((0)));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"assertPageContains:",{aString:aString},$globals.WidgetTest)});
@@ -636,10 +628,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aString"],
-source: "assertPageContains: aString\x0a\x09self assert: ((':contains(', aString, ')') asJQuery length) > 0",
+source: "assertPageContains: aString\x0a\x09self assert: (self visibleElementsWithText: aString) > 0",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["assert:", ">", "length", "asJQuery", ","]
+messageSends: ["assert:", ">", "visibleElementsWithText:"]
 }),
 $globals.WidgetTest);
 
@@ -652,15 +644,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $4,$3,$2,$1;
-$4=$recv(":contains(".__comma(aString)).__comma(")");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-$3=$recv($4)._asJQuery();
-$2=$recv($3)._length();
-$1=$recv($2).__eq_eq((0));
-self._assert_($1);
+self._assert_($recv(self._visibleElementsWithText_(aString)).__eq_eq((0)));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"assertPageDoesNotContain:",{aString:aString},$globals.WidgetTest)});
@@ -668,10 +652,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aString"],
-source: "assertPageDoesNotContain: aString\x0a\x09self assert: ((':contains(', aString, ')') asJQuery length) == 0",
+source: "assertPageDoesNotContain: aString\x0a\x09self assert: (self visibleElementsWithText: aString) == 0",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["assert:", "==", "length", "asJQuery", ","]
+messageSends: ["assert:", "==", "visibleElementsWithText:"]
 }),
 $globals.WidgetTest);
 
@@ -757,6 +741,35 @@ source: "setUp\x0a\x09'body' asJQuery empty",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["empty", "asJQuery"]
+}),
+$globals.WidgetTest);
+
+$core.addMethod(
+$core.method({
+selector: "visibleElementsWithText:",
+protocol: 'gui testing',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $2,$1;
+$2=$recv(":contains(".__comma(aString)).__comma("):visible");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+$1=$recv($2)._asJQuery();
+return $recv($1)._length();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"visibleElementsWithText:",{aString:aString},$globals.WidgetTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "visibleElementsWithText: aString\x0a\x09^ (':contains(', aString, '):visible') asJQuery length",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["length", "asJQuery", ","]
 }),
 $globals.WidgetTest);
 
@@ -1325,6 +1338,35 @@ source: "test02WhenStartExamIsClickedItStartsTheExam\x0a\x09| examStarted |\x0a\
 referencedClasses: ["Header"],
 //>>excludeEnd("ide");
 messageSends: ["whenStartExam:", "new", "appendToJQuery:", "asJQuery", "clickOn:", "assert:"]
+}),
+$globals.HeaderTest);
+
+$core.addMethod(
+$core.method({
+selector: "test03ShowsStartExamAndResetButtons",
+protocol: 'tests',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv($recv($globals.Header)._new())._appendToJQuery_("body"._asJQuery());
+self._assertPageContains_("Start exam");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assertPageContains:"]=1;
+//>>excludeEnd("ctx");
+self._assertPageContains_("New exam");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test03ShowsStartExamAndResetButtons",{},$globals.HeaderTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test03ShowsStartExamAndResetButtons\x0a\x09Header new\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x0a\x09self assertPageContains: 'Start exam'.\x0a\x09self assertPageContains: 'New exam'.",
+referencedClasses: ["Header"],
+//>>excludeEnd("ide");
+messageSends: ["appendToJQuery:", "new", "asJQuery", "assertPageContains:"]
 }),
 $globals.HeaderTest);
 

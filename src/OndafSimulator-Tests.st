@@ -171,11 +171,11 @@ TestCase subclass: #WidgetTest
 !WidgetTest methodsFor: 'gui testing'!
 
 assertPageContains: aString
-	self assert: ((':contains(', aString, ')') asJQuery length) > 0
+	self assert: (self visibleElementsWithText: aString) > 0
 !
 
 assertPageDoesNotContain: aString
-	self assert: ((':contains(', aString, ')') asJQuery length) == 0
+	self assert: (self visibleElementsWithText: aString) == 0
 !
 
 clickOn: aString
@@ -185,6 +185,10 @@ clickOn: aString
 elementWithText: aString
 	^ (':contains(', aString, ')') asJQuery
 		filter: [ :i :elem | elem children length == 0 ]
+!
+
+visibleElementsWithText: aString
+	^ (':contains(', aString, '):visible') asJQuery length
 ! !
 
 !WidgetTest methodsFor: 'running'!
@@ -396,6 +400,14 @@ test02WhenStartExamIsClickedItStartsTheExam
 	self clickOn: 'Start exam'.
 	
 	self assert: examStarted
+!
+
+test03ShowsStartExamAndResetButtons
+	Header new
+		appendToJQuery: 'body' asJQuery.
+	
+	self assertPageContains: 'Start exam'.
+	self assertPageContains: 'New exam'.
 ! !
 
 WidgetTest subclass: #OndafSimulatorTest

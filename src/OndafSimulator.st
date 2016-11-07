@@ -244,6 +244,10 @@ renderOn: html
 	headerElement := html header
 		with: [
 			html a
+				with: 'New exam';
+				tabindex: 0;
+				onClick: [].
+			html a
 				with: 'Start exam';
 				tabindex: 0;
 				onClick: startExamHandler

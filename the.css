@@ -1,5 +1,5 @@
 body {
-    background: whitesmoke;
+    background: white;
     font-family: sans-serif;
 }
 body > header {
@@ -20,6 +20,7 @@ body > header > a {
     height: 50px;
     line-height: 50px;
     cursor: pointer;
+    margin-left: .5em;
 }
 body > #content {
     background: white;

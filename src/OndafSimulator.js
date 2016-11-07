@@ -1086,16 +1086,35 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$2;
+var $1,$2,$3,$4;
 $1=$recv(html)._header();
 $recv($1)._with_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
 $2=$recv(html)._a();
-$recv($2)._with_("Start exam");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["a"]=1;
+//>>excludeEnd("ctx");
+$recv($2)._with_("New exam");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["with:"]=2;
+//>>excludeEnd("ctx");
 $recv($2)._tabindex_((0));
-return $recv($2)._onClick_(self["@startExamHandler"]);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["tabindex:"]=1;
+//>>excludeEnd("ctx");
+$3=$recv($2)._onClick_((function(){
+
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["onClick:"]=1;
+//>>excludeEnd("ctx");
+$3;
+$4=$recv(html)._a();
+$recv($4)._with_("Start exam");
+$recv($4)._tabindex_((0));
+return $recv($4)._onClick_(self["@startExamHandler"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1111,7 +1130,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderOn: html\x0a\x09headerElement := html header\x0a\x09\x09with: [\x0a\x09\x09\x09html a\x0a\x09\x09\x09\x09with: 'Start exam';\x0a\x09\x09\x09\x09tabindex: 0;\x0a\x09\x09\x09\x09onClick: startExamHandler\x0a\x09\x09];\x0a\x09\x09asJQuery",
+source: "renderOn: html\x0a\x09headerElement := html header\x0a\x09\x09with: [\x0a\x09\x09\x09html a\x0a\x09\x09\x09\x09with: 'New exam';\x0a\x09\x09\x09\x09tabindex: 0;\x0a\x09\x09\x09\x09onClick: [].\x0a\x09\x09\x09html a\x0a\x09\x09\x09\x09with: 'Start exam';\x0a\x09\x09\x09\x09tabindex: 0;\x0a\x09\x09\x09\x09onClick: startExamHandler\x0a\x09\x09];\x0a\x09\x09asJQuery",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["with:", "header", "a", "tabindex:", "onClick:", "asJQuery"]
