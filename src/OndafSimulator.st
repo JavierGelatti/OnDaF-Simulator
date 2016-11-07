@@ -193,6 +193,10 @@ renderTitleOn: html
 		with: title
 !
 
+show
+	renderArea show
+!
+
 whenContinueDo: aBlock
 	continueAction := aBlock
 ! !
@@ -263,7 +267,7 @@ doSilkTAG
 !
 
 startExam
-	| aPrinter copies textsStream copy result whenContinue |
+	| aPrinter copies textsStream copy result whenContinue answers |
 	fileDropTarget hide.
 	theExam := examDesigner designExam.
 	aPrinter := ExamPrinter newOn: '#content'.
@@ -273,8 +277,10 @@ startExam
 	whenContinue := [
 		copy hide.
 		textsStream atEnd ifTrue: [
-			result := theExam evaluate: copy answers.
+			answers := copies flatCollect: [ :each | each answers ].
+			result := theExam evaluate: answers.
 			ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage.
+			copies do: #show.
 		] ifFalse: [
 			copy := textsStream next.
 			copy whenContinueDo: whenContinue.
@@ -359,11 +365,15 @@ totalScore: aScore
 !ResultView class methodsFor: 'as yet unclassified'!
 
 newIn: aSelector withScore: actualScore of: totalScore percentage: percentage
+	| container |
+	container := '<div>' asJQuery.
+	aSelector asJQuery prepend: container.
+	
 	^ self new
 		score: actualScore;
 		totalScore: totalScore;
 		percentage: percentage;
-		appendToJQuery: aSelector asJQuery;
+		appendToJQuery: container;
 		yourself
 ! !
 

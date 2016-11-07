@@ -456,16 +456,26 @@ test04
 		self assertPageContains: 'First text'.
 		self assertPageDoesNotContain: 'Second text'.
 		
+		inputs := 'input[type="text"]' asJQuery.
+		(inputs at: 0) value: 'ld'.
+		(inputs at: 1) value: 'wrong'.
+		
 		'input[type="checkbox"]' asJQuery click.
 		'.continue' asJQuery click.
 		
 		self assertPageContains: 'Second text'.
 		self assertPageDoesNotContain: 'Ergebnis'.
 		
+		inputs := 'input[type="text"]' asJQuery.
+		(inputs at: 2) value: 'ond'.
+		
 		'input[type="checkbox"]' asJQuery click.
 		'.continue' asJQuery click.
 		
 		self assertPageContains: 'Ergebnis'.
+		self assertPageContains: '66.67 %'.
+		
+		self assert: '.text:visible:not(.result)' asJQuery length equals: 2.
 	]
 ! !
 

@@ -836,6 +836,30 @@ $globals.ExamTextView);
 
 $core.addMethod(
 $core.method({
+selector: "show",
+protocol: 'rendering',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@renderArea"])._show();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"show",{},$globals.ExamTextView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "show\x0a\x09renderArea show",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["show"]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
 selector: "showResults:",
 protocol: 'actions',
 fn: function (results){
@@ -1276,7 +1300,7 @@ selector: "startExam",
 protocol: 'action',
 fn: function (){
 var self=this;
-var aPrinter,copies,textsStream,copy,result,whenContinue;
+var aPrinter,copies,textsStream,copy,result,whenContinue,answers;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -1296,9 +1320,20 @@ return $core.withContext(function($ctx2) {
 $recv(copy)._hide();
 $1=$recv(textsStream)._atEnd();
 if($core.assert($1)){
-result=$recv(self["@theExam"])._evaluate_($recv(copy)._answers());
+answers=$recv(copies)._flatCollect_((function(each){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+return $recv(each)._answers();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({each:each},$ctx2,3)});
+//>>excludeEnd("ctx");
+}));
+answers;
+result=$recv(self["@theExam"])._evaluate_(answers);
 result;
-return $recv($globals.ResultView)._newIn_withScore_of_percentage_("#content",$recv(result)._score(),$recv(result)._maxScore(),$recv(result)._percentage());
+$recv($globals.ResultView)._newIn_withScore_of_percentage_("#content",$recv(result)._score(),$recv(result)._maxScore(),$recv(result)._percentage());
+return $recv(copies)._do_("show");
 } else {
 copy=$recv(textsStream)._next();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1323,15 +1358,15 @@ $recv(copy)._whenContinueDo_(whenContinue);
 $recv(copy)._render();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies,textsStream:textsStream,copy:copy,result:result,whenContinue:whenContinue},$globals.OndafSimulator)});
+}, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies,textsStream:textsStream,copy:copy,result:result,whenContinue:whenContinue,answers:answers},$globals.OndafSimulator)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09result := theExam evaluate: copy answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.",
+source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage.\x0a\x09\x09\x09copies do: #show.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.",
 referencedClasses: ["ExamPrinter", "ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["hide", "designExam", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "evaluate:", "answers", "newIn:withScore:of:percentage:", "score", "maxScore", "percentage", "next", "whenContinueDo:", "render"]
+messageSends: ["hide", "designExam", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:", "score", "maxScore", "percentage", "do:", "next", "whenContinueDo:", "render"]
 }),
 $globals.OndafSimulator);
 
@@ -1560,26 +1595,32 @@ selector: "newIn:withScore:of:percentage:",
 protocol: 'as yet unclassified',
 fn: function (aSelector,actualScore,totalScore,percentage){
 var self=this;
+var container;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
+container="<div>"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+$recv($recv(aSelector)._asJQuery())._prepend_(container);
 $1=self._new();
 $recv($1)._score_(actualScore);
 $recv($1)._totalScore_(totalScore);
 $recv($1)._percentage_(percentage);
-$recv($1)._appendToJQuery_($recv(aSelector)._asJQuery());
+$recv($1)._appendToJQuery_(container);
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"newIn:withScore:of:percentage:",{aSelector:aSelector,actualScore:actualScore,totalScore:totalScore,percentage:percentage},$globals.ResultView.klass)});
+}, function($ctx1) {$ctx1.fill(self,"newIn:withScore:of:percentage:",{aSelector:aSelector,actualScore:actualScore,totalScore:totalScore,percentage:percentage,container:container},$globals.ResultView.klass)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aSelector", "actualScore", "totalScore", "percentage"],
-source: "newIn: aSelector withScore: actualScore of: totalScore percentage: percentage\x0a\x09^ self new\x0a\x09\x09score: actualScore;\x0a\x09\x09totalScore: totalScore;\x0a\x09\x09percentage: percentage;\x0a\x09\x09appendToJQuery: aSelector asJQuery;\x0a\x09\x09yourself",
+source: "newIn: aSelector withScore: actualScore of: totalScore percentage: percentage\x0a\x09| container |\x0a\x09container := '<div>' asJQuery.\x0a\x09aSelector asJQuery prepend: container.\x0a\x09\x0a\x09^ self new\x0a\x09\x09score: actualScore;\x0a\x09\x09totalScore: totalScore;\x0a\x09\x09percentage: percentage;\x0a\x09\x09appendToJQuery: container;\x0a\x09\x09yourself",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["score:", "new", "totalScore:", "percentage:", "appendToJQuery:", "asJQuery", "yourself"]
+messageSends: ["asJQuery", "prepend:", "score:", "new", "totalScore:", "percentage:", "appendToJQuery:", "yourself"]
 }),
 $globals.ResultView.klass);
 
