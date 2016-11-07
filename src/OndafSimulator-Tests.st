@@ -476,6 +476,8 @@ test04
 		self assertPageContains: '66.67 %'.
 		
 		self assert: '.text:visible:not(.result)' asJQuery length equals: 2.
+		self assert: '.incorrect' asJQuery length equals: 1.
+		self assert: '.correct' asJQuery length equals: 2.
 	]
 ! !
 

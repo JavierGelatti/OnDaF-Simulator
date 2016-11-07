@@ -58,6 +58,10 @@ answers
 	^ inputs collect: [ :input | input val ]
 !
 
+consumeResults: resultStream
+	self showResults: (resultStream next: inputs size)
+!
+
 showResults: results
 	| classes |
 	classes := results collect: [ :result |
@@ -267,7 +271,7 @@ doSilkTAG
 !
 
 startExam
-	| aPrinter copies textsStream copy result whenContinue answers |
+	| aPrinter copies textsStream copy result whenContinue answers resultStream |
 	fileDropTarget hide.
 	theExam := examDesigner designExam.
 	aPrinter := ExamPrinter newOn: '#content'.
@@ -280,6 +284,8 @@ startExam
 			answers := copies flatCollect: [ :each | each answers ].
 			result := theExam evaluate: answers.
 			ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage.
+			resultStream := result individualResults readStream.
+			copies do: [ :each | each consumeResults: resultStream ].
 			copies do: #show.
 		] ifFalse: [
 			copy := textsStream next.
