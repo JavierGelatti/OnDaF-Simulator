@@ -214,7 +214,7 @@ newIn: aSelector title: aString text: number of: totalNumber
 ! !
 
 Widget subclass: #Header
-	instanceVariableNames: 'startExamHandler'
+	instanceVariableNames: 'startExamHandler headerElement'
 	package: 'OndafSimulator'!
 
 !Header methodsFor: 'events'!
@@ -232,18 +232,23 @@ initialize
 
 !Header methodsFor: 'rendering'!
 
+remove
+	headerElement remove
+!
+
 renderOn: html
-	html header
+	headerElement := html header
 		with: [
 			html a
 				with: 'Start exam';
 				tabindex: 0;
 				onClick: startExamHandler
-		]
+		];
+		asJQuery
 ! !
 
 Object subclass: #OndafSimulator
-	instanceVariableNames: 'fileDropTarget examDesigner theExam'
+	instanceVariableNames: 'fileDropTarget examDesigner theExam header'
 	package: 'OndafSimulator'!
 
 !OndafSimulator methodsFor: 'action'!
@@ -272,6 +277,7 @@ doSilkTAG
 
 startExam
 	| aPrinter copies textsStream copy result whenContinue answers resultStream |
+	header remove.
 	fileDropTarget hide.
 	theExam := examDesigner designExam.
 	aPrinter := ExamPrinter newOn: '#content'.
@@ -305,9 +311,10 @@ augmentPage
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ]."
 	
-	Header new
+	header := Header new
 		whenStartExam: [ self startExam ];
-		appendToJQuery: 'body' asJQuery.
+		appendToJQuery: 'body' asJQuery;
+		yourself.
 	
 	(HTMLCanvas onJQuery: 'body' asJQuery) section id: 'content'.
 		

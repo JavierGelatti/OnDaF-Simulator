@@ -429,6 +429,8 @@ test03
 	self afterThat: [
 		':contains("Start exam")' asJQuery click.
 		
+		self assertPageDoesNotContain: 'Start exam'.
+		
 		inputs := 'input[type="text"]' asJQuery.
 		(inputs at: 0) value: 'ld'.
 		(inputs at: 1) value: 'wrong'.

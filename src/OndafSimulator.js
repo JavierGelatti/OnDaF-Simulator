@@ -2,7 +2,7 @@ define("amber-ondafsimulator/OndafSimulator", ["amber/boot"
 //>>excludeStart("imports", pragmas.excludeImports);
 , "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"
 //>>excludeEnd("imports");
-, "amber_core/Kernel-Objects", "amber/web/Web", "amber_core/Kernel-Methods", "amber_core/Kernel-Collections"], function($boot
+, "amber_core/Kernel-Objects", "amber/web/Web", "amber_core/Kernel-Collections", "amber_core/Kernel-Methods"], function($boot
 //>>excludeStart("imports", pragmas.excludeImports);
 
 //>>excludeEnd("imports");
@@ -999,7 +999,7 @@ messageSends: ["initializeWithTitle:selector:number:of:", "new", "yourself"]
 $globals.ExamTextView.klass);
 
 
-$core.addClass('Header', $globals.Widget, ['startExamHandler'], 'OndafSimulator');
+$core.addClass('Header', $globals.Widget, ['startExamHandler', 'headerElement'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "initialize",
@@ -1036,6 +1036,30 @@ $globals.Header);
 
 $core.addMethod(
 $core.method({
+selector: "remove",
+protocol: 'rendering',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@headerElement"])._remove();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"remove",{},$globals.Header)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "remove\x0a\x09headerElement remove",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["remove"]
+}),
+$globals.Header);
+
+$core.addMethod(
+$core.method({
 selector: "renderOn:",
 protocol: 'rendering',
 fn: function (html){
@@ -1043,15 +1067,16 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1;
-$recv($recv(html)._header())._with_((function(){
+var $1,$2;
+$1=$recv(html)._header();
+$recv($1)._with_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$1=$recv(html)._a();
-$recv($1)._with_("Start exam");
-$recv($1)._tabindex_((0));
-return $recv($1)._onClick_(self["@startExamHandler"]);
+$2=$recv(html)._a();
+$recv($2)._with_("Start exam");
+$recv($2)._tabindex_((0));
+return $recv($2)._onClick_(self["@startExamHandler"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1059,6 +1084,7 @@ return $recv($1)._onClick_(self["@startExamHandler"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["with:"]=1;
 //>>excludeEnd("ctx");
+self["@headerElement"]=$recv($1)._asJQuery();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},$globals.Header)});
@@ -1066,10 +1092,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderOn: html\x0a\x09html header\x0a\x09\x09with: [\x0a\x09\x09\x09html a\x0a\x09\x09\x09\x09with: 'Start exam';\x0a\x09\x09\x09\x09tabindex: 0;\x0a\x09\x09\x09\x09onClick: startExamHandler\x0a\x09\x09]",
+source: "renderOn: html\x0a\x09headerElement := html header\x0a\x09\x09with: [\x0a\x09\x09\x09html a\x0a\x09\x09\x09\x09with: 'Start exam';\x0a\x09\x09\x09\x09tabindex: 0;\x0a\x09\x09\x09\x09onClick: startExamHandler\x0a\x09\x09];\x0a\x09\x09asJQuery",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["with:", "header", "a", "tabindex:", "onClick:"]
+messageSends: ["with:", "header", "a", "tabindex:", "onClick:", "asJQuery"]
 }),
 $globals.Header);
 
@@ -1094,7 +1120,7 @@ $globals.Header);
 
 
 
-$core.addClass('OndafSimulator', $globals.Object, ['fileDropTarget', 'examDesigner', 'theExam'], 'OndafSimulator');
+$core.addClass('OndafSimulator', $globals.Object, ['fileDropTarget', 'examDesigner', 'theExam', 'header'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "addText:",
@@ -1168,6 +1194,7 @@ $2="body"._asJQuery();
 $ctx1.sendIdx["asJQuery"]=1;
 //>>excludeEnd("ctx");
 $recv($1)._appendToJQuery_($2);
+self["@header"]=$recv($1)._yourself();
 $recv($recv($recv($globals.HTMLCanvas)._onJQuery_("body"._asJQuery()))._section())._id_("content");
 self["@fileDropTarget"]=$recv($globals.TextFileDropTarget)._newIn_handler_("#content",(function(txt){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1185,10 +1212,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09Header new\x0a\x09\x09whenStartExam: [ self startExam ];\x0a\x09\x09appendToJQuery: 'body' asJQuery.\x0a\x09\x0a\x09(HTMLCanvas onJQuery: 'body' asJQuery) section id: 'content'.\x0a\x09\x09\x0a\x09fileDropTarget := TextFileDropTarget\x0a\x09\x09newIn: '#content'\x0a\x09\x09handler: [ :txt | self addText: txt ]",
+source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09header := Header new\x0a\x09\x09whenStartExam: [ self startExam ];\x0a\x09\x09appendToJQuery: 'body' asJQuery;\x0a\x09\x09yourself.\x0a\x09\x0a\x09(HTMLCanvas onJQuery: 'body' asJQuery) section id: 'content'.\x0a\x09\x09\x0a\x09fileDropTarget := TextFileDropTarget\x0a\x09\x09newIn: '#content'\x0a\x09\x09handler: [ :txt | self addText: txt ]",
 referencedClasses: ["Header", "HTMLCanvas", "TextFileDropTarget"],
 //>>excludeEnd("ide");
-messageSends: ["whenStartExam:", "new", "startExam", "appendToJQuery:", "asJQuery", "id:", "section", "onJQuery:", "newIn:handler:", "addText:"]
+messageSends: ["whenStartExam:", "new", "startExam", "appendToJQuery:", "asJQuery", "yourself", "id:", "section", "onJQuery:", "newIn:handler:", "addText:"]
 }),
 $globals.OndafSimulator);
 
@@ -1329,6 +1356,7 @@ var aPrinter,copies,textsStream,copy,result,whenContinue,answers,resultStream;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
+$recv(self["@header"])._remove();
 $recv(self["@fileDropTarget"])._hide();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["hide"]=1;
@@ -1404,10 +1432,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers resultStream |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.\x0a\x09\x09\x09resultStream := result individualResults readStream.\x0a\x09\x09\x09copies do: [ :each | each consumeResults: resultStream ].\x0a\x09\x09\x09copies do: #show.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.",
+source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers resultStream |\x0a\x09header remove.\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.\x0a\x09\x09\x09resultStream := result individualResults readStream.\x0a\x09\x09\x09copies do: [ :each | each consumeResults: resultStream ].\x0a\x09\x09\x09copies do: #show.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.",
 referencedClasses: ["ExamPrinter", "ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["hide", "designExam", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:level:", "score", "maxScore", "percentage", "level", "individualResults", "do:", "consumeResults:", "next", "whenContinueDo:", "render"]
+messageSends: ["remove", "hide", "designExam", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:level:", "score", "maxScore", "percentage", "level", "individualResults", "do:", "consumeResults:", "next", "whenContinueDo:", "render"]
 }),
 $globals.OndafSimulator);
 
