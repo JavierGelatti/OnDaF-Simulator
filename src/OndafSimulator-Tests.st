@@ -466,6 +466,7 @@ test04
 		'.continue' asJQuery click.
 		
 		self assertPageContains: 'Second text'.
+		self assertPageContains: 'Text 2 von 2'.
 		self assertPageDoesNotContain: 'Ergebnis'.
 		
 		inputs := 'input[type="text"]' asJQuery.

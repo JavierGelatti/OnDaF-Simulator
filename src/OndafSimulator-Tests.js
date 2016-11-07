@@ -1634,6 +1634,10 @@ self._assertPageContains_("Second text");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["assertPageContains:"]=2;
 //>>excludeEnd("ctx");
+self._assertPageContains_("Text 2 von 2");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["assertPageContains:"]=3;
+//>>excludeEnd("ctx");
 self._assertPageDoesNotContain_("Ergebnis");
 inputs="input[type=\x22text\x22]"._asJQuery();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1656,11 +1660,11 @@ $ctx2.sendIdx["asJQuery"]=7;
 $recv($8)._click();
 self._assertPageContains_("Ergebnis");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["assertPageContains:"]=3;
+$ctx2.sendIdx["assertPageContains:"]=4;
 //>>excludeEnd("ctx");
 self._assertPageContains_("66.67 %");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["assertPageContains:"]=4;
+$ctx2.sendIdx["assertPageContains:"]=5;
 //>>excludeEnd("ctx");
 self._assertPageContains_("B1");
 $10=".text:visible:not(.result)"._asJQuery();
@@ -1699,7 +1703,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test04\x0a\x09| inputs |\x0a\x09OndafSimulator start.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text 1\x0a\x09First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.\x0a\x09\x0a\x09FileDropper new dropText: 'Beispiel Text 2\x0a\x09Second text. This is the sec{ond} text.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'First text'.\x0a\x09\x09self assertPageDoesNotContain: 'Second text'.\x0a\x09\x09\x0a\x09\x09inputs := 'input[type=\x22text\x22]' asJQuery.\x0a\x09\x09(inputs at: 0) value: 'ld'.\x0a\x09\x09(inputs at: 1) value: 'wrong'.\x0a\x09\x09\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Second text'.\x0a\x09\x09self assertPageDoesNotContain: 'Ergebnis'.\x0a\x09\x09\x0a\x09\x09inputs := 'input[type=\x22text\x22]' asJQuery.\x0a\x09\x09(inputs at: 2) value: 'ond'.\x0a\x09\x09\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Ergebnis'.\x0a\x09\x09self assertPageContains: '66.67 %'.\x0a\x09\x09self assertPageContains: 'B1'.\x0a\x09\x09\x0a\x09\x09self assert: '.text:visible:not(.result)' asJQuery length equals: 2.\x0a\x09\x09self assert: '.incorrect' asJQuery length equals: 1.\x0a\x09\x09self assert: '.correct' asJQuery length equals: 2.\x0a\x09]",
+source: "test04\x0a\x09| inputs |\x0a\x09OndafSimulator start.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text 1\x0a\x09First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.\x0a\x09\x0a\x09FileDropper new dropText: 'Beispiel Text 2\x0a\x09Second text. This is the sec{ond} text.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'First text'.\x0a\x09\x09self assertPageDoesNotContain: 'Second text'.\x0a\x09\x09\x0a\x09\x09inputs := 'input[type=\x22text\x22]' asJQuery.\x0a\x09\x09(inputs at: 0) value: 'ld'.\x0a\x09\x09(inputs at: 1) value: 'wrong'.\x0a\x09\x09\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Second text'.\x0a\x09\x09self assertPageContains: 'Text 2 von 2'.\x0a\x09\x09self assertPageDoesNotContain: 'Ergebnis'.\x0a\x09\x09\x0a\x09\x09inputs := 'input[type=\x22text\x22]' asJQuery.\x0a\x09\x09(inputs at: 2) value: 'ond'.\x0a\x09\x09\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Ergebnis'.\x0a\x09\x09self assertPageContains: '66.67 %'.\x0a\x09\x09self assertPageContains: 'B1'.\x0a\x09\x09\x0a\x09\x09self assert: '.text:visible:not(.result)' asJQuery length equals: 2.\x0a\x09\x09self assert: '.incorrect' asJQuery length equals: 1.\x0a\x09\x09self assert: '.correct' asJQuery length equals: 2.\x0a\x09]",
 referencedClasses: ["OndafSimulator", "FileDropper"],
 //>>excludeEnd("ide");
 messageSends: ["start", "dropText:on:", "new", "afterThat:", "click", "asJQuery", "assertPageContains:", "assertPageDoesNotContain:", "value:", "at:", "assert:equals:", "length"]

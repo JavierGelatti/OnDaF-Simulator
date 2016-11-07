@@ -1,7 +1,7 @@
 Smalltalk createPackage: 'OndafSimulator'!
 (Smalltalk packageAt: 'OndafSimulator') imports: {'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
 Object subclass: #ExamPrinter
-	instanceVariableNames: 'textViews selector'
+	instanceVariableNames: 'textViews selector numberOfTexts'
 	package: 'OndafSimulator'!
 
 !ExamPrinter methodsFor: 'as yet unclassified'!
@@ -24,12 +24,16 @@ print: anExam
 	^ self copies
 !
 
+printNumberOfTexts: aNumber
+	numberOfTexts := aNumber
+!
+
 printText: aString
 	self currentTextView addText: aString
 !
 
 printTitle: aString
-	textViews add: (ExamTextView newIn: selector title: aString text: 1 of: 1)
+	textViews add: (ExamTextView newIn: selector title: aString text: textViews size + 1 of: numberOfTexts)
 !
 
 printWordToComplete: aString

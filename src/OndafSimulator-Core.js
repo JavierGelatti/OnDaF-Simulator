@@ -14,6 +14,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
+$recv(aPrinter)._printNumberOfTexts_($recv(self["@texts"])._size());
 $recv(self["@texts"])._do_((function(text){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -30,10 +31,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aPrinter"],
-source: "copyOn: aPrinter \x0a\x09texts do: [ :text |\x0a\x09\x09text copyOn: aPrinter\x0a\x09]",
+source: "copyOn: aPrinter\x0a\x09aPrinter printNumberOfTexts: texts size.\x0a\x09texts do: [ :text |\x0a\x09\x09text copyOn: aPrinter\x0a\x09]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["do:", "copyOn:"]
+messageSends: ["printNumberOfTexts:", "size", "do:", "copyOn:"]
 }),
 $globals.CTestExam);
 
@@ -1783,7 +1784,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aPrinter"],
-source: "copyOn: aPrinter \x0a\x09aPrinter printTitle: title.\x0a\x09content do: [ :each | each copyOn: aPrinter ]",
+source: "copyOn: aPrinter\x0a\x09aPrinter printTitle: title.\x0a\x09content do: [ :each | each copyOn: aPrinter ]",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["printTitle:", "do:", "copyOn:"]

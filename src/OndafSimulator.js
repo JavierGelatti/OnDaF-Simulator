@@ -2,7 +2,7 @@ define("amber-ondafsimulator/OndafSimulator", ["amber/boot"
 //>>excludeStart("imports", pragmas.excludeImports);
 , "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"
 //>>excludeEnd("imports");
-, "amber_core/Kernel-Objects", "amber/web/Web", "amber_core/Kernel-Collections", "amber_core/Kernel-Methods"], function($boot
+, "amber_core/Kernel-Objects", "amber/web/Web", "amber_core/Kernel-Methods", "amber_core/Kernel-Collections"], function($boot
 //>>excludeStart("imports", pragmas.excludeImports);
 
 //>>excludeEnd("imports");
@@ -13,7 +13,7 @@ $core.packages["OndafSimulator"].innerEval = function (expr) { return eval(expr)
 $core.packages["OndafSimulator"].imports = ["amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"];
 $core.packages["OndafSimulator"].transport = {"type":"amd","amdNamespace":"amber-ondafsimulator"};
 
-$core.addClass('ExamPrinter', $globals.Object, ['textViews', 'selector'], 'OndafSimulator');
+$core.addClass('ExamPrinter', $globals.Object, ['textViews', 'selector', 'numberOfTexts'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "copies",
@@ -113,6 +113,25 @@ $globals.ExamPrinter);
 
 $core.addMethod(
 $core.method({
+selector: "printNumberOfTexts:",
+protocol: 'as yet unclassified',
+fn: function (aNumber){
+var self=this;
+self["@numberOfTexts"]=aNumber;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aNumber"],
+source: "printNumberOfTexts: aNumber\x0a\x09numberOfTexts := aNumber",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.ExamPrinter);
+
+$core.addMethod(
+$core.method({
 selector: "printText:",
 protocol: 'as yet unclassified',
 fn: function (aString){
@@ -144,7 +163,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@textViews"])._add_($recv($globals.ExamTextView)._newIn_title_text_of_(self["@selector"],aString,(1),(1)));
+$recv(self["@textViews"])._add_($recv($globals.ExamTextView)._newIn_title_text_of_(self["@selector"],aString,$recv($recv(self["@textViews"])._size()).__plus((1)),self["@numberOfTexts"]));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"printTitle:",{aString:aString},$globals.ExamPrinter)});
@@ -152,10 +171,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aString"],
-source: "printTitle: aString\x0a\x09textViews add: (ExamTextView newIn: selector title: aString text: 1 of: 1)",
+source: "printTitle: aString\x0a\x09textViews add: (ExamTextView newIn: selector title: aString text: textViews size + 1 of: numberOfTexts)",
 referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
-messageSends: ["add:", "newIn:title:text:of:"]
+messageSends: ["add:", "newIn:title:text:of:", "+", "size"]
 }),
 $globals.ExamPrinter);
 

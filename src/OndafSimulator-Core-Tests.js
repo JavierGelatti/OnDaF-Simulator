@@ -517,7 +517,7 @@ $ctx1.sendIdx[","]=1;
 self._givenExamWithText_($1);
 aPrinter=$recv($globals.TestPrinter)._new();
 $recv(self["@theExam"])._copyOn_(aPrinter);
-self._assert_equals_($recv(aPrinter)._printedText(),"|Title A| And the text said: he_ wor_ . ");
+self._assert_equals_($recv(aPrinter)._printedText(),"1 |Title A| And the text said: he_ wor_ . ");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"test07CopyOnPrinter",{aPrinter:aPrinter},$globals.ExamTest)});
@@ -525,7 +525,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test07CopyOnPrinter\x0a\x09| aPrinter |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09aPrinter := TestPrinter new.\x0a\x09\x0a\x09theExam copyOn: aPrinter.\x0a\x09\x0a\x09self assert: aPrinter printedText equals: '|Title A| And the text said: he_ wor_ . '.",
+source: "test07CopyOnPrinter\x0a\x09| aPrinter |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09aPrinter := TestPrinter new.\x0a\x09\x0a\x09theExam copyOn: aPrinter.\x0a\x09\x0a\x09self assert: aPrinter printedText equals: '1 |Title A| And the text said: he_ wor_ . '.",
 referencedClasses: ["String", "TestPrinter"],
 //>>excludeEnd("ide");
 messageSends: ["givenExamWithText:", ",", "lf", "new", "copyOn:", "assert:equals:", "printedText"]
@@ -628,6 +628,51 @@ source: "test10DetermineMaximumScore\x0a\x09| aSubmission aResult |\x0a\x09self 
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
 messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "maxScore"]
+}),
+$globals.ExamTest);
+
+$core.addMethod(
+$core.method({
+selector: "test11CopyOnPrinterMultipleTexts",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var aPrinter;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $3,$2,$1,$4;
+$3=$recv($globals.String)._lf();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["lf"]=1;
+//>>excludeEnd("ctx");
+$2="Title A".__comma($3);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=2;
+//>>excludeEnd("ctx");
+$1=$recv($2).__comma("he{llo} wor{ld}");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+$4=$recv("Title B".__comma($recv($globals.String)._lf())).__comma("loca{tion}");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=3;
+//>>excludeEnd("ctx");
+self._givenExamWithText_and_($1,$4);
+aPrinter=$recv($globals.TestPrinter)._new();
+$recv(self["@theExam"])._copyOn_(aPrinter);
+self._assert_equals_($recv(aPrinter)._printedText(),"2 |Title A| he_ wor_ |Title B| loca_ ");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test11CopyOnPrinterMultipleTexts",{aPrinter:aPrinter},$globals.ExamTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test11CopyOnPrinterMultipleTexts\x0a\x09| aPrinter |\x0a\x09self givenExamWithText: 'Title A', String lf, 'he{llo} wor{ld}'\x0a\x09                   and: 'Title B', String lf, 'loca{tion}'.\x0a\x09aPrinter := TestPrinter new.\x0a\x09\x0a\x09theExam copyOn: aPrinter.\x0a\x09\x0a\x09self assert: aPrinter printedText equals: '2 |Title A| he_ wor_ |Title B| loca_ '.",
+referencedClasses: ["String", "TestPrinter"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:and:", ",", "lf", "new", "copyOn:", "assert:equals:", "printedText"]
 }),
 $globals.ExamTest);
 
@@ -2049,6 +2094,30 @@ source: "initialize\x0a\x09super initialize.\x0a\x09printedText := ''",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initialize"]
+}),
+$globals.TestPrinter);
+
+$core.addMethod(
+$core.method({
+selector: "printNumberOfTexts:",
+protocol: 'as yet unclassified',
+fn: function (aNumber){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._printText_($recv(aNumber)._asString());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"printNumberOfTexts:",{aNumber:aNumber},$globals.TestPrinter)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aNumber"],
+source: "printNumberOfTexts: aNumber\x0a\x09self printText: aNumber asString",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["printText:", "asString"]
 }),
 $globals.TestPrinter);
 
