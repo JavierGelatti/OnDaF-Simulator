@@ -218,10 +218,14 @@ newIn: aSelector title: aString text: number of: totalNumber
 ! !
 
 Widget subclass: #Header
-	instanceVariableNames: 'startExamHandler headerElement'
+	instanceVariableNames: 'startExamHandler headerElement newExamHandler'
 	package: 'OndafSimulator'!
 
 !Header methodsFor: 'events'!
+
+whenNewExam: aBlock
+	newExamHandler := aBlock
+!
 
 whenStartExam: aBlock
 	startExamHandler := aBlock
@@ -246,7 +250,7 @@ renderOn: html
 			html a
 				with: 'New exam';
 				tabindex: 0;
-				onClick: [].
+				onClick: newExamHandler.
 			html a
 				with: 'Start exam';
 				tabindex: 0;

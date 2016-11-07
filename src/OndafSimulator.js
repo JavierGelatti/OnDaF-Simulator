@@ -1018,7 +1018,7 @@ messageSends: ["initializeWithTitle:selector:number:of:", "new", "yourself"]
 $globals.ExamTextView.klass);
 
 
-$core.addClass('Header', $globals.Widget, ['startExamHandler', 'headerElement'], 'OndafSimulator');
+$core.addClass('Header', $globals.Widget, ['startExamHandler', 'headerElement', 'newExamHandler'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "initialize",
@@ -1104,9 +1104,7 @@ $recv($2)._tabindex_((0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["tabindex:"]=1;
 //>>excludeEnd("ctx");
-$3=$recv($2)._onClick_((function(){
-
-}));
+$3=$recv($2)._onClick_(self["@newExamHandler"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["onClick:"]=1;
 //>>excludeEnd("ctx");
@@ -1130,10 +1128,29 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderOn: html\x0a\x09headerElement := html header\x0a\x09\x09with: [\x0a\x09\x09\x09html a\x0a\x09\x09\x09\x09with: 'New exam';\x0a\x09\x09\x09\x09tabindex: 0;\x0a\x09\x09\x09\x09onClick: [].\x0a\x09\x09\x09html a\x0a\x09\x09\x09\x09with: 'Start exam';\x0a\x09\x09\x09\x09tabindex: 0;\x0a\x09\x09\x09\x09onClick: startExamHandler\x0a\x09\x09];\x0a\x09\x09asJQuery",
+source: "renderOn: html\x0a\x09headerElement := html header\x0a\x09\x09with: [\x0a\x09\x09\x09html a\x0a\x09\x09\x09\x09with: 'New exam';\x0a\x09\x09\x09\x09tabindex: 0;\x0a\x09\x09\x09\x09onClick: newExamHandler.\x0a\x09\x09\x09html a\x0a\x09\x09\x09\x09with: 'Start exam';\x0a\x09\x09\x09\x09tabindex: 0;\x0a\x09\x09\x09\x09onClick: startExamHandler\x0a\x09\x09];\x0a\x09\x09asJQuery",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["with:", "header", "a", "tabindex:", "onClick:", "asJQuery"]
+}),
+$globals.Header);
+
+$core.addMethod(
+$core.method({
+selector: "whenNewExam:",
+protocol: 'events',
+fn: function (aBlock){
+var self=this;
+self["@newExamHandler"]=aBlock;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aBlock"],
+source: "whenNewExam: aBlock\x0a\x09newExamHandler := aBlock",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
 }),
 $globals.Header);
 
