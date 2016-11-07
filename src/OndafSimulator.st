@@ -261,7 +261,7 @@ doSilkTAG
 !
 
 startExam
-	| aPrinter copies textsStream copy |
+	| aPrinter copies textsStream copy result |
 	fileDropTarget hide.
 	theExam := examDesigner designExam.
 	aPrinter := ExamPrinter newOn: '#content'.
@@ -271,7 +271,8 @@ startExam
 	copy := textsStream next.
 	copy whenContinueDo: [
 		copy hide.
-		ResultView newIn: '#content' withScore: 0 of: 100 percentage: 0.
+		result := theExam evaluate: copy answers.
+		ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage.
 	].
 	copy render.
 ! !

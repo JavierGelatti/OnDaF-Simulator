@@ -409,17 +409,23 @@ setUp
 !
 
 test03
+	| inputs |
 	OndafSimulator start.
 
 	FileDropper new dropText: 'Beispiel Text
-	Hello wor{ld}.' on: '.text-file-target'.
+	Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.
 	
 	self afterThat: [
 		':contains("Start exam")' asJQuery click.
+		
+		inputs := 'input[type="text"]' asJQuery.
+		(inputs at: 0) value: 'ld'.
+		(inputs at: 1) value: 'wrong'.
+		
 		'input[type="checkbox"]' asJQuery click.
 		'.continue' asJQuery click.
 		
-		self assertPageContains: '0'
+		self assertPageContains: '50'
 	]
 ! !
 

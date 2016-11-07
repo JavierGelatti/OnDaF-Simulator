@@ -565,6 +565,72 @@ messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "
 }),
 $globals.ExamTest);
 
+$core.addMethod(
+$core.method({
+selector: "test09DetermineScore",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var aSubmission,aResult;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}. Cor{rect}");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._givenExamWithText_($1);
+aSubmission=["wrong", "ld", "rect"];
+aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
+self._assert_equals_($recv(aResult)._score(),(2));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test09DetermineScore",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test09DetermineScore\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}. Cor{rect}'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld' 'rect').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult score equals: 2.",
+referencedClasses: ["String"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "score"]
+}),
+$globals.ExamTest);
+
+$core.addMethod(
+$core.method({
+selector: "test10DetermineMaximumScore",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var aSubmission,aResult;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}. Cor{rect}");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._givenExamWithText_($1);
+aSubmission=["wrong", "ld", "rect"];
+aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
+self._assert_equals_($recv(aResult)._maxScore(),(3));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test10DetermineMaximumScore",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test10DetermineMaximumScore\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}. Cor{rect}'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld' 'rect').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult maxScore equals: 3.",
+referencedClasses: ["String"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "maxScore"]
+}),
+$globals.ExamTest);
+
 
 
 $core.addClass('InterpreterText', $globals.TestCase, [], 'OndafSimulator-Core-Tests');

@@ -1270,7 +1270,7 @@ selector: "startExam",
 protocol: 'action',
 fn: function (){
 var self=this;
-var aPrinter,copies,textsStream,copy;
+var aPrinter,copies,textsStream,copy,result;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -1288,7 +1288,9 @@ $recv(copy)._whenContinueDo_((function(){
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
 $recv(copy)._hide();
-return $recv($globals.ResultView)._newIn_withScore_of_percentage_("#content",(0),(100),(0));
+result=$recv(self["@theExam"])._evaluate_($recv(copy)._answers());
+result;
+return $recv($globals.ResultView)._newIn_withScore_of_percentage_("#content",$recv(result)._score(),$recv(result)._maxScore(),$recv(result)._percentage());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1296,15 +1298,15 @@ return $recv($globals.ResultView)._newIn_withScore_of_percentage_("#content",(0)
 $recv(copy)._render();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies,textsStream:textsStream,copy:copy},$globals.OndafSimulator)});
+}, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies,textsStream:textsStream,copy:copy,result:result},$globals.OndafSimulator)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter copies textsStream copy |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: [\x0a\x09\x09copy hide.\x0a\x09\x09ResultView newIn: '#content' withScore: 0 of: 100 percentage: 0.\x0a\x09].\x0a\x09copy render.",
+source: "startExam\x0a\x09| aPrinter copies textsStream copy result |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: [\x0a\x09\x09copy hide.\x0a\x09\x09result := theExam evaluate: copy answers.\x0a\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage.\x0a\x09].\x0a\x09copy render.",
 referencedClasses: ["ExamPrinter", "ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["hide", "designExam", "newOn:", "print:", "readStream", "next", "whenContinueDo:", "newIn:withScore:of:percentage:", "render"]
+messageSends: ["hide", "designExam", "newOn:", "print:", "readStream", "next", "whenContinueDo:", "evaluate:", "answers", "newIn:withScore:of:percentage:", "score", "maxScore", "percentage", "render"]
 }),
 $globals.OndafSimulator);
 

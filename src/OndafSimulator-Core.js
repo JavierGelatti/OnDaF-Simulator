@@ -1584,6 +1584,29 @@ $globals.CTestResult);
 
 $core.addMethod(
 $core.method({
+selector: "maxScore",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+return $recv(self["@results"])._size();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"maxScore",{},$globals.CTestResult)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "maxScore\x0a\x09 ^ results size",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["size"]
+}),
+$globals.CTestResult);
+
+$core.addMethod(
+$core.method({
 selector: "percentage",
 protocol: 'as yet unclassified',
 fn: function (){
@@ -1592,16 +1615,12 @@ var realPercentage,roundedPercentage;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $2,$1;
-$2=$recv($recv(self["@results"])._select_("value"))._size();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["size"]=1;
-//>>excludeEnd("ctx");
-$1=$recv($2).__star((100));
+var $1;
+$1=$recv(self._score()).__star((100));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["*"]=1;
 //>>excludeEnd("ctx");
-realPercentage=$recv($1).__slash($recv(self["@results"])._size());
+realPercentage=$recv($1).__slash(self._maxScore());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["/"]=1;
 //>>excludeEnd("ctx");
@@ -1613,10 +1632,33 @@ return $recv(roundedPercentage)._asFloat();
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "percentage\x0a\x09| realPercentage roundedPercentage |\x0a\x09realPercentage := (results select: #value) size * 100 / results size.\x0a\x09roundedPercentage := (realPercentage * 100) rounded / 100.\x0a\x09^ roundedPercentage asFloat",
+source: "percentage\x0a\x09| realPercentage roundedPercentage |\x0a\x09realPercentage := self score * 100 / self maxScore.\x0a\x09roundedPercentage := (realPercentage * 100) rounded / 100.\x0a\x09^ roundedPercentage asFloat",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["/", "*", "size", "select:", "rounded", "asFloat"]
+messageSends: ["/", "*", "score", "maxScore", "rounded", "asFloat"]
+}),
+$globals.CTestResult);
+
+$core.addMethod(
+$core.method({
+selector: "score",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+return $recv($recv(self["@results"])._select_("value"))._size();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"score",{},$globals.CTestResult)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "score\x0a\x09^ (results select: #value) size",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["size", "select:"]
 }),
 $globals.CTestResult);
 
