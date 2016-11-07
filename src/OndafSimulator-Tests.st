@@ -227,11 +227,11 @@ test02IfThereAre2TitlesItRenders2Texts
 	self assertPageContains: 'A title 2'
 ! !
 
-WidgetTest subclass: #ExamTestViewTest
+WidgetTest subclass: #ExamTextViewTest
 	instanceVariableNames: ''
 	package: 'OndafSimulator-Tests'!
 
-!ExamTestViewTest methodsFor: 'tests'!
+!ExamTextViewTest methodsFor: 'tests'!
 
 test01ShowsTheTextTitle
 	| examTextView |

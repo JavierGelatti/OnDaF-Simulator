@@ -846,7 +846,7 @@ $globals.ExamPrinterTest);
 
 
 
-$core.addClass('ExamTestViewTest', $globals.WidgetTest, [], 'OndafSimulator-Tests');
+$core.addClass('ExamTextViewTest', $globals.WidgetTest, [], 'OndafSimulator-Tests');
 $core.addMethod(
 $core.method({
 selector: "test01ShowsTheTextTitle",
@@ -862,7 +862,7 @@ $recv(examTextView)._render();
 self._assertPageContains_("Text Title");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test01ShowsTheTextTitle",{examTextView:examTextView},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test01ShowsTheTextTitle",{examTextView:examTextView},$globals.ExamTextViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -872,7 +872,7 @@ referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "render", "assertPageContains:"]
 }),
-$globals.ExamTestViewTest);
+$globals.ExamTextViewTest);
 
 $core.addMethod(
 $core.method({
@@ -889,7 +889,7 @@ $recv(examTextView)._render();
 self._assertPageContains_("Text 1 von 2");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test02ShowsTheTextNumberAndTotalNumber",{examTextView:examTextView},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test02ShowsTheTextNumberAndTotalNumber",{examTextView:examTextView},$globals.ExamTextViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -899,7 +899,7 @@ referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "render", "assertPageContains:"]
 }),
-$globals.ExamTestViewTest);
+$globals.ExamTextViewTest);
 
 $core.addMethod(
 $core.method({
@@ -917,7 +917,7 @@ continueVisible=$recv($recv(".continue"._asJQuery())._css_("visibility")).__eq_e
 self._assert_($recv(continueVisible)._not());
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test03TheContinueButtonIsHiddenByDefault",{examTextView:examTextView,continueVisible:continueVisible},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test03TheContinueButtonIsHiddenByDefault",{examTextView:examTextView,continueVisible:continueVisible},$globals.ExamTextViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -927,7 +927,7 @@ referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "render", "==", "css:", "asJQuery", "assert:", "not"]
 }),
-$globals.ExamTestViewTest);
+$globals.ExamTextViewTest);
 
 $core.addMethod(
 $core.method({
@@ -951,7 +951,7 @@ continueVisible=$recv($recv(".continue"._asJQuery())._css_("visibility")).__eq_e
 self._assert_(continueVisible);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test04TheContinueButtonIsShownWhenCheckingTheCheckbox",{examTextView:examTextView,continueVisible:continueVisible},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test04TheContinueButtonIsShownWhenCheckingTheCheckbox",{examTextView:examTextView,continueVisible:continueVisible},$globals.ExamTextViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -961,7 +961,7 @@ referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "render", "click", "asJQuery", "==", "css:", "assert:"]
 }),
-$globals.ExamTestViewTest);
+$globals.ExamTextViewTest);
 
 $core.addMethod(
 $core.method({
@@ -979,7 +979,7 @@ $recv(examTextView)._render();
 self._assertPageContains_("Hello.");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test05ShowsTheCompletedText",{examTextView:examTextView},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test05ShowsTheCompletedText",{examTextView:examTextView},$globals.ExamTextViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -989,7 +989,7 @@ referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "addText:", "render", "assertPageContains:"]
 }),
-$globals.ExamTestViewTest);
+$globals.ExamTextViewTest);
 
 $core.addMethod(
 $core.method({
@@ -1008,7 +1008,7 @@ self._assertPageContains_("Hel");
 self._assert_equals_($recv("input[type=\x22text\x22]"._asJQuery())._length(),(1));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test06ShowsTheWordsToComplete",{examTextView:examTextView},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test06ShowsTheWordsToComplete",{examTextView:examTextView},$globals.ExamTextViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -1018,7 +1018,7 @@ referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "addWordToComplete:", "render", "assertPageContains:", "assert:equals:", "length", "asJQuery"]
 }),
-$globals.ExamTestViewTest);
+$globals.ExamTextViewTest);
 
 $core.addMethod(
 $core.method({
@@ -1051,7 +1051,7 @@ $recv($recv(inputs)._at_((1)))._value_("rld");
 self._assert_equals_($recv(examTextView)._answers(),["lo", "rld"]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test07CanProvideTheAnswers",{examTextView:examTextView,inputs:inputs},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test07CanProvideTheAnswers",{examTextView:examTextView,inputs:inputs},$globals.ExamTextViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -1061,7 +1061,7 @@ referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "addWordToComplete:", "render", "asJQuery", "value:", "at:", "assert:equals:", "answers"]
 }),
-$globals.ExamTestViewTest);
+$globals.ExamTextViewTest);
 
 $core.addMethod(
 $core.method({
@@ -1079,7 +1079,7 @@ $recv(examTextView)._showSeconds_((59));
 self._assertPageContains_("Verbleibende Sekunden: 59");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test08CanDisplaySeconds",{examTextView:examTextView},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test08CanDisplaySeconds",{examTextView:examTextView},$globals.ExamTextViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -1089,7 +1089,7 @@ referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "render", "showSeconds:", "assertPageContains:"]
 }),
-$globals.ExamTestViewTest);
+$globals.ExamTextViewTest);
 
 $core.addMethod(
 $core.method({
@@ -1106,7 +1106,7 @@ $recv(examTextView)._render();
 self._assertPageDoesNotContain_("Verbleibende Sekunden");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test09ByDefaultSecondsAreNotDisplayed",{examTextView:examTextView},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test09ByDefaultSecondsAreNotDisplayed",{examTextView:examTextView},$globals.ExamTextViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -1116,7 +1116,7 @@ referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "render", "assertPageDoesNotContain:"]
 }),
-$globals.ExamTestViewTest);
+$globals.ExamTextViewTest);
 
 $core.addMethod(
 $core.method({
@@ -1160,7 +1160,7 @@ $ctx1.sendIdx["assert:equals:"]=1;
 self._assert_equals_($recv($recv($recv(inputs)._at_((1)))._asJQuery())._attr_("class"),"correct");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test10CanShowTheResults",{examTextView:examTextView,inputs:inputs},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test10CanShowTheResults",{examTextView:examTextView,inputs:inputs},$globals.ExamTextViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -1170,7 +1170,7 @@ referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "addWordToComplete:", "render", "showResults:", "asJQuery", "assert:equals:", "attr:", "at:"]
 }),
-$globals.ExamTestViewTest);
+$globals.ExamTextViewTest);
 
 $core.addMethod(
 $core.method({
@@ -1203,7 +1203,7 @@ $recv(".continue"._asJQuery())._click();
 self._assert_(executed);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test11ContinuesWhenContinueClicked",{examTextView:examTextView,executed:executed},$globals.ExamTestViewTest)});
+}, function($ctx1) {$ctx1.fill(self,"test11ContinuesWhenContinueClicked",{examTextView:examTextView,executed:executed},$globals.ExamTextViewTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -1213,7 +1213,7 @@ referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["newIn:title:text:of:", "whenContinueDo:", "render", "click", "asJQuery", "assert:"]
 }),
-$globals.ExamTestViewTest);
+$globals.ExamTextViewTest);
 
 
 
