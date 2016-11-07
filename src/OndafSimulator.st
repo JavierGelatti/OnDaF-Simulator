@@ -325,6 +325,7 @@ augmentPage
 	
 	header := Header new
 		whenStartExam: [ self startExam ];
+		whenNewExam: [ 'body' asJQuery empty. OndafSimulator start ];
 		appendToJQuery: 'body' asJQuery;
 		yourself.
 	

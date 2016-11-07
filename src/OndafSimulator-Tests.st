@@ -386,6 +386,20 @@ test04
 		self assert: '.incorrect' asJQuery length equals: 1.
 		self assert: '.correct' asJQuery length equals: 2.
 	]
+!
+
+test05
+	| inputs |
+	OndafSimulator start.
+
+	FileDropper new dropText: 'Beispiel Text 1
+	First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.
+	
+	self afterThat: [
+		self clickOnText: 'New exam'.
+		self assertPageDoesNotContain: 'Beispiel Text 1'.
+		self assertPageContains: 'New exam'.
+	]
 ! !
 
 GUITest subclass: #ResultViewTest

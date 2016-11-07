@@ -1218,6 +1218,43 @@ messageSends: ["start", "dropText:on:", "new", "afterThat:", "clickOnText:", "as
 }),
 $globals.OndafSimulatorTest);
 
+$core.addMethod(
+$core.method({
+selector: "test05",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var inputs;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv($globals.OndafSimulator)._start();
+$recv($recv($globals.FileDropper)._new())._dropText_on_("Beispiel Text 1\x0a\x09First text. Hello wor{ld}. This is an exam{ple}.",".text-file-target");
+self._afterThat_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+self._clickOnText_("New exam");
+self._assertPageDoesNotContain_("Beispiel Text 1");
+return self._assertPageContains_("New exam");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test05",{inputs:inputs},$globals.OndafSimulatorTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test05\x0a\x09| inputs |\x0a\x09OndafSimulator start.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text 1\x0a\x09First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self clickOnText: 'New exam'.\x0a\x09\x09self assertPageDoesNotContain: 'Beispiel Text 1'.\x0a\x09\x09self assertPageContains: 'New exam'.\x0a\x09]",
+referencedClasses: ["OndafSimulator", "FileDropper"],
+//>>excludeEnd("ide");
+messageSends: ["start", "dropText:on:", "new", "afterThat:", "clickOnText:", "assertPageDoesNotContain:", "assertPageContains:"]
+}),
+$globals.OndafSimulatorTest);
+
 
 
 $core.addClass('ResultViewTest', $globals.GUITest, [], 'OndafSimulator-Tests');

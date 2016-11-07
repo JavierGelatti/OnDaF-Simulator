@@ -1233,7 +1233,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$2;
+var $1,$2,$3;
 $1=$recv($globals.Header)._new();
 $recv($1)._whenStartExam_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1244,11 +1244,25 @@ return self._startExam();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
+$recv($1)._whenNewExam_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
 $2="body"._asJQuery();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["asJQuery"]=1;
+$ctx2.sendIdx["asJQuery"]=1;
 //>>excludeEnd("ctx");
-$recv($1)._appendToJQuery_($2);
+$recv($2)._empty();
+return $recv($globals.OndafSimulator)._start();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
+//>>excludeEnd("ctx");
+}));
+$3="body"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=2;
+//>>excludeEnd("ctx");
+$recv($1)._appendToJQuery_($3);
 self["@header"]=$recv($1)._yourself();
 $recv($recv($recv($globals.HTMLCanvas)._onJQuery_("body"._asJQuery()))._section())._id_("content");
 self["@fileDropTarget"]=$recv($globals.TextFileDropTarget)._newIn_handler_("#content",(function(txt){
@@ -1257,7 +1271,7 @@ return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
 return self._addText_(txt);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({txt:txt},$ctx1,2)});
+}, function($ctx2) {$ctx2.fillBlock({txt:txt},$ctx1,3)});
 //>>excludeEnd("ctx");
 }));
 return self;
@@ -1267,10 +1281,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09header := Header new\x0a\x09\x09whenStartExam: [ self startExam ];\x0a\x09\x09appendToJQuery: 'body' asJQuery;\x0a\x09\x09yourself.\x0a\x09\x0a\x09(HTMLCanvas onJQuery: 'body' asJQuery) section id: 'content'.\x0a\x09\x09\x0a\x09fileDropTarget := TextFileDropTarget\x0a\x09\x09newIn: '#content'\x0a\x09\x09handler: [ :txt | self addText: txt ]",
-referencedClasses: ["Header", "HTMLCanvas", "TextFileDropTarget"],
+source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09header := Header new\x0a\x09\x09whenStartExam: [ self startExam ];\x0a\x09\x09whenNewExam: [ 'body' asJQuery empty. OndafSimulator start ];\x0a\x09\x09appendToJQuery: 'body' asJQuery;\x0a\x09\x09yourself.\x0a\x09\x0a\x09(HTMLCanvas onJQuery: 'body' asJQuery) section id: 'content'.\x0a\x09\x09\x0a\x09fileDropTarget := TextFileDropTarget\x0a\x09\x09newIn: '#content'\x0a\x09\x09handler: [ :txt | self addText: txt ]",
+referencedClasses: ["Header", "OndafSimulator", "HTMLCanvas", "TextFileDropTarget"],
 //>>excludeEnd("ide");
-messageSends: ["whenStartExam:", "new", "startExam", "appendToJQuery:", "asJQuery", "yourself", "id:", "section", "onJQuery:", "newIn:handler:", "addText:"]
+messageSends: ["whenStartExam:", "new", "startExam", "whenNewExam:", "empty", "asJQuery", "start", "appendToJQuery:", "yourself", "id:", "section", "onJQuery:", "newIn:handler:", "addText:"]
 }),
 $globals.OndafSimulator);
 
