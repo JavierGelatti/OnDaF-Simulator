@@ -49,7 +49,7 @@ newOn: aSelector
 ! !
 
 Widget subclass: #ExamTextView
-	instanceVariableNames: 'title content continueCheckbox continueButton inputs container textNumber numberOfTexts infoSeconds continueAction'
+	instanceVariableNames: 'title content continueCheckbox continueButton inputs container textNumber numberOfTexts infoSeconds continueAction renderArea'
 	package: 'OndafSimulator'!
 
 !ExamTextView methodsFor: 'actions'!
@@ -121,6 +121,10 @@ continue
 	continueAction value
 !
 
+hide
+	renderArea hide
+!
+
 render
 	self appendToJQuery: container asJQuery
 !
@@ -172,12 +176,13 @@ renderInfoOn: html
 !
 
 renderOn: html
-	html div
+	renderArea := html div
 		class: 'text';
 		with: [ self renderTitleOn: html ];
 		with: [ self renderContentOn: html ];
 		with: [ self renderActionsOn: html ];
-		with: [ self renderInfoOn: html ]
+		with: [ self renderInfoOn: html ];
+		asJQuery
 !
 
 renderTitleOn: html
@@ -256,12 +261,19 @@ doSilkTAG
 !
 
 startExam
-	| aPrinter copies |
+	| aPrinter copies textsStream copy |
 	fileDropTarget hide.
 	theExam := examDesigner designExam.
 	aPrinter := ExamPrinter newOn: '#content'.
 	copies := aPrinter print: theExam.
-	copies do: #render
+	
+	textsStream := copies readStream.
+	copy := textsStream next.
+	copy whenContinueDo: [
+		copy hide.
+		ResultView newIn: '#content' withScore: 0 of: 100 percentage: 0.
+	].
+	copy render.
 ! !
 
 !OndafSimulator methodsFor: 'starting'!

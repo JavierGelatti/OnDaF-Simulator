@@ -1475,7 +1475,8 @@ $recv($2)._click();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["click"]=2;
 //>>excludeEnd("ctx");
-return $recv(".continue"._asJQuery())._click();
+$recv(".continue"._asJQuery())._click();
+return self._assertPageContains_("0");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1487,10 +1488,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test03\x0a\x09OndafSimulator start.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text\x0a\x09Hello wor{ld}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09]",
+source: "test03\x0a\x09OndafSimulator start.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text\x0a\x09Hello wor{ld}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: '0'\x0a\x09]",
 referencedClasses: ["OndafSimulator", "FileDropper"],
 //>>excludeEnd("ide");
-messageSends: ["start", "dropText:on:", "new", "afterThat:", "click", "asJQuery"]
+messageSends: ["start", "dropText:on:", "new", "afterThat:", "click", "asJQuery", "assertPageContains:"]
 }),
 $globals.OndafSimulatorTest);
 

@@ -418,6 +418,8 @@ test03
 		':contains("Start exam")' asJQuery click.
 		'input[type="checkbox"]' asJQuery click.
 		'.continue' asJQuery click.
+		
+		self assertPageContains: '0'
 	]
 ! !
 

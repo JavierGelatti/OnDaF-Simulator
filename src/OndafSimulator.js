@@ -230,7 +230,7 @@ messageSends: ["selector:", "new", "yourself"]
 $globals.ExamPrinter.klass);
 
 
-$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container', 'textNumber', 'numberOfTexts', 'infoSeconds', 'continueAction'], 'OndafSimulator');
+$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container', 'textNumber', 'numberOfTexts', 'infoSeconds', 'continueAction', 'renderArea'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "addText:",
@@ -373,6 +373,30 @@ source: "continue\x0a\x09continueAction value",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["value"]
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
+selector: "hide",
+protocol: 'rendering',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@renderArea"])._hide();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"hide",{},$globals.ExamTextView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "hide\x0a\x09renderArea hide",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["hide"]
 }),
 $globals.ExamTextView);
 
@@ -762,6 +786,7 @@ return self._renderInfoOn_(html);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,4)});
 //>>excludeEnd("ctx");
 }));
+self["@renderArea"]=$recv($1)._asJQuery();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},$globals.ExamTextView)});
@@ -769,10 +794,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderOn: html\x0a\x09html div\x0a\x09\x09class: 'text';\x0a\x09\x09with: [ self renderTitleOn: html ];\x0a\x09\x09with: [ self renderContentOn: html ];\x0a\x09\x09with: [ self renderActionsOn: html ];\x0a\x09\x09with: [ self renderInfoOn: html ]",
+source: "renderOn: html\x0a\x09renderArea := html div\x0a\x09\x09class: 'text';\x0a\x09\x09with: [ self renderTitleOn: html ];\x0a\x09\x09with: [ self renderContentOn: html ];\x0a\x09\x09with: [ self renderActionsOn: html ];\x0a\x09\x09with: [ self renderInfoOn: html ];\x0a\x09\x09asJQuery",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["class:", "div", "with:", "renderTitleOn:", "renderContentOn:", "renderActionsOn:", "renderInfoOn:"]
+messageSends: ["class:", "div", "with:", "renderTitleOn:", "renderContentOn:", "renderActionsOn:", "renderInfoOn:", "asJQuery"]
 }),
 $globals.ExamTextView);
 
@@ -1245,26 +1270,41 @@ selector: "startExam",
 protocol: 'action',
 fn: function (){
 var self=this;
-var aPrinter,copies;
+var aPrinter,copies,textsStream,copy;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 $recv(self["@fileDropTarget"])._hide();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["hide"]=1;
+//>>excludeEnd("ctx");
 self["@theExam"]=$recv(self["@examDesigner"])._designExam();
 aPrinter=$recv($globals.ExamPrinter)._newOn_("#content");
 copies=$recv(aPrinter)._print_(self["@theExam"]);
-$recv(copies)._do_("render");
+textsStream=$recv(copies)._readStream();
+copy=$recv(textsStream)._next();
+$recv(copy)._whenContinueDo_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$recv(copy)._hide();
+return $recv($globals.ResultView)._newIn_withScore_of_percentage_("#content",(0),(100),(0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$recv(copy)._render();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies},$globals.OndafSimulator)});
+}, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies,textsStream:textsStream,copy:copy},$globals.OndafSimulator)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter copies |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09copies do: #render",
-referencedClasses: ["ExamPrinter"],
+source: "startExam\x0a\x09| aPrinter copies textsStream copy |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: [\x0a\x09\x09copy hide.\x0a\x09\x09ResultView newIn: '#content' withScore: 0 of: 100 percentage: 0.\x0a\x09].\x0a\x09copy render.",
+referencedClasses: ["ExamPrinter", "ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["hide", "designExam", "newOn:", "print:", "do:"]
+messageSends: ["hide", "designExam", "newOn:", "print:", "readStream", "next", "whenContinueDo:", "newIn:withScore:of:percentage:", "render"]
 }),
 $globals.OndafSimulator);
 
