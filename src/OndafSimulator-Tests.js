@@ -1510,6 +1510,96 @@ messageSends: ["start", "dropText:on:", "new", "afterThat:", "click", "asJQuery"
 }),
 $globals.OndafSimulatorTest);
 
+$core.addMethod(
+$core.method({
+selector: "test04",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+var inputs;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$2,$3,$4,$5;
+$recv($globals.OndafSimulator)._start();
+$1=$recv($globals.FileDropper)._new();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["new"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._dropText_on_("Beispiel Text 1\x0a\x09First text. Hello wor{ld}. This is an exam{ple}.",".text-file-target");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["dropText:on:"]=1;
+//>>excludeEnd("ctx");
+$recv($recv($globals.FileDropper)._new())._dropText_on_("Beispiel Text 2\x0a\x09Second text. This is the sec{ond} text.",".text-file-target");
+self._afterThat_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$2=":contains(\x22Start exam\x22)"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+$recv($2)._click();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["click"]=1;
+//>>excludeEnd("ctx");
+self._assertPageContains_("First text");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["assertPageContains:"]=1;
+//>>excludeEnd("ctx");
+self._assertPageDoesNotContain_("Second text");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["assertPageDoesNotContain:"]=1;
+//>>excludeEnd("ctx");
+$3="input[type=\x22checkbox\x22]"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["asJQuery"]=2;
+//>>excludeEnd("ctx");
+$recv($3)._click();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["click"]=2;
+//>>excludeEnd("ctx");
+$4=".continue"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["asJQuery"]=3;
+//>>excludeEnd("ctx");
+$recv($4)._click();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["click"]=3;
+//>>excludeEnd("ctx");
+self._assertPageContains_("Second text");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["assertPageContains:"]=2;
+//>>excludeEnd("ctx");
+self._assertPageDoesNotContain_("Ergebnis");
+$5="input[type=\x22checkbox\x22]"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["asJQuery"]=4;
+//>>excludeEnd("ctx");
+$recv($5)._click();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["click"]=4;
+//>>excludeEnd("ctx");
+$recv(".continue"._asJQuery())._click();
+return self._assertPageContains_("Ergebnis");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test04",{inputs:inputs},$globals.OndafSimulatorTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test04\x0a\x09| inputs |\x0a\x09OndafSimulator start.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text 1\x0a\x09First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.\x0a\x09\x0a\x09FileDropper new dropText: 'Beispiel Text 2\x0a\x09Second text. This is the sec{ond} text.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'First text'.\x0a\x09\x09self assertPageDoesNotContain: 'Second text'.\x0a\x09\x09\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Second text'.\x0a\x09\x09self assertPageDoesNotContain: 'Ergebnis'.\x0a\x09\x09\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Ergebnis'.\x0a\x09]",
+referencedClasses: ["OndafSimulator", "FileDropper"],
+//>>excludeEnd("ide");
+messageSends: ["start", "dropText:on:", "new", "afterThat:", "click", "asJQuery", "assertPageContains:", "assertPageDoesNotContain:"]
+}),
+$globals.OndafSimulatorTest);
+
 
 
 $core.addClass('ResultViewTest', $globals.WidgetTest, [], 'OndafSimulator-Tests');

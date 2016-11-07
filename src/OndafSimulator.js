@@ -1270,10 +1270,11 @@ selector: "startExam",
 protocol: 'action',
 fn: function (){
 var self=this;
-var aPrinter,copies,textsStream,copy,result;
+var aPrinter,copies,textsStream,copy,result,whenContinue;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
+var $1;
 $recv(self["@fileDropTarget"])._hide();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["hide"]=1;
@@ -1282,31 +1283,49 @@ self["@theExam"]=$recv(self["@examDesigner"])._designExam();
 aPrinter=$recv($globals.ExamPrinter)._newOn_("#content");
 copies=$recv(aPrinter)._print_(self["@theExam"]);
 textsStream=$recv(copies)._readStream();
-copy=$recv(textsStream)._next();
-$recv(copy)._whenContinueDo_((function(){
+whenContinue=(function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
 $recv(copy)._hide();
+$1=$recv(textsStream)._atEnd();
+if($core.assert($1)){
 result=$recv(self["@theExam"])._evaluate_($recv(copy)._answers());
 result;
 return $recv($globals.ResultView)._newIn_withScore_of_percentage_("#content",$recv(result)._score(),$recv(result)._maxScore(),$recv(result)._percentage());
+} else {
+copy=$recv(textsStream)._next();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["next"]=1;
+//>>excludeEnd("ctx");
+copy;
+$recv(copy)._whenContinueDo_(whenContinue);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["whenContinueDo:"]=1;
+//>>excludeEnd("ctx");
+return $recv(copy)._render();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["render"]=1;
+//>>excludeEnd("ctx");
+};
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
-}));
+});
+copy=$recv(textsStream)._next();
+$recv(copy)._whenContinueDo_(whenContinue);
 $recv(copy)._render();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies,textsStream:textsStream,copy:copy,result:result},$globals.OndafSimulator)});
+}, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies,textsStream:textsStream,copy:copy,result:result,whenContinue:whenContinue},$globals.OndafSimulator)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter copies textsStream copy result |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: [\x0a\x09\x09copy hide.\x0a\x09\x09result := theExam evaluate: copy answers.\x0a\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage.\x0a\x09].\x0a\x09copy render.",
+source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09result := theExam evaluate: copy answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.",
 referencedClasses: ["ExamPrinter", "ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["hide", "designExam", "newOn:", "print:", "readStream", "next", "whenContinueDo:", "evaluate:", "answers", "newIn:withScore:of:percentage:", "score", "maxScore", "percentage", "render"]
+messageSends: ["hide", "designExam", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "evaluate:", "answers", "newIn:withScore:of:percentage:", "score", "maxScore", "percentage", "next", "whenContinueDo:", "render"]
 }),
 $globals.OndafSimulator);
 

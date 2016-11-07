@@ -427,6 +427,35 @@ test03
 		
 		self assertPageContains: '50'
 	]
+!
+
+test04
+	| inputs |
+	OndafSimulator start.
+
+	FileDropper new dropText: 'Beispiel Text 1
+	First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.
+	
+	FileDropper new dropText: 'Beispiel Text 2
+	Second text. This is the sec{ond} text.' on: '.text-file-target'.
+	
+	self afterThat: [
+		':contains("Start exam")' asJQuery click.
+		
+		self assertPageContains: 'First text'.
+		self assertPageDoesNotContain: 'Second text'.
+		
+		'input[type="checkbox"]' asJQuery click.
+		'.continue' asJQuery click.
+		
+		self assertPageContains: 'Second text'.
+		self assertPageDoesNotContain: 'Ergebnis'.
+		
+		'input[type="checkbox"]' asJQuery click.
+		'.continue' asJQuery click.
+		
+		self assertPageContains: 'Ergebnis'.
+	]
 ! !
 
 !OndafSimulatorTest methodsFor: 'tests'!
