@@ -355,6 +355,17 @@ test11ContinuesWhenContinueClicked
 	'.continue' asJQuery click.
 	
 	self assert: executed.
+!
+
+test12RemovesButtonsWhenContinueClicked
+	| examTextView |
+	examTextView := ExamTextView newIn: 'body' title: 'Text Title' text: 1 of: 2.
+	
+	examTextView render.
+	'input[type="checkbox"]' asJQuery click.
+	'.continue' asJQuery click.
+	
+	self assert: '.actions' asJQuery length equals: 0
 ! !
 
 WidgetTest subclass: #HeaderTest

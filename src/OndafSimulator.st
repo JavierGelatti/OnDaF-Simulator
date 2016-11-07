@@ -49,7 +49,7 @@ newOn: aSelector
 ! !
 
 Widget subclass: #ExamTextView
-	instanceVariableNames: 'title content continueCheckbox continueButton inputs container textNumber numberOfTexts infoSeconds continueAction renderArea'
+	instanceVariableNames: 'title content continueCheckbox continueButton inputs container textNumber numberOfTexts infoSeconds continueAction renderArea actions'
 	package: 'OndafSimulator'!
 
 !ExamTextView methodsFor: 'actions'!
@@ -118,6 +118,7 @@ onContinueCheckboxChanged
 !ExamTextView methodsFor: 'rendering'!
 
 continue
+	actions remove.
 	continueAction value
 !
 
@@ -130,7 +131,7 @@ render
 !
 
 renderActionsOn: html
-	html div
+	actions := html div
 		class: 'actions';
 		with: [
 			html label with: [
@@ -152,7 +153,8 @@ renderActionsOn: html
 					width: 256
 				];
 				asJQuery
-		]
+		];
+		asJQuery
 !
 
 renderContentOn: html

@@ -230,7 +230,7 @@ messageSends: ["selector:", "new", "yourself"]
 $globals.ExamPrinter.klass);
 
 
-$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container', 'textNumber', 'numberOfTexts', 'infoSeconds', 'continueAction', 'renderArea'], 'OndafSimulator');
+$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container', 'textNumber', 'numberOfTexts', 'infoSeconds', 'continueAction', 'renderArea', 'actions'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "addText:",
@@ -361,6 +361,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
+$recv(self["@actions"])._remove();
 $recv(self["@continueAction"])._value();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -369,10 +370,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "continue\x0a\x09continueAction value",
+source: "continue\x0a\x09actions remove.\x0a\x09continueAction value",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["value"]
+messageSends: ["remove", "value"]
 }),
 $globals.ExamTextView);
 
@@ -524,13 +525,13 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$3,$4,$5,$6,$7,$8,$2;
+var $1,$2,$3,$4,$5,$6,$7,$8;
 $1=$recv(html)._div();
 $recv($1)._class_("actions");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["class:"]=1;
 //>>excludeEnd("ctx");
-$2=$recv($1)._with_((function(){
+$recv($1)._with_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -538,9 +539,9 @@ $recv($recv(html)._label())._with_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx3) {
 //>>excludeEnd("ctx");
-$3=$recv(html)._input();
-$recv($3)._type_("checkbox");
-$recv($3)._onChange_((function(){
+$2=$recv(html)._input();
+$recv($2)._type_("checkbox");
+$recv($2)._onChange_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx4) {
 //>>excludeEnd("ctx");
@@ -549,25 +550,25 @@ return self._onContinueCheckboxChanged();
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)});
 //>>excludeEnd("ctx");
 }));
-$4=$recv($3)._asJQuery();
+$3=$recv($2)._asJQuery();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx3.sendIdx["asJQuery"]=1;
 //>>excludeEnd("ctx");
-self["@continueCheckbox"]=$4;
+self["@continueCheckbox"]=$3;
 self["@continueCheckbox"];
-$5=$recv(html)._img();
+$4=$recv(html)._img();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx3.sendIdx["img"]=1;
 //>>excludeEnd("ctx");
-$recv($5)._src_("https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif");
+$recv($4)._src_("https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx3.sendIdx["src:"]=1;
 //>>excludeEnd("ctx");
-$6=$recv($5)._width_((190));
+$5=$recv($4)._width_((190));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx3.sendIdx["width:"]=1;
 //>>excludeEnd("ctx");
-return $6;
+return $5;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)});
 //>>excludeEnd("ctx");
@@ -575,10 +576,10 @@ return $6;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["with:"]=2;
 //>>excludeEnd("ctx");
-$7=$recv(html)._a();
-$recv($7)._href_("#");
-$recv($7)._class_("continue");
-$recv($7)._onClick_((function(){
+$6=$recv(html)._a();
+$recv($6)._href_("#");
+$recv($6)._class_("continue");
+$recv($6)._onClick_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx3) {
 //>>excludeEnd("ctx");
@@ -587,18 +588,22 @@ return self._continue();
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,4)});
 //>>excludeEnd("ctx");
 }));
-$recv($7)._with_((function(){
+$recv($6)._with_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx3) {
 //>>excludeEnd("ctx");
-$8=$recv(html)._img();
-$recv($8)._src_("https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif");
-return $recv($8)._width_((256));
+$7=$recv(html)._img();
+$recv($7)._src_("https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif");
+return $recv($7)._width_((256));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,5)});
 //>>excludeEnd("ctx");
 }));
-self["@continueButton"]=$recv($7)._asJQuery();
+$8=$recv($6)._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["asJQuery"]=2;
+//>>excludeEnd("ctx");
+self["@continueButton"]=$8;
 return self["@continueButton"];
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
@@ -607,6 +612,7 @@ return self["@continueButton"];
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["with:"]=1;
 //>>excludeEnd("ctx");
+self["@actions"]=$recv($1)._asJQuery();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"renderActionsOn:",{html:html},$globals.ExamTextView)});
@@ -614,7 +620,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderActionsOn: html\x0a\x09html div\x0a\x09\x09class: 'actions';\x0a\x09\x09with: [\x0a\x09\x09\x09html label with: [\x0a\x09\x09\x09\x09continueCheckbox := html input\x0a\x09\x09\x09\x09\x09type: 'checkbox';\x0a\x09\x09\x09\x09\x09onChange: [ self onContinueCheckboxChanged ];\x0a\x09\x09\x09\x09\x09asJQuery.\x0a\x09\x09\x09\x09html img\x0a\x09\x09\x09\x09\x09src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif';\x0a\x09\x09\x09\x09\x09width: 190\x0a\x09\x09\x09].\x0a\x09\x09\x09continueButton := html a\x0a\x09\x09\x09\x09href: '#';\x0a\x09\x09\x09\x09class: 'continue';\x0a\x09\x09\x09\x09onClick: [ self continue ];\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html img\x0a\x09\x09\x09\x09\x09src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif';\x0a\x09\x09\x09\x09\x09width: 256\x0a\x09\x09\x09\x09];\x0a\x09\x09\x09\x09asJQuery\x0a\x09\x09]",
+source: "renderActionsOn: html\x0a\x09actions := html div\x0a\x09\x09class: 'actions';\x0a\x09\x09with: [\x0a\x09\x09\x09html label with: [\x0a\x09\x09\x09\x09continueCheckbox := html input\x0a\x09\x09\x09\x09\x09type: 'checkbox';\x0a\x09\x09\x09\x09\x09onChange: [ self onContinueCheckboxChanged ];\x0a\x09\x09\x09\x09\x09asJQuery.\x0a\x09\x09\x09\x09html img\x0a\x09\x09\x09\x09\x09src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/text.gif';\x0a\x09\x09\x09\x09\x09width: 190\x0a\x09\x09\x09].\x0a\x09\x09\x09continueButton := html a\x0a\x09\x09\x09\x09href: '#';\x0a\x09\x09\x09\x09class: 'continue';\x0a\x09\x09\x09\x09onClick: [ self continue ];\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html img\x0a\x09\x09\x09\x09\x09src: 'https://www.ondaf.de/ondaf/durchfuehrung/bilder/weiter.gif';\x0a\x09\x09\x09\x09\x09width: 256\x0a\x09\x09\x09\x09];\x0a\x09\x09\x09\x09asJQuery\x0a\x09\x09];\x0a\x09\x09asJQuery",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["class:", "div", "with:", "label", "type:", "input", "onChange:", "onContinueCheckboxChanged", "asJQuery", "src:", "img", "width:", "href:", "a", "onClick:", "continue"]
