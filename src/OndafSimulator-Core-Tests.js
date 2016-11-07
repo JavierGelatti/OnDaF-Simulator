@@ -258,7 +258,139 @@ $globals.ExamTest);
 
 $core.addMethod(
 $core.method({
-selector: "test03",
+selector: "test01EvaluateACorrectSubmission",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var aSubmission,aResult;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._givenExamWithText_($1);
+aSubmission=["llo", "ld"];
+aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
+self._assert_equals_($recv(aResult)._individualResults(),[true, true]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test01EvaluateACorrectSubmission",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test01EvaluateACorrectSubmission\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('llo' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true true).",
+referencedClasses: ["String"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
+}),
+$globals.ExamTest);
+
+$core.addMethod(
+$core.method({
+selector: "test02EvaluateAnIncorrectSubmission",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var aSubmission,aResult;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._givenExamWithText_($1);
+aSubmission=["wrong", "answer"];
+aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
+self._assert_equals_($recv(aResult)._individualResults(),[false, false]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test02EvaluateAnIncorrectSubmission",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test02EvaluateAnIncorrectSubmission\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'answer').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(false false).",
+referencedClasses: ["String"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
+}),
+$globals.ExamTest);
+
+$core.addMethod(
+$core.method({
+selector: "test03EvaluateAMixedSubmission1",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var aSubmission,aResult;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._givenExamWithText_($1);
+aSubmission=["llo"];
+aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
+self._assert_equals_($recv(aResult)._individualResults(),[true, false]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test03EvaluateAMixedSubmission1",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test03EvaluateAMixedSubmission1\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('llo').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true false).",
+referencedClasses: ["String"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
+}),
+$globals.ExamTest);
+
+$core.addMethod(
+$core.method({
+selector: "test04EvaluateAMixedSubmission2",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var aSubmission,aResult;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._givenExamWithText_($1);
+aSubmission=["wrong", "ld"];
+aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
+self._assert_equals_($recv(aResult)._individualResults(),[false, true]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test04EvaluateAMixedSubmission2",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test04EvaluateAMixedSubmission2\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(false true).",
+referencedClasses: ["String"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
+}),
+$globals.ExamTest);
+
+$core.addMethod(
+$core.method({
+selector: "test05EvaluateTheSubmissionOfMultipleTexts",
 protocol: 'tests',
 fn: function (){
 var self=this;
@@ -289,12 +421,12 @@ aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
 self._assert_equals_($recv(aResult)._individualResults(),[true, true, true]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test03",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
+}, function($ctx1) {$ctx1.fill(self,"test05EvaluateTheSubmissionOfMultipleTexts",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test03\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'he{llo} wor{ld}'\x0a\x09                   and: 'Title B', String lf, 'loca{tion}'.\x0a\x09\x0a\x09aSubmission := #('llo' 'ld' 'tion').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true true true).",
+source: "test05EvaluateTheSubmissionOfMultipleTexts\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'he{llo} wor{ld}'\x0a\x09                   and: 'Title B', String lf, 'loca{tion}'.\x0a\x09\x0a\x09aSubmission := #('llo' 'ld' 'tion').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true true true).",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
 messageSends: ["givenExamWithText:and:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
@@ -303,139 +435,7 @@ $globals.ExamTest);
 
 $core.addMethod(
 $core.method({
-selector: "test04",
-protocol: 'tests',
-fn: function (){
-var self=this;
-var aSubmission,aResult;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-self._givenExamWithText_($1);
-aSubmission=["llo", "ld"];
-aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
-self._assert_equals_($recv(aResult)._individualResults(),[true, true]);
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test04",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "test04\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('llo' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true true).",
-referencedClasses: ["String"],
-//>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
-}),
-$globals.ExamTest);
-
-$core.addMethod(
-$core.method({
-selector: "test05",
-protocol: 'tests',
-fn: function (){
-var self=this;
-var aSubmission,aResult;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-self._givenExamWithText_($1);
-aSubmission=["wrong", "answer"];
-aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
-self._assert_equals_($recv(aResult)._individualResults(),[false, false]);
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test05",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "test05\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'answer').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(false false).",
-referencedClasses: ["String"],
-//>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
-}),
-$globals.ExamTest);
-
-$core.addMethod(
-$core.method({
-selector: "test06",
-protocol: 'tests',
-fn: function (){
-var self=this;
-var aSubmission,aResult;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-self._givenExamWithText_($1);
-aSubmission=["llo"];
-aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
-self._assert_equals_($recv(aResult)._individualResults(),[true, false]);
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test06",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "test06\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('llo').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(true false).",
-referencedClasses: ["String"],
-//>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
-}),
-$globals.ExamTest);
-
-$core.addMethod(
-$core.method({
-selector: "test07",
-protocol: 'tests',
-fn: function (){
-var self=this;
-var aSubmission,aResult;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-self._givenExamWithText_($1);
-aSubmission=["wrong", "ld"];
-aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
-self._assert_equals_($recv(aResult)._individualResults(),[false, true]);
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test07",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "test07\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult individualResults equals: #(false true).",
-referencedClasses: ["String"],
-//>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "individualResults"]
-}),
-$globals.ExamTest);
-
-$core.addMethod(
-$core.method({
-selector: "test08",
+selector: "test06CalculatePercentage",
 protocol: 'tests',
 fn: function (){
 var self=this;
@@ -454,12 +454,12 @@ aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
 self._assert_equals_($recv(aResult)._percentage(),(50));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test08",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
+}, function($ctx1) {$ctx1.fill(self,"test06CalculatePercentage",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test08\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult percentage equals: 50.",
+source: "test06CalculatePercentage\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult percentage equals: 50.",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
 messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "percentage"]
@@ -468,7 +468,40 @@ $globals.ExamTest);
 
 $core.addMethod(
 $core.method({
-selector: "test09",
+selector: "test06RoundPercentageToTwoDecimals",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var aSubmission,aResult;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}. Cor{rect}");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._givenExamWithText_($1);
+aSubmission=["wrong", "ld", "rect"];
+aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
+self._assert_equals_($recv(aResult)._percentage(),(66.67));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test06RoundPercentageToTwoDecimals",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test06RoundPercentageToTwoDecimals\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}. Cor{rect}'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld' 'rect').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult percentage equals: 66.67.",
+referencedClasses: ["String"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "percentage"]
+}),
+$globals.ExamTest);
+
+$core.addMethod(
+$core.method({
+selector: "test07CopyOnPrinter",
 protocol: 'tests',
 fn: function (){
 var self=this;
@@ -487,15 +520,48 @@ $recv(self["@theExam"])._copyOn_(aPrinter);
 self._assert_equals_($recv(aPrinter)._printedText(),"|Title A| And the text said: he_ wor_ . ");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test09",{aPrinter:aPrinter},$globals.ExamTest)});
+}, function($ctx1) {$ctx1.fill(self,"test07CopyOnPrinter",{aPrinter:aPrinter},$globals.ExamTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test09\x0a\x09| aPrinter |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09aPrinter := TestPrinter new.\x0a\x09\x0a\x09theExam copyOn: aPrinter.\x0a\x09\x0a\x09self assert: aPrinter printedText equals: '|Title A| And the text said: he_ wor_ . '.",
+source: "test07CopyOnPrinter\x0a\x09| aPrinter |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09aPrinter := TestPrinter new.\x0a\x09\x0a\x09theExam copyOn: aPrinter.\x0a\x09\x0a\x09self assert: aPrinter printedText equals: '|Title A| And the text said: he_ wor_ . '.",
 referencedClasses: ["String", "TestPrinter"],
 //>>excludeEnd("ide");
 messageSends: ["givenExamWithText:", ",", "lf", "new", "copyOn:", "assert:equals:", "printedText"]
+}),
+$globals.ExamTest);
+
+$core.addMethod(
+$core.method({
+selector: "test08DetermineLevelForSubmission",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var aSubmission,aResult;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}. Cor{rect}");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._givenExamWithText_($1);
+aSubmission=["wrong", "ld", "rect"];
+aResult=$recv(self["@theExam"])._evaluate_(aSubmission);
+self._assert_equals_($recv(aResult)._level(),"B1");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test08DetermineLevelForSubmission",{aSubmission:aSubmission,aResult:aResult},$globals.ExamTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test08DetermineLevelForSubmission\x0a\x09| aSubmission aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}. Cor{rect}'.\x0a\x09\x0a\x09aSubmission := #('wrong' 'ld' 'rect').\x0a\x09aResult := theExam evaluate: aSubmission.\x0a\x09\x0a\x09self assert: aResult level equals: 'B1'.",
+referencedClasses: ["String"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "level"]
 }),
 $globals.ExamTest);
 
@@ -787,6 +853,63 @@ return self;
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
 source: "test8\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String lf , 'The cont{ent}' , String lf, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The cont{ent} More content'",
+referencedClasses: ["CTestInterpreter", "String"],
+//>>excludeEnd("ide");
+messageSends: ["new", ",", "lf", "interpretText:", "assert:equals:", "title", "contentAsString"]
+}),
+$globals.InterpreterText);
+
+$core.addMethod(
+$core.method({
+selector: "test9",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var anInterpreter,aText,stringText;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $5,$4,$6,$3,$2,$1;
+anInterpreter=$recv($globals.CTestInterpreter)._new();
+$5=$recv($globals.String)._lf();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["lf"]=1;
+//>>excludeEnd("ctx");
+$4="The Title".__comma($5);
+$6=$recv($globals.String)._lf();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["lf"]=2;
+//>>excludeEnd("ctx");
+$3=$recv($4).__comma($6);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=4;
+//>>excludeEnd("ctx");
+$2=$recv($3).__comma("The cont{ent}");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=3;
+//>>excludeEnd("ctx");
+$1=$recv($2).__comma($recv($globals.String)._lf());
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=2;
+//>>excludeEnd("ctx");
+stringText=$recv($1).__comma("More content");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+aText=$recv(anInterpreter)._interpretText_(stringText);
+self._assert_equals_($recv(aText)._title(),"The Title");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assert:equals:"]=1;
+//>>excludeEnd("ctx");
+self._assert_equals_($recv(aText)._contentAsString(),"The cont{ent} More content");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test9",{anInterpreter:anInterpreter,aText:aText,stringText:stringText},$globals.InterpreterText)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test9\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String lf, String lf , 'The cont{ent}' , String lf, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The cont{ent} More content'",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
 messageSends: ["new", ",", "lf", "interpretText:", "assert:equals:", "title", "contentAsString"]
@@ -1762,6 +1885,71 @@ referencedClasses: ["String"],
 messageSends: [",", "lf", "readStream", "consumeAllIn:", "assert:equals:", "contents"]
 }),
 $globals.ParserForTitleTest);
+
+
+
+$core.addClass('ResultTableTest', $globals.TestCase, [], 'OndafSimulator-Core-Tests');
+$core.addMethod(
+$core.method({
+selector: "assertPercentage:isLevel:",
+protocol: 'as yet unclassified',
+fn: function (percentage,expectedLevel){
+var self=this;
+var aLevel;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+aLevel=$recv($globals.CTestResultTable)._levelForPercentage_(percentage);
+self._assert_equals_(aLevel,expectedLevel);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"assertPercentage:isLevel:",{percentage:percentage,expectedLevel:expectedLevel,aLevel:aLevel},$globals.ResultTableTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["percentage", "expectedLevel"],
+source: "assertPercentage: percentage isLevel: expectedLevel\x0a\x09| aLevel |\x0a\x09aLevel := CTestResultTable levelForPercentage: percentage.\x0a\x09self assert: aLevel equals: expectedLevel",
+referencedClasses: ["CTestResultTable"],
+//>>excludeEnd("ide");
+messageSends: ["levelForPercentage:", "assert:equals:"]
+}),
+$globals.ResultTableTest);
+
+$core.addMethod(
+$core.method({
+selector: "test01DetermineLevelFromPercentage",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._assertPercentage_isLevel_((60),"A2 (oder unter)");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assertPercentage:isLevel:"]=1;
+//>>excludeEnd("ctx");
+self._assertPercentage_isLevel_((61),"B1");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assertPercentage:isLevel:"]=2;
+//>>excludeEnd("ctx");
+self._assertPercentage_isLevel_((87),"B1");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assertPercentage:isLevel:"]=3;
+//>>excludeEnd("ctx");
+self._assertPercentage_isLevel_((88),"B2 (oder höher)");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test01DetermineLevelFromPercentage",{},$globals.ResultTableTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test01DetermineLevelFromPercentage\x0a\x09self assertPercentage: 60 isLevel: 'A2 (oder unter)'.\x0a\x09self assertPercentage: 61 isLevel: 'B1'.\x0a\x09self assertPercentage: 87 isLevel: 'B1'.\x0a\x09self assertPercentage: 88 isLevel: 'B2 (oder höher)'",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["assertPercentage:isLevel:"]
+}),
+$globals.ResultTableTest);
 
 
 

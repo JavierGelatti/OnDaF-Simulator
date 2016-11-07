@@ -1,4 +1,4 @@
-define("amber-ondafsimulator/PharoCompat", ["amber/boot", "amber_core/Kernel-Collections"], function($boot){"use strict";
+define("amber-ondafsimulator/PharoCompat", ["amber/boot", "amber_core/Kernel-Objects", "amber_core/Kernel-Collections"], function($boot){"use strict";
 var $core=$boot.api,nil=$boot.nil,$recv=$boot.asReceiver,$globals=$boot.globals;
 $core.addPackage('PharoCompat');
 $core.packages["PharoCompat"].innerEval = function (expr) { return eval(expr); };
@@ -157,5 +157,23 @@ referencedClasses: [],
 messageSends: ["at:put:", "new:", "yourself"]
 }),
 $globals.Array.klass);
+
+$core.addMethod(
+$core.method({
+selector: "asFloat",
+protocol: '*PharoCompat',
+fn: function (){
+var self=this;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "asFloat\x0a\x09^ self",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.Number);
 
 });

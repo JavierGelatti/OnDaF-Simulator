@@ -49,3 +49,9 @@ with: anObject with: anObject2 with: anObject3 with: anObject4
 		yourself
 ! !
 
+!Number methodsFor: '*PharoCompat'!
+
+asFloat
+	^ self
+! !
+

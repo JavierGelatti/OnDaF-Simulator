@@ -209,7 +209,7 @@ selector: "interpretTitleFrom:",
 protocol: 'operations',
 fn: function (textStream){
 var self=this;
-var theTitle,titleParser;
+var titleParser;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -217,15 +217,14 @@ var $1;
 titleParser=$recv($globals.CTestParser)._forTitle();
 $1=titleParser;
 $recv($1)._consumeAllIn_(textStream);
-theTitle=$recv($1)._contents();
-return theTitle;
+return $recv($1)._contents();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"interpretTitleFrom:",{textStream:textStream,theTitle:theTitle,titleParser:titleParser},$globals.CTestInterpreter)});
+}, function($ctx1) {$ctx1.fill(self,"interpretTitleFrom:",{textStream:textStream,titleParser:titleParser},$globals.CTestInterpreter)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["textStream"],
-source: "interpretTitleFrom: textStream\x0a\x09| theTitle titleParser |\x0a\x09titleParser := CTestParser forTitle.\x0a\x09theTitle := titleParser\x0a\x09\x09consumeAllIn: textStream;\x0a\x09\x09contents.\x0a\x09^ theTitle",
+source: "interpretTitleFrom: textStream\x0a\x09| titleParser |\x0a\x09titleParser := CTestParser forTitle.\x0a\x09^ titleParser\x0a\x09\x09consumeAllIn: textStream;\x0a\x09\x09contents",
 referencedClasses: ["CTestParser"],
 //>>excludeEnd("ide");
 messageSends: ["forTitle", "consumeAllIn:", "contents"]
@@ -1334,9 +1333,9 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@specialChars"])._add_($recv(aCharacter).__minus_gt($recv($globals.Array)._with_with_(aState,(function(){
+self._when_thenState_action_(aCharacter,aState,(function(){
 
-}))));
+}));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"when:thenState:",{aCharacter:aCharacter,aState:aState},$globals.CTestParserState)});
@@ -1344,10 +1343,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aCharacter", "aState"],
-source: "when: aCharacter thenState: aState\x0a\x09specialChars add: aCharacter -> (Array with: aState with: [  ])",
-referencedClasses: ["Array"],
+source: "when: aCharacter thenState: aState\x0a\x09self when: aCharacter thenState: aState action: []",
+referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["add:", "->", "with:with:"]
+messageSends: ["when:thenState:action:"]
 }),
 $globals.CTestParserState);
 
@@ -1562,33 +1561,62 @@ $globals.CTestResult);
 
 $core.addMethod(
 $core.method({
-selector: "percentage",
+selector: "level",
 protocol: 'as yet unclassified',
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $2,$1;
-$2=$recv($recv(self["@results"])._select_((function(e){
-return e;
-
-})))._size();
+return $recv($globals.CTestResultTable)._levelForPercentage_(self._percentage());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["size"]=1;
-//>>excludeEnd("ctx");
-$1=$recv($2).__star((100));
-return $recv($1).__slash($recv(self["@results"])._size());
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"percentage",{},$globals.CTestResult)});
+}, function($ctx1) {$ctx1.fill(self,"level",{},$globals.CTestResult)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "percentage\x0a\x09^ (results select: [ :e | e ]) size * 100 / results size",
+source: "level\x0a\x09^ CTestResultTable levelForPercentage: self percentage",
+referencedClasses: ["CTestResultTable"],
+//>>excludeEnd("ide");
+messageSends: ["levelForPercentage:", "percentage"]
+}),
+$globals.CTestResult);
+
+$core.addMethod(
+$core.method({
+selector: "percentage",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+var realPercentage,roundedPercentage;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $2,$1;
+$2=$recv($recv(self["@results"])._select_("value"))._size();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["size"]=1;
+//>>excludeEnd("ctx");
+$1=$recv($2).__star((100));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["*"]=1;
+//>>excludeEnd("ctx");
+realPercentage=$recv($1).__slash($recv(self["@results"])._size());
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["/"]=1;
+//>>excludeEnd("ctx");
+roundedPercentage=$recv($recv($recv(realPercentage).__star((100)))._rounded()).__slash((100));
+return $recv(roundedPercentage)._asFloat();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"percentage",{realPercentage:realPercentage,roundedPercentage:roundedPercentage},$globals.CTestResult)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "percentage\x0a\x09| realPercentage roundedPercentage |\x0a\x09realPercentage := (results select: #value) size * 100 / results size.\x0a\x09roundedPercentage := (realPercentage * 100) rounded / 100.\x0a\x09^ roundedPercentage asFloat",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["/", "*", "size", "select:"]
+messageSends: ["/", "*", "size", "select:", "rounded", "asFloat"]
 }),
 $globals.CTestResult);
 
@@ -1618,6 +1646,41 @@ referencedClasses: [],
 messageSends: ["initializeWith:", "new", "yourself"]
 }),
 $globals.CTestResult.klass);
+
+
+$core.addClass('CTestResultTable', $globals.Object, [], 'OndafSimulator-Core');
+
+$core.addMethod(
+$core.method({
+selector: "levelForPercentage:",
+protocol: 'as yet unclassified',
+fn: function (percentage){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$2;
+$1=$recv(percentage).__lt_eq((60));
+if($core.assert($1)){
+return "A2 (oder unter)";
+};
+$2=$recv(percentage).__gt_eq((88));
+if($core.assert($2)){
+return "B2 (oder höher)";
+};
+return "B1";
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"levelForPercentage:",{percentage:percentage},$globals.CTestResultTable.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["percentage"],
+source: "levelForPercentage: percentage\x0a\x09percentage <= 60 ifTrue: [ ^ 'A2 (oder unter)' ].\x0a\x09percentage >= 88 ifTrue: [ ^ 'B2 (oder höher)' ].\x0a\x09^ 'B1'",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["ifTrue:", "<=", ">="]
+}),
+$globals.CTestResultTable.klass);
 
 
 $core.addClass('CTestText', $globals.Object, ['title', 'content'], 'OndafSimulator-Core');
