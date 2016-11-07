@@ -1298,6 +1298,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 self["@currentInstance"]=self._new();
+$recv(self._current())._augmentPage();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"start",{},$globals.OndafSimulator.klass)});
@@ -1305,10 +1306,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "start\x0a\x09currentInstance := self new.\x0a\x09\x22self current augmentPage\x22",
+source: "start\x0a\x09currentInstance := self new.\x0a\x09self current augmentPage",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["new"]
+messageSends: ["new", "augmentPage", "current"]
 }),
 $globals.OndafSimulator.klass);
 

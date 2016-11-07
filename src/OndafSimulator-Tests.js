@@ -1,4 +1,4 @@
-define("amber-ondafsimulator/OndafSimulator-Tests", ["amber/boot", "amber_core/SUnit", "amber_core/Kernel-Objects"], function($boot){"use strict";
+define("amber-ondafsimulator/OndafSimulator-Tests", ["amber/boot", "amber_core/Kernel-Objects", "amber_core/SUnit"], function($boot){"use strict";
 var $core=$boot.api,nil=$boot.nil,$recv=$boot.asReceiver,$globals=$boot.globals;
 $core.addPackage('OndafSimulator-Tests');
 $core.packages["OndafSimulator-Tests"].innerEval = function (expr) { return eval(expr); };
@@ -1374,7 +1374,6 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 $recv($globals.OndafSimulator)._start();
-$recv($recv($globals.OndafSimulator)._current())._augmentPage();
 $recv($recv($globals.FileDropper)._new())._dropText_on_("Beispiel Text\x0a\x09Hello wor{ld}.",".text-file-target");
 self._afterThat_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1392,10 +1391,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test01\x0a\x09OndafSimulator start.\x0a\x09OndafSimulator current augmentPage.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text\x0a\x09Hello wor{ld}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self assertPageContains: 'Beispiel Text'\x0a\x09]",
+source: "test01\x0a\x09OndafSimulator start.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text\x0a\x09Hello wor{ld}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self assertPageContains: 'Beispiel Text'\x0a\x09]",
 referencedClasses: ["OndafSimulator", "FileDropper"],
 //>>excludeEnd("ide");
-messageSends: ["start", "augmentPage", "current", "dropText:on:", "new", "afterThat:", "assertPageContains:"]
+messageSends: ["start", "dropText:on:", "new", "afterThat:", "assertPageContains:"]
 }),
 $globals.OndafSimulatorTest);
 
@@ -1410,7 +1409,6 @@ return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
 $recv($globals.OndafSimulator)._start();
-$recv($recv($globals.OndafSimulator)._current())._augmentPage();
 $recv($recv($globals.FileDropper)._new())._dropText_on_("Beispiel Text\x0a\x09Hello wor{ld}.",".text-file-target");
 self._afterThat_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1438,10 +1436,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test02\x0a\x09OndafSimulator start.\x0a\x09OndafSimulator current augmentPage.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text\x0a\x09Hello wor{ld}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09self assertPageContains: 'Beispiel Text'.\x0a\x09\x09self assertPageContains: 'Hello wor'.\x0a\x09\x09self assert: 'input[type=\x22text\x22]' asJQuery length equals: 1.\x0a\x09]",
+source: "test02\x0a\x09OndafSimulator start.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text\x0a\x09Hello wor{ld}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09self assertPageContains: 'Beispiel Text'.\x0a\x09\x09self assertPageContains: 'Hello wor'.\x0a\x09\x09self assert: 'input[type=\x22text\x22]' asJQuery length equals: 1.\x0a\x09]",
 referencedClasses: ["OndafSimulator", "FileDropper"],
 //>>excludeEnd("ide");
-messageSends: ["start", "augmentPage", "current", "dropText:on:", "new", "afterThat:", "click", "asJQuery", "assertPageContains:", "assert:equals:", "length"]
+messageSends: ["start", "dropText:on:", "new", "afterThat:", "click", "asJQuery", "assertPageContains:", "assert:equals:", "length"]
 }),
 $globals.OndafSimulatorTest);
 
@@ -1456,7 +1454,6 @@ return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1,$2;
 $recv($globals.OndafSimulator)._start();
-$recv($recv($globals.OndafSimulator)._current())._augmentPage();
 $recv($recv($globals.FileDropper)._new())._dropText_on_("Beispiel Text\x0a\x09Hello wor{ld}.",".text-file-target");
 self._afterThat_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1490,10 +1487,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test03\x0a\x09OndafSimulator start.\x0a\x09OndafSimulator current augmentPage.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text\x0a\x09Hello wor{ld}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09]",
+source: "test03\x0a\x09OndafSimulator start.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text\x0a\x09Hello wor{ld}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09]",
 referencedClasses: ["OndafSimulator", "FileDropper"],
 //>>excludeEnd("ide");
-messageSends: ["start", "augmentPage", "current", "dropText:on:", "new", "afterThat:", "click", "asJQuery"]
+messageSends: ["start", "dropText:on:", "new", "afterThat:", "click", "asJQuery"]
 }),
 $globals.OndafSimulatorTest);
 

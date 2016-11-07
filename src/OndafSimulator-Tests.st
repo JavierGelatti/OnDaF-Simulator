@@ -410,7 +410,6 @@ setUp
 
 test03
 	OndafSimulator start.
-	OndafSimulator current augmentPage.
 
 	FileDropper new dropText: 'Beispiel Text
 	Hello wor{ld}.' on: '.text-file-target'.
@@ -426,7 +425,6 @@ test03
 
 test01
 	OndafSimulator start.
-	OndafSimulator current augmentPage.
 
 	FileDropper new dropText: 'Beispiel Text
 	Hello wor{ld}.' on: '.text-file-target'.
@@ -438,7 +436,6 @@ test01
 
 test02
 	OndafSimulator start.
-	OndafSimulator current augmentPage.
 
 	FileDropper new dropText: 'Beispiel Text
 	Hello wor{ld}.' on: '.text-file-target'.

@@ -299,7 +299,7 @@ current
 
 start
 	currentInstance := self new.
-	"self current augmentPage"
+	self current augmentPage
 ! !
 
 Widget subclass: #ResultView
