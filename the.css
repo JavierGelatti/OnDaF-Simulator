@@ -128,6 +128,7 @@ div.result span.score > span {
     display: inline;
     margin-left: 1em;
 }
-div.result span.score > span:first-child {
+div.result span.score > span:first-child,
+div.result span.score > span:last-child {
     font-weight: bold;
 }
