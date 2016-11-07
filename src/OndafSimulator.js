@@ -1359,7 +1359,7 @@ return $recv(each)._answers();
 answers;
 result=$recv(self["@theExam"])._evaluate_(answers);
 result;
-$recv($globals.ResultView)._newIn_withScore_of_percentage_("#content",$recv(result)._score(),$recv(result)._maxScore(),$recv(result)._percentage());
+$recv($globals.ResultView)._newIn_withScore_of_percentage_level_("#content",$recv(result)._score(),$recv(result)._maxScore(),$recv(result)._percentage(),$recv(result)._level());
 resultStream=$recv($recv(result)._individualResults())._readStream();
 resultStream;
 $recv(copies)._do_((function(each){
@@ -1404,10 +1404,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers resultStream |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage.\x0a\x09\x09\x09resultStream := result individualResults readStream.\x0a\x09\x09\x09copies do: [ :each | each consumeResults: resultStream ].\x0a\x09\x09\x09copies do: #show.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.",
+source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers resultStream |\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.\x0a\x09\x09\x09resultStream := result individualResults readStream.\x0a\x09\x09\x09copies do: [ :each | each consumeResults: resultStream ].\x0a\x09\x09\x09copies do: #show.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.",
 referencedClasses: ["ExamPrinter", "ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["hide", "designExam", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:", "score", "maxScore", "percentage", "individualResults", "do:", "consumeResults:", "next", "whenContinueDo:", "render"]
+messageSends: ["hide", "designExam", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:level:", "score", "maxScore", "percentage", "level", "individualResults", "do:", "consumeResults:", "next", "whenContinueDo:", "render"]
 }),
 $globals.OndafSimulator);
 
@@ -1457,7 +1457,26 @@ messageSends: ["new", "augmentPage", "current"]
 $globals.OndafSimulator.klass);
 
 
-$core.addClass('ResultView', $globals.Widget, ['score', 'totalScore', 'percentage'], 'OndafSimulator');
+$core.addClass('ResultView', $globals.Widget, ['score', 'totalScore', 'percentage', 'level'], 'OndafSimulator');
+$core.addMethod(
+$core.method({
+selector: "level:",
+protocol: 'as yet unclassified',
+fn: function (aLevel){
+var self=this;
+self["@level"]=aLevel;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aLevel"],
+source: "level: aLevel\x0a\x09level := aLevel",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.ResultView);
+
 $core.addMethod(
 $core.method({
 selector: "percentage:",
@@ -1486,7 +1505,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$3,$5,$6,$7,$8,$9,$12,$11,$10,$4,$2;
+var $1,$3,$5,$6,$7,$8,$9,$10,$13,$12,$11,$4,$2;
 $1=$recv(html)._div();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["div"]=1;
@@ -1536,9 +1555,17 @@ $8=$recv(html)._span();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx4.sendIdx["span"]=4;
 //>>excludeEnd("ctx");
-return $recv($8)._with_("Punkte");
+$recv($8)._with_("Punkte.");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx4.sendIdx["with:"]=6;
+//>>excludeEnd("ctx");
+$9=$recv(html)._span();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx["span"]=5;
+//>>excludeEnd("ctx");
+return $recv($9)._with_(self["@level"]);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx4.sendIdx["with:"]=7;
 //>>excludeEnd("ctx");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)});
@@ -1548,20 +1575,20 @@ $ctx4.sendIdx["with:"]=6;
 $ctx3.sendIdx["with:"]=4;
 //>>excludeEnd("ctx");
 $recv($6)._class_("score");
-$9=$recv(html)._span();
-$12=$recv("Dies sind ".__comma(self["@percentage"])).__comma(" % der maximal möglichen ");
+$10=$recv(html)._span();
+$13=$recv("Dies sind ".__comma(self["@percentage"])).__comma(" % der maximal möglichen ");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx3.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$11=$recv($12).__comma(self["@totalScore"]);
+$12=$recv($13).__comma(self["@totalScore"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx3.sendIdx[","]=2;
 //>>excludeEnd("ctx");
-$10=$recv($11).__comma(" Punkte.");
+$11=$recv($12).__comma(" Punkte.");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx3.sendIdx[","]=1;
 //>>excludeEnd("ctx");
-return $recv($9)._with_($10);
+return $recv($10)._with_($11);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)});
 //>>excludeEnd("ctx");
@@ -1584,7 +1611,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderOn: html\x0a\x09html div\x0a\x09\x09class: 'text result';\x0a\x09\x09with: [\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'info';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span with: 'Der Test ist beendet. Sie haben folgendes Ergebnis erzielt:'.\x0a\x09\x09\x09\x09\x09html span with: [ html span with: score. html span with: 'Punkte' ]; class: 'score'.\x0a\x09\x09\x09\x09\x09html span with: 'Dies sind ', percentage, ' % der maximal möglichen ', totalScore, ' Punkte.'\x0a\x09\x09\x09\x09]\x0a\x09\x09]",
+source: "renderOn: html\x0a\x09html div\x0a\x09\x09class: 'text result';\x0a\x09\x09with: [\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'info';\x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html span with: 'Der Test ist beendet. Sie haben folgendes Ergebnis erzielt:'.\x0a\x09\x09\x09\x09\x09html span with: [ html span with: score. html span with: 'Punkte.'. html span with: level ]; class: 'score'.\x0a\x09\x09\x09\x09\x09html span with: 'Dies sind ', percentage, ' % der maximal möglichen ', totalScore, ' Punkte.'\x0a\x09\x09\x09\x09]\x0a\x09\x09]",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["class:", "div", "with:", "span", ","]
@@ -1632,9 +1659,9 @@ $globals.ResultView);
 
 $core.addMethod(
 $core.method({
-selector: "newIn:withScore:of:percentage:",
+selector: "newIn:withScore:of:percentage:level:",
 protocol: 'as yet unclassified',
-fn: function (aSelector,actualScore,totalScore,percentage){
+fn: function (aSelector,actualScore,totalScore,percentage,level){
 var self=this;
 var container;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1650,18 +1677,19 @@ $1=self._new();
 $recv($1)._score_(actualScore);
 $recv($1)._totalScore_(totalScore);
 $recv($1)._percentage_(percentage);
+$recv($1)._level_(level);
 $recv($1)._appendToJQuery_(container);
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"newIn:withScore:of:percentage:",{aSelector:aSelector,actualScore:actualScore,totalScore:totalScore,percentage:percentage,container:container},$globals.ResultView.klass)});
+}, function($ctx1) {$ctx1.fill(self,"newIn:withScore:of:percentage:level:",{aSelector:aSelector,actualScore:actualScore,totalScore:totalScore,percentage:percentage,level:level,container:container},$globals.ResultView.klass)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aSelector", "actualScore", "totalScore", "percentage"],
-source: "newIn: aSelector withScore: actualScore of: totalScore percentage: percentage\x0a\x09| container |\x0a\x09container := '<div>' asJQuery.\x0a\x09aSelector asJQuery prepend: container.\x0a\x09\x0a\x09^ self new\x0a\x09\x09score: actualScore;\x0a\x09\x09totalScore: totalScore;\x0a\x09\x09percentage: percentage;\x0a\x09\x09appendToJQuery: container;\x0a\x09\x09yourself",
+args: ["aSelector", "actualScore", "totalScore", "percentage", "level"],
+source: "newIn: aSelector withScore: actualScore of: totalScore percentage: percentage level: level\x0a\x09| container |\x0a\x09container := '<div>' asJQuery.\x0a\x09aSelector asJQuery prepend: container.\x0a\x09\x0a\x09^ self new\x0a\x09\x09score: actualScore;\x0a\x09\x09totalScore: totalScore;\x0a\x09\x09percentage: percentage;\x0a\x09\x09level: level;\x0a\x09\x09appendToJQuery: container;\x0a\x09\x09yourself",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["asJQuery", "prepend:", "score:", "new", "totalScore:", "percentage:", "appendToJQuery:", "yourself"]
+messageSends: ["asJQuery", "prepend:", "score:", "new", "totalScore:", "percentage:", "level:", "appendToJQuery:", "yourself"]
 }),
 $globals.ResultView.klass);
 

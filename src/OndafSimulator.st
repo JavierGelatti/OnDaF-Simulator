@@ -283,7 +283,7 @@ startExam
 		textsStream atEnd ifTrue: [
 			answers := copies flatCollect: [ :each | each answers ].
 			result := theExam evaluate: answers.
-			ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage.
+			ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.
 			resultStream := result individualResults readStream.
 			copies do: [ :each | each consumeResults: resultStream ].
 			copies do: #show.
@@ -337,10 +337,14 @@ start
 ! !
 
 Widget subclass: #ResultView
-	instanceVariableNames: 'score totalScore percentage'
+	instanceVariableNames: 'score totalScore percentage level'
 	package: 'OndafSimulator'!
 
 !ResultView methodsFor: 'as yet unclassified'!
+
+level: aLevel
+	level := aLevel
+!
 
 percentage: aPercentage
 	percentage := aPercentage
@@ -354,7 +358,7 @@ renderOn: html
 				class: 'info';
 				with: [
 					html span with: 'Der Test ist beendet. Sie haben folgendes Ergebnis erzielt:'.
-					html span with: [ html span with: score. html span with: 'Punkte' ]; class: 'score'.
+					html span with: [ html span with: score. html span with: 'Punkte.'. html span with: level ]; class: 'score'.
 					html span with: 'Dies sind ', percentage, ' % der maximal möglichen ', totalScore, ' Punkte.'
 				]
 		]
@@ -370,7 +374,7 @@ totalScore: aScore
 
 !ResultView class methodsFor: 'as yet unclassified'!
 
-newIn: aSelector withScore: actualScore of: totalScore percentage: percentage
+newIn: aSelector withScore: actualScore of: totalScore percentage: percentage level: level
 	| container |
 	container := '<div>' asJQuery.
 	aSelector asJQuery prepend: container.
@@ -379,6 +383,7 @@ newIn: aSelector withScore: actualScore of: totalScore percentage: percentage
 		score: actualScore;
 		totalScore: totalScore;
 		percentage: percentage;
+		level: level;
 		appendToJQuery: container;
 		yourself
 ! !

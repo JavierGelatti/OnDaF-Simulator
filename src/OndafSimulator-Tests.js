@@ -1658,6 +1658,10 @@ self._assertPageContains_("Ergebnis");
 $ctx2.sendIdx["assertPageContains:"]=3;
 //>>excludeEnd("ctx");
 self._assertPageContains_("66.67 %");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["assertPageContains:"]=4;
+//>>excludeEnd("ctx");
+self._assertPageContains_("B1");
 $10=".text:visible:not(.result)"._asJQuery();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["asJQuery"]=8;
@@ -1694,7 +1698,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test04\x0a\x09| inputs |\x0a\x09OndafSimulator start.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text 1\x0a\x09First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.\x0a\x09\x0a\x09FileDropper new dropText: 'Beispiel Text 2\x0a\x09Second text. This is the sec{ond} text.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'First text'.\x0a\x09\x09self assertPageDoesNotContain: 'Second text'.\x0a\x09\x09\x0a\x09\x09inputs := 'input[type=\x22text\x22]' asJQuery.\x0a\x09\x09(inputs at: 0) value: 'ld'.\x0a\x09\x09(inputs at: 1) value: 'wrong'.\x0a\x09\x09\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Second text'.\x0a\x09\x09self assertPageDoesNotContain: 'Ergebnis'.\x0a\x09\x09\x0a\x09\x09inputs := 'input[type=\x22text\x22]' asJQuery.\x0a\x09\x09(inputs at: 2) value: 'ond'.\x0a\x09\x09\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Ergebnis'.\x0a\x09\x09self assertPageContains: '66.67 %'.\x0a\x09\x09\x0a\x09\x09self assert: '.text:visible:not(.result)' asJQuery length equals: 2.\x0a\x09\x09self assert: '.incorrect' asJQuery length equals: 1.\x0a\x09\x09self assert: '.correct' asJQuery length equals: 2.\x0a\x09]",
+source: "test04\x0a\x09| inputs |\x0a\x09OndafSimulator start.\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text 1\x0a\x09First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.\x0a\x09\x0a\x09FileDropper new dropText: 'Beispiel Text 2\x0a\x09Second text. This is the sec{ond} text.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09':contains(\x22Start exam\x22)' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'First text'.\x0a\x09\x09self assertPageDoesNotContain: 'Second text'.\x0a\x09\x09\x0a\x09\x09inputs := 'input[type=\x22text\x22]' asJQuery.\x0a\x09\x09(inputs at: 0) value: 'ld'.\x0a\x09\x09(inputs at: 1) value: 'wrong'.\x0a\x09\x09\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Second text'.\x0a\x09\x09self assertPageDoesNotContain: 'Ergebnis'.\x0a\x09\x09\x0a\x09\x09inputs := 'input[type=\x22text\x22]' asJQuery.\x0a\x09\x09(inputs at: 2) value: 'ond'.\x0a\x09\x09\x0a\x09\x09'input[type=\x22checkbox\x22]' asJQuery click.\x0a\x09\x09'.continue' asJQuery click.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Ergebnis'.\x0a\x09\x09self assertPageContains: '66.67 %'.\x0a\x09\x09self assertPageContains: 'B1'.\x0a\x09\x09\x0a\x09\x09self assert: '.text:visible:not(.result)' asJQuery length equals: 2.\x0a\x09\x09self assert: '.incorrect' asJQuery length equals: 1.\x0a\x09\x09self assert: '.correct' asJQuery length equals: 2.\x0a\x09]",
 referencedClasses: ["OndafSimulator", "FileDropper"],
 //>>excludeEnd("ide");
 messageSends: ["start", "dropText:on:", "new", "afterThat:", "click", "asJQuery", "assertPageContains:", "assertPageDoesNotContain:", "value:", "at:", "assert:equals:", "length"]
@@ -1713,14 +1717,18 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv($globals.ResultView)._newIn_withScore_of_percentage_("body",(123),(456),(78.99));
-self._assertPageContains_("123");
+$recv($globals.ResultView)._newIn_withScore_of_percentage_level_("body",(123),(456),(78.99),"B1");
+self._assertPageContains_("B1");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["assertPageContains:"]=1;
 //>>excludeEnd("ctx");
-self._assertPageContains_("78.99 %");
+self._assertPageContains_("123");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["assertPageContains:"]=2;
+//>>excludeEnd("ctx");
+self._assertPageContains_("78.99 %");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assertPageContains:"]=3;
 //>>excludeEnd("ctx");
 self._assertPageContains_("456 Punkte");
 return self;
@@ -1730,10 +1738,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test01\x0a\x09ResultView newIn: 'body' withScore: 123 of: 456 percentage: 78.99.\x0a\x09\x09\x0a\x09self assertPageContains: '123'.\x0a\x09self assertPageContains: '78.99 %'.\x0a\x09self assertPageContains: '456 Punkte'",
+source: "test01\x0a\x09ResultView newIn: 'body' withScore: 123 of: 456 percentage: 78.99 level: 'B1'.\x0a\x09\x0a\x09self assertPageContains: 'B1'.\x0a\x09self assertPageContains: '123'.\x0a\x09self assertPageContains: '78.99 %'.\x0a\x09self assertPageContains: '456 Punkte'",
 referencedClasses: ["ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["newIn:withScore:of:percentage:", "assertPageContains:"]
+messageSends: ["newIn:withScore:of:percentage:level:", "assertPageContains:"]
 }),
 $globals.ResultViewTest);
 

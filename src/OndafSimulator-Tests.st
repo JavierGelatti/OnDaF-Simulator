@@ -474,6 +474,7 @@ test04
 		
 		self assertPageContains: 'Ergebnis'.
 		self assertPageContains: '66.67 %'.
+		self assertPageContains: 'B1'.
 		
 		self assert: '.text:visible:not(.result)' asJQuery length equals: 2.
 		self assert: '.incorrect' asJQuery length equals: 1.
@@ -515,8 +516,9 @@ WidgetTest subclass: #ResultViewTest
 !ResultViewTest methodsFor: 'as yet unclassified'!
 
 test01
-	ResultView newIn: 'body' withScore: 123 of: 456 percentage: 78.99.
-		
+	ResultView newIn: 'body' withScore: 123 of: 456 percentage: 78.99 level: 'B1'.
+	
+	self assertPageContains: 'B1'.
 	self assertPageContains: '123'.
 	self assertPageContains: '78.99 %'.
 	self assertPageContains: '456 Punkte'
