@@ -382,20 +382,6 @@ newIn: aSelector
 	^ self new
 		container: container;
 		yourself
-!
-
-newIn: aSelector withScore: actualScore of: totalScore percentage: percentage level: level
-	| container |
-	container := '<div>' asJQuery.
-	aSelector asJQuery prepend: container.
-	
-	^ self new
-		score: actualScore;
-		totalScore: totalScore;
-		percentage: percentage;
-		level: level;
-		appendToJQuery: container;
-		yourself
 ! !
 
 Widget subclass: #TextCard

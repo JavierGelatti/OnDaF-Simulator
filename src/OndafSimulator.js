@@ -2,7 +2,7 @@ define("amber-ondafsimulator/OndafSimulator", ["amber/boot"
 //>>excludeStart("imports", pragmas.excludeImports);
 , "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"
 //>>excludeEnd("imports");
-, "amber_core/Kernel-Objects", "amber/web/Web", "amber_core/Kernel-Collections", "amber_core/Kernel-Methods"], function($boot
+, "amber_core/Kernel-Objects", "amber/web/Web", "amber_core/Kernel-Methods", "amber_core/Kernel-Collections"], function($boot
 //>>excludeStart("imports", pragmas.excludeImports);
 
 //>>excludeEnd("imports");
@@ -1658,42 +1658,6 @@ source: "newIn: aSelector\x0a\x09| container |\x0a\x09container := '<div>' asJQu
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["asJQuery", "prepend:", "container:", "new", "yourself"]
-}),
-$globals.ResultView.klass);
-
-$core.addMethod(
-$core.method({
-selector: "newIn:withScore:of:percentage:level:",
-protocol: 'as yet unclassified',
-fn: function (aSelector,actualScore,totalScore,percentage,level){
-var self=this;
-var container;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-container="<div>"._asJQuery();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["asJQuery"]=1;
-//>>excludeEnd("ctx");
-$recv($recv(aSelector)._asJQuery())._prepend_(container);
-$1=self._new();
-$recv($1)._score_(actualScore);
-$recv($1)._totalScore_(totalScore);
-$recv($1)._percentage_(percentage);
-$recv($1)._level_(level);
-$recv($1)._appendToJQuery_(container);
-return $recv($1)._yourself();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"newIn:withScore:of:percentage:level:",{aSelector:aSelector,actualScore:actualScore,totalScore:totalScore,percentage:percentage,level:level,container:container},$globals.ResultView.klass)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aSelector", "actualScore", "totalScore", "percentage", "level"],
-source: "newIn: aSelector withScore: actualScore of: totalScore percentage: percentage level: level\x0a\x09| container |\x0a\x09container := '<div>' asJQuery.\x0a\x09aSelector asJQuery prepend: container.\x0a\x09\x0a\x09^ self new\x0a\x09\x09score: actualScore;\x0a\x09\x09totalScore: totalScore;\x0a\x09\x09percentage: percentage;\x0a\x09\x09level: level;\x0a\x09\x09appendToJQuery: container;\x0a\x09\x09yourself",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["asJQuery", "prepend:", "score:", "new", "totalScore:", "percentage:", "level:", "appendToJQuery:", "yourself"]
 }),
 $globals.ResultView.klass);
 

@@ -66,40 +66,6 @@ setUp
 	'body' asJQuery empty
 ! !
 
-GUITest subclass: #ExamPrinterTest
-	instanceVariableNames: ''
-	package: 'OndafSimulator-Tests'!
-
-!ExamPrinterTest methodsFor: 'tests'!
-
-test01PrintsATextCorrectly
-	| printer |
-	printer := ExamPrinter newOn: 'body'.
-	printer printTitle: 'A title' time: 0.
-	printer printText: 'Example text. '.
-	printer printWordToComplete: 'Hel'.
-
-	printer copies do: #render.
-	
-	self assertPageContains: 'A title'.
-	self assertPageContains: 'Example text.'.
-	self assertPageContains: 'Hel'.
-	self assertNumberOf: 'input[type="text"]' equals: 1
-!
-
-test02IfThereAre2TitlesItRenders2Texts
-	| printer |
-	printer := ExamPrinter newOn: 'body'.
-	printer printTitle: 'A title 1' time: 0.
-	printer printTitle: 'A title 2' time: 0.
-
-	printer copies do: #render.
-	
-	self assert: printer copies size equals: 2.
-	self assertPageContains: 'A title 1'.
-	self assertPageContains: 'A title 2'
-! !
-
 GUITest subclass: #ExamTextViewTest
 	instanceVariableNames: ''
 	package: 'OndafSimulator-Tests'!
@@ -431,7 +397,7 @@ GUITest subclass: #ResultViewTest
 !ResultViewTest methodsFor: 'tests'!
 
 test01ShowResultInfo
-	ResultView newIn: 'body' withScore: 123 of: 456 percentage: 78.99 level: 'B1'.
+	(ResultView newIn: 'body') renderScore: 123 of: 456 percentage: 78.99 level: 'B1'.
 	
 	self assertPageContains: 'B1'.
 	self assertPageContains: '123'.
@@ -653,9 +619,8 @@ header
 
 resultView
 	'body' asJQuery empty.
-		
-	ResultView
-		newIn: 'body'.
+	
+	(ResultView newIn: 'body') renderScore: 123 of: 456 percentage: 78.99 level: 'B1'.
 !
 
 textCard

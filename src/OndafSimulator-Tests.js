@@ -331,90 +331,6 @@ $globals.GUITest);
 
 
 
-$core.addClass('ExamPrinterTest', $globals.GUITest, [], 'OndafSimulator-Tests');
-$core.addMethod(
-$core.method({
-selector: "test01PrintsATextCorrectly",
-protocol: 'tests',
-fn: function (){
-var self=this;
-var printer;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-printer=$recv($globals.ExamPrinter)._newOn_("body");
-$recv(printer)._printTitle_time_("A title",(0));
-$recv(printer)._printText_("Example text. ");
-$recv(printer)._printWordToComplete_("Hel");
-$recv($recv(printer)._copies())._do_("render");
-self._assertPageContains_("A title");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["assertPageContains:"]=1;
-//>>excludeEnd("ctx");
-self._assertPageContains_("Example text.");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["assertPageContains:"]=2;
-//>>excludeEnd("ctx");
-self._assertPageContains_("Hel");
-self._assertNumberOf_equals_("input[type=\x22text\x22]",(1));
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test01PrintsATextCorrectly",{printer:printer},$globals.ExamPrinterTest)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "test01PrintsATextCorrectly\x0a\x09| printer |\x0a\x09printer := ExamPrinter newOn: 'body'.\x0a\x09printer printTitle: 'A title' time: 0.\x0a\x09printer printText: 'Example text. '.\x0a\x09printer printWordToComplete: 'Hel'.\x0a\x0a\x09printer copies do: #render.\x0a\x09\x0a\x09self assertPageContains: 'A title'.\x0a\x09self assertPageContains: 'Example text.'.\x0a\x09self assertPageContains: 'Hel'.\x0a\x09self assertNumberOf: 'input[type=\x22text\x22]' equals: 1",
-referencedClasses: ["ExamPrinter"],
-//>>excludeEnd("ide");
-messageSends: ["newOn:", "printTitle:time:", "printText:", "printWordToComplete:", "do:", "copies", "assertPageContains:", "assertNumberOf:equals:"]
-}),
-$globals.ExamPrinterTest);
-
-$core.addMethod(
-$core.method({
-selector: "test02IfThereAre2TitlesItRenders2Texts",
-protocol: 'tests',
-fn: function (){
-var self=this;
-var printer;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-printer=$recv($globals.ExamPrinter)._newOn_("body");
-$recv(printer)._printTitle_time_("A title 1",(0));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["printTitle:time:"]=1;
-//>>excludeEnd("ctx");
-$recv(printer)._printTitle_time_("A title 2",(0));
-$1=$recv(printer)._copies();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["copies"]=1;
-//>>excludeEnd("ctx");
-$recv($1)._do_("render");
-self._assert_equals_($recv($recv(printer)._copies())._size(),(2));
-self._assertPageContains_("A title 1");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["assertPageContains:"]=1;
-//>>excludeEnd("ctx");
-self._assertPageContains_("A title 2");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test02IfThereAre2TitlesItRenders2Texts",{printer:printer},$globals.ExamPrinterTest)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "test02IfThereAre2TitlesItRenders2Texts\x0a\x09| printer |\x0a\x09printer := ExamPrinter newOn: 'body'.\x0a\x09printer printTitle: 'A title 1' time: 0.\x0a\x09printer printTitle: 'A title 2' time: 0.\x0a\x0a\x09printer copies do: #render.\x0a\x09\x0a\x09self assert: printer copies size equals: 2.\x0a\x09self assertPageContains: 'A title 1'.\x0a\x09self assertPageContains: 'A title 2'",
-referencedClasses: ["ExamPrinter"],
-//>>excludeEnd("ide");
-messageSends: ["newOn:", "printTitle:time:", "do:", "copies", "assert:equals:", "size", "assertPageContains:"]
-}),
-$globals.ExamPrinterTest);
-
-
-
 $core.addClass('ExamTextViewTest', $globals.GUITest, [], 'OndafSimulator-Tests');
 $core.addMethod(
 $core.method({
@@ -1318,7 +1234,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv($globals.ResultView)._newIn_withScore_of_percentage_level_("body",(123),(456),(78.99),"B1");
+$recv($recv($globals.ResultView)._newIn_("body"))._renderScore_of_percentage_level_((123),(456),(78.99),"B1");
 self._assertPageContains_("B1");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["assertPageContains:"]=1;
@@ -1339,10 +1255,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test01ShowResultInfo\x0a\x09ResultView newIn: 'body' withScore: 123 of: 456 percentage: 78.99 level: 'B1'.\x0a\x09\x0a\x09self assertPageContains: 'B1'.\x0a\x09self assertPageContains: '123'.\x0a\x09self assertPageContains: '78.99 %'.\x0a\x09self assertPageContains: '456 Punkte'",
+source: "test01ShowResultInfo\x0a\x09(ResultView newIn: 'body') renderScore: 123 of: 456 percentage: 78.99 level: 'B1'.\x0a\x09\x0a\x09self assertPageContains: 'B1'.\x0a\x09self assertPageContains: '123'.\x0a\x09self assertPageContains: '78.99 %'.\x0a\x09self assertPageContains: '456 Punkte'",
 referencedClasses: ["ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["newIn:withScore:of:percentage:level:", "assertPageContains:"]
+messageSends: ["renderScore:of:percentage:level:", "newIn:", "assertPageContains:"]
 }),
 $globals.ResultViewTest);
 
@@ -2133,7 +2049,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 $recv("body"._asJQuery())._empty();
-$recv($globals.ResultView)._newIn_("body");
+$recv($recv($globals.ResultView)._newIn_("body"))._renderScore_of_percentage_level_((123),(456),(78.99),"B1");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"resultView",{},$globals.WidgetPreviews)});
@@ -2141,10 +2057,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "resultView\x0a\x09'body' asJQuery empty.\x0a\x09\x09\x0a\x09ResultView\x0a\x09\x09newIn: 'body'.",
+source: "resultView\x0a\x09'body' asJQuery empty.\x0a\x09\x0a\x09(ResultView newIn: 'body') renderScore: 123 of: 456 percentage: 78.99 level: 'B1'.",
 referencedClasses: ["ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["empty", "asJQuery", "newIn:"]
+messageSends: ["empty", "asJQuery", "renderScore:of:percentage:level:", "newIn:"]
 }),
 $globals.WidgetPreviews);
 
