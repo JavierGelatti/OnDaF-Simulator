@@ -2,7 +2,7 @@ define("amber-ondafsimulator/OndafSimulator", ["amber/boot"
 //>>excludeStart("imports", pragmas.excludeImports);
 , "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"
 //>>excludeEnd("imports");
-, "amber/web/Web", "amber_core/Kernel-Objects", "amber_core/Kernel-Methods", "amber_core/Kernel-Collections"], function($boot
+, "amber_core/Kernel-Objects", "amber/web/Web", "amber_core/Kernel-Collections", "amber_core/Kernel-Methods"], function($boot
 //>>excludeStart("imports", pragmas.excludeImports);
 
 //>>excludeEnd("imports");
@@ -23,17 +23,17 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv($globals.ExamTextView)._newIn_title_text_of_(self["@selector"],aString,textNumber,totalTexts);
+return $recv($globals.CTestTextCopy)._newWithView_($recv($globals.ExamTextView)._newIn_title_text_of_(self["@selector"],aString,textNumber,totalTexts));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"newCopy:of:titled:withTime:",{textNumber:textNumber,totalTexts:totalTexts,aString:aString,aTimeInSeconds:aTimeInSeconds},$globals.ExamPrinterTray)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["textNumber", "totalTexts", "aString", "aTimeInSeconds"],
-source: "newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds \x0a\x09^ ExamTextView newIn: selector title: aString text: textNumber of: totalTexts",
-referencedClasses: ["ExamTextView"],
+source: "newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds \x0a\x09^ CTestTextCopy newWithView: (ExamTextView newIn: selector title: aString text: textNumber of: totalTexts)",
+referencedClasses: ["CTestTextCopy", "ExamTextView"],
 //>>excludeEnd("ide");
-messageSends: ["newIn:title:text:of:"]
+messageSends: ["newWithView:", "newIn:title:text:of:"]
 }),
 $globals.ExamPrinterTray);
 
@@ -1260,12 +1260,9 @@ var aPrinter,copies,textsStream,copy,result,whenContinue,answers,resultStream,ti
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$2;
+var $1;
 $recv(self["@header"])._remove();
 $recv(self["@fileDropTarget"])._hide();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["hide"]=1;
-//>>excludeEnd("ctx");
 self["@theExam"]=$recv(self["@examDesigner"])._designExam();
 aPrinter=$recv($globals.CTestPrinter)._newWithTray_($recv($globals.ExamPrinterTray)._newOn_("#content"));
 copies=$recv(aPrinter)._print_(self["@theExam"]);
@@ -1277,13 +1274,8 @@ whenContinue=(function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$recv(copy)._hide();
 $1=$recv(textsStream)._atEnd();
 if($core.assert($1)){
-$recv(timerInst)._stop();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["stop"]=1;
-//>>excludeEnd("ctx");
 answers=$recv(copies)._flatCollect_((function(each){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx3) {
@@ -1311,20 +1303,20 @@ return $recv(each)._consumeResults_(resultStream);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["do:"]=1;
 //>>excludeEnd("ctx");
-return $recv(copies)._do_("show");
+return $recv(copies)._do_("giveBackToStudent");
 } else {
 copy=$recv(textsStream)._next();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["next"]=1;
 //>>excludeEnd("ctx");
 copy;
-$recv(copy)._whenContinueDo_(whenContinue);
+$recv(copy)._whenFinishDo_(whenContinue);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["whenContinueDo:"]=1;
+$ctx2.sendIdx["whenFinishDo:"]=1;
 //>>excludeEnd("ctx");
-return $recv(copy)._render();
+return $recv(copy)._giveToStudent();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["render"]=1;
+$ctx2.sendIdx["giveToStudent"]=1;
 //>>excludeEnd("ctx");
 };
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1332,27 +1324,8 @@ $ctx2.sendIdx["render"]=1;
 //>>excludeEnd("ctx");
 });
 copy=$recv(textsStream)._next();
-$recv(copy)._whenContinueDo_(whenContinue);
-$recv(copy)._render();
-time=(0);
-timerInst=$recv(self["@timer"])._each_do_((1000),(function(){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-time=$recv(time).__plus((1));
-time;
-$2=$recv(time).__gt_eq((30));
-if($core.assert($2)){
-$recv(timerInst)._stop();
-return $recv(whenContinue)._value();
-} else {
-return $recv(copy)._showSeconds_(time);
-};
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,6)});
-//>>excludeEnd("ctx");
-}));
-$recv(timerInst)._start();
+$recv(copy)._whenFinishDo_(whenContinue);
+$recv(copy)._giveToStudent();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies,textsStream:textsStream,copy:copy,result:result,whenContinue:whenContinue,answers:answers,resultStream:resultStream,timerInst:timerInst,time:time},$globals.OndafSimulator)});
@@ -1360,10 +1333,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers resultStream timerInst time |\x0a\x09header remove.\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := CTestPrinter newWithTray: (ExamPrinterTray newOn: '#content').\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09timerInst stop.\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.\x0a\x09\x09\x09resultStream := result individualResults readStream.\x0a\x09\x09\x09copies do: [ :each | each consumeResults: resultStream ].\x0a\x09\x09\x09copies do: #show.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.\x0a\x09\x0a\x09time := 0.\x0a\x09timerInst := timer each: 1000 do: [ time := time + 1. time >= 30 ifTrue: [timerInst stop. whenContinue value] ifFalse: [copy showSeconds: time] ].\x0a\x09timerInst start.\x0a\x09\x0a\x09",
+source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers resultStream timerInst time |\x0a\x09header remove.\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := CTestPrinter newWithTray: (ExamPrinterTray newOn: '#content').\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09\x22copy hide.\x22\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09\x22timerInst stop.\x22\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.\x0a\x09\x09\x09resultStream := result individualResults readStream.\x0a\x09\x09\x09copies do: [ :each | each consumeResults: resultStream ].\x0a\x09\x09\x09copies do: #giveBackToStudent.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenFinishDo: whenContinue.\x0a\x09\x09\x09copy giveToStudent.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenFinishDo: whenContinue.\x0a\x09copy giveToStudent.\x0a\x09\x0a\x09\x22time := 0.\x0a\x09timerInst := timer each: 1000 do: [ time := time + 1. time >= 30 ifTrue: [timerInst stop. whenContinue value] ifFalse: [copy showSeconds: time] ].\x0a\x09timerInst start.\x22\x0a\x09\x0a\x09",
 referencedClasses: ["CTestPrinter", "ExamPrinterTray", "ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["remove", "hide", "designExam", "newWithTray:", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "stop", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:level:", "score", "maxScore", "percentage", "level", "individualResults", "do:", "consumeResults:", "next", "whenContinueDo:", "render", "each:do:", "+", ">=", "value", "showSeconds:", "start"]
+messageSends: ["remove", "hide", "designExam", "newWithTray:", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:level:", "score", "maxScore", "percentage", "level", "individualResults", "do:", "consumeResults:", "next", "whenFinishDo:", "giveToStudent"]
 }),
 $globals.OndafSimulator);
 

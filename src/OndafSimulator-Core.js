@@ -2185,6 +2185,333 @@ messageSends: ["initializeTitle:content:", "new", "yourself"]
 $globals.CTestText.klass);
 
 
+$core.addClass('CTestTextCopy', $globals.Object, ['time', 'title', 'view', 'onFinish', 'wordsToComplete'], 'OndafSimulator-Core');
+$core.addMethod(
+$core.method({
+selector: "addText:",
+protocol: 'as yet unclassified',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@view"])._addText_(aString);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"addText:",{aString:aString},$globals.CTestTextCopy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "addText: aString\x0a\x09view addText: aString",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["addText:"]
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
+selector: "addWordToComplete:",
+protocol: 'as yet unclassified',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self["@wordsToComplete"]=$recv(self["@wordsToComplete"]).__plus((1));
+$recv(self["@view"])._addWordToComplete_(aString);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"addWordToComplete:",{aString:aString},$globals.CTestTextCopy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "addWordToComplete: aString\x0a\x09wordsToComplete := wordsToComplete + 1.\x0a\x09view addWordToComplete: aString",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["+", "addWordToComplete:"]
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
+selector: "answers",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+return $recv(self["@view"])._answers();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"answers",{},$globals.CTestTextCopy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "answers\x0a\x09^ view answers",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["answers"]
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
+selector: "consumeResults:",
+protocol: 'as yet unclassified',
+fn: function (aStreamOfResults){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@view"])._showResults_($recv(aStreamOfResults)._next_(self["@wordsToComplete"]));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"consumeResults:",{aStreamOfResults:aStreamOfResults},$globals.CTestTextCopy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aStreamOfResults"],
+source: "consumeResults: aStreamOfResults \x0a\x09view showResults: (aStreamOfResults next: wordsToComplete)",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["showResults:", "next:"]
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
+selector: "finish",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@view"])._hide();
+$recv(self["@onFinish"])._value();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"finish",{},$globals.CTestTextCopy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "finish\x0a\x09view hide.\x0a\x09onFinish value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["hide", "value"]
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
+selector: "giveBackToStudent",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@view"])._show();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"giveBackToStudent",{},$globals.CTestTextCopy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "giveBackToStudent\x0a\x09view show",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["show"]
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
+selector: "giveToStudent",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@view"])._whenContinueDo_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return self._finish();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$recv(self["@view"])._render();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"giveToStudent",{},$globals.CTestTextCopy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "giveToStudent\x0a\x09view whenContinueDo: [ self finish ].\x0a\x09view render",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["whenContinueDo:", "finish", "render"]
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
+selector: "initialize",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true,
+//>>excludeEnd("ctx");
+($globals.CTestTextCopy.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+self["@wordsToComplete"]=(0);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.CTestTextCopy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "initialize\x0a\x09super initialize.\x0a\x09wordsToComplete := 0",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["initialize"]
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
+selector: "initializeWithView:",
+protocol: 'as yet unclassified',
+fn: function (aView){
+var self=this;
+self["@view"]=aView;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aView"],
+source: "initializeWithView: aView\x0a\x09view := aView",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
+selector: "time:",
+protocol: 'as yet unclassified',
+fn: function (aTimeInSeconds){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self["@time"]=aTimeInSeconds;
+$recv(self["@view"])._time_(self["@time"]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"time:",{aTimeInSeconds:aTimeInSeconds},$globals.CTestTextCopy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aTimeInSeconds"],
+source: "time: aTimeInSeconds \x0a\x09time := aTimeInSeconds.\x0a\x09view time: time",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["time:"]
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
+selector: "title:",
+protocol: 'as yet unclassified',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self["@title"]=aString;
+$recv(self["@view"])._title_(self["@title"]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"title:",{aString:aString},$globals.CTestTextCopy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "title: aString \x0a\x09title := aString.\x0a\x09view title: title",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["title:"]
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
+selector: "whenFinishDo:",
+protocol: 'as yet unclassified',
+fn: function (aBlock){
+var self=this;
+self["@onFinish"]=aBlock;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aBlock"],
+source: "whenFinishDo: aBlock\x0a\x09onFinish := aBlock",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.CTestTextCopy);
+
+
+$core.addMethod(
+$core.method({
+selector: "newWithView:",
+protocol: 'as yet unclassified',
+fn: function (aView){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._new();
+$recv($1)._initializeWithView_(aView);
+return $recv($1)._yourself();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"newWithView:",{aView:aView},$globals.CTestTextCopy.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aView"],
+source: "newWithView: aView\x0a\x09^ self new\x0a\x09\x09initializeWithView: aView;\x0a\x09\x09yourself",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["initializeWithView:", "new", "yourself"]
+}),
+$globals.CTestTextCopy.klass);
+
+
 $core.addClass('CompletedText', $globals.Object, ['text'], 'OndafSimulator-Core');
 $core.addMethod(
 $core.method({

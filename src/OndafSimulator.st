@@ -7,7 +7,7 @@ Object subclass: #ExamPrinterTray
 !ExamPrinterTray methodsFor: 'as yet unclassified'!
 
 newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds 
-	^ ExamTextView newIn: selector title: aString text: textNumber of: totalTexts
+	^ CTestTextCopy newWithView: (ExamTextView newIn: selector title: aString text: textNumber of: totalTexts)
 !
 
 selector: aSelector
@@ -267,28 +267,28 @@ startExam
 	
 	textsStream := copies readStream.
 	whenContinue := [
-		copy hide.
+		"copy hide."
 		textsStream atEnd ifTrue: [
-			timerInst stop.
+			"timerInst stop."
 			answers := copies flatCollect: [ :each | each answers ].
 			result := theExam evaluate: answers.
 			ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.
 			resultStream := result individualResults readStream.
 			copies do: [ :each | each consumeResults: resultStream ].
-			copies do: #show.
+			copies do: #giveBackToStudent.
 		] ifFalse: [
 			copy := textsStream next.
-			copy whenContinueDo: whenContinue.
-			copy render.
+			copy whenFinishDo: whenContinue.
+			copy giveToStudent.
 		]	
 	].
 	copy := textsStream next.
-	copy whenContinueDo: whenContinue.
-	copy render.
+	copy whenFinishDo: whenContinue.
+	copy giveToStudent.
 	
-	time := 0.
+	"time := 0.
 	timerInst := timer each: 1000 do: [ time := time + 1. time >= 30 ifTrue: [timerInst stop. whenContinue value] ifFalse: [copy showSeconds: time] ].
-	timerInst start.
+	timerInst start."
 !
 
 timer: aTimer

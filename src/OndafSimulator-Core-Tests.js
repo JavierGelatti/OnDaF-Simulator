@@ -2279,7 +2279,7 @@ var self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv($globals.TextViewSpy)._new();
+$1=$recv($globals.TextCopySpy)._new();
 $recv($1)._time_(aTimeInSeconds);
 $recv($1)._title_(aString);
 return $recv($1)._yourself();
@@ -2289,8 +2289,8 @@ return $recv($1)._yourself();
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["textNumber", "totalTexts", "aString", "aTimeInSeconds"],
-source: "newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds \x0a\x09^ TextViewSpy new\x0a\x09\x09time: aTimeInSeconds;\x0a\x09\x09title: aString;\x0a\x09\x09yourself",
-referencedClasses: ["TextViewSpy"],
+source: "newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds \x0a\x09^ TextCopySpy new\x0a\x09\x09time: aTimeInSeconds;\x0a\x09\x09title: aString;\x0a\x09\x09yourself",
+referencedClasses: ["TextCopySpy"],
 //>>excludeEnd("ide");
 messageSends: ["time:", "new", "title:", "yourself"]
 }),
@@ -2298,7 +2298,7 @@ $globals.TestTray);
 
 
 
-$core.addClass('TextViewSpy', $globals.Object, ['printedText', 'time'], 'OndafSimulator-Core-Tests');
+$core.addClass('TextCopySpy', $globals.Object, ['printedText', 'time'], 'OndafSimulator-Core-Tests');
 $core.addMethod(
 $core.method({
 selector: "addText:",
@@ -2314,7 +2314,7 @@ $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"addText:",{aString:aString},$globals.TextViewSpy)});
+}, function($ctx1) {$ctx1.fill(self,"addText:",{aString:aString},$globals.TextCopySpy)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2324,7 +2324,7 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: [","]
 }),
-$globals.TextViewSpy);
+$globals.TextCopySpy);
 
 $core.addMethod(
 $core.method({
@@ -2338,7 +2338,7 @@ return $core.withContext(function($ctx1) {
 self._addText_($recv(aString).__comma("_"));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"addWordToComplete:",{aString:aString},$globals.TextViewSpy)});
+}, function($ctx1) {$ctx1.fill(self,"addWordToComplete:",{aString:aString},$globals.TextCopySpy)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2348,7 +2348,7 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["addText:", ","]
 }),
-$globals.TextViewSpy);
+$globals.TextCopySpy);
 
 $core.addMethod(
 $core.method({
@@ -2363,14 +2363,14 @@ return $core.withContext(function($ctx1) {
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true,
 //>>excludeEnd("ctx");
-($globals.TextViewSpy.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
+($globals.TextCopySpy.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
 self["@printedText"]="";
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.TextViewSpy)});
+}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.TextCopySpy)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2380,7 +2380,7 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initialize"]
 }),
-$globals.TextViewSpy);
+$globals.TextCopySpy);
 
 $core.addMethod(
 $core.method({
@@ -2398,7 +2398,7 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
 }),
-$globals.TextViewSpy);
+$globals.TextCopySpy);
 
 $core.addMethod(
 $core.method({
@@ -2417,7 +2417,7 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
 }),
-$globals.TextViewSpy);
+$globals.TextCopySpy);
 
 $core.addMethod(
 $core.method({
@@ -2444,7 +2444,7 @@ $ctx1.sendIdx[","]=1;
 self._addText_($1);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"title:",{aString:aString},$globals.TextViewSpy)});
+}, function($ctx1) {$ctx1.fill(self,"title:",{aString:aString},$globals.TextCopySpy)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2454,7 +2454,482 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["addText:", ",", "asString"]
 }),
+$globals.TextCopySpy);
+
+
+
+$core.addClass('TextViewSpy', $globals.TextCopySpy, ['rendered', 'answers', 'results', 'onContinue', 'wasShown'], 'OndafSimulator-Core-Tests');
+$core.addMethod(
+$core.method({
+selector: "answers",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@answers"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "answers\x0a\x09^ answers",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
 $globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "answers:",
+protocol: 'as yet unclassified',
+fn: function (anObject){
+var self=this;
+self["@answers"]=anObject;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anObject"],
+source: "answers: anObject \x0a\x09answers := anObject",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "continue",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@onContinue"])._value();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"continue",{},$globals.TextViewSpy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "continue\x0a\x09onContinue value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value"]
+}),
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "hide",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+self["@rendered"]=false;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "hide\x0a\x09rendered := false",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "isRendered",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@rendered"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "isRendered\x0a\x09^ rendered",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "render",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+self["@rendered"]=true;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "render\x0a\x09rendered := true",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "results",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@results"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "results\x0a\x09^ results",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "show",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+self["@wasShown"]=true;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "show\x0a\x09wasShown := true",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "showResults:",
+protocol: 'as yet unclassified',
+fn: function (aCollection){
+var self=this;
+self["@results"]=aCollection;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aCollection"],
+source: "showResults: aCollection \x0a\x09results := aCollection",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "wasShown",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@wasShown"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "wasShown\x0a\x09^ wasShown",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "whenContinueDo:",
+protocol: 'as yet unclassified',
+fn: function (aBlock){
+var self=this;
+self["@onContinue"]=aBlock;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aBlock"],
+source: "whenContinueDo: aBlock\x0a\x09onContinue := aBlock",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextViewSpy);
+
+
+
+$core.addClass('TextCopyTest', $globals.TestCase, ['spyView', 'copy'], 'OndafSimulator-Core-Tests');
+$core.addMethod(
+$core.method({
+selector: "setUp",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true,
+//>>excludeEnd("ctx");
+($globals.TextCopyTest.superclass||$boot.nilAsClass).fn.prototype._setUp.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+self["@spyView"]=$recv($globals.TextViewSpy)._new();
+self["@copy"]=$recv($globals.CTestTextCopy)._newWithView_(self["@spyView"]);
+$1=self["@copy"];
+$recv($1)._time_((59));
+$recv($1)._title_("The title");
+$recv($1)._addText_("Some Text.");
+$recv($1)._addWordToComplete_("Plan ahea");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"setUp",{},$globals.TextCopyTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "setUp\x0a\x09super setUp.\x0a\x09spyView := TextViewSpy new.\x0a\x09copy := CTestTextCopy newWithView: spyView.\x0a\x09copy\x0a\x09\x09time: 59;\x0a\x09\x09title: 'The title';\x0a\x09\x09addText: 'Some Text.';\x0a\x09\x09addWordToComplete: 'Plan ahea'.",
+referencedClasses: ["TextViewSpy", "CTestTextCopy"],
+//>>excludeEnd("ide");
+messageSends: ["setUp", "new", "newWithView:", "time:", "title:", "addText:", "addWordToComplete:"]
+}),
+$globals.TextCopyTest);
+
+$core.addMethod(
+$core.method({
+selector: "test01",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._assert_equals_($recv(self["@spyView"])._printedText(),"|The title (59s)| Some Text. Plan ahea_ ");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test01",{},$globals.TextCopyTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test01\x09\x09\x0a\x09self assert: spyView printedText equals: '|The title (59s)| Some Text. Plan ahea_ '",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["assert:equals:", "printedText"]
+}),
+$globals.TextCopyTest);
+
+$core.addMethod(
+$core.method({
+selector: "test02",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@copy"])._giveToStudent();
+self._assert_($recv(self["@spyView"])._isRendered());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test02",{},$globals.TextCopyTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test02\x0a\x09copy giveToStudent.\x0a\x09\x09\x0a\x09self assert: spyView isRendered",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["giveToStudent", "assert:", "isRendered"]
+}),
+$globals.TextCopyTest);
+
+$core.addMethod(
+$core.method({
+selector: "test03",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@copy"])._giveToStudent();
+$recv(self["@copy"])._finish();
+self._assert_($recv($recv(self["@spyView"])._isRendered())._not());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test03",{},$globals.TextCopyTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test03\x09\x09\x0a\x09copy giveToStudent.\x0a\x09\x0a\x09copy finish.\x0a\x09\x09\x0a\x09self assert: spyView isRendered not",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["giveToStudent", "finish", "assert:", "not", "isRendered"]
+}),
+$globals.TextCopyTest);
+
+$core.addMethod(
+$core.method({
+selector: "test04",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+var executed;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+executed=false;
+$recv(self["@copy"])._whenFinishDo_((function(){
+executed=true;
+return executed;
+
+}));
+$recv(self["@copy"])._giveToStudent();
+$recv(self["@copy"])._finish();
+self._assert_(executed);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test04",{executed:executed},$globals.TextCopyTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test04\x0a\x09| executed |\x0a\x09executed := false.\x0a\x09\x0a\x09copy whenFinishDo: [ executed := true ].\x0a\x09copy giveToStudent.\x0a\x09copy finish.\x0a\x09\x09\x0a\x09self assert: executed",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["whenFinishDo:", "giveToStudent", "finish", "assert:"]
+}),
+$globals.TextCopyTest);
+
+$core.addMethod(
+$core.method({
+selector: "test05",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+var expectedAnswers;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+expectedAnswers=$recv($globals.Object)._new();
+$recv(self["@spyView"])._answers_(expectedAnswers);
+$recv(self["@copy"])._giveToStudent();
+$recv(self["@copy"])._finish();
+self._assert_equals_($recv(self["@copy"])._answers(),expectedAnswers);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test05",{expectedAnswers:expectedAnswers},$globals.TextCopyTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test05\x0a\x09| expectedAnswers |\x0a\x09expectedAnswers := Object new.\x0a\x09spyView answers: expectedAnswers.\x0a\x09\x0a\x09copy giveToStudent.\x0a\x09copy finish.\x0a\x09\x09\x0a\x09self assert: copy answers equals: expectedAnswers.",
+referencedClasses: ["Object"],
+//>>excludeEnd("ide");
+messageSends: ["new", "answers:", "giveToStudent", "finish", "assert:equals:", "answers"]
+}),
+$globals.TextCopyTest);
+
+$core.addMethod(
+$core.method({
+selector: "test06",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+var resultStream;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+resultStream=[(1), (2), (3), (4)]._readStream();
+$recv(self["@copy"])._addWordToComplete_("A second word to complete");
+$recv(self["@copy"])._giveToStudent();
+$recv(self["@copy"])._finish();
+$recv(self["@copy"])._consumeResults_(resultStream);
+self._assert_equals_($recv(self["@spyView"])._results(),[(1), (2)]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test06",{resultStream:resultStream},$globals.TextCopyTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test06\x0a\x09| resultStream |\x0a\x09resultStream := #(1 2 3 4) readStream.\x0a\x09copy addWordToComplete: 'A second word to complete'.\x0a\x09copy giveToStudent.\x0a\x09copy finish.\x0a\x09copy consumeResults: resultStream.\x0a\x09\x09\x0a\x09self assert: spyView results equals: #(1 2).",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["readStream", "addWordToComplete:", "giveToStudent", "finish", "consumeResults:", "assert:equals:", "results"]
+}),
+$globals.TextCopyTest);
+
+$core.addMethod(
+$core.method({
+selector: "test07",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@copy"])._giveToStudent();
+$recv(self["@spyView"])._continue();
+self._assert_($recv($recv(self["@spyView"])._isRendered())._not());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test07",{},$globals.TextCopyTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test07\x0a\x09copy giveToStudent.\x0a\x09spyView continue.\x0a\x09\x09\x0a\x09self assert: spyView isRendered not",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["giveToStudent", "continue", "assert:", "not", "isRendered"]
+}),
+$globals.TextCopyTest);
+
+$core.addMethod(
+$core.method({
+selector: "test08",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@copy"])._giveToStudent();
+$recv(self["@copy"])._finish();
+$recv(self["@copy"])._giveBackToStudent();
+self._assert_($recv(self["@spyView"])._wasShown());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test08",{},$globals.TextCopyTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test08\x09\x0a\x09copy giveToStudent.\x0a\x09copy finish.\x0a\x09\x0a\x09copy giveBackToStudent.\x0a\x09\x09\x0a\x09self assert: spyView wasShown",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["giveToStudent", "finish", "giveBackToStudent", "assert:", "wasShown"]
+}),
+$globals.TextCopyTest);
 
 
 });
