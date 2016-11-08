@@ -1522,6 +1522,226 @@ messageSends: ["initializeWith:name:", "new", "yourself"]
 $globals.CTestParserState.klass);
 
 
+$core.addClass('CTestPrinter', $globals.Object, ['copies', 'numberOfTexts', 'tray'], 'OndafSimulator-Core');
+$core.addMethod(
+$core.method({
+selector: "currentCopy",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+return $recv(self["@copies"])._last();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"currentCopy",{},$globals.CTestPrinter)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "currentCopy\x0a\x09^ copies last",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["last"]
+}),
+$globals.CTestPrinter);
+
+$core.addMethod(
+$core.method({
+selector: "initialize",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true,
+//>>excludeEnd("ctx");
+($globals.CTestPrinter.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+self["@copies"]=$recv($globals.OrderedCollection)._new();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.CTestPrinter)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "initialize\x0a\x09super initialize.\x0a\x09copies := OrderedCollection new",
+referencedClasses: ["OrderedCollection"],
+//>>excludeEnd("ide");
+messageSends: ["initialize", "new"]
+}),
+$globals.CTestPrinter);
+
+$core.addMethod(
+$core.method({
+selector: "print:",
+protocol: 'as yet unclassified',
+fn: function (anExam){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(anExam)._copyOn_(self);
+return self["@copies"];
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"print:",{anExam:anExam},$globals.CTestPrinter)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anExam"],
+source: "print: anExam\x0a\x09anExam copyOn: self.\x0a\x09^ copies",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["copyOn:"]
+}),
+$globals.CTestPrinter);
+
+$core.addMethod(
+$core.method({
+selector: "printNumberOfTexts:",
+protocol: 'as yet unclassified',
+fn: function (aNumber){
+var self=this;
+self["@numberOfTexts"]=aNumber;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aNumber"],
+source: "printNumberOfTexts: aNumber\x0a\x09numberOfTexts := aNumber.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.CTestPrinter);
+
+$core.addMethod(
+$core.method({
+selector: "printText:",
+protocol: 'as yet unclassified',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._currentCopy())._addText_(aString);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"printText:",{aString:aString},$globals.CTestPrinter)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "printText: aString\x0a\x09self currentCopy addText: aString",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["addText:", "currentCopy"]
+}),
+$globals.CTestPrinter);
+
+$core.addMethod(
+$core.method({
+selector: "printTitle:time:",
+protocol: 'as yet unclassified',
+fn: function (aString,aTimeInSeconds){
+var self=this;
+var newCopy;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+newCopy=$recv(self["@tray"])._newCopy_of_titled_withTime_($recv($recv(self["@copies"])._size()).__plus((1)),self["@numberOfTexts"],aString,aTimeInSeconds);
+$recv(self["@copies"])._add_(newCopy);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"printTitle:time:",{aString:aString,aTimeInSeconds:aTimeInSeconds,newCopy:newCopy},$globals.CTestPrinter)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString", "aTimeInSeconds"],
+source: "printTitle: aString time: aTimeInSeconds\x0a\x09| newCopy |\x0a\x09newCopy := tray newCopy: copies size + 1 of: numberOfTexts titled: aString withTime: aTimeInSeconds.\x0a\x09copies add: newCopy",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["newCopy:of:titled:withTime:", "+", "size", "add:"]
+}),
+$globals.CTestPrinter);
+
+$core.addMethod(
+$core.method({
+selector: "printWordToComplete:",
+protocol: 'as yet unclassified',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self._currentCopy())._addWordToComplete_(aString);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"printWordToComplete:",{aString:aString},$globals.CTestPrinter)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "printWordToComplete: aString\x0a\x09self currentCopy addWordToComplete: aString",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["addWordToComplete:", "currentCopy"]
+}),
+$globals.CTestPrinter);
+
+$core.addMethod(
+$core.method({
+selector: "tray:",
+protocol: 'as yet unclassified',
+fn: function (aTray){
+var self=this;
+self["@tray"]=aTray;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aTray"],
+source: "tray: aTray \x0a\x09tray := aTray",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.CTestPrinter);
+
+
+$core.addMethod(
+$core.method({
+selector: "newWithTray:",
+protocol: 'as yet unclassified',
+fn: function (aPaperTray){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._new();
+$recv($1)._tray_(aPaperTray);
+return $recv($1)._yourself();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"newWithTray:",{aPaperTray:aPaperTray},$globals.CTestPrinter.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aPaperTray"],
+source: "newWithTray: aPaperTray \x0a\x09^ self new\x0a\x09\x09tray: aPaperTray;\x0a\x09\x09yourself",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["tray:", "new", "yourself"]
+}),
+$globals.CTestPrinter.klass);
+
+
 $core.addClass('CTestResult', $globals.Object, ['results'], 'OndafSimulator-Core');
 $core.addMethod(
 $core.method({

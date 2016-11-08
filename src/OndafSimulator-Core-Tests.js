@@ -1,8 +1,67 @@
-define("amber-ondafsimulator/OndafSimulator-Core-Tests", ["amber/boot", "amber_core/SUnit", "amber_core/Kernel-Objects"], function($boot){"use strict";
+define("amber-ondafsimulator/OndafSimulator-Core-Tests", ["amber/boot", "amber_core/Kernel-Objects", "amber_core/SUnit"], function($boot){"use strict";
 var $core=$boot.api,nil=$boot.nil,$recv=$boot.asReceiver,$globals=$boot.globals;
 $core.addPackage('OndafSimulator-Core-Tests');
 $core.packages["OndafSimulator-Core-Tests"].innerEval = function (expr) { return eval(expr); };
 $core.packages["OndafSimulator-Core-Tests"].transport = {"type":"amd","amdNamespace":"amber-ondafsimulator"};
+
+$core.addClass('ExamCreator', $globals.Object, [], 'OndafSimulator-Core-Tests');
+$core.addMethod(
+$core.method({
+selector: "examWithText:",
+protocol: 'as yet unclassified',
+fn: function (text1){
+var self=this;
+var examDesigner;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+examDesigner=$recv($globals.ExamDesigner)._new();
+$recv(examDesigner)._considerText_(text1);
+return $recv(examDesigner)._designExam();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"examWithText:",{text1:text1,examDesigner:examDesigner},$globals.ExamCreator)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["text1"],
+source: "examWithText: text1\x0a\x09| examDesigner |\x0a\x09examDesigner := ExamDesigner new.\x0a\x09examDesigner considerText: text1.\x0a\x09^ examDesigner designExam.",
+referencedClasses: ["ExamDesigner"],
+//>>excludeEnd("ide");
+messageSends: ["new", "considerText:", "designExam"]
+}),
+$globals.ExamCreator);
+
+$core.addMethod(
+$core.method({
+selector: "examWithText:and:",
+protocol: 'as yet unclassified',
+fn: function (text1,text2){
+var self=this;
+var examDesigner;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+examDesigner=$recv($globals.ExamDesigner)._new();
+$recv(examDesigner)._considerText_(text1);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["considerText:"]=1;
+//>>excludeEnd("ctx");
+$recv(examDesigner)._considerText_(text2);
+return $recv(examDesigner)._designExam();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"examWithText:and:",{text1:text1,text2:text2,examDesigner:examDesigner},$globals.ExamCreator)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["text1", "text2"],
+source: "examWithText: text1 and: text2 \x0a\x09| examDesigner |\x0a\x09examDesigner := ExamDesigner new.\x0a\x09examDesigner considerText: text1.\x0a\x09examDesigner considerText: text2.\x0a\x09^ examDesigner designExam.",
+referencedClasses: ["ExamDesigner"],
+//>>excludeEnd("ide");
+messageSends: ["new", "considerText:", "designExam"]
+}),
+$globals.ExamCreator);
+
+
 
 $core.addClass('ExamDesignerTest', $globals.TestCase, ['theExamDesigner'], 'OndafSimulator-Core-Tests');
 $core.addMethod(
@@ -173,31 +232,261 @@ $globals.ExamDesignerTest);
 
 
 
-$core.addClass('ExamTest', $globals.TestCase, ['theExamDesigner', 'theExam'], 'OndafSimulator-Core-Tests');
+$core.addClass('ExamPrinterTest', $globals.TestCase, ['examCreator', 'theExam', 'printer', 'copies'], 'OndafSimulator-Core-Tests');
+$core.addMethod(
+$core.method({
+selector: "givenExamWithText:",
+protocol: 'as yet unclassified',
+fn: function (text1){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self["@theExam"]=$recv(self["@examCreator"])._examWithText_(text1);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"givenExamWithText:",{text1:text1},$globals.ExamPrinterTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["text1"],
+source: "givenExamWithText: text1\x0a\x09theExam := examCreator examWithText: text1",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["examWithText:"]
+}),
+$globals.ExamPrinterTest);
+
+$core.addMethod(
+$core.method({
+selector: "givenExamWithText:and:",
+protocol: 'as yet unclassified',
+fn: function (text1,text2){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self["@theExam"]=$recv(self["@examCreator"])._examWithText_and_(text1,text2);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"givenExamWithText:and:",{text1:text1,text2:text2},$globals.ExamPrinterTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["text1", "text2"],
+source: "givenExamWithText: text1 and: text2 \x0a\x09theExam := examCreator examWithText: text1 and: text2",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["examWithText:and:"]
+}),
+$globals.ExamPrinterTest);
+
+$core.addMethod(
+$core.method({
+selector: "printedText",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+var allText;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $2,$1;
+allText=$recv($recv(self["@copies"])._collect_("printedText"))._reduce_((function(a,b){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(a).__comma(b);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({a:a,b:b},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$2=$recv("Texts: ".__comma($recv($recv(self["@copies"])._size())._asString())).__comma(" ");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=3;
+//>>excludeEnd("ctx");
+$1=$recv($2).__comma(allText);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=2;
+//>>excludeEnd("ctx");
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"printedText",{allText:allText},$globals.ExamPrinterTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "printedText\x0a\x09| allText |\x0a\x09allText := (copies collect: #printedText) reduce: [ :a :b | a, b ].\x0a\x09^ 'Texts: ', copies size asString, ' ', allText.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["reduce:", "collect:", ",", "asString", "size"]
+}),
+$globals.ExamPrinterTest);
+
+$core.addMethod(
+$core.method({
+selector: "setUp",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self["@examCreator"]=$recv($globals.ExamCreator)._new();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["new"]=1;
+//>>excludeEnd("ctx");
+self["@printer"]=$recv($globals.CTestPrinter)._newWithTray_($recv($globals.TestTray)._new());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"setUp",{},$globals.ExamPrinterTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "setUp\x0a\x09examCreator := ExamCreator new.\x0a\x09printer := CTestPrinter newWithTray: TestTray new",
+referencedClasses: ["ExamCreator", "CTestPrinter", "TestTray"],
+//>>excludeEnd("ide");
+messageSends: ["new", "newWithTray:"]
+}),
+$globals.ExamPrinterTest);
+
+$core.addMethod(
+$core.method({
+selector: "test01",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._givenExamWithText_($1);
+self["@copies"]=$recv(self["@printer"])._print_(self["@theExam"]);
+self._assert_equals_($recv(self["@copies"])._size(),(1));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assert:equals:"]=1;
+//>>excludeEnd("ctx");
+self._assert_equals_(self._printedText(),"Texts: 1 |Title A (30s)| And the text said: he_ wor_ . ");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test01",{},$globals.ExamPrinterTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test01\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09self assert: copies size equals: 1.\x0a\x09self assert: self printedText equals: 'Texts: 1 |Title A (30s)| And the text said: he_ wor_ . '.",
+referencedClasses: ["String"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:", ",", "lf", "print:", "assert:equals:", "size", "printedText"]
+}),
+$globals.ExamPrinterTest);
+
+$core.addMethod(
+$core.method({
+selector: "test02CopyExamOnPrinter",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._givenExamWithText_($1);
+self["@copies"]=$recv(self["@printer"])._print_(self["@theExam"]);
+self._assert_equals_(self._printedText(),"Texts: 1 |Title A (30s)| And the text said: he_ wor_ . ");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test02CopyExamOnPrinter",{},$globals.ExamPrinterTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test02CopyExamOnPrinter\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09self assert: self printedText equals: 'Texts: 1 |Title A (30s)| And the text said: he_ wor_ . '.",
+referencedClasses: ["String"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:", ",", "lf", "print:", "assert:equals:", "printedText"]
+}),
+$globals.ExamPrinterTest);
+
+$core.addMethod(
+$core.method({
+selector: "test03CopyExamWithMultipleTexts",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $3,$2,$1,$4;
+$3=$recv($globals.String)._lf();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["lf"]=1;
+//>>excludeEnd("ctx");
+$2="Title A".__comma($3);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=2;
+//>>excludeEnd("ctx");
+$1=$recv($2).__comma("he{llo} wor{ld}");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+$4=$recv("Title B".__comma($recv($globals.String)._lf())).__comma("loca{tion}");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=3;
+//>>excludeEnd("ctx");
+self._givenExamWithText_and_($1,$4);
+self["@copies"]=$recv(self["@printer"])._print_(self["@theExam"]);
+self._assert_equals_(self._printedText(),"Texts: 2 |Title A (30s)| he_ wor_ |Title B (15s)| loca_ ");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test03CopyExamWithMultipleTexts",{},$globals.ExamPrinterTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test03CopyExamWithMultipleTexts\x0a\x09self givenExamWithText: 'Title A', String lf, 'he{llo} wor{ld}'\x0a\x09                   and: 'Title B', String lf, 'loca{tion}'.\x0a\x09\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09self assert: self printedText equals: 'Texts: 2 |Title A (30s)| he_ wor_ |Title B (15s)| loca_ '.",
+referencedClasses: ["String"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:and:", ",", "lf", "print:", "assert:equals:", "printedText"]
+}),
+$globals.ExamPrinterTest);
+
+
+
+$core.addClass('ExamTest', $globals.TestCase, ['theExam', 'examCreator'], 'OndafSimulator-Core-Tests');
 $core.addMethod(
 $core.method({
 selector: "givenExamWithText:",
 protocol: 'given',
 fn: function (text1){
 var self=this;
-var examDesigner;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-examDesigner=$recv($globals.ExamDesigner)._new();
-$recv(examDesigner)._considerText_(text1);
-self["@theExam"]=$recv(examDesigner)._designExam();
+self["@theExam"]=$recv(self["@examCreator"])._examWithText_(text1);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"givenExamWithText:",{text1:text1,examDesigner:examDesigner},$globals.ExamTest)});
+}, function($ctx1) {$ctx1.fill(self,"givenExamWithText:",{text1:text1},$globals.ExamTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["text1"],
-source: "givenExamWithText: text1\x0a\x09| examDesigner |\x0a\x09examDesigner := ExamDesigner new.\x0a\x09examDesigner considerText: text1.\x0a\x09theExam := examDesigner designExam.",
-referencedClasses: ["ExamDesigner"],
+source: "givenExamWithText: text1\x0a\x09theExam := examCreator examWithText: text1",
+referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["new", "considerText:", "designExam"]
+messageSends: ["examWithText:"]
 }),
 $globals.ExamTest);
 
@@ -207,28 +496,21 @@ selector: "givenExamWithText:and:",
 protocol: 'given',
 fn: function (text1,text2){
 var self=this;
-var examDesigner;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-examDesigner=$recv($globals.ExamDesigner)._new();
-$recv(examDesigner)._considerText_(text1);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["considerText:"]=1;
-//>>excludeEnd("ctx");
-$recv(examDesigner)._considerText_(text2);
-self["@theExam"]=$recv(examDesigner)._designExam();
+self["@theExam"]=$recv(self["@examCreator"])._examWithText_and_(text1,text2);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"givenExamWithText:and:",{text1:text1,text2:text2,examDesigner:examDesigner},$globals.ExamTest)});
+}, function($ctx1) {$ctx1.fill(self,"givenExamWithText:and:",{text1:text1,text2:text2},$globals.ExamTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["text1", "text2"],
-source: "givenExamWithText: text1 and: text2 \x0a\x09| examDesigner |\x0a\x09examDesigner := ExamDesigner new.\x0a\x09examDesigner considerText: text1.\x0a\x09examDesigner considerText: text2.\x0a\x09theExam := examDesigner designExam.",
-referencedClasses: ["ExamDesigner"],
+source: "givenExamWithText: text1 and: text2 \x0a\x09theExam := examCreator examWithText: text1 and: text2",
+referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["new", "considerText:", "designExam"]
+messageSends: ["examWithText:and:"]
 }),
 $globals.ExamTest);
 
@@ -241,7 +523,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self["@theExamDesigner"]=$recv($globals.ExamDesigner)._new();
+self["@examCreator"]=$recv($globals.ExamCreator)._new();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"setUp",{},$globals.ExamTest)});
@@ -249,8 +531,8 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "setUp\x0a\x09theExamDesigner := ExamDesigner new.",
-referencedClasses: ["ExamDesigner"],
+source: "setUp\x0a\x09examCreator := ExamCreator new.",
+referencedClasses: ["ExamCreator"],
 //>>excludeEnd("ide");
 messageSends: ["new"]
 }),
@@ -595,84 +877,6 @@ source: "test10DetermineMaximumScore\x0a\x09| aSubmission aResult |\x0a\x09self 
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
 messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "maxScore"]
-}),
-$globals.ExamTest);
-
-$core.addMethod(
-$core.method({
-selector: "test11CopyOnPrinter",
-protocol: 'tests',
-fn: function (){
-var self=this;
-var aPrinter;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-self._givenExamWithText_($1);
-aPrinter=$recv($globals.TestPrinter)._new();
-$recv(self["@theExam"])._copyOn_(aPrinter);
-self._assert_equals_($recv(aPrinter)._printedText(),"Texts: 1 |Title A (30s)| And the text said: he_ wor_ . ");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test11CopyOnPrinter",{aPrinter:aPrinter},$globals.ExamTest)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "test11CopyOnPrinter\x0a\x09| aPrinter |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09aPrinter := TestPrinter new.\x0a\x09\x0a\x09theExam copyOn: aPrinter.\x0a\x09\x0a\x09self assert: aPrinter printedText equals: 'Texts: 1 |Title A (30s)| And the text said: he_ wor_ . '.",
-referencedClasses: ["String", "TestPrinter"],
-//>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "lf", "new", "copyOn:", "assert:equals:", "printedText"]
-}),
-$globals.ExamTest);
-
-$core.addMethod(
-$core.method({
-selector: "test12CopyOnPrinterMultipleTexts",
-protocol: 'tests',
-fn: function (){
-var self=this;
-var aPrinter;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $3,$2,$1,$4;
-$3=$recv($globals.String)._lf();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["lf"]=1;
-//>>excludeEnd("ctx");
-$2="Title A".__comma($3);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=2;
-//>>excludeEnd("ctx");
-$1=$recv($2).__comma("he{llo} wor{ld}");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-$4=$recv("Title B".__comma($recv($globals.String)._lf())).__comma("loca{tion}");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=3;
-//>>excludeEnd("ctx");
-self._givenExamWithText_and_($1,$4);
-aPrinter=$recv($globals.TestPrinter)._new();
-$recv(self["@theExam"])._copyOn_(aPrinter);
-self._assert_equals_($recv(aPrinter)._printedText(),"Texts: 2 |Title A (30s)| he_ wor_ |Title B (15s)| loca_ ");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test12CopyOnPrinterMultipleTexts",{aPrinter:aPrinter},$globals.ExamTest)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "test12CopyOnPrinterMultipleTexts\x0a\x09| aPrinter |\x0a\x09self givenExamWithText: 'Title A', String lf, 'he{llo} wor{ld}'\x0a\x09                   and: 'Title B', String lf, 'loca{tion}'.\x0a\x09aPrinter := TestPrinter new.\x0a\x09\x0a\x09theExam copyOn: aPrinter.\x0a\x09\x0a\x09self assert: aPrinter printedText equals: 'Texts: 2 |Title A (30s)| he_ wor_ |Title B (15s)| loca_ '.",
-referencedClasses: ["String", "TestPrinter"],
-//>>excludeEnd("ide");
-messageSends: ["givenExamWithText:and:", ",", "lf", "new", "copyOn:", "assert:equals:", "printedText"]
 }),
 $globals.ExamTest);
 
@@ -2064,7 +2268,88 @@ $globals.ResultTableTest);
 
 
 
-$core.addClass('TestPrinter', $globals.Object, ['printedText'], 'OndafSimulator-Core-Tests');
+$core.addClass('TestTray', $globals.Object, [], 'OndafSimulator-Core-Tests');
+$core.addMethod(
+$core.method({
+selector: "newCopy:of:titled:withTime:",
+protocol: 'as yet unclassified',
+fn: function (textNumber,totalTexts,aString,aTimeInSeconds){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv($globals.TextViewSpy)._new();
+$recv($1)._time_(aTimeInSeconds);
+$recv($1)._title_(aString);
+return $recv($1)._yourself();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"newCopy:of:titled:withTime:",{textNumber:textNumber,totalTexts:totalTexts,aString:aString,aTimeInSeconds:aTimeInSeconds},$globals.TestTray)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["textNumber", "totalTexts", "aString", "aTimeInSeconds"],
+source: "newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds \x0a\x09^ TextViewSpy new\x0a\x09\x09time: aTimeInSeconds;\x0a\x09\x09title: aString;\x0a\x09\x09yourself",
+referencedClasses: ["TextViewSpy"],
+//>>excludeEnd("ide");
+messageSends: ["time:", "new", "title:", "yourself"]
+}),
+$globals.TestTray);
+
+
+
+$core.addClass('TextViewSpy', $globals.Object, ['printedText', 'time'], 'OndafSimulator-Core-Tests');
+$core.addMethod(
+$core.method({
+selector: "addText:",
+protocol: 'as yet unclassified',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self["@printedText"]=$recv($recv(self["@printedText"]).__comma(aString)).__comma(" ");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"addText:",{aString:aString},$globals.TextViewSpy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "addText: aString \x0a\x09printedText := printedText, aString, ' '",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: [","]
+}),
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "addWordToComplete:",
+protocol: 'as yet unclassified',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._addText_($recv(aString).__comma("_"));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"addWordToComplete:",{aString:aString},$globals.TextViewSpy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "addWordToComplete: aString \x0a\x09self addText: aString, '_'",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["addText:", ","]
+}),
+$globals.TextViewSpy);
+
 $core.addMethod(
 $core.method({
 selector: "initialize",
@@ -2078,14 +2363,14 @@ return $core.withContext(function($ctx1) {
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true,
 //>>excludeEnd("ctx");
-($globals.TestPrinter.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
+($globals.TextViewSpy.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
 self["@printedText"]="";
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.TestPrinter)});
+}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.TextViewSpy)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2095,119 +2380,7 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initialize"]
 }),
-$globals.TestPrinter);
-
-$core.addMethod(
-$core.method({
-selector: "printNumberOfTexts:",
-protocol: 'as yet unclassified',
-fn: function (aNumber){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-self._printText_("Texts: ".__comma($recv(aNumber)._asString()));
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"printNumberOfTexts:",{aNumber:aNumber},$globals.TestPrinter)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aNumber"],
-source: "printNumberOfTexts: aNumber\x0a\x09self printText: 'Texts: ', aNumber asString",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["printText:", ",", "asString"]
-}),
-$globals.TestPrinter);
-
-$core.addMethod(
-$core.method({
-selector: "printText:",
-protocol: 'as yet unclassified',
-fn: function (aString){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-self["@printedText"]=$recv($recv(self["@printedText"]).__comma(aString)).__comma(" ");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"printText:",{aString:aString},$globals.TestPrinter)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aString"],
-source: "printText: aString \x0a\x09printedText := printedText, aString, ' '",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: [","]
-}),
-$globals.TestPrinter);
-
-$core.addMethod(
-$core.method({
-selector: "printTitle:time:",
-protocol: 'as yet unclassified',
-fn: function (aString,aTimeInSeconds){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $3,$2,$1;
-$3=$recv("|".__comma(aString)).__comma(" (");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=3;
-//>>excludeEnd("ctx");
-$2=$recv($3).__comma($recv(aTimeInSeconds)._asString());
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=2;
-//>>excludeEnd("ctx");
-$1=$recv($2).__comma("s)|");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-self._printText_($1);
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"printTitle:time:",{aString:aString,aTimeInSeconds:aTimeInSeconds},$globals.TestPrinter)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aString", "aTimeInSeconds"],
-source: "printTitle: aString time: aTimeInSeconds\x0a\x09self printText: '|', aString, ' (', aTimeInSeconds asString, 's)|'",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["printText:", ",", "asString"]
-}),
-$globals.TestPrinter);
-
-$core.addMethod(
-$core.method({
-selector: "printWordToComplete:",
-protocol: 'as yet unclassified',
-fn: function (aString){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-self._printText_($recv(aString).__comma("_"));
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"printWordToComplete:",{aString:aString},$globals.TestPrinter)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aString"],
-source: "printWordToComplete: aString \x0a\x09self printText: aString, '_'",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["printText:", ","]
-}),
-$globals.TestPrinter);
+$globals.TextViewSpy);
 
 $core.addMethod(
 $core.method({
@@ -2225,7 +2398,63 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
 }),
-$globals.TestPrinter);
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "time:",
+protocol: 'as yet unclassified',
+fn: function (anInteger){
+var self=this;
+self["@time"]=anInteger;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anInteger"],
+source: "time: anInteger \x0a\x09time := anInteger",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TextViewSpy);
+
+$core.addMethod(
+$core.method({
+selector: "title:",
+protocol: 'as yet unclassified',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $3,$2,$1;
+$3=$recv("|".__comma(aString)).__comma(" (");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=3;
+//>>excludeEnd("ctx");
+$2=$recv($3).__comma($recv(self["@time"])._asString());
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=2;
+//>>excludeEnd("ctx");
+$1=$recv($2).__comma("s)|");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._addText_($1);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"title:",{aString:aString},$globals.TextViewSpy)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "title: aString \x0a\x09self addText: '|', aString, ' (', time asString, 's)|'",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["addText:", ",", "asString"]
+}),
+$globals.TextViewSpy);
 
 
 });

@@ -2,7 +2,7 @@ define("amber-ondafsimulator/OndafSimulator", ["amber/boot"
 //>>excludeStart("imports", pragmas.excludeImports);
 , "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"
 //>>excludeEnd("imports");
-, "amber_core/Kernel-Objects", "amber/web/Web", "amber_core/Kernel-Methods", "amber_core/Kernel-Collections"], function($boot
+, "amber/web/Web", "amber_core/Kernel-Objects", "amber_core/Kernel-Methods", "amber_core/Kernel-Collections"], function($boot
 //>>excludeStart("imports", pragmas.excludeImports);
 
 //>>excludeEnd("imports");
@@ -13,194 +13,29 @@ $core.packages["OndafSimulator"].innerEval = function (expr) { return eval(expr)
 $core.packages["OndafSimulator"].imports = ["amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"];
 $core.packages["OndafSimulator"].transport = {"type":"amd","amdNamespace":"amber-ondafsimulator"};
 
-$core.addClass('ExamPrinter', $globals.Object, ['textViews', 'selector', 'numberOfTexts'], 'OndafSimulator');
+$core.addClass('ExamPrinterTray', $globals.Object, ['selector'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
-selector: "copies",
+selector: "newCopy:of:titled:withTime:",
 protocol: 'as yet unclassified',
-fn: function (){
-var self=this;
-return self["@textViews"];
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "copies\x0a\x09^ textViews",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.ExamPrinter);
-
-$core.addMethod(
-$core.method({
-selector: "currentTextView",
-protocol: 'as yet unclassified',
-fn: function (){
+fn: function (textNumber,totalTexts,aString,aTimeInSeconds){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(self["@textViews"])._last();
+return $recv($globals.ExamTextView)._newIn_title_text_of_(self["@selector"],aString,textNumber,totalTexts);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"currentTextView",{},$globals.ExamPrinter)});
+}, function($ctx1) {$ctx1.fill(self,"newCopy:of:titled:withTime:",{textNumber:textNumber,totalTexts:totalTexts,aString:aString,aTimeInSeconds:aTimeInSeconds},$globals.ExamPrinterTray)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "currentTextView\x0a\x09^ textViews last",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["last"]
-}),
-$globals.ExamPrinter);
-
-$core.addMethod(
-$core.method({
-selector: "initialize",
-protocol: 'as yet unclassified',
-fn: function (){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-(
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = true,
-//>>excludeEnd("ctx");
-($globals.ExamPrinter.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = false;
-//>>excludeEnd("ctx");;
-self["@textViews"]=$recv($globals.OrderedCollection)._new();
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.ExamPrinter)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09textViews := OrderedCollection new.",
-referencedClasses: ["OrderedCollection"],
-//>>excludeEnd("ide");
-messageSends: ["initialize", "new"]
-}),
-$globals.ExamPrinter);
-
-$core.addMethod(
-$core.method({
-selector: "print:",
-protocol: 'as yet unclassified',
-fn: function (anExam){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv(anExam)._copyOn_(self);
-return self._copies();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"print:",{anExam:anExam},$globals.ExamPrinter)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["anExam"],
-source: "print: anExam\x0a\x09anExam copyOn: self.\x0a\x09^ self copies",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["copyOn:", "copies"]
-}),
-$globals.ExamPrinter);
-
-$core.addMethod(
-$core.method({
-selector: "printNumberOfTexts:",
-protocol: 'as yet unclassified',
-fn: function (aNumber){
-var self=this;
-self["@numberOfTexts"]=aNumber;
-return self;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aNumber"],
-source: "printNumberOfTexts: aNumber\x0a\x09numberOfTexts := aNumber",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.ExamPrinter);
-
-$core.addMethod(
-$core.method({
-selector: "printText:",
-protocol: 'as yet unclassified',
-fn: function (aString){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv(self._currentTextView())._addText_(aString);
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"printText:",{aString:aString},$globals.ExamPrinter)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aString"],
-source: "printText: aString\x0a\x09self currentTextView addText: aString",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["addText:", "currentTextView"]
-}),
-$globals.ExamPrinter);
-
-$core.addMethod(
-$core.method({
-selector: "printTitle:time:",
-protocol: 'as yet unclassified',
-fn: function (aString,aTimeInSeconds){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv(self["@textViews"])._add_($recv($globals.ExamTextView)._newIn_title_text_of_(self["@selector"],aString,$recv($recv(self["@textViews"])._size()).__plus((1)),self["@numberOfTexts"]));
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"printTitle:time:",{aString:aString,aTimeInSeconds:aTimeInSeconds},$globals.ExamPrinter)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aString", "aTimeInSeconds"],
-source: "printTitle: aString time: aTimeInSeconds\x0a\x09textViews add: (ExamTextView newIn: selector title: aString text: textViews size + 1 of: numberOfTexts)",
+args: ["textNumber", "totalTexts", "aString", "aTimeInSeconds"],
+source: "newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds \x0a\x09^ ExamTextView newIn: selector title: aString text: textNumber of: totalTexts",
 referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
-messageSends: ["add:", "newIn:title:text:of:", "+", "size"]
+messageSends: ["newIn:title:text:of:"]
 }),
-$globals.ExamPrinter);
-
-$core.addMethod(
-$core.method({
-selector: "printWordToComplete:",
-protocol: 'as yet unclassified',
-fn: function (aString){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv(self._currentTextView())._addWordToComplete_(aString);
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"printWordToComplete:",{aString:aString},$globals.ExamPrinter)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aString"],
-source: "printWordToComplete: aString\x0a\x09self currentTextView addWordToComplete: aString",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["addWordToComplete:", "currentTextView"]
-}),
-$globals.ExamPrinter);
+$globals.ExamPrinterTray);
 
 $core.addMethod(
 $core.method({
@@ -219,13 +54,13 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
 }),
-$globals.ExamPrinter);
+$globals.ExamPrinterTray);
 
 
 $core.addMethod(
 $core.method({
 selector: "newOn:",
-protocol: 'instance creation',
+protocol: 'as yet unclassified',
 fn: function (aSelector){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -236,7 +71,7 @@ $1=self._new();
 $recv($1)._selector_(aSelector);
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"newOn:",{aSelector:aSelector},$globals.ExamPrinter.klass)});
+}, function($ctx1) {$ctx1.fill(self,"newOn:",{aSelector:aSelector},$globals.ExamPrinterTray.klass)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -246,7 +81,7 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["selector:", "new", "yourself"]
 }),
-$globals.ExamPrinter.klass);
+$globals.ExamPrinterTray.klass);
 
 
 $core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container', 'textNumber', 'numberOfTexts', 'infoSeconds', 'continueAction', 'renderArea', 'actions'], 'OndafSimulator');
@@ -1432,7 +1267,7 @@ $recv(self["@fileDropTarget"])._hide();
 $ctx1.sendIdx["hide"]=1;
 //>>excludeEnd("ctx");
 self["@theExam"]=$recv(self["@examDesigner"])._designExam();
-aPrinter=$recv($globals.ExamPrinter)._newOn_("#content");
+aPrinter=$recv($globals.CTestPrinter)._newWithTray_($recv($globals.ExamPrinterTray)._newOn_("#content"));
 copies=$recv(aPrinter)._print_(self["@theExam"]);
 textsStream=$recv(copies)._readStream();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1525,10 +1360,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers resultStream timerInst time |\x0a\x09header remove.\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09timerInst stop.\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.\x0a\x09\x09\x09resultStream := result individualResults readStream.\x0a\x09\x09\x09copies do: [ :each | each consumeResults: resultStream ].\x0a\x09\x09\x09copies do: #show.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.\x0a\x09\x0a\x09time := 0.\x0a\x09timerInst := timer each: 1000 do: [ time := time + 1. time >= 30 ifTrue: [timerInst stop. whenContinue value] ifFalse: [copy showSeconds: time] ].\x0a\x09timerInst start.\x0a\x09\x0a\x09",
-referencedClasses: ["ExamPrinter", "ResultView"],
+source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers resultStream timerInst time |\x0a\x09header remove.\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := CTestPrinter newWithTray: (ExamPrinterTray newOn: '#content').\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09timerInst stop.\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.\x0a\x09\x09\x09resultStream := result individualResults readStream.\x0a\x09\x09\x09copies do: [ :each | each consumeResults: resultStream ].\x0a\x09\x09\x09copies do: #show.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.\x0a\x09\x0a\x09time := 0.\x0a\x09timerInst := timer each: 1000 do: [ time := time + 1. time >= 30 ifTrue: [timerInst stop. whenContinue value] ifFalse: [copy showSeconds: time] ].\x0a\x09timerInst start.\x0a\x09\x0a\x09",
+referencedClasses: ["CTestPrinter", "ExamPrinterTray", "ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["remove", "hide", "designExam", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "stop", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:level:", "score", "maxScore", "percentage", "level", "individualResults", "do:", "consumeResults:", "next", "whenContinueDo:", "render", "each:do:", "+", ">=", "value", "showSeconds:", "start"]
+messageSends: ["remove", "hide", "designExam", "newWithTray:", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "stop", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:level:", "score", "maxScore", "percentage", "level", "individualResults", "do:", "consumeResults:", "next", "whenContinueDo:", "render", "each:do:", "+", ">=", "value", "showSeconds:", "start"]
 }),
 $globals.OndafSimulator);
 

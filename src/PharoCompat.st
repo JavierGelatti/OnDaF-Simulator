@@ -13,6 +13,10 @@ flatCollect: aBlock
 	^ stream contents
 !
 
+reduce: aBlock
+	<return self.reduce(aBlock)>
+!
+
 select: selectBlock thenDo: doBlock
     "Utility method to improve readability.
 	Do not create the intermediate collection."

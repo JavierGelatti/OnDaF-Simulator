@@ -1,50 +1,20 @@
 Smalltalk createPackage: 'OndafSimulator'!
 (Smalltalk packageAt: 'OndafSimulator') imports: {'amber/jquery/Wrappers-JQuery'. 'amber/web/Web'. 'silk/Silk'}!
-Object subclass: #ExamPrinter
-	instanceVariableNames: 'textViews selector numberOfTexts'
+Object subclass: #ExamPrinterTray
+	instanceVariableNames: 'selector'
 	package: 'OndafSimulator'!
 
-!ExamPrinter methodsFor: 'as yet unclassified'!
+!ExamPrinterTray methodsFor: 'as yet unclassified'!
 
-copies
-	^ textViews
-!
-
-currentTextView
-	^ textViews last
-!
-
-initialize
-	super initialize.
-	textViews := OrderedCollection new.
-!
-
-print: anExam
-	anExam copyOn: self.
-	^ self copies
-!
-
-printNumberOfTexts: aNumber
-	numberOfTexts := aNumber
-!
-
-printText: aString
-	self currentTextView addText: aString
-!
-
-printTitle: aString time: aTimeInSeconds
-	textViews add: (ExamTextView newIn: selector title: aString text: textViews size + 1 of: numberOfTexts)
-!
-
-printWordToComplete: aString
-	self currentTextView addWordToComplete: aString
+newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds 
+	^ ExamTextView newIn: selector title: aString text: textNumber of: totalTexts
 !
 
 selector: aSelector
 	selector := aSelector
 ! !
 
-!ExamPrinter class methodsFor: 'instance creation'!
+!ExamPrinterTray class methodsFor: 'as yet unclassified'!
 
 newOn: aSelector
 	^ self new
@@ -292,7 +262,7 @@ startExam
 	header remove.
 	fileDropTarget hide.
 	theExam := examDesigner designExam.
-	aPrinter := ExamPrinter newOn: '#content'.
+	aPrinter := CTestPrinter newWithTray: (ExamPrinterTray newOn: '#content').
 	copies := aPrinter print: theExam.
 	
 	textsStream := copies readStream.

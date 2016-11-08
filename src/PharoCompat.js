@@ -44,6 +44,30 @@ $globals.Array);
 
 $core.addMethod(
 $core.method({
+selector: "reduce:",
+protocol: '*PharoCompat',
+fn: function (aBlock){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+return self.reduce(aBlock);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"reduce:",{aBlock:aBlock},$globals.Array)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aBlock"],
+source: "reduce: aBlock\x0a\x09<return self.reduce(aBlock)>",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.Array);
+
+$core.addMethod(
+$core.method({
 selector: "select:thenDo:",
 protocol: '*PharoCompat',
 fn: function (selectBlock,doBlock){
