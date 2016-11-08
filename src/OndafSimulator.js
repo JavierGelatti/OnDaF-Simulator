@@ -156,9 +156,9 @@ $globals.ExamPrinter);
 
 $core.addMethod(
 $core.method({
-selector: "printTitle:",
+selector: "printTitle:time:",
 protocol: 'as yet unclassified',
-fn: function (aString){
+fn: function (aString,aTimeInSeconds){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
@@ -166,12 +166,12 @@ return $core.withContext(function($ctx1) {
 $recv(self["@textViews"])._add_($recv($globals.ExamTextView)._newIn_title_text_of_(self["@selector"],aString,$recv($recv(self["@textViews"])._size()).__plus((1)),self["@numberOfTexts"]));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"printTitle:",{aString:aString},$globals.ExamPrinter)});
+}, function($ctx1) {$ctx1.fill(self,"printTitle:time:",{aString:aString,aTimeInSeconds:aTimeInSeconds},$globals.ExamPrinter)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aString"],
-source: "printTitle: aString\x0a\x09textViews add: (ExamTextView newIn: selector title: aString text: textViews size + 1 of: numberOfTexts)",
+args: ["aString", "aTimeInSeconds"],
+source: "printTitle: aString time: aTimeInSeconds\x0a\x09textViews add: (ExamTextView newIn: selector title: aString text: textViews size + 1 of: numberOfTexts)",
 referencedClasses: ["ExamTextView"],
 //>>excludeEnd("ide");
 messageSends: ["add:", "newIn:title:text:of:", "+", "size"]
@@ -1175,7 +1175,7 @@ $globals.Header);
 
 
 
-$core.addClass('OndafSimulator', $globals.Object, ['fileDropTarget', 'examDesigner', 'theExam', 'header'], 'OndafSimulator');
+$core.addClass('OndafSimulator', $globals.Object, ['fileDropTarget', 'examDesigner', 'theExam', 'header', 'timer'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "addText:",
@@ -1391,6 +1391,7 @@ $ctx1.supercall = true,
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
 self["@examDesigner"]=$recv($globals.ExamDesigner)._new();
+self["@timer"]=$globals.Timer;
 $recv(self["@examDesigner"])._informProgressTo_((function(title){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -1407,8 +1408,8 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09examDesigner := ExamDesigner new.\x0a\x09examDesigner\x0a\x09\x09informProgressTo: [ :title | self addToList: title ]\x0a\x09",
-referencedClasses: ["ExamDesigner"],
+source: "initialize\x0a\x09super initialize.\x0a\x09examDesigner := ExamDesigner new.\x0a\x09timer := Timer.\x0a\x09examDesigner\x0a\x09\x09informProgressTo: [ :title | self addToList: title ]\x0a\x09",
+referencedClasses: ["ExamDesigner", "Timer"],
 //>>excludeEnd("ide");
 messageSends: ["initialize", "new", "informProgressTo:", "addToList:"]
 }),
@@ -1420,11 +1421,11 @@ selector: "startExam",
 protocol: 'action',
 fn: function (){
 var self=this;
-var aPrinter,copies,textsStream,copy,result,whenContinue,answers,resultStream;
+var aPrinter,copies,textsStream,copy,result,whenContinue,answers,resultStream,timerInst,time;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1;
+var $1,$2;
 $recv(self["@header"])._remove();
 $recv(self["@fileDropTarget"])._hide();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1444,6 +1445,10 @@ return $core.withContext(function($ctx2) {
 $recv(copy)._hide();
 $1=$recv(textsStream)._atEnd();
 if($core.assert($1)){
+$recv(timerInst)._stop();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["stop"]=1;
+//>>excludeEnd("ctx");
 answers=$recv(copies)._flatCollect_((function(each){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx3) {
@@ -1494,17 +1499,55 @@ $ctx2.sendIdx["render"]=1;
 copy=$recv(textsStream)._next();
 $recv(copy)._whenContinueDo_(whenContinue);
 $recv(copy)._render();
+time=(0);
+timerInst=$recv(self["@timer"])._each_do_((1000),(function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+time=$recv(time).__plus((1));
+time;
+$2=$recv(time).__gt_eq((30));
+if($core.assert($2)){
+$recv(timerInst)._stop();
+return $recv(whenContinue)._value();
+} else {
+return $recv(copy)._showSeconds_(time);
+};
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,6)});
+//>>excludeEnd("ctx");
+}));
+$recv(timerInst)._start();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies,textsStream:textsStream,copy:copy,result:result,whenContinue:whenContinue,answers:answers,resultStream:resultStream},$globals.OndafSimulator)});
+}, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies,textsStream:textsStream,copy:copy,result:result,whenContinue:whenContinue,answers:answers,resultStream:resultStream,timerInst:timerInst,time:time},$globals.OndafSimulator)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers resultStream |\x0a\x09header remove.\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.\x0a\x09\x09\x09resultStream := result individualResults readStream.\x0a\x09\x09\x09copies do: [ :each | each consumeResults: resultStream ].\x0a\x09\x09\x09copies do: #show.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.",
+source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers resultStream timerInst time |\x0a\x09header remove.\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := ExamPrinter newOn: '#content'.\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09copy hide.\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09timerInst stop.\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.\x0a\x09\x09\x09resultStream := result individualResults readStream.\x0a\x09\x09\x09copies do: [ :each | each consumeResults: resultStream ].\x0a\x09\x09\x09copies do: #show.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenContinueDo: whenContinue.\x0a\x09\x09\x09copy render.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenContinueDo: whenContinue.\x0a\x09copy render.\x0a\x09\x0a\x09time := 0.\x0a\x09timerInst := timer each: 1000 do: [ time := time + 1. time >= 30 ifTrue: [timerInst stop. whenContinue value] ifFalse: [copy showSeconds: time] ].\x0a\x09timerInst start.\x0a\x09\x0a\x09",
 referencedClasses: ["ExamPrinter", "ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["remove", "hide", "designExam", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:level:", "score", "maxScore", "percentage", "level", "individualResults", "do:", "consumeResults:", "next", "whenContinueDo:", "render"]
+messageSends: ["remove", "hide", "designExam", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "stop", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:level:", "score", "maxScore", "percentage", "level", "individualResults", "do:", "consumeResults:", "next", "whenContinueDo:", "render", "each:do:", "+", ">=", "value", "showSeconds:", "start"]
+}),
+$globals.OndafSimulator);
+
+$core.addMethod(
+$core.method({
+selector: "timer:",
+protocol: 'action',
+fn: function (aTimer){
+var self=this;
+self["@timer"]=aTimer;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aTimer"],
+source: "timer: aTimer\x0a\x09timer := aTimer",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
 }),
 $globals.OndafSimulator);
 

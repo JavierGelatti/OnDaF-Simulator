@@ -75,7 +75,7 @@ GUITest subclass: #ExamPrinterTest
 test01PrintsATextCorrectly
 	| printer |
 	printer := ExamPrinter newOn: 'body'.
-	printer printTitle: 'A title'.
+	printer printTitle: 'A title' time: 0.
 	printer printText: 'Example text. '.
 	printer printWordToComplete: 'Hel'.
 
@@ -90,8 +90,8 @@ test01PrintsATextCorrectly
 test02IfThereAre2TitlesItRenders2Texts
 	| printer |
 	printer := ExamPrinter newOn: 'body'.
-	printer printTitle: 'A title 1'.
-	printer printTitle: 'A title 2'.
+	printer printTitle: 'A title 1' time: 0.
+	printer printTitle: 'A title 2' time: 0.
 
 	printer copies do: #render.
 	
@@ -400,6 +400,28 @@ test05
 		self assertPageDoesNotContain: 'Beispiel Text 1'.
 		self assertPageContains: 'New exam'.
 	]
+!
+
+test06
+	| inputs timer |
+	OndafSimulator start.
+	timer := TestTimer new.
+	"OndafSimulator current timer: timer."
+
+	FileDropper new dropText: 'Beispiel Text 1
+	First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.
+	
+	self afterThat: [
+		self clickOnText: 'Start exam'.
+		
+		inputs := 'input[type="text"]' asJQuery.
+		(inputs at: 0) value: 'ld'.
+		(inputs at: 1) value: 'wrong'.
+		
+		"timer forwardTime: 30."
+		
+		"self assertPageContains: 'Ergebnis'."
+	]
 ! !
 
 GUITest subclass: #ResultViewTest
@@ -570,6 +592,39 @@ textFileWith: aString
 
 newObject
 	^ JSON parse: '{}'
+! !
+
+Object subclass: #TestTimer
+	instanceVariableNames: 'time onTrigger onHandler handler trigger stopped'
+	package: 'OndafSimulator-Tests'!
+
+!TestTimer methodsFor: 'as yet unclassified'!
+
+each: milliseconds do: aBlock
+	trigger := milliseconds.
+	handler := aBlock.
+	^ self
+!
+
+initialize
+	super initialize.
+	stopped := false
+!
+
+stop
+	stopped := true
+!
+
+stopped
+	^ stopped
+!
+
+tick
+	handler value
+!
+
+triggerMillis
+	^ trigger
 ! !
 
 Object subclass: #WidgetPreviews

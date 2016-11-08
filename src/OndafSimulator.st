@@ -32,7 +32,7 @@ printText: aString
 	self currentTextView addText: aString
 !
 
-printTitle: aString
+printTitle: aString time: aTimeInSeconds
 	textViews add: (ExamTextView newIn: selector title: aString text: textViews size + 1 of: numberOfTexts)
 !
 
@@ -260,7 +260,7 @@ renderOn: html
 ! !
 
 Object subclass: #OndafSimulator
-	instanceVariableNames: 'fileDropTarget examDesigner theExam header'
+	instanceVariableNames: 'fileDropTarget examDesigner theExam header timer'
 	package: 'OndafSimulator'!
 
 !OndafSimulator methodsFor: 'action'!
@@ -288,7 +288,7 @@ doSilkTAG
 !
 
 startExam
-	| aPrinter copies textsStream copy result whenContinue answers resultStream |
+	| aPrinter copies textsStream copy result whenContinue answers resultStream timerInst time |
 	header remove.
 	fileDropTarget hide.
 	theExam := examDesigner designExam.
@@ -299,6 +299,7 @@ startExam
 	whenContinue := [
 		copy hide.
 		textsStream atEnd ifTrue: [
+			timerInst stop.
 			answers := copies flatCollect: [ :each | each answers ].
 			result := theExam evaluate: answers.
 			ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.
@@ -314,6 +315,14 @@ startExam
 	copy := textsStream next.
 	copy whenContinueDo: whenContinue.
 	copy render.
+	
+	time := 0.
+	timerInst := timer each: 1000 do: [ time := time + 1. time >= 30 ifTrue: [timerInst stop. whenContinue value] ifFalse: [copy showSeconds: time] ].
+	timerInst start.
+!
+
+timer: aTimer
+	timer := aTimer
 ! !
 
 !OndafSimulator methodsFor: 'starting'!
@@ -339,6 +348,7 @@ augmentPage
 initialize
 	super initialize.
 	examDesigner := ExamDesigner new.
+	timer := Timer.
 	examDesigner
 		informProgressTo: [ :title | self addToList: title ]
 ! !

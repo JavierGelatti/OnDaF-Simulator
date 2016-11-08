@@ -343,7 +343,7 @@ var printer;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 printer=$recv($globals.ExamPrinter)._newOn_("body");
-$recv(printer)._printTitle_("A title");
+$recv(printer)._printTitle_time_("A title",(0));
 $recv(printer)._printText_("Example text. ");
 $recv(printer)._printWordToComplete_("Hel");
 $recv($recv(printer)._copies())._do_("render");
@@ -364,10 +364,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test01PrintsATextCorrectly\x0a\x09| printer |\x0a\x09printer := ExamPrinter newOn: 'body'.\x0a\x09printer printTitle: 'A title'.\x0a\x09printer printText: 'Example text. '.\x0a\x09printer printWordToComplete: 'Hel'.\x0a\x0a\x09printer copies do: #render.\x0a\x09\x0a\x09self assertPageContains: 'A title'.\x0a\x09self assertPageContains: 'Example text.'.\x0a\x09self assertPageContains: 'Hel'.\x0a\x09self assertNumberOf: 'input[type=\x22text\x22]' equals: 1",
+source: "test01PrintsATextCorrectly\x0a\x09| printer |\x0a\x09printer := ExamPrinter newOn: 'body'.\x0a\x09printer printTitle: 'A title' time: 0.\x0a\x09printer printText: 'Example text. '.\x0a\x09printer printWordToComplete: 'Hel'.\x0a\x0a\x09printer copies do: #render.\x0a\x09\x0a\x09self assertPageContains: 'A title'.\x0a\x09self assertPageContains: 'Example text.'.\x0a\x09self assertPageContains: 'Hel'.\x0a\x09self assertNumberOf: 'input[type=\x22text\x22]' equals: 1",
 referencedClasses: ["ExamPrinter"],
 //>>excludeEnd("ide");
-messageSends: ["newOn:", "printTitle:", "printText:", "printWordToComplete:", "do:", "copies", "assertPageContains:", "assertNumberOf:equals:"]
+messageSends: ["newOn:", "printTitle:time:", "printText:", "printWordToComplete:", "do:", "copies", "assertPageContains:", "assertNumberOf:equals:"]
 }),
 $globals.ExamPrinterTest);
 
@@ -383,11 +383,11 @@ return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
 printer=$recv($globals.ExamPrinter)._newOn_("body");
-$recv(printer)._printTitle_("A title 1");
+$recv(printer)._printTitle_time_("A title 1",(0));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["printTitle:"]=1;
+$ctx1.sendIdx["printTitle:time:"]=1;
 //>>excludeEnd("ctx");
-$recv(printer)._printTitle_("A title 2");
+$recv(printer)._printTitle_time_("A title 2",(0));
 $1=$recv(printer)._copies();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["copies"]=1;
@@ -406,10 +406,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test02IfThereAre2TitlesItRenders2Texts\x0a\x09| printer |\x0a\x09printer := ExamPrinter newOn: 'body'.\x0a\x09printer printTitle: 'A title 1'.\x0a\x09printer printTitle: 'A title 2'.\x0a\x0a\x09printer copies do: #render.\x0a\x09\x0a\x09self assert: printer copies size equals: 2.\x0a\x09self assertPageContains: 'A title 1'.\x0a\x09self assertPageContains: 'A title 2'",
+source: "test02IfThereAre2TitlesItRenders2Texts\x0a\x09| printer |\x0a\x09printer := ExamPrinter newOn: 'body'.\x0a\x09printer printTitle: 'A title 1' time: 0.\x0a\x09printer printTitle: 'A title 2' time: 0.\x0a\x0a\x09printer copies do: #render.\x0a\x09\x0a\x09self assert: printer copies size equals: 2.\x0a\x09self assertPageContains: 'A title 1'.\x0a\x09self assertPageContains: 'A title 2'",
 referencedClasses: ["ExamPrinter"],
 //>>excludeEnd("ide");
-messageSends: ["newOn:", "printTitle:", "do:", "copies", "assert:equals:", "size", "assertPageContains:"]
+messageSends: ["newOn:", "printTitle:time:", "do:", "copies", "assert:equals:", "size", "assertPageContains:"]
 }),
 $globals.ExamPrinterTest);
 
@@ -1255,6 +1255,57 @@ messageSends: ["start", "dropText:on:", "new", "afterThat:", "clickOnText:", "as
 }),
 $globals.OndafSimulatorTest);
 
+$core.addMethod(
+$core.method({
+selector: "test06",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var inputs,timer;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$recv($globals.OndafSimulator)._start();
+timer=$recv($globals.TestTimer)._new();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["new"]=1;
+//>>excludeEnd("ctx");
+$recv($recv($globals.FileDropper)._new())._dropText_on_("Beispiel Text 1\x0a\x09First text. Hello wor{ld}. This is an exam{ple}.",".text-file-target");
+self._afterThat_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+self._clickOnText_("Start exam");
+inputs="input[type=\x22text\x22]"._asJQuery();
+inputs;
+$1=$recv(inputs)._at_((0));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["at:"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._value_("ld");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["value:"]=1;
+//>>excludeEnd("ctx");
+return $recv($recv(inputs)._at_((1)))._value_("wrong");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test06",{inputs:inputs,timer:timer},$globals.OndafSimulatorTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test06\x0a\x09| inputs timer |\x0a\x09OndafSimulator start.\x0a\x09timer := TestTimer new.\x0a\x09\x22OndafSimulator current timer: timer.\x22\x0a\x0a\x09FileDropper new dropText: 'Beispiel Text 1\x0a\x09First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self clickOnText: 'Start exam'.\x0a\x09\x09\x0a\x09\x09inputs := 'input[type=\x22text\x22]' asJQuery.\x0a\x09\x09(inputs at: 0) value: 'ld'.\x0a\x09\x09(inputs at: 1) value: 'wrong'.\x0a\x09\x09\x0a\x09\x09\x22timer forwardTime: 30.\x22\x0a\x09\x09\x0a\x09\x09\x22self assertPageContains: 'Ergebnis'.\x22\x0a\x09]",
+referencedClasses: ["OndafSimulator", "TestTimer", "FileDropper"],
+//>>excludeEnd("ide");
+messageSends: ["start", "new", "dropText:on:", "afterThat:", "clickOnText:", "asJQuery", "value:", "at:"]
+}),
+$globals.OndafSimulatorTest);
+
 
 
 $core.addClass('ResultViewTest', $globals.GUITest, [], 'OndafSimulator-Tests');
@@ -1864,6 +1915,140 @@ referencedClasses: ["Blob", "Array"],
 messageSends: ["newValue:value:", "with:"]
 }),
 $globals.FileDropper);
+
+
+
+$core.addClass('TestTimer', $globals.Object, ['time', 'onTrigger', 'onHandler', 'handler', 'trigger', 'stopped'], 'OndafSimulator-Tests');
+$core.addMethod(
+$core.method({
+selector: "each:do:",
+protocol: 'as yet unclassified',
+fn: function (milliseconds,aBlock){
+var self=this;
+self["@trigger"]=milliseconds;
+self["@handler"]=aBlock;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["milliseconds", "aBlock"],
+source: "each: milliseconds do: aBlock\x0a\x09trigger := milliseconds.\x0a\x09handler := aBlock.\x0a\x09^ self",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TestTimer);
+
+$core.addMethod(
+$core.method({
+selector: "initialize",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true,
+//>>excludeEnd("ctx");
+($globals.TestTimer.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+self["@stopped"]=false;
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.TestTimer)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "initialize\x0a\x09super initialize.\x0a\x09stopped := false",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["initialize"]
+}),
+$globals.TestTimer);
+
+$core.addMethod(
+$core.method({
+selector: "stop",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+self["@stopped"]=true;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "stop\x0a\x09stopped := true",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TestTimer);
+
+$core.addMethod(
+$core.method({
+selector: "stopped",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@stopped"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "stopped\x0a\x09^ stopped",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TestTimer);
+
+$core.addMethod(
+$core.method({
+selector: "tick",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@handler"])._value();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"tick",{},$globals.TestTimer)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "tick\x0a\x09handler value",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["value"]
+}),
+$globals.TestTimer);
+
+$core.addMethod(
+$core.method({
+selector: "triggerMillis",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@trigger"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "triggerMillis\x0a\x09^ trigger",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TestTimer);
 
 
 

@@ -1767,7 +1767,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(aPrinter)._printTitle_(self["@title"]);
+$recv(aPrinter)._printTitle_time_(self["@title"],self._timeInSeconds());
 $recv(self["@content"])._do_((function(each){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -1784,10 +1784,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aPrinter"],
-source: "copyOn: aPrinter\x0a\x09aPrinter printTitle: title.\x0a\x09content do: [ :each | each copyOn: aPrinter ]",
+source: "copyOn: aPrinter\x0a\x09aPrinter printTitle: title time: self timeInSeconds.\x0a\x09content do: [ :each | each copyOn: aPrinter ]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["printTitle:", "do:", "copyOn:"]
+messageSends: ["printTitle:time:", "timeInSeconds", "do:", "copyOn:"]
 }),
 $globals.CTestText);
 
@@ -1847,6 +1847,52 @@ source: "initializeTitle: aTitle content: anObject\x0a\x09title := aTitle.\x0a\x
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
+}),
+$globals.CTestText);
+
+$core.addMethod(
+$core.method({
+selector: "numberOfWordsToComplete",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+return $recv($recv(self["@content"])._select_("requiresAnAnswer"))._size();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"numberOfWordsToComplete",{},$globals.CTestText)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "numberOfWordsToComplete\x0a\x09^ (content select: #requiresAnAnswer) size",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["size", "select:"]
+}),
+$globals.CTestText);
+
+$core.addMethod(
+$core.method({
+selector: "timeInSeconds",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+return $recv(self._numberOfWordsToComplete()).__star((15));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"timeInSeconds",{},$globals.CTestText)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "timeInSeconds\x0a\x09^ self numberOfWordsToComplete * 15",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["*", "numberOfWordsToComplete"]
 }),
 $globals.CTestText);
 
