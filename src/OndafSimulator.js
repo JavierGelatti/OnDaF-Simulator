@@ -1010,7 +1010,7 @@ $globals.Header);
 
 
 
-$core.addClass('OndafSimulator', $globals.Object, ['fileDropTarget', 'examDesigner', 'theExam', 'header', 'timer'], 'OndafSimulator');
+$core.addClass('OndafSimulator', $globals.Object, ['fileDropTarget', 'examDesigner', 'theExam', 'header', 'printer', 'currentExam', 'copies'], 'OndafSimulator');
 $core.addMethod(
 $core.method({
 selector: "addText:",
@@ -1125,6 +1125,42 @@ $globals.OndafSimulator);
 
 $core.addMethod(
 $core.method({
+selector: "beginNextText",
+protocol: 'action',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv(self["@currentExam"])._atEnd();
+if($core.assert($1)){
+var result;
+result=$recv(self["@theExam"])._evaluate_on_(self["@copies"],$recv($globals.ResultView)._newIn_("#content"));
+result;
+$recv(result)._giveToStudent();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["giveToStudent"]=1;
+//>>excludeEnd("ctx");
+return nil;
+};
+$recv($recv(self["@currentExam"])._next())._giveToStudent();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"beginNextText",{},$globals.OndafSimulator)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "beginNextText\x0a\x09currentExam atEnd ifTrue: [\x0a\x09\x09| result |\x0a\x09\x09result := theExam evaluate: copies on: (ResultView newIn: '#content').\x0a\x09\x09result giveToStudent.\x0a\x09\x09^ nil\x0a\x09].\x0a\x0a\x09currentExam next giveToStudent.",
+referencedClasses: ["ResultView"],
+//>>excludeEnd("ide");
+messageSends: ["ifTrue:", "atEnd", "evaluate:on:", "newIn:", "giveToStudent", "next"]
+}),
+$globals.OndafSimulator);
+
+$core.addMethod(
+$core.method({
 selector: "doAmberWith",
 protocol: 'action',
 fn: function (){
@@ -1226,7 +1262,7 @@ $ctx1.supercall = true,
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
 self["@examDesigner"]=$recv($globals.ExamDesigner)._new();
-self["@timer"]=$globals.Timer;
+self["@printer"]=$recv($globals.CTestPrinter)._newWithTray_($recv($globals.ExamPrinterTray)._newOn_("#content"));
 $recv(self["@examDesigner"])._informProgressTo_((function(title){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
@@ -1243,10 +1279,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09examDesigner := ExamDesigner new.\x0a\x09timer := Timer.\x0a\x09examDesigner\x0a\x09\x09informProgressTo: [ :title | self addToList: title ]\x0a\x09",
-referencedClasses: ["ExamDesigner", "Timer"],
+source: "initialize\x0a\x09super initialize.\x0a\x09examDesigner := ExamDesigner new.\x0a\x09printer := CTestPrinter newWithTray: (ExamPrinterTray newOn: '#content').\x0a\x09examDesigner\x0a\x09\x09informProgressTo: [ :title | self addToList: title ]\x0a\x09",
+referencedClasses: ["ExamDesigner", "CTestPrinter", "ExamPrinterTray"],
 //>>excludeEnd("ide");
-messageSends: ["initialize", "new", "informProgressTo:", "addToList:"]
+messageSends: ["initialize", "new", "newWithTray:", "newOn:", "informProgressTo:", "addToList:"]
 }),
 $globals.OndafSimulator);
 
@@ -1256,106 +1292,46 @@ selector: "startExam",
 protocol: 'action',
 fn: function (){
 var self=this;
-var aPrinter,copies,textsStream,copy,result,whenContinue,answers,resultStream,timerInst,time;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1;
 $recv(self["@header"])._remove();
 $recv(self["@fileDropTarget"])._hide();
 self["@theExam"]=$recv(self["@examDesigner"])._designExam();
-aPrinter=$recv($globals.CTestPrinter)._newWithTray_($recv($globals.ExamPrinterTray)._newOn_("#content"));
-copies=$recv(aPrinter)._print_(self["@theExam"]);
-textsStream=$recv(copies)._readStream();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["readStream"]=1;
-//>>excludeEnd("ctx");
-whenContinue=(function(){
+self["@copies"]=$recv(self["@printer"])._print_(self["@theExam"]);
+$recv(self["@copies"])._do_((function(each){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$1=$recv(textsStream)._atEnd();
-if($core.assert($1)){
-answers=$recv(copies)._flatCollect_((function(each){
+return $recv(each)._whenFinishDo_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx3) {
 //>>excludeEnd("ctx");
-return $recv(each)._answers();
+return self._beginNextText();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx3) {$ctx3.fillBlock({each:each},$ctx2,3)});
+$ctx3.sendIdx["beginNextText"]=1;
 //>>excludeEnd("ctx");
-}));
-answers;
-result=$recv(self["@theExam"])._evaluate_(answers);
-result;
-$recv($globals.ResultView)._newIn_withScore_of_percentage_level_("#content",$recv(result)._score(),$recv(result)._maxScore(),$recv(result)._percentage(),$recv(result)._level());
-resultStream=$recv($recv(result)._individualResults())._readStream();
-resultStream;
-$recv(copies)._do_((function(each){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx3) {
-//>>excludeEnd("ctx");
-return $recv(each)._consumeResults_(resultStream);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx3) {$ctx3.fillBlock({each:each},$ctx2,4)});
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)});
 //>>excludeEnd("ctx");
 }));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["do:"]=1;
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)});
 //>>excludeEnd("ctx");
-return $recv(copies)._do_("giveBackToStudent");
-} else {
-copy=$recv(textsStream)._next();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["next"]=1;
-//>>excludeEnd("ctx");
-copy;
-$recv(copy)._whenFinishDo_(whenContinue);
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["whenFinishDo:"]=1;
-//>>excludeEnd("ctx");
-return $recv(copy)._giveToStudent();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["giveToStudent"]=1;
-//>>excludeEnd("ctx");
-};
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
-//>>excludeEnd("ctx");
-});
-copy=$recv(textsStream)._next();
-$recv(copy)._whenFinishDo_(whenContinue);
-$recv(copy)._giveToStudent();
+}));
+self["@currentExam"]=$recv(self["@copies"])._readStream();
+self._beginNextText();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"startExam",{aPrinter:aPrinter,copies:copies,textsStream:textsStream,copy:copy,result:result,whenContinue:whenContinue,answers:answers,resultStream:resultStream,timerInst:timerInst,time:time},$globals.OndafSimulator)});
+}, function($ctx1) {$ctx1.fill(self,"startExam",{},$globals.OndafSimulator)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09| aPrinter copies textsStream copy result whenContinue answers resultStream timerInst time |\x0a\x09header remove.\x0a\x09fileDropTarget hide.\x0a\x09theExam := examDesigner designExam.\x0a\x09aPrinter := CTestPrinter newWithTray: (ExamPrinterTray newOn: '#content').\x0a\x09copies := aPrinter print: theExam.\x0a\x09\x0a\x09textsStream := copies readStream.\x0a\x09whenContinue := [\x0a\x09\x09\x22copy hide.\x22\x0a\x09\x09textsStream atEnd ifTrue: [\x0a\x09\x09\x09\x22timerInst stop.\x22\x0a\x09\x09\x09answers := copies flatCollect: [ :each | each answers ].\x0a\x09\x09\x09result := theExam evaluate: answers.\x0a\x09\x09\x09ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.\x0a\x09\x09\x09resultStream := result individualResults readStream.\x0a\x09\x09\x09copies do: [ :each | each consumeResults: resultStream ].\x0a\x09\x09\x09copies do: #giveBackToStudent.\x0a\x09\x09] ifFalse: [\x0a\x09\x09\x09copy := textsStream next.\x0a\x09\x09\x09copy whenFinishDo: whenContinue.\x0a\x09\x09\x09copy giveToStudent.\x0a\x09\x09]\x09\x0a\x09].\x0a\x09copy := textsStream next.\x0a\x09copy whenFinishDo: whenContinue.\x0a\x09copy giveToStudent.\x0a\x09\x0a\x09\x22time := 0.\x0a\x09timerInst := timer each: 1000 do: [ time := time + 1. time >= 30 ifTrue: [timerInst stop. whenContinue value] ifFalse: [copy showSeconds: time] ].\x0a\x09timerInst start.\x22\x0a\x09\x0a\x09",
-referencedClasses: ["CTestPrinter", "ExamPrinterTray", "ResultView"],
-//>>excludeEnd("ide");
-messageSends: ["remove", "hide", "designExam", "newWithTray:", "newOn:", "print:", "readStream", "ifTrue:ifFalse:", "atEnd", "flatCollect:", "answers", "evaluate:", "newIn:withScore:of:percentage:level:", "score", "maxScore", "percentage", "level", "individualResults", "do:", "consumeResults:", "next", "whenFinishDo:", "giveToStudent"]
-}),
-$globals.OndafSimulator);
-
-$core.addMethod(
-$core.method({
-selector: "timer:",
-protocol: 'action',
-fn: function (aTimer){
-var self=this;
-self["@timer"]=aTimer;
-return self;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["aTimer"],
-source: "timer: aTimer\x0a\x09timer := aTimer",
+source: "startExam\x0a\x09header remove.\x0a\x09fileDropTarget hide.\x0a\x09\x0a\x09theExam := examDesigner designExam.\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09copies do: [ :each | each whenFinishDo: [ self beginNextText ] ].\x0a\x09currentExam := copies readStream.\x0a\x09\x0a\x09self beginNextText",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: []
+messageSends: ["remove", "hide", "designExam", "print:", "do:", "whenFinishDo:", "beginNextText", "readStream"]
 }),
 $globals.OndafSimulator);
 
@@ -1405,7 +1381,26 @@ messageSends: ["new", "augmentPage", "current"]
 $globals.OndafSimulator.klass);
 
 
-$core.addClass('ResultView', $globals.Widget, ['score', 'totalScore', 'percentage', 'level'], 'OndafSimulator');
+$core.addClass('ResultView', $globals.Widget, ['score', 'totalScore', 'percentage', 'level', 'container'], 'OndafSimulator');
+$core.addMethod(
+$core.method({
+selector: "container:",
+protocol: 'as yet unclassified',
+fn: function (aContainer){
+var self=this;
+self["@container"]=aContainer;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aContainer"],
+source: "container: aContainer\x0a\x09container := aContainer",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.ResultView);
+
 $core.addMethod(
 $core.method({
 selector: "level:",
@@ -1568,6 +1563,34 @@ $globals.ResultView);
 
 $core.addMethod(
 $core.method({
+selector: "renderScore:of:percentage:level:",
+protocol: 'as yet unclassified',
+fn: function (aScore,aTotalScore,aPercentage,aLevel){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self._score_(aScore);
+self._totalScore_(aTotalScore);
+self._percentage_(aPercentage);
+self._level_(aLevel);
+self._appendToJQuery_(self["@container"]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"renderScore:of:percentage:level:",{aScore:aScore,aTotalScore:aTotalScore,aPercentage:aPercentage,aLevel:aLevel},$globals.ResultView)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aScore", "aTotalScore", "aPercentage", "aLevel"],
+source: "renderScore: aScore of: aTotalScore percentage: aPercentage level: aLevel\x0a\x09self\x0a\x09\x09score: aScore;\x0a\x09\x09totalScore: aTotalScore;\x0a\x09\x09percentage: aPercentage;\x0a\x09\x09level: aLevel;\x0a\x09\x09appendToJQuery: container",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["score:", "totalScore:", "percentage:", "level:", "appendToJQuery:"]
+}),
+$globals.ResultView);
+
+$core.addMethod(
+$core.method({
 selector: "score:",
 protocol: 'as yet unclassified',
 fn: function (aScore){
@@ -1604,6 +1627,38 @@ messageSends: []
 }),
 $globals.ResultView);
 
+
+$core.addMethod(
+$core.method({
+selector: "newIn:",
+protocol: 'as yet unclassified',
+fn: function (aSelector){
+var self=this;
+var container;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+container="<div>"._asJQuery();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["asJQuery"]=1;
+//>>excludeEnd("ctx");
+$recv($recv(aSelector)._asJQuery())._prepend_(container);
+$1=self._new();
+$recv($1)._container_(container);
+return $recv($1)._yourself();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"newIn:",{aSelector:aSelector,container:container},$globals.ResultView.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aSelector"],
+source: "newIn: aSelector\x0a\x09| container |\x0a\x09container := '<div>' asJQuery.\x0a\x09aSelector asJQuery prepend: container.\x0a\x09\x0a\x09^ self new\x0a\x09\x09container: container;\x0a\x09\x09yourself",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["asJQuery", "prepend:", "container:", "new", "yourself"]
+}),
+$globals.ResultView.klass);
 
 $core.addMethod(
 $core.method({

@@ -880,6 +880,57 @@ messageSends: ["givenExamWithText:", ",", "lf", "evaluate:", "assert:equals:", "
 }),
 $globals.ExamTest);
 
+$core.addMethod(
+$core.method({
+selector: "test11",
+protocol: 'tests',
+fn: function (){
+var self=this;
+var spySubmissions,spyView,aResult;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}. Cor{rect}");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx[","]=1;
+//>>excludeEnd("ctx");
+self._givenExamWithText_($1);
+spySubmissions=$recv($globals.Array)._with_($recv($globals.SpySubmission)._newWith_(["wrong", "ld", "rect"]));
+spyView=$recv($globals.SpyResultsView)._new();
+aResult=$recv(self["@theExam"])._evaluate_on_(spySubmissions,spyView);
+$recv(aResult)._giveToStudent();
+self._assert_equals_($recv(spyView)._score(),(2));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assert:equals:"]=1;
+//>>excludeEnd("ctx");
+self._assert_equals_($recv(spyView)._totalScore(),(3));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assert:equals:"]=2;
+//>>excludeEnd("ctx");
+self._assert_equals_($recv(spyView)._percentage(),(66.67));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assert:equals:"]=3;
+//>>excludeEnd("ctx");
+self._assert_equals_($recv(spyView)._level(),"B1");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["assert:equals:"]=4;
+//>>excludeEnd("ctx");
+self._assert_equals_($recv($recv(spySubmissions)._first())._results(),[false, true, true]);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test11",{spySubmissions:spySubmissions,spyView:spyView,aResult:aResult},$globals.ExamTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test11\x0a\x09| spySubmissions spyView aResult |\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}. Cor{rect}'.\x0a\x09\x0a\x09spySubmissions := Array with: (SpySubmission newWith: #('wrong' 'ld' 'rect')).\x0a\x09spyView := SpyResultsView new.\x0a\x09\x0a\x09aResult := theExam evaluate: spySubmissions on: spyView.\x0a\x09aResult giveToStudent.\x0a\x09\x0a\x09self assert: spyView score equals: 2.\x0a\x09self assert: spyView totalScore equals: 3.\x0a\x09self assert: spyView percentage equals: 66.67.\x0a\x09self assert: spyView level equals: 'B1'.\x0a\x09self assert: (spySubmissions first) results equals: #(false true true).",
+referencedClasses: ["String", "Array", "SpySubmission", "SpyResultsView"],
+//>>excludeEnd("ide");
+messageSends: ["givenExamWithText:", ",", "lf", "with:", "newWith:", "new", "evaluate:on:", "giveToStudent", "assert:equals:", "score", "totalScore", "percentage", "level", "results", "first"]
+}),
+$globals.ExamTest);
+
 
 
 $core.addClass('InterpreterText', $globals.TestCase, [], 'OndafSimulator-Core-Tests');
@@ -2266,6 +2317,230 @@ messageSends: ["assertPercentage:isLevel:"]
 }),
 $globals.ResultTableTest);
 
+
+
+$core.addClass('SpyResultsView', $globals.Object, ['score', 'totalScore', 'percentage', 'level'], 'OndafSimulator-Core-Tests');
+$core.addMethod(
+$core.method({
+selector: "level",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@level"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "level\x0a\x09^ level",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.SpyResultsView);
+
+$core.addMethod(
+$core.method({
+selector: "percentage",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@percentage"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "percentage\x0a\x09^ percentage",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.SpyResultsView);
+
+$core.addMethod(
+$core.method({
+selector: "renderScore:of:percentage:level:",
+protocol: 'as yet unclassified',
+fn: function (aScore,aTotalScore,aPercentage,aLevel){
+var self=this;
+self["@score"]=aScore;
+self["@totalScore"]=aTotalScore;
+self["@percentage"]=aPercentage;
+self["@level"]=aLevel;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aScore", "aTotalScore", "aPercentage", "aLevel"],
+source: "renderScore: aScore of: aTotalScore percentage: aPercentage level: aLevel \x0a\x09score := aScore.\x0a\x09totalScore := aTotalScore.\x0a\x09percentage := aPercentage.\x0a\x09level := aLevel",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.SpyResultsView);
+
+$core.addMethod(
+$core.method({
+selector: "score",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@score"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "score\x0a\x09^ score",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.SpyResultsView);
+
+$core.addMethod(
+$core.method({
+selector: "totalScore",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@totalScore"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "totalScore\x0a\x09^ totalScore",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.SpyResultsView);
+
+
+
+$core.addClass('SpySubmission', $globals.Object, ['answers', 'results', 'shown'], 'OndafSimulator-Core-Tests');
+$core.addMethod(
+$core.method({
+selector: "answers",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@answers"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "answers\x0a\x09^ answers",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.SpySubmission);
+
+$core.addMethod(
+$core.method({
+selector: "answers:",
+protocol: 'as yet unclassified',
+fn: function (aCollection){
+var self=this;
+self["@answers"]=aCollection;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aCollection"],
+source: "answers: aCollection \x0a\x09answers := aCollection",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.SpySubmission);
+
+$core.addMethod(
+$core.method({
+selector: "consumeResults:",
+protocol: 'as yet unclassified',
+fn: function (aReadStream){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+self["@results"]=$recv(aReadStream)._next_($recv(self["@answers"])._size());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"consumeResults:",{aReadStream:aReadStream},$globals.SpySubmission)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aReadStream"],
+source: "consumeResults: aReadStream \x0a\x09results := aReadStream next: answers size.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["next:", "size"]
+}),
+$globals.SpySubmission);
+
+$core.addMethod(
+$core.method({
+selector: "giveBackToStudent",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+self["@shown"]=true;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "giveBackToStudent\x0a\x09shown := true",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.SpySubmission);
+
+$core.addMethod(
+$core.method({
+selector: "results",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+return self["@results"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "results\x0a\x09^ results",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.SpySubmission);
+
+
+$core.addMethod(
+$core.method({
+selector: "newWith:",
+protocol: 'as yet unclassified',
+fn: function (aCollection){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=self._new();
+$recv($1)._answers_(aCollection);
+return $recv($1)._yourself();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"newWith:",{aCollection:aCollection},$globals.SpySubmission.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aCollection"],
+source: "newWith: aCollection \x0a\x09^ self new\x0a\x09\x09answers: aCollection;\x0a\x09\x09yourself",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["answers:", "new", "yourself"]
+}),
+$globals.SpySubmission.klass);
 
 
 $core.addClass('TestTray', $globals.Object, [], 'OndafSimulator-Core-Tests');

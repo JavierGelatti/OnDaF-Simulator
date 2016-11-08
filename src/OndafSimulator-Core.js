@@ -74,6 +74,41 @@ $globals.CTestExam);
 
 $core.addMethod(
 $core.method({
+selector: "evaluate:on:",
+protocol: 'as yet unclassified',
+fn: function (examCopies,aResultView){
+var self=this;
+var answers,result;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+answers=$recv(examCopies)._flatCollect_((function(each){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(each)._answers();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+result=self._evaluate_(answers);
+$recv(result)._for_toShowIn_(examCopies,aResultView);
+return result;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"evaluate:on:",{examCopies:examCopies,aResultView:aResultView,answers:answers,result:result},$globals.CTestExam)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["examCopies", "aResultView"],
+source: "evaluate: examCopies on: aResultView \x0a\x09| answers result |\x0a\x09answers := examCopies flatCollect: [ :each | each answers ].\x0a\x09result := self evaluate: answers.\x0a\x09result for: examCopies toShowIn: aResultView.\x0a\x09^ result",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["flatCollect:", "answers", "evaluate:", "for:toShowIn:"]
+}),
+$globals.CTestExam);
+
+$core.addMethod(
+$core.method({
 selector: "initializeWithTexts:",
 protocol: 'initialization',
 fn: function (aCollectionOfTexts){
@@ -1742,7 +1777,66 @@ messageSends: ["tray:", "new", "yourself"]
 $globals.CTestPrinter.klass);
 
 
-$core.addClass('CTestResult', $globals.Object, ['results'], 'OndafSimulator-Core');
+$core.addClass('CTestResult', $globals.Object, ['results', 'sourceSubmission', 'view'], 'OndafSimulator-Core');
+$core.addMethod(
+$core.method({
+selector: "for:toShowIn:",
+protocol: 'as yet unclassified',
+fn: function (sumission,aResultView){
+var self=this;
+self["@sourceSubmission"]=sumission;
+self["@view"]=aResultView;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["sumission", "aResultView"],
+source: "for: sumission toShowIn: aResultView\x0a\x09sourceSubmission := sumission.\x0a\x09view := aResultView.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.CTestResult);
+
+$core.addMethod(
+$core.method({
+selector: "giveToStudent",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+var resultStream;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@view"])._renderScore_of_percentage_level_(self._score(),self._maxScore(),self._percentage(),self._level());
+resultStream=$recv(self["@results"])._readStream();
+$recv(self["@sourceSubmission"])._do_((function(each){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(each)._consumeResults_(resultStream);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["do:"]=1;
+//>>excludeEnd("ctx");
+$recv(self["@sourceSubmission"])._do_("giveBackToStudent");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"giveToStudent",{resultStream:resultStream},$globals.CTestResult)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "giveToStudent\x0a\x09| resultStream |\x0a\x09view renderScore: self score of: self maxScore percentage: self percentage level: self level.\x0a\x09\x09\x0a\x09resultStream := results readStream.\x0a\x09sourceSubmission do: [ :each | each consumeResults: resultStream ].\x0a\x09sourceSubmission do: #giveBackToStudent",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["renderScore:of:percentage:level:", "score", "maxScore", "percentage", "level", "readStream", "do:", "consumeResults:"]
+}),
+$globals.CTestResult);
+
 $core.addMethod(
 $core.method({
 selector: "individualResults",

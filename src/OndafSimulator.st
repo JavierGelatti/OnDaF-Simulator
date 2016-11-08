@@ -230,7 +230,7 @@ renderOn: html
 ! !
 
 Object subclass: #OndafSimulator
-	instanceVariableNames: 'fileDropTarget examDesigner theExam header timer'
+	instanceVariableNames: 'fileDropTarget examDesigner theExam header printer currentExam copies'
 	package: 'OndafSimulator'!
 
 !OndafSimulator methodsFor: 'action'!
@@ -241,6 +241,17 @@ addText: aString
 
 addToList: aTitle
 	TextCard newIn: '#content > .text-file-target' title: aTitle
+!
+
+beginNextText
+	currentExam atEnd ifTrue: [
+		| result |
+		result := theExam evaluate: copies on: (ResultView newIn: '#content').
+		result giveToStudent.
+		^ nil
+	].
+
+	currentExam next giveToStudent.
 !
 
 doAmberWith
@@ -258,41 +269,16 @@ doSilkTAG
 !
 
 startExam
-	| aPrinter copies textsStream copy result whenContinue answers resultStream timerInst time |
 	header remove.
 	fileDropTarget hide.
+	
 	theExam := examDesigner designExam.
-	aPrinter := CTestPrinter newWithTray: (ExamPrinterTray newOn: '#content').
-	copies := aPrinter print: theExam.
+	copies := printer print: theExam.
 	
-	textsStream := copies readStream.
-	whenContinue := [
-		"copy hide."
-		textsStream atEnd ifTrue: [
-			"timerInst stop."
-			answers := copies flatCollect: [ :each | each answers ].
-			result := theExam evaluate: answers.
-			ResultView newIn: '#content' withScore: result score of: result maxScore percentage: result percentage level: result level.
-			resultStream := result individualResults readStream.
-			copies do: [ :each | each consumeResults: resultStream ].
-			copies do: #giveBackToStudent.
-		] ifFalse: [
-			copy := textsStream next.
-			copy whenFinishDo: whenContinue.
-			copy giveToStudent.
-		]	
-	].
-	copy := textsStream next.
-	copy whenFinishDo: whenContinue.
-	copy giveToStudent.
+	copies do: [ :each | each whenFinishDo: [ self beginNextText ] ].
+	currentExam := copies readStream.
 	
-	"time := 0.
-	timerInst := timer each: 1000 do: [ time := time + 1. time >= 30 ifTrue: [timerInst stop. whenContinue value] ifFalse: [copy showSeconds: time] ].
-	timerInst start."
-!
-
-timer: aTimer
-	timer := aTimer
+	self beginNextText
 ! !
 
 !OndafSimulator methodsFor: 'starting'!
@@ -318,7 +304,7 @@ augmentPage
 initialize
 	super initialize.
 	examDesigner := ExamDesigner new.
-	timer := Timer.
+	printer := CTestPrinter newWithTray: (ExamPrinterTray newOn: '#content').
 	examDesigner
 		informProgressTo: [ :title | self addToList: title ]
 ! !
@@ -337,10 +323,14 @@ start
 ! !
 
 Widget subclass: #ResultView
-	instanceVariableNames: 'score totalScore percentage level'
+	instanceVariableNames: 'score totalScore percentage level container'
 	package: 'OndafSimulator'!
 
 !ResultView methodsFor: 'as yet unclassified'!
+
+container: aContainer
+	container := aContainer
+!
 
 level: aLevel
 	level := aLevel
@@ -364,6 +354,15 @@ renderOn: html
 		]
 !
 
+renderScore: aScore of: aTotalScore percentage: aPercentage level: aLevel
+	self
+		score: aScore;
+		totalScore: aTotalScore;
+		percentage: aPercentage;
+		level: aLevel;
+		appendToJQuery: container
+!
+
 score: aScore
 	score := aScore
 !
@@ -373,6 +372,16 @@ totalScore: aScore
 ! !
 
 !ResultView class methodsFor: 'as yet unclassified'!
+
+newIn: aSelector
+	| container |
+	container := '<div>' asJQuery.
+	aSelector asJQuery prepend: container.
+	
+	^ self new
+		container: container;
+		yourself
+!
 
 newIn: aSelector withScore: actualScore of: totalScore percentage: percentage level: level
 	| container |
