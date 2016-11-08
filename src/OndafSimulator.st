@@ -319,6 +319,7 @@ current
 
 start
 	currentInstance := self new.
+	'body' asJQuery empty.
 	self current augmentPage
 ! !
 
