@@ -258,16 +258,61 @@ test04DefineBlockToExecuteOnNewExam
 ! !
 
 GUITest subclass: #OndafSimulatorTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'lastInputCompleted'
 	package: 'OndafSimulator-Tests'!
+
+!OndafSimulatorTest methodsFor: 'private'!
+
+assertNumberOfInputsEquals: aNumber
+	self assert: 'input[type="text"]' asJQuery length equals: aNumber
+!
+
+completeExamWith: answers
+	| inputs |
+	inputs := 'input[type="text"]' asJQuery.
+	answers do: [ :answer |
+		(inputs at: lastInputCompleted) value: answer.
+		lastInputCompleted := lastInputCompleted + 1
+	]
+!
+
+dropTextWithContents: contents
+	self dropTextWithTitle: 'Beispiel Text' contents: contents
+!
+
+dropTextWithTitle: title
+	self dropTextWithTitle: title contents: 'Hello wor{ld}.'
+!
+
+dropTextWithTitle: title contents: contents
+	FileDropper new dropText: title, String crlf, contents on: '.text-file-target'
+!
+
+finishText
+	self clickOn: 'input[type="checkbox"]'.
+	self clickOn: '.continue'
+!
+
+newExam
+	self clickOnText: 'New exam'
+!
+
+startExam
+	self clickOnText: 'Start exam'.
+! !
+
+!OndafSimulatorTest methodsFor: 'running'!
+
+setUp
+	super setUp.
+	OndafSimulator start.
+	lastInputCompleted := 0
+! !
 
 !OndafSimulatorTest methodsFor: 'tests'!
 
 test01
-	OndafSimulator start.
-
-	FileDropper new dropText: 'Beispiel Text
-	Hello wor{ld}.' on: '.text-file-target'.
+	self dropTextWithTitle: 'Beispiel Text'.
 	
 	self afterThat: [
 		self assertPageContains: 'Beispiel Text'
@@ -275,37 +320,26 @@ test01
 !
 
 test02
-	OndafSimulator start.
-
-	FileDropper new dropText: 'Beispiel Text
-	Hello wor{ld}.' on: '.text-file-target'.
+	self dropTextWithTitle: 'Beispiel Text' contents: 'Hello wor{ld}.'.
 	
 	self afterThat: [
-		self clickOnText: 'Start exam'.
+		self startExam.
+		
+		self assertPageDoesNotContain: 'Start exam'.
 		self assertPageContains: 'Beispiel Text'.
 		self assertPageContains: 'Hello wor'.
-		self assert: 'input[type="text"]' asJQuery length equals: 1.
+		self assertNumberOfInputsEquals: 1.
 	]
 !
 
 test03
-	| inputs |
-	OndafSimulator start.
-
-	FileDropper new dropText: 'Beispiel Text
-	Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.
+	self dropTextWithContents: 'Hello wor{ld}. This is an exam{ple}.'.
 	
 	self afterThat: [
-		self clickOnText: 'Start exam'.
+		self startExam.
 		
-		self assertPageDoesNotContain: 'Start exam'.
-		
-		inputs := 'input[type="text"]' asJQuery.
-		(inputs at: 0) value: 'ld'.
-		(inputs at: 1) value: 'wrong'.
-		
-		self clickOn: 'input[type="checkbox"]'.
-		self clickOn: '.continue'.
+		self completeExamWith: #('ld' 'wrong').
+		self finishText.
 		
 		self assertPageContains: '50'
 	]
@@ -313,36 +347,26 @@ test03
 
 test04
 	| inputs |
-	OndafSimulator start.
-
-	FileDropper new dropText: 'Beispiel Text 1
-	First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.
-	
-	FileDropper new dropText: 'Beispiel Text 2
-	Second text. This is the sec{ond} text.' on: '.text-file-target'.
+	self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.
+	self dropTextWithTitle: 'Beispiel Text 2' contents: 'Second text. This is the sec{ond} text.'.
 	
 	self afterThat: [
-		self clickOnText: 'Start exam'.
+		self startExam.
 		
 		self assertPageContains: 'First text'.
 		self assertPageDoesNotContain: 'Second text'.
 		
-		inputs := 'input[type="text"]' asJQuery.
-		(inputs at: 0) value: 'ld'.
-		(inputs at: 1) value: 'wrong'.
+		self completeExamWith: #('ld' 'wrong').
 		
-		self clickOn: 'input[type="checkbox"]'.
-		self clickOn: '.continue'.
+		self finishText.
 		
 		self assertPageContains: 'Second text'.
 		self assertPageContains: 'Text 2 von 2'.
 		self assertPageDoesNotContain: 'Ergebnis'.
 		
-		inputs := 'input[type="text"]' asJQuery.
-		(inputs at: 2) value: 'ond'.
+		self completeExamWith: #('ond').
 		
-		self clickOn: 'input[type="checkbox"]'.
-		self clickOn: '.continue'.
+		self finishText.
 		
 		self assertPageContains: 'Ergebnis'.
 		self assertPageContains: '66.67 %'.
@@ -356,13 +380,10 @@ test04
 
 test05
 	| inputs |
-	OndafSimulator start.
-
-	FileDropper new dropText: 'Beispiel Text 1
-	First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.
+	self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.
 	
 	self afterThat: [
-		self clickOnText: 'New exam'.
+		self newExam.
 		self assertPageDoesNotContain: 'Beispiel Text 1'.
 		self assertPageContains: 'New exam'.
 	]
@@ -370,19 +391,15 @@ test05
 
 test06
 	| inputs timer |
-	OndafSimulator start.
 	timer := TestTimer new.
 	"OndafSimulator current timer: timer."
 
-	FileDropper new dropText: 'Beispiel Text 1
-	First text. Hello wor{ld}. This is an exam{ple}.' on: '.text-file-target'.
+	self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.
 	
 	self afterThat: [
-		self clickOnText: 'Start exam'.
+		self startExam.
 		
-		inputs := 'input[type="text"]' asJQuery.
-		(inputs at: 0) value: 'ld'.
-		(inputs at: 1) value: 'wrong'.
+		self completeExamWith: #('ld' 'wrong').
 		
 		"timer forwardTime: 30."
 		
