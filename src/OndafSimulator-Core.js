@@ -1,21 +1,24 @@
-define("amber-ondafsimulator/OndafSimulator-Core", ["amber/boot", "amber_core/Kernel-Objects"], function($boot){"use strict";
-var $core=$boot.api,nil=$boot.nil,$recv=$boot.asReceiver,$globals=$boot.globals;
-$core.addPackage('OndafSimulator-Core');
+define(["amber/boot", "amber_core/Kernel-Objects"], function($boot){"use strict";
+if(!$boot.nilAsReceiver)$boot.nilAsReceiver=$boot.nil;
+if(!("nilAsValue" in $boot))$boot.nilAsValue=$boot.nilAsReceiver;
+var $core=$boot.api,nil=$boot.nilAsValue,$nil=$boot.nilAsReceiver,$recv=$boot.asReceiver,$globals=$boot.globals;
+if(!$boot.nilAsClass)$boot.nilAsClass=$boot.dnu;
+$core.addPackage("OndafSimulator-Core");
 $core.packages["OndafSimulator-Core"].innerEval = function (expr) { return eval(expr); };
 $core.packages["OndafSimulator-Core"].transport = {"type":"amd","amdNamespace":"amber-ondafsimulator"};
 
-$core.addClass('CTestExam', $globals.Object, ['texts'], 'OndafSimulator-Core');
+$core.addClass("CTestExam", $globals.Object, ["texts"], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "copyOn:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aPrinter){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(aPrinter)._printNumberOfTexts_($recv(self["@texts"])._size());
-$recv(self["@texts"])._do_((function(text){
+$recv(aPrinter)._printNumberOfTexts_($recv($self["@texts"])._size());
+$recv($self["@texts"])._do_((function(text){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -41,15 +44,15 @@ $globals.CTestExam);
 $core.addMethod(
 $core.method({
 selector: "evaluate:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aSubmission){
-var self=this;
+var self=this,$self=this;
 var responseStream,results;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 responseStream=$recv(aSubmission)._readStream();
-results=$recv(self["@texts"])._flatCollect_((function(aText){
+results=$recv($self["@texts"])._flatCollect_((function(aText){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -75,9 +78,9 @@ $globals.CTestExam);
 $core.addMethod(
 $core.method({
 selector: "evaluate:on:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (examCopies,aResultView){
-var self=this;
+var self=this,$self=this;
 var answers,result;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
@@ -91,7 +94,7 @@ return $recv(each)._answers();
 }, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
-result=self._evaluate_(answers);
+result=$self._evaluate_(answers);
 $recv(result)._for_toShowIn_(examCopies,aResultView);
 return result;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -110,10 +113,10 @@ $globals.CTestExam);
 $core.addMethod(
 $core.method({
 selector: "initializeWithTexts:",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (aCollectionOfTexts){
-var self=this;
-self["@texts"]=aCollectionOfTexts;
+var self=this,$self=this;
+$self["@texts"]=aCollectionOfTexts;
 return self;
 
 },
@@ -129,13 +132,13 @@ $globals.CTestExam);
 $core.addMethod(
 $core.method({
 selector: "numberOfTexts",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(self["@texts"])._size();
+return $recv($self["@texts"])._size();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"numberOfTexts",{},$globals.CTestExam)});
 //>>excludeEnd("ctx");
@@ -153,18 +156,18 @@ $globals.CTestExam);
 $core.addMethod(
 $core.method({
 selector: "withTexts:",
-protocol: 'instance creation',
+protocol: "instance creation",
 fn: function (aCollectionOfTexts){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=self._new();
+$1=$self._new();
 $recv($1)._initializeWithTexts_(aCollectionOfTexts);
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"withTexts:",{aCollectionOfTexts:aCollectionOfTexts},$globals.CTestExam.klass)});
+}, function($ctx1) {$ctx1.fill(self,"withTexts:",{aCollectionOfTexts:aCollectionOfTexts},$globals.CTestExam.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -174,16 +177,16 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initializeWithTexts:", "new", "yourself"]
 }),
-$globals.CTestExam.klass);
+$globals.CTestExam.a$cls);
 
 
-$core.addClass('CTestInterpreter', $globals.Object, [], 'OndafSimulator-Core');
+$core.addClass("CTestInterpreter", $globals.Object, [], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "interpretContentFrom:",
-protocol: 'operations',
+protocol: "operations",
 fn: function (textStream){
-var self=this;
+var self=this,$self=this;
 var theContent,contentParser;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
@@ -210,9 +213,9 @@ $globals.CTestInterpreter);
 $core.addMethod(
 $core.method({
 selector: "interpretText:",
-protocol: 'operations',
+protocol: "operations",
 fn: function (aString){
-var self=this;
+var self=this,$self=this;
 var theTitle,textStream,theContent;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
@@ -222,9 +225,9 @@ textStream=$recv($recv(aString)._trimBoth())._readStream();
 $1=$recv(textStream)._isEmpty();
 if($core.assert($1)){
 return $recv($globals.CTestText)._empty();
-};
-theTitle=self._interpretTitleFrom_(textStream);
-theContent=self._interpretContentFrom_(textStream);
+}
+theTitle=$self._interpretTitleFrom_(textStream);
+theContent=$self._interpretContentFrom_(textStream);
 return $recv($globals.CTestText)._withTitle_content_(theTitle,theContent);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"interpretText:",{aString:aString,theTitle:theTitle,textStream:textStream,theContent:theContent},$globals.CTestInterpreter)});
@@ -242,9 +245,9 @@ $globals.CTestInterpreter);
 $core.addMethod(
 $core.method({
 selector: "interpretTitleFrom:",
-protocol: 'operations',
+protocol: "operations",
 fn: function (textStream){
-var self=this;
+var self=this,$self=this;
 var titleParser;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
@@ -269,17 +272,17 @@ $globals.CTestInterpreter);
 
 
 
-$core.addClass('CTestParser', $globals.Object, ['state', 'content', 'endState'], 'OndafSimulator-Core');
+$core.addClass("CTestParser", $globals.Object, ["state", "content", "endState"], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "addToContents:",
-protocol: 'operations',
+protocol: "operations",
 fn: function (anObject){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self._subclassResponsibility();
+$self._subclassResponsibility();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"addToContents:",{anObject:anObject},$globals.CTestParser)});
@@ -297,13 +300,13 @@ $globals.CTestParser);
 $core.addMethod(
 $core.method({
 selector: "consume:",
-protocol: 'operations',
+protocol: "operations",
 fn: function (aCharacter){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@state"])._consume_(aCharacter);
+$recv($self["@state"])._consume_(aCharacter);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"consume:",{aCharacter:aCharacter},$globals.CTestParser)});
@@ -321,9 +324,9 @@ $globals.CTestParser);
 $core.addMethod(
 $core.method({
 selector: "consumeAllIn:",
-protocol: 'operations',
+protocol: "operations",
 fn: function (aReadStream){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -331,7 +334,7 @@ $recv((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return $recv($recv(self["@state"]).__eq(self._endState()))._or_($recv(aReadStream)._atEnd());
+return $recv($recv($self["@state"]).__eq($self._endState()))._or_($recv(aReadStream)._atEnd());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -339,12 +342,12 @@ return $recv($recv(self["@state"]).__eq(self._endState()))._or_($recv(aReadStrea
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return self._consume_($recv($recv(aReadStream)._next())._asString());
+return $self._consume_($recv($recv(aReadStream)._next())._asString());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
 //>>excludeEnd("ctx");
 }));
-$recv(self["@state"])._finish();
+$recv($self["@state"])._finish();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"consumeAllIn:",{aReadStream:aReadStream},$globals.CTestParser)});
@@ -362,10 +365,10 @@ $globals.CTestParser);
 $core.addMethod(
 $core.method({
 selector: "contents",
-protocol: 'accessing',
+protocol: "accessing",
 fn: function (){
-var self=this;
-return self["@content"];
+var self=this,$self=this;
+return $self["@content"];
 
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -380,10 +383,10 @@ $globals.CTestParser);
 $core.addMethod(
 $core.method({
 selector: "endState",
-protocol: 'accessing',
+protocol: "accessing",
 fn: function (){
-var self=this;
-return self["@endState"];
+var self=this,$self=this;
+return $self["@endState"];
 
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -398,9 +401,9 @@ $globals.CTestParser);
 $core.addMethod(
 $core.method({
 selector: "initialize",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -408,11 +411,11 @@ return $core.withContext(function($ctx1) {
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true,
 //>>excludeEnd("ctx");
-($globals.CTestParser.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
+($globals.CTestParser.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($self, []));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
-self["@endState"]=$recv($globals.CTestParserState)._newFor_named_(self,"End");
+$self["@endState"]=$recv($globals.CTestParserState)._newFor_named_(self,"End");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.CTestParser)});
@@ -430,13 +433,13 @@ $globals.CTestParser);
 $core.addMethod(
 $core.method({
 selector: "state",
-protocol: 'accessing',
+protocol: "accessing",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(self["@state"])._name();
+return $recv($self["@state"])._name();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"state",{},$globals.CTestParser)});
 //>>excludeEnd("ctx");
@@ -453,10 +456,10 @@ $globals.CTestParser);
 $core.addMethod(
 $core.method({
 selector: "state:",
-protocol: 'accessing',
+protocol: "accessing",
 fn: function (aState){
-var self=this;
-self["@state"]=aState;
+var self=this,$self=this;
+$self["@state"]=aState;
 return self;
 
 },
@@ -473,15 +476,15 @@ $globals.CTestParser);
 $core.addMethod(
 $core.method({
 selector: "forContent",
-protocol: 'instance creation',
+protocol: "instance creation",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 return $recv($globals.CTestContentParser)._new();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"forContent",{},$globals.CTestParser.klass)});
+}, function($ctx1) {$ctx1.fill(self,"forContent",{},$globals.CTestParser.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -491,20 +494,20 @@ referencedClasses: ["CTestContentParser"],
 //>>excludeEnd("ide");
 messageSends: ["new"]
 }),
-$globals.CTestParser.klass);
+$globals.CTestParser.a$cls);
 
 $core.addMethod(
 $core.method({
 selector: "forTitle",
-protocol: 'instance creation',
+protocol: "instance creation",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 return $recv($globals.CTestTitleParser)._new();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"forTitle",{},$globals.CTestParser.klass)});
+}, function($ctx1) {$ctx1.fill(self,"forTitle",{},$globals.CTestParser.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -514,16 +517,16 @@ referencedClasses: ["CTestTitleParser"],
 //>>excludeEnd("ide");
 messageSends: ["new"]
 }),
-$globals.CTestParser.klass);
+$globals.CTestParser.a$cls);
 
 
-$core.addClass('CTestContentParser', $globals.CTestParser, ['currentWord', 'currentSuffix', 'waiting', 'readingWord', 'waitingForWord', 'readingSuffixes', 'words', 'suffixes'], 'OndafSimulator-Core');
+$core.addClass("CTestContentParser", $globals.CTestParser, ["currentWord", "currentSuffix", "waiting", "readingWord", "waitingForWord", "readingSuffixes", "words", "suffixes"], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "addRemainingWords",
-protocol: 'private-actions',
+protocol: "private-actions",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -531,11 +534,11 @@ return (function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$recv(self._addWord())._value();
+$recv($self._addWord())._value();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["value"]=1;
 //>>excludeEnd("ctx");
-return $recv(self._addWordsToContent())._value();
+return $recv($self._addWordsToContent())._value();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -556,9 +559,9 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "addSuffix",
-protocol: 'private-popping',
+protocol: "private-popping",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -566,7 +569,7 @@ return (function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return $recv(self["@suffixes"])._add_(self._popCurrentSuffix());
+return $recv($self["@suffixes"])._add_($self._popCurrentSuffix());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -587,13 +590,13 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "addToContents:",
-protocol: 'operations',
+protocol: "operations",
 fn: function (anObject){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@content"])._add_(anObject);
+$recv($self["@content"])._add_(anObject);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"addToContents:",{anObject:anObject},$globals.CTestContentParser)});
@@ -611,9 +614,9 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "addWord",
-protocol: 'private-actions',
+protocol: "private-actions",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -622,10 +625,10 @@ return (function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$1=$recv(self["@currentWord"])._isEmpty();
+$1=$recv($self["@currentWord"])._isEmpty();
 if(!$core.assert($1)){
-return $recv(self["@words"])._add_(self._popCurrentWord());
-};
+return $recv($self["@words"])._add_($self._popCurrentWord());
+}
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -646,9 +649,9 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "addWordToComplete",
-protocol: 'private-actions',
+protocol: "private-actions",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -656,7 +659,7 @@ return (function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return self._addToContents_(self._popWordToComplete());
+return $self._addToContents_($self._popWordToComplete());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -677,9 +680,9 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "addWordsToContent",
-protocol: 'private-actions',
+protocol: "private-actions",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -687,17 +690,17 @@ return (function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-$recv(self["@words"])._ifNotEmpty_((function(){
+$recv($self["@words"])._ifNotEmpty_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx3) {
 //>>excludeEnd("ctx");
-return self._addToContents_($recv($globals.CompletedText)._with_(" "._join_(self["@words"])));
+return $self._addToContents_($recv($globals.CompletedText)._with_(" "._join_($self["@words"])));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)});
 //>>excludeEnd("ctx");
 }));
-self["@words"]=$recv($globals.OrderedCollection)._new();
-return self["@words"];
+$self["@words"]=$recv($globals.OrderedCollection)._new();
+return $self["@words"];
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -718,9 +721,9 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "appendToCurrentSuffix",
-protocol: 'private-actions',
+protocol: "private-actions",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -728,8 +731,8 @@ return (function(aCharacter){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-self["@currentSuffix"]=$recv(self["@currentSuffix"]).__comma(aCharacter);
-return self["@currentSuffix"];
+$self["@currentSuffix"]=$recv($self["@currentSuffix"]).__comma(aCharacter);
+return $self["@currentSuffix"];
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({aCharacter:aCharacter},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -750,9 +753,9 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "appendToCurrentWord",
-protocol: 'private-actions',
+protocol: "private-actions",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -760,8 +763,8 @@ return (function(aCharacter){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-self["@currentWord"]=$recv(self["@currentWord"]).__comma(aCharacter);
-return self["@currentWord"];
+$self["@currentWord"]=$recv($self["@currentWord"]).__comma(aCharacter);
+return $self["@currentWord"];
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({aCharacter:aCharacter},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -782,19 +785,19 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "bindStates",
-protocol: 'private-initialization',
+protocol: "private-initialization",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1,$2,$3,$4,$5,$6;
-$recv(self["@waiting"])._whenLetterState_(self["@readingWord"]);
+$recv($self["@waiting"])._whenLetterState_($self["@readingWord"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["whenLetterState:"]=1;
 //>>excludeEnd("ctx");
-$1=self["@waiting"];
-$2=self._appendToCurrentWord();
+$1=$self["@waiting"];
+$2=$self._appendToCurrentWord();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["appendToCurrentWord"]=1;
 //>>excludeEnd("ctx");
@@ -802,10 +805,10 @@ $recv($1)._whenLetterAction_($2);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["whenLetterAction:"]=1;
 //>>excludeEnd("ctx");
-$recv(self["@readingWord"])._whenSpaceState_(self["@waitingForWord"]);
-$recv(self["@readingWord"])._whenSpaceAction_(self._addWord());
-$3=self["@readingWord"];
-$4=self._appendToCurrentWord();
+$recv($self["@readingWord"])._whenSpaceState_($self["@waitingForWord"]);
+$recv($self["@readingWord"])._whenSpaceAction_($self._addWord());
+$3=$self["@readingWord"];
+$4=$self._appendToCurrentWord();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["appendToCurrentWord"]=2;
 //>>excludeEnd("ctx");
@@ -813,8 +816,8 @@ $recv($3)._whenLetterAction_($4);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["whenLetterAction:"]=2;
 //>>excludeEnd("ctx");
-$5=self["@readingWord"];
-$6=self._addRemainingWords();
+$5=$self["@readingWord"];
+$6=$self._addRemainingWords();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["addRemainingWords"]=1;
 //>>excludeEnd("ctx");
@@ -822,19 +825,19 @@ $recv($5)._whenFinishAction_($6);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["whenFinishAction:"]=1;
 //>>excludeEnd("ctx");
-$recv(self["@readingWord"])._when_thenState_action_("{",self["@readingSuffixes"],self._addWordsToContent());
+$recv($self["@readingWord"])._when_thenState_action_("{",$self["@readingSuffixes"],$self._addWordsToContent());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["when:thenState:action:"]=1;
 //>>excludeEnd("ctx");
-$recv(self["@waitingForWord"])._whenLetterState_(self["@readingWord"]);
-$recv(self["@waitingForWord"])._whenLetterAction_(self._appendToCurrentWord());
+$recv($self["@waitingForWord"])._whenLetterState_($self["@readingWord"]);
+$recv($self["@waitingForWord"])._whenLetterAction_($self._appendToCurrentWord());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["whenLetterAction:"]=3;
 //>>excludeEnd("ctx");
-$recv(self["@waitingForWord"])._whenFinishAction_(self._addRemainingWords());
-$recv(self["@readingSuffixes"])._whenLetterAction_(self._appendToCurrentSuffix());
-$recv(self["@readingSuffixes"])._when_thenState_action_("}",self["@readingWord"],self._addWordToComplete());
-$recv(self["@readingSuffixes"])._when_thenAction_(",",self._addSuffix());
+$recv($self["@waitingForWord"])._whenFinishAction_($self._addRemainingWords());
+$recv($self["@readingSuffixes"])._whenLetterAction_($self._appendToCurrentSuffix());
+$recv($self["@readingSuffixes"])._when_thenState_action_("}",$self["@readingWord"],$self._addWordToComplete());
+$recv($self["@readingSuffixes"])._when_thenAction_(",",$self._addSuffix());
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"bindStates",{},$globals.CTestContentParser)});
@@ -852,9 +855,9 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "initialize",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -862,24 +865,24 @@ return $core.withContext(function($ctx1) {
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true,
 //>>excludeEnd("ctx");
-($globals.CTestContentParser.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
+($globals.CTestContentParser.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($self, []));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
-self["@currentWord"]="";
-self["@currentSuffix"]="";
-self["@words"]=$recv($globals.OrderedCollection)._new();
+$self["@currentWord"]="";
+$self["@currentSuffix"]="";
+$self["@words"]=$recv($globals.OrderedCollection)._new();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["new"]=1;
 //>>excludeEnd("ctx");
-self["@suffixes"]=$recv($globals.OrderedCollection)._new();
+$self["@suffixes"]=$recv($globals.OrderedCollection)._new();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["new"]=2;
 //>>excludeEnd("ctx");
-self["@content"]=$recv($globals.OrderedCollection)._new();
-self._initializeStates();
-self._bindStates();
-self["@state"]=self["@waiting"];
+$self["@content"]=$recv($globals.OrderedCollection)._new();
+$self._initializeStates();
+$self._bindStates();
+$self["@state"]=$self["@waiting"];
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.CTestContentParser)});
@@ -897,25 +900,25 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "initializeStates",
-protocol: 'private-initialization',
+protocol: "private-initialization",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self["@waiting"]=$recv($globals.CTestParserState)._newFor_named_(self,"Waiting");
+$self["@waiting"]=$recv($globals.CTestParserState)._newFor_named_(self,"Waiting");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["newFor:named:"]=1;
 //>>excludeEnd("ctx");
-self["@readingWord"]=$recv($globals.CTestParserState)._newFor_named_(self,"ReadingWord");
+$self["@readingWord"]=$recv($globals.CTestParserState)._newFor_named_(self,"ReadingWord");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["newFor:named:"]=2;
 //>>excludeEnd("ctx");
-self["@waitingForWord"]=$recv($globals.CTestParserState)._newFor_named_(self,"WaitingForWord");
+$self["@waitingForWord"]=$recv($globals.CTestParserState)._newFor_named_(self,"WaitingForWord");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["newFor:named:"]=3;
 //>>excludeEnd("ctx");
-self["@readingSuffixes"]=$recv($globals.CTestParserState)._newFor_named_(self,"ReadingSuffixes");
+$self["@readingSuffixes"]=$recv($globals.CTestParserState)._newFor_named_(self,"ReadingSuffixes");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"initializeStates",{},$globals.CTestContentParser)});
@@ -933,12 +936,12 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "popCurrentSuffix",
-protocol: 'private-popping',
+protocol: "private-popping",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 var suffix;
-suffix=self["@currentSuffix"];
-self["@currentSuffix"]="";
+suffix=$self["@currentSuffix"];
+$self["@currentSuffix"]="";
 return suffix;
 
 },
@@ -954,12 +957,12 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "popCurrentWord",
-protocol: 'private-popping',
+protocol: "private-popping",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 var word;
-word=self["@currentWord"];
-self["@currentWord"]="";
+word=$self["@currentWord"];
+$self["@currentWord"]="";
 return word;
 
 },
@@ -975,16 +978,16 @@ $globals.CTestContentParser);
 $core.addMethod(
 $core.method({
 selector: "popWordToComplete",
-protocol: 'private-popping',
+protocol: "private-popping",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 var wordToComplete;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self._addSuffix())._value();
-wordToComplete=$recv($globals.WordToComplete)._withPrefix_options_(self._popCurrentWord(),$recv($globals.Array)._newFrom_(self["@suffixes"]));
-self["@suffixes"]=$recv($globals.OrderedCollection)._new();
+$recv($self._addSuffix())._value();
+wordToComplete=$recv($globals.WordToComplete)._withPrefix_options_($self._popCurrentWord(),$recv($globals.Array)._newFrom_($self["@suffixes"]));
+$self["@suffixes"]=$recv($globals.OrderedCollection)._new();
 return wordToComplete;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"popWordToComplete",{wordToComplete:wordToComplete},$globals.CTestContentParser)});
@@ -1001,17 +1004,17 @@ $globals.CTestContentParser);
 
 
 
-$core.addClass('CTestTitleParser', $globals.CTestParser, [], 'OndafSimulator-Core');
+$core.addClass("CTestTitleParser", $globals.CTestParser, [], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "addToContents:",
-protocol: 'operations',
+protocol: "operations",
 fn: function (aCharacter){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self["@content"]=$recv(self["@content"]).__comma(aCharacter);
+$self["@content"]=$recv($self["@content"]).__comma(aCharacter);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"addToContents:",{aCharacter:aCharacter},$globals.CTestTitleParser)});
@@ -1029,9 +1032,9 @@ $globals.CTestTitleParser);
 $core.addMethod(
 $core.method({
 selector: "initialize",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 var waiting,readingWord,waitingForWord;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
@@ -1040,11 +1043,11 @@ return $core.withContext(function($ctx1) {
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true,
 //>>excludeEnd("ctx");
-($globals.CTestTitleParser.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
+($globals.CTestTitleParser.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($self, []));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
-self["@content"]="";
+$self["@content"]="";
 waiting=$recv($globals.CTestParserState)._newFor_named_(self,"Waiting");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["newFor:named:"]=1;
@@ -1062,7 +1065,7 @@ $recv(waiting)._whenLetterAction_((function(aCharacter){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return self._addToContents_(aCharacter);
+return $self._addToContents_(aCharacter);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["addToContents:"]=1;
 //>>excludeEnd("ctx");
@@ -1074,7 +1077,7 @@ $ctx2.sendIdx["addToContents:"]=1;
 $ctx1.sendIdx["whenLetterAction:"]=1;
 //>>excludeEnd("ctx");
 $recv(readingWord)._whenSpaceState_(waitingForWord);
-$recv(readingWord)._whenEnterState_(self["@endState"]);
+$recv(readingWord)._whenEnterState_($self["@endState"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["whenEnterState:"]=1;
 //>>excludeEnd("ctx");
@@ -1082,7 +1085,7 @@ $recv(readingWord)._whenLetterAction_((function(aCharacter){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return self._addToContents_(aCharacter);
+return $self._addToContents_(aCharacter);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["addToContents:"]=2;
 //>>excludeEnd("ctx");
@@ -1093,18 +1096,18 @@ $ctx2.sendIdx["addToContents:"]=2;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["whenLetterAction:"]=2;
 //>>excludeEnd("ctx");
-$recv(waitingForWord)._whenEnterState_(self["@endState"]);
+$recv(waitingForWord)._whenEnterState_($self["@endState"]);
 $recv(waitingForWord)._whenLetterState_(readingWord);
 $recv(waitingForWord)._whenLetterAction_((function(aCharacter){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return self._addToContents_(" ".__comma(aCharacter));
+return $self._addToContents_(" ".__comma(aCharacter));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({aCharacter:aCharacter},$ctx1,3)});
 //>>excludeEnd("ctx");
 }));
-self["@state"]=waiting;
+$self["@state"]=waiting;
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"initialize",{waiting:waiting,readingWord:readingWord,waitingForWord:waitingForWord},$globals.CTestTitleParser)});
@@ -1121,20 +1124,20 @@ $globals.CTestTitleParser);
 
 
 
-$core.addClass('CTestParserState', $globals.Object, ['parser', 'whenSpaceState', 'whenEnterState', 'whenLetterState', 'letterBlock', 'spaceBlock', 'name', 'finishBlock', 'specialChars'], 'OndafSimulator-Core');
+$core.addClass("CTestParserState", $globals.Object, ["parser", "whenSpaceState", "whenEnterState", "whenLetterState", "letterBlock", "spaceBlock", "name", "finishBlock", "specialChars"], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "consume:",
-protocol: 'operations',
+protocol: "operations",
 fn: function (aCharacter){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
 var $early={};
 try {
-$recv(self["@specialChars"])._at_ifPresent_(aCharacter,(function(p){
+$recv($self["@specialChars"])._at_ifPresent_(aCharacter,(function(p){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1142,7 +1145,7 @@ $recv($recv(p)._second())._value();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["value"]=1;
 //>>excludeEnd("ctx");
-$recv(self["@parser"])._state_($recv(p)._first());
+$recv($self["@parser"])._state_($recv(p)._first());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx2.sendIdx["state:"]=1;
 //>>excludeEnd("ctx");
@@ -1151,17 +1154,17 @@ throw $early=[nil];
 }, function($ctx2) {$ctx2.fillBlock({p:p},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
-$1=self._isWhiteSpace_(aCharacter);
+$1=$self._isWhiteSpace_(aCharacter);
 if(!$core.assert($1)){
-$recv(self["@letterBlock"])._value_(aCharacter);
-$recv(self["@parser"])._state_(self["@whenLetterState"]);
+$recv($self["@letterBlock"])._value_(aCharacter);
+$recv($self["@parser"])._state_($self["@whenLetterState"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["state:"]=2;
 //>>excludeEnd("ctx");
 return nil;
-};
-$recv(self["@spaceBlock"])._value();
-$recv(self["@parser"])._state_(self["@whenSpaceState"]);
+}
+$recv($self["@spaceBlock"])._value();
+$recv($self["@parser"])._state_($self["@whenSpaceState"]);
 return nil;
 }
 catch(e) {if(e===$early)return e[0]; throw e}
@@ -1181,13 +1184,13 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "finish",
-protocol: 'operations',
+protocol: "operations",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(self["@finishBlock"])._value();
+return $recv($self["@finishBlock"])._value();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"finish",{},$globals.CTestParserState)});
 //>>excludeEnd("ctx");
@@ -1204,24 +1207,24 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "initializeWith:name:",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (aParser,aString){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self["@parser"]=aParser;
-self["@name"]=aString;
-self["@specialChars"]=$recv($globals.Dictionary)._new();
-self["@letterBlock"]=(function(aCharacter){
+$self["@parser"]=aParser;
+$self["@name"]=aString;
+$self["@specialChars"]=$recv($globals.Dictionary)._new();
+$self["@letterBlock"]=(function(aCharacter){
 
 });
-self["@spaceBlock"]=(function(){
+$self["@spaceBlock"]=(function(){
 
 });
-self["@whenLetterState"]=self;
-self["@whenEnterState"]=self;
-self["@whenSpaceState"]=self;
+$self["@whenLetterState"]=self;
+$self["@whenEnterState"]=self;
+$self["@whenSpaceState"]=self;
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"initializeWith:name:",{aParser:aParser,aString:aString},$globals.CTestParserState)});
@@ -1239,9 +1242,9 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "isEnter:",
-protocol: 'private-testing',
+protocol: "private-testing",
 fn: function (aCharacter){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -1262,9 +1265,9 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "isWhiteSpace:",
-protocol: 'private-testing',
+protocol: "private-testing",
 fn: function (aCharacter){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -1285,10 +1288,10 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "name",
-protocol: 'accessing',
+protocol: "accessing",
 fn: function (){
-var self=this;
-return self["@name"];
+var self=this,$self=this;
+return $self["@name"];
 
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -1303,21 +1306,21 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "printOn:",
-protocol: 'printing',
+protocol: "printing",
 fn: function (aStream){
-var self=this;
+var self=this,$self=this;
 var title;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $2,$1;
-title=$recv(self._name()).__comma(" State");
+title=$recv($self._name()).__comma(" State");
 $2=$recv($recv(title)._first())._isVowel();
 if($core.assert($2)){
 $1="an ";
 } else {
 $1="a ";
-};
+}
 $recv(aStream)._nextPutAll_($1);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["nextPutAll:"]=1;
@@ -1340,13 +1343,13 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "when:thenAction:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aCharacter,aBlock){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return self._when_thenState_action_(aCharacter,self,aBlock);
+return $self._when_thenState_action_(aCharacter,self,aBlock);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"when:thenAction:",{aCharacter:aCharacter,aBlock:aBlock},$globals.CTestParserState)});
 //>>excludeEnd("ctx");
@@ -1363,13 +1366,13 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "when:thenState:",
-protocol: 'configuration',
+protocol: "configuration",
 fn: function (aCharacter,aState){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self._when_thenState_action_(aCharacter,aState,(function(){
+$self._when_thenState_action_(aCharacter,aState,(function(){
 
 }));
 return self;
@@ -1389,13 +1392,13 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "when:thenState:action:",
-protocol: 'configuration',
+protocol: "configuration",
 fn: function (aCharacter,aState,aBlock){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@specialChars"])._add_($recv(aCharacter).__minus_gt($recv($globals.Array)._with_with_(aState,aBlock)));
+$recv($self["@specialChars"])._add_($recv(aCharacter).__minus_gt($recv($globals.Array)._with_with_(aState,aBlock)));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"when:thenState:action:",{aCharacter:aCharacter,aState:aState,aBlock:aBlock},$globals.CTestParserState)});
@@ -1413,13 +1416,13 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "whenEnterState:",
-protocol: 'configuration',
+protocol: "configuration",
 fn: function (aState){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self._when_thenState_($recv($globals.String)._lf(),aState);
+$self._when_thenState_($recv($globals.String)._lf(),aState);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"whenEnterState:",{aState:aState},$globals.CTestParserState)});
@@ -1437,10 +1440,10 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "whenFinishAction:",
-protocol: 'configuration',
+protocol: "configuration",
 fn: function (aBlock){
-var self=this;
-self["@finishBlock"]=aBlock;
+var self=this,$self=this;
+$self["@finishBlock"]=aBlock;
 return self;
 
 },
@@ -1456,10 +1459,10 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "whenLetterAction:",
-protocol: 'configuration',
+protocol: "configuration",
 fn: function (aBlock){
-var self=this;
-self["@letterBlock"]=aBlock;
+var self=this,$self=this;
+$self["@letterBlock"]=aBlock;
 return self;
 
 },
@@ -1475,10 +1478,10 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "whenLetterState:",
-protocol: 'configuration',
+protocol: "configuration",
 fn: function (aState){
-var self=this;
-self["@whenLetterState"]=aState;
+var self=this,$self=this;
+$self["@whenLetterState"]=aState;
 return self;
 
 },
@@ -1494,10 +1497,10 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "whenSpaceAction:",
-protocol: 'configuration',
+protocol: "configuration",
 fn: function (aBlock){
-var self=this;
-self["@spaceBlock"]=aBlock;
+var self=this,$self=this;
+$self["@spaceBlock"]=aBlock;
 return self;
 
 },
@@ -1513,10 +1516,10 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "whenSpaceState:",
-protocol: 'configuration',
+protocol: "configuration",
 fn: function (aState){
-var self=this;
-self["@whenSpaceState"]=aState;
+var self=this,$self=this;
+$self["@whenSpaceState"]=aState;
 return self;
 
 },
@@ -1533,18 +1536,18 @@ $globals.CTestParserState);
 $core.addMethod(
 $core.method({
 selector: "newFor:named:",
-protocol: 'instance creation',
+protocol: "instance creation",
 fn: function (aParser,aString){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=self._new();
+$1=$self._new();
 $recv($1)._initializeWith_name_(aParser,aString);
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"newFor:named:",{aParser:aParser,aString:aString},$globals.CTestParserState.klass)});
+}, function($ctx1) {$ctx1.fill(self,"newFor:named:",{aParser:aParser,aString:aString},$globals.CTestParserState.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -1554,20 +1557,20 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initializeWith:name:", "new", "yourself"]
 }),
-$globals.CTestParserState.klass);
+$globals.CTestParserState.a$cls);
 
 
-$core.addClass('CTestPrinter', $globals.Object, ['copies', 'numberOfTexts', 'tray'], 'OndafSimulator-Core');
+$core.addClass("CTestPrinter", $globals.Object, ["copies", "numberOfTexts", "tray"], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "currentCopy",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(self["@copies"])._last();
+return $recv($self["@copies"])._last();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"currentCopy",{},$globals.CTestPrinter)});
 //>>excludeEnd("ctx");
@@ -1584,9 +1587,9 @@ $globals.CTestPrinter);
 $core.addMethod(
 $core.method({
 selector: "initialize",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -1594,11 +1597,11 @@ return $core.withContext(function($ctx1) {
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true,
 //>>excludeEnd("ctx");
-($globals.CTestPrinter.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
+($globals.CTestPrinter.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($self, []));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
-self["@copies"]=$recv($globals.OrderedCollection)._new();
+$self["@copies"]=$recv($globals.OrderedCollection)._new();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.CTestPrinter)});
@@ -1616,14 +1619,14 @@ $globals.CTestPrinter);
 $core.addMethod(
 $core.method({
 selector: "print:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (anExam){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 $recv(anExam)._copyOn_(self);
-return self["@copies"];
+return $self["@copies"];
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"print:",{anExam:anExam},$globals.CTestPrinter)});
 //>>excludeEnd("ctx");
@@ -1640,10 +1643,10 @@ $globals.CTestPrinter);
 $core.addMethod(
 $core.method({
 selector: "printNumberOfTexts:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aNumber){
-var self=this;
-self["@numberOfTexts"]=aNumber;
+var self=this,$self=this;
+$self["@numberOfTexts"]=aNumber;
 return self;
 
 },
@@ -1659,13 +1662,13 @@ $globals.CTestPrinter);
 $core.addMethod(
 $core.method({
 selector: "printText:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aString){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self._currentCopy())._addText_(aString);
+$recv($self._currentCopy())._addText_(aString);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"printText:",{aString:aString},$globals.CTestPrinter)});
@@ -1683,15 +1686,15 @@ $globals.CTestPrinter);
 $core.addMethod(
 $core.method({
 selector: "printTitle:time:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aString,aTimeInSeconds){
-var self=this;
+var self=this,$self=this;
 var newCopy;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-newCopy=$recv(self["@tray"])._newCopy_of_titled_withTime_($recv($recv(self["@copies"])._size()).__plus((1)),self["@numberOfTexts"],aString,aTimeInSeconds);
-$recv(self["@copies"])._add_(newCopy);
+newCopy=$recv($self["@tray"])._newCopy_of_titled_withTime_($recv($recv($self["@copies"])._size()).__plus((1)),$self["@numberOfTexts"],aString,aTimeInSeconds);
+$recv($self["@copies"])._add_(newCopy);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"printTitle:time:",{aString:aString,aTimeInSeconds:aTimeInSeconds,newCopy:newCopy},$globals.CTestPrinter)});
@@ -1709,13 +1712,13 @@ $globals.CTestPrinter);
 $core.addMethod(
 $core.method({
 selector: "printWordToComplete:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aString){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self._currentCopy())._addWordToComplete_(aString);
+$recv($self._currentCopy())._addWordToComplete_(aString);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"printWordToComplete:",{aString:aString},$globals.CTestPrinter)});
@@ -1733,10 +1736,10 @@ $globals.CTestPrinter);
 $core.addMethod(
 $core.method({
 selector: "tray:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aTray){
-var self=this;
-self["@tray"]=aTray;
+var self=this,$self=this;
+$self["@tray"]=aTray;
 return self;
 
 },
@@ -1753,18 +1756,18 @@ $globals.CTestPrinter);
 $core.addMethod(
 $core.method({
 selector: "newWithTray:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aPaperTray){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=self._new();
+$1=$self._new();
 $recv($1)._tray_(aPaperTray);
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"newWithTray:",{aPaperTray:aPaperTray},$globals.CTestPrinter.klass)});
+}, function($ctx1) {$ctx1.fill(self,"newWithTray:",{aPaperTray:aPaperTray},$globals.CTestPrinter.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -1774,18 +1777,18 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["tray:", "new", "yourself"]
 }),
-$globals.CTestPrinter.klass);
+$globals.CTestPrinter.a$cls);
 
 
-$core.addClass('CTestResult', $globals.Object, ['results', 'sourceSubmission', 'view'], 'OndafSimulator-Core');
+$core.addClass("CTestResult", $globals.Object, ["results", "sourceSubmission", "view"], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "for:toShowIn:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (sumission,aResultView){
-var self=this;
-self["@sourceSubmission"]=sumission;
-self["@view"]=aResultView;
+var self=this,$self=this;
+$self["@sourceSubmission"]=sumission;
+$self["@view"]=aResultView;
 return self;
 
 },
@@ -1801,16 +1804,16 @@ $globals.CTestResult);
 $core.addMethod(
 $core.method({
 selector: "giveToStudent",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 var resultStream;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@view"])._renderScore_of_percentage_level_(self._score(),self._maxScore(),self._percentage(),self._level());
-resultStream=$recv(self["@results"])._readStream();
-$recv(self["@sourceSubmission"])._do_((function(each){
+$recv($self["@view"])._renderScore_of_percentage_level_($self._score(),$self._maxScore(),$self._percentage(),$self._level());
+resultStream=$recv($self["@results"])._readStream();
+$recv($self["@sourceSubmission"])._do_((function(each){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1822,7 +1825,7 @@ return $recv(each)._consumeResults_(resultStream);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["do:"]=1;
 //>>excludeEnd("ctx");
-$recv(self["@sourceSubmission"])._do_("giveBackToStudent");
+$recv($self["@sourceSubmission"])._do_("giveBackToStudent");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"giveToStudent",{resultStream:resultStream},$globals.CTestResult)});
@@ -1840,10 +1843,10 @@ $globals.CTestResult);
 $core.addMethod(
 $core.method({
 selector: "individualResults",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
-return self["@results"];
+var self=this,$self=this;
+return $self["@results"];
 
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -1858,10 +1861,10 @@ $globals.CTestResult);
 $core.addMethod(
 $core.method({
 selector: "initializeWith:",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (aCollectionOfResults){
-var self=this;
-self["@results"]=aCollectionOfResults;
+var self=this,$self=this;
+$self["@results"]=aCollectionOfResults;
 return self;
 
 },
@@ -1877,13 +1880,13 @@ $globals.CTestResult);
 $core.addMethod(
 $core.method({
 selector: "level",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv($globals.CTestResultTable)._levelForPercentage_(self._percentage());
+return $recv($globals.CTestResultTable)._levelForPercentage_($self._percentage());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"level",{},$globals.CTestResult)});
 //>>excludeEnd("ctx");
@@ -1900,13 +1903,13 @@ $globals.CTestResult);
 $core.addMethod(
 $core.method({
 selector: "maxScore",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(self["@results"])._size();
+return $recv($self["@results"])._size();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"maxScore",{},$globals.CTestResult)});
 //>>excludeEnd("ctx");
@@ -1923,19 +1926,19 @@ $globals.CTestResult);
 $core.addMethod(
 $core.method({
 selector: "percentage",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 var realPercentage,roundedPercentage;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self._score()).__star((100));
+$1=$recv($self._score()).__star((100));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["*"]=1;
 //>>excludeEnd("ctx");
-realPercentage=$recv($1).__slash(self._maxScore());
+realPercentage=$recv($1).__slash($self._maxScore());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["/"]=1;
 //>>excludeEnd("ctx");
@@ -1957,13 +1960,13 @@ $globals.CTestResult);
 $core.addMethod(
 $core.method({
 selector: "score",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv($recv(self["@results"])._select_("value"))._size();
+return $recv($recv($self["@results"])._select_("value"))._size();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"score",{},$globals.CTestResult)});
 //>>excludeEnd("ctx");
@@ -1981,18 +1984,18 @@ $globals.CTestResult);
 $core.addMethod(
 $core.method({
 selector: "with:",
-protocol: 'instance creation',
+protocol: "instance creation",
 fn: function (aCollectionOfResults){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=self._new();
+$1=$self._new();
 $recv($1)._initializeWith_(aCollectionOfResults);
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"with:",{aCollectionOfResults:aCollectionOfResults},$globals.CTestResult.klass)});
+}, function($ctx1) {$ctx1.fill(self,"with:",{aCollectionOfResults:aCollectionOfResults},$globals.CTestResult.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2002,17 +2005,17 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initializeWith:", "new", "yourself"]
 }),
-$globals.CTestResult.klass);
+$globals.CTestResult.a$cls);
 
 
-$core.addClass('CTestResultTable', $globals.Object, [], 'OndafSimulator-Core');
+$core.addClass("CTestResultTable", $globals.Object, [], "OndafSimulator-Core");
 
 $core.addMethod(
 $core.method({
 selector: "levelForPercentage:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (percentage){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -2020,14 +2023,14 @@ var $1,$2;
 $1=$recv(percentage).__lt_eq((60));
 if($core.assert($1)){
 return "A2 (oder unter)";
-};
+}
 $2=$recv(percentage).__gt_eq((88));
 if($core.assert($2)){
 return "B2 (oder höher)";
-};
+}
 return "B1";
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"levelForPercentage:",{percentage:percentage},$globals.CTestResultTable.klass)});
+}, function($ctx1) {$ctx1.fill(self,"levelForPercentage:",{percentage:percentage},$globals.CTestResultTable.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2037,20 +2040,20 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["ifTrue:", "<=", ">="]
 }),
-$globals.CTestResultTable.klass);
+$globals.CTestResultTable.a$cls);
 
 
-$core.addClass('CTestText', $globals.Object, ['title', 'content'], 'OndafSimulator-Core');
+$core.addClass("CTestText", $globals.Object, ["title", "content"], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "contentAsString",
-protocol: 'conversion',
+protocol: "conversion",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return ""._join_($recv(self["@content"])._collect_((function(c){
+return ""._join_($recv($self["@content"])._collect_((function(c){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -2075,14 +2078,14 @@ $globals.CTestText);
 $core.addMethod(
 $core.method({
 selector: "copyOn:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aPrinter){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(aPrinter)._printTitle_time_(self["@title"],self._timeInSeconds());
-$recv(self["@content"])._do_((function(each){
+$recv(aPrinter)._printTitle_time_($self["@title"],$self._timeInSeconds());
+$recv($self["@content"])._do_((function(each){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -2108,13 +2111,13 @@ $globals.CTestText);
 $core.addMethod(
 $core.method({
 selector: "evaluate:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (anAnswerStream){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(self["@content"])._select_thenCollect_((function(each){
+return $recv($self["@content"])._select_thenCollect_((function(each){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -2147,11 +2150,11 @@ $globals.CTestText);
 $core.addMethod(
 $core.method({
 selector: "initializeTitle:content:",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (aTitle,anObject){
-var self=this;
-self["@title"]=aTitle;
-self["@content"]=anObject;
+var self=this,$self=this;
+$self["@title"]=aTitle;
+$self["@content"]=anObject;
 return self;
 
 },
@@ -2167,13 +2170,13 @@ $globals.CTestText);
 $core.addMethod(
 $core.method({
 selector: "numberOfWordsToComplete",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv($recv(self["@content"])._select_("requiresAnAnswer"))._size();
+return $recv($recv($self["@content"])._select_("requiresAnAnswer"))._size();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"numberOfWordsToComplete",{},$globals.CTestText)});
 //>>excludeEnd("ctx");
@@ -2190,13 +2193,13 @@ $globals.CTestText);
 $core.addMethod(
 $core.method({
 selector: "timeInSeconds",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(self._numberOfWordsToComplete()).__star((15));
+return $recv($self._numberOfWordsToComplete()).__star((15));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"timeInSeconds",{},$globals.CTestText)});
 //>>excludeEnd("ctx");
@@ -2213,10 +2216,10 @@ $globals.CTestText);
 $core.addMethod(
 $core.method({
 selector: "title",
-protocol: 'accessing',
+protocol: "accessing",
 fn: function (){
-var self=this;
-return self["@title"];
+var self=this,$self=this;
+return $self["@title"];
 
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2232,15 +2235,15 @@ $globals.CTestText);
 $core.addMethod(
 $core.method({
 selector: "empty",
-protocol: 'instance creation',
+protocol: "instance creation",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return self._withTitle_content_("",nil);
+return $self._withTitle_content_("",nil);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"empty",{},$globals.CTestText.klass)});
+}, function($ctx1) {$ctx1.fill(self,"empty",{},$globals.CTestText.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2250,23 +2253,23 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["withTitle:content:"]
 }),
-$globals.CTestText.klass);
+$globals.CTestText.a$cls);
 
 $core.addMethod(
 $core.method({
 selector: "withTitle:content:",
-protocol: 'instance creation',
+protocol: "instance creation",
 fn: function (aString,theContent){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=self._new();
+$1=$self._new();
 $recv($1)._initializeTitle_content_(aString,theContent);
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"withTitle:content:",{aString:aString,theContent:theContent},$globals.CTestText.klass)});
+}, function($ctx1) {$ctx1.fill(self,"withTitle:content:",{aString:aString,theContent:theContent},$globals.CTestText.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2276,20 +2279,20 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initializeTitle:content:", "new", "yourself"]
 }),
-$globals.CTestText.klass);
+$globals.CTestText.a$cls);
 
 
-$core.addClass('CTestTextCopy', $globals.Object, ['time', 'title', 'view', 'onFinish', 'wordsToComplete'], 'OndafSimulator-Core');
+$core.addClass("CTestTextCopy", $globals.Object, ["time", "title", "view", "onFinish", "wordsToComplete"], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "addText:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aString){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@view"])._addText_(aString);
+$recv($self["@view"])._addText_(aString);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"addText:",{aString:aString},$globals.CTestTextCopy)});
@@ -2307,14 +2310,14 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "addWordToComplete:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aString){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self["@wordsToComplete"]=$recv(self["@wordsToComplete"]).__plus((1));
-$recv(self["@view"])._addWordToComplete_(aString);
+$self["@wordsToComplete"]=$recv($self["@wordsToComplete"]).__plus((1));
+$recv($self["@view"])._addWordToComplete_(aString);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"addWordToComplete:",{aString:aString},$globals.CTestTextCopy)});
@@ -2332,13 +2335,13 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "answers",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(self["@view"])._answers();
+return $recv($self["@view"])._answers();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"answers",{},$globals.CTestTextCopy)});
 //>>excludeEnd("ctx");
@@ -2355,13 +2358,13 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "consumeResults:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aStreamOfResults){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@view"])._showResults_($recv(aStreamOfResults)._next_(self["@wordsToComplete"]));
+$recv($self["@view"])._showResults_($recv(aStreamOfResults)._next_($self["@wordsToComplete"]));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"consumeResults:",{aStreamOfResults:aStreamOfResults},$globals.CTestTextCopy)});
@@ -2379,14 +2382,14 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "finish",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@view"])._hide();
-$recv(self["@onFinish"])._value();
+$recv($self["@view"])._hide();
+$recv($self["@onFinish"])._value();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"finish",{},$globals.CTestTextCopy)});
@@ -2404,13 +2407,13 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "giveBackToStudent",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@view"])._show();
+$recv($self["@view"])._show();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"giveBackToStudent",{},$globals.CTestTextCopy)});
@@ -2428,22 +2431,22 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "giveToStudent",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@view"])._whenContinueDo_((function(){
+$recv($self["@view"])._whenContinueDo_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return self._finish();
+return $self._finish();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
-$recv(self["@view"])._render();
+$recv($self["@view"])._render();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"giveToStudent",{},$globals.CTestTextCopy)});
@@ -2461,9 +2464,9 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "initialize",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -2471,11 +2474,11 @@ return $core.withContext(function($ctx1) {
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true,
 //>>excludeEnd("ctx");
-($globals.CTestTextCopy.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
+($globals.CTestTextCopy.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($self, []));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
-self["@wordsToComplete"]=(0);
+$self["@wordsToComplete"]=(0);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.CTestTextCopy)});
@@ -2493,10 +2496,10 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "initializeWithView:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aView){
-var self=this;
-self["@view"]=aView;
+var self=this,$self=this;
+$self["@view"]=aView;
 return self;
 
 },
@@ -2512,14 +2515,14 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "time:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aTimeInSeconds){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self["@time"]=aTimeInSeconds;
-$recv(self["@view"])._time_(self["@time"]);
+$self["@time"]=aTimeInSeconds;
+$recv($self["@view"])._time_($self["@time"]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"time:",{aTimeInSeconds:aTimeInSeconds},$globals.CTestTextCopy)});
@@ -2537,14 +2540,14 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "title:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aString){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self["@title"]=aString;
-$recv(self["@view"])._title_(self["@title"]);
+$self["@title"]=aString;
+$recv($self["@view"])._title_($self["@title"]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"title:",{aString:aString},$globals.CTestTextCopy)});
@@ -2562,10 +2565,10 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "whenFinishDo:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aBlock){
-var self=this;
-self["@onFinish"]=aBlock;
+var self=this,$self=this;
+$self["@onFinish"]=aBlock;
 return self;
 
 },
@@ -2582,18 +2585,18 @@ $globals.CTestTextCopy);
 $core.addMethod(
 $core.method({
 selector: "newWithView:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aView){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=self._new();
+$1=$self._new();
 $recv($1)._initializeWithView_(aView);
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"newWithView:",{aView:aView},$globals.CTestTextCopy.klass)});
+}, function($ctx1) {$ctx1.fill(self,"newWithView:",{aView:aView},$globals.CTestTextCopy.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2603,20 +2606,20 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initializeWithView:", "new", "yourself"]
 }),
-$globals.CTestTextCopy.klass);
+$globals.CTestTextCopy.a$cls);
 
 
-$core.addClass('CompletedText', $globals.Object, ['text'], 'OndafSimulator-Core');
+$core.addClass("CompletedText", $globals.Object, ["text"], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "=",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (anotherObject){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv($recv(anotherObject)._text()).__eq(self["@text"]);
+return $recv($recv(anotherObject)._text()).__eq($self["@text"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"=",{anotherObject:anotherObject},$globals.CompletedText)});
 //>>excludeEnd("ctx");
@@ -2633,13 +2636,13 @@ $globals.CompletedText);
 $core.addMethod(
 $core.method({
 selector: "asString",
-protocol: 'accessing',
+protocol: "accessing",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return self._text();
+return $self._text();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"asString",{},$globals.CompletedText)});
 //>>excludeEnd("ctx");
@@ -2656,13 +2659,13 @@ $globals.CompletedText);
 $core.addMethod(
 $core.method({
 selector: "copyOn:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aPrinter){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(aPrinter)._printText_(self["@text"]);
+$recv(aPrinter)._printText_($self["@text"]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"copyOn:",{aPrinter:aPrinter},$globals.CompletedText)});
@@ -2680,10 +2683,10 @@ $globals.CompletedText);
 $core.addMethod(
 $core.method({
 selector: "initializeWithText:",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (aString){
-var self=this;
-self["@text"]=aString;
+var self=this,$self=this;
+$self["@text"]=aString;
 return self;
 
 },
@@ -2699,9 +2702,9 @@ $globals.CompletedText);
 $core.addMethod(
 $core.method({
 selector: "printOn:",
-protocol: 'printing',
+protocol: "printing",
 fn: function (aStream){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -2710,11 +2713,11 @@ var $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true,
 //>>excludeEnd("ctx");
-($globals.CompletedText.superclass||$boot.nilAsClass).fn.prototype._printOn_.apply($recv(self), [aStream]));
+($globals.CompletedText.superclass||$boot.nilAsClass).fn.prototype._printOn_.apply($self, [aStream]));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
-$1=$recv("(".__comma(self["@text"])).__comma(")");
+$1=$recv("(".__comma($self["@text"])).__comma(")");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -2736,9 +2739,9 @@ $globals.CompletedText);
 $core.addMethod(
 $core.method({
 selector: "requiresAnAnswer",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 return false;
 
 },
@@ -2754,10 +2757,10 @@ $globals.CompletedText);
 $core.addMethod(
 $core.method({
 selector: "text",
-protocol: 'accessing',
+protocol: "accessing",
 fn: function (){
-var self=this;
-return self["@text"];
+var self=this,$self=this;
+return $self["@text"];
 
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2773,15 +2776,15 @@ $globals.CompletedText);
 $core.addMethod(
 $core.method({
 selector: "with:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aText){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(self._new())._initializeWithText_(aText);
+return $recv($self._new())._initializeWithText_(aText);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"with:",{aText:aText},$globals.CompletedText.klass)});
+}, function($ctx1) {$ctx1.fill(self,"with:",{aText:aText},$globals.CompletedText.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -2791,23 +2794,23 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initializeWithText:", "new"]
 }),
-$globals.CompletedText.klass);
+$globals.CompletedText.a$cls);
 
 
-$core.addClass('ExamDesigner', $globals.Object, ['texts', 'interpreter', 'supervisor'], 'OndafSimulator-Core');
+$core.addClass("ExamDesigner", $globals.Object, ["texts", "interpreter", "supervisor"], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "considerText:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aString){
-var self=this;
+var self=this,$self=this;
 var text;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-text=$recv(self["@interpreter"])._interpretText_(aString);
-$recv(self["@supervisor"])._value_($recv(text)._title());
-$recv(self["@texts"])._add_(text);
+text=$recv($self["@interpreter"])._interpretText_(aString);
+$recv($self["@supervisor"])._value_($recv(text)._title());
+$recv($self["@texts"])._add_(text);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"considerText:",{aString:aString,text:text},$globals.ExamDesigner)});
@@ -2825,13 +2828,13 @@ $globals.ExamDesigner);
 $core.addMethod(
 $core.method({
 selector: "designExam",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv($globals.CTestExam)._withTexts_(self["@texts"]);
+return $recv($globals.CTestExam)._withTexts_($self["@texts"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"designExam",{},$globals.ExamDesigner)});
 //>>excludeEnd("ctx");
@@ -2848,10 +2851,10 @@ $globals.ExamDesigner);
 $core.addMethod(
 $core.method({
 selector: "informProgressTo:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aSupervisor){
-var self=this;
-self["@supervisor"]=aSupervisor;
+var self=this,$self=this;
+$self["@supervisor"]=aSupervisor;
 return self;
 
 },
@@ -2867,18 +2870,18 @@ $globals.ExamDesigner);
 $core.addMethod(
 $core.method({
 selector: "initialize",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self["@texts"]=$recv($globals.OrderedCollection)._new();
+$self["@texts"]=$recv($globals.OrderedCollection)._new();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["new"]=1;
 //>>excludeEnd("ctx");
-self["@interpreter"]=$recv($globals.CTestInterpreter)._new();
-self["@supervisor"]=(function(ignored){
+$self["@interpreter"]=$recv($globals.CTestInterpreter)._new();
+$self["@supervisor"]=(function(ignored){
 
 });
 return self;
@@ -2897,22 +2900,22 @@ $globals.ExamDesigner);
 
 
 
-$core.addClass('WordToComplete', $globals.Object, ['prefix', 'suffixOptions'], 'OndafSimulator-Core');
+$core.addClass("WordToComplete", $globals.Object, ["prefix", "suffixOptions"], "OndafSimulator-Core");
 $core.addMethod(
 $core.method({
 selector: "=",
-protocol: 'comparing',
+protocol: "comparing",
 fn: function (anotherObject){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv($recv(anotherObject)._prefix()).__eq(self["@prefix"]);
+$1=$recv($recv(anotherObject)._prefix()).__eq($self["@prefix"]);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["="]=1;
 //>>excludeEnd("ctx");
-return $recv($1)._and_($recv($recv(anotherObject)._suffixOptions()).__eq(self["@suffixOptions"]));
+return $recv($1)._and_($recv($recv(anotherObject)._suffixOptions()).__eq($self["@suffixOptions"]));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"=",{anotherObject:anotherObject},$globals.WordToComplete)});
 //>>excludeEnd("ctx");
@@ -2929,18 +2932,18 @@ $globals.WordToComplete);
 $core.addMethod(
 $core.method({
 selector: "asString",
-protocol: 'printing',
+protocol: "printing",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $3,$2,$1;
-$3=$recv(" ".__comma(self["@prefix"])).__comma("{");
+$3=$recv(" ".__comma($self["@prefix"])).__comma("{");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=3;
 //>>excludeEnd("ctx");
-$2=$recv($3).__comma(","._join_(self["@suffixOptions"]));
+$2=$recv($3).__comma(","._join_($self["@suffixOptions"]));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=2;
 //>>excludeEnd("ctx");
@@ -2965,13 +2968,13 @@ $globals.WordToComplete);
 $core.addMethod(
 $core.method({
 selector: "copyOn:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aPrinter){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(aPrinter)._printWordToComplete_(self["@prefix"]);
+$recv(aPrinter)._printWordToComplete_($self["@prefix"]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"copyOn:",{aPrinter:aPrinter},$globals.WordToComplete)});
@@ -2989,13 +2992,13 @@ $globals.WordToComplete);
 $core.addMethod(
 $core.method({
 selector: "evaluate:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aString){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv(self["@suffixOptions"])._includes_(aString);
+return $recv($self["@suffixOptions"])._includes_(aString);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"evaluate:",{aString:aString},$globals.WordToComplete)});
 //>>excludeEnd("ctx");
@@ -3012,11 +3015,11 @@ $globals.WordToComplete);
 $core.addMethod(
 $core.method({
 selector: "initializeWithPrefix:options:",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (aString,aCollection){
-var self=this;
-self["@prefix"]=aString;
-self["@suffixOptions"]=aCollection;
+var self=this,$self=this;
+$self["@prefix"]=aString;
+$self["@suffixOptions"]=aCollection;
 return self;
 
 },
@@ -3032,10 +3035,10 @@ $globals.WordToComplete);
 $core.addMethod(
 $core.method({
 selector: "prefix",
-protocol: 'accessing',
+protocol: "accessing",
 fn: function (){
-var self=this;
-return self["@prefix"];
+var self=this,$self=this;
+return $self["@prefix"];
 
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -3050,9 +3053,9 @@ $globals.WordToComplete);
 $core.addMethod(
 $core.method({
 selector: "printOn:",
-protocol: 'printing',
+protocol: "printing",
 fn: function (aStream){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -3061,11 +3064,11 @@ var $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true,
 //>>excludeEnd("ctx");
-($globals.WordToComplete.superclass||$boot.nilAsClass).fn.prototype._printOn_.apply($recv(self), [aStream]));
+($globals.WordToComplete.superclass||$boot.nilAsClass).fn.prototype._printOn_.apply($self, [aStream]));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
-$1=$recv("(".__comma(self._asString())).__comma(")");
+$1=$recv("(".__comma($self._asString())).__comma(")");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx[","]=1;
 //>>excludeEnd("ctx");
@@ -3087,9 +3090,9 @@ $globals.WordToComplete);
 $core.addMethod(
 $core.method({
 selector: "requiresAnAnswer",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 return true;
 
 },
@@ -3105,10 +3108,10 @@ $globals.WordToComplete);
 $core.addMethod(
 $core.method({
 selector: "suffixOptions",
-protocol: 'accessing',
+protocol: "accessing",
 fn: function (){
-var self=this;
-return self["@suffixOptions"];
+var self=this,$self=this;
+return $self["@suffixOptions"];
 
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -3124,18 +3127,18 @@ $globals.WordToComplete);
 $core.addMethod(
 $core.method({
 selector: "withPrefix:options:",
-protocol: 'instance creation',
+protocol: "instance creation",
 fn: function (aString,aCollection){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=self._new();
+$1=$self._new();
 $recv($1)._initializeWithPrefix_options_(aString,aCollection);
 return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"withPrefix:options:",{aString:aString,aCollection:aCollection},$globals.WordToComplete.klass)});
+}, function($ctx1) {$ctx1.fill(self,"withPrefix:options:",{aString:aString,aCollection:aCollection},$globals.WordToComplete.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -3145,6 +3148,6 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initializeWithPrefix:options:", "new", "yourself"]
 }),
-$globals.WordToComplete.klass);
+$globals.WordToComplete.a$cls);
 
 });
