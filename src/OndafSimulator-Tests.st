@@ -457,7 +457,7 @@ AsyncTest subclass: #TimerTest
 
 !TimerTest methodsFor: 'tests'!
 
-test01
+test01ExecuteAnActionPeriodically
 	| timer1 timer2 count |
 	self timeout: 150.
 	
@@ -473,7 +473,7 @@ test01
 	timer2 start
 !
 
-test02
+test02ExecuteAnActionOneTime
 	| timer1 timer2 count |
 	self timeout: 150.
 	

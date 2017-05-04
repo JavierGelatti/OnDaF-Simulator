@@ -1,14 +1,17 @@
-define("amber-ondafsimulator/OndafSimulator-Tests", ["amber/boot", "amber_core/SUnit", "amber_core/Kernel-Objects"], function($boot){"use strict";
-var $core=$boot.api,nil=$boot.nil,$recv=$boot.asReceiver,$globals=$boot.globals;
-$core.addPackage('OndafSimulator-Tests');
+define(["amber/boot", "amber_core/Kernel-Objects", "amber_core/SUnit"], function($boot){"use strict";
+if(!$boot.nilAsReceiver)$boot.nilAsReceiver=$boot.nil;
+if(!("nilAsValue" in $boot))$boot.nilAsValue=$boot.nilAsReceiver;
+var $core=$boot.api,nil=$boot.nilAsValue,$nil=$boot.nilAsReceiver,$recv=$boot.asReceiver,$globals=$boot.globals;
+if(!$boot.nilAsClass)$boot.nilAsClass=$boot.dnu;
+$core.addPackage("OndafSimulator-Tests");
 $core.packages["OndafSimulator-Tests"].innerEval = function (expr) { return eval(expr); };
 $core.packages["OndafSimulator-Tests"].transport = {"type":"amd","amdNamespace":"amber-ondafsimulator"};
 
-$core.addClass('AsyncTest', $globals.TestCase, ['ctx'], 'OndafSimulator-Tests');
+$core.addClass("AsyncTest", $globals.TestCase, ["ctx"], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
 selector: "afterThat:",
-protocol: 'running',
+protocol: "running",
 fn: function (aBlock){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -50,7 +53,7 @@ $globals.AsyncTest);
 $core.addMethod(
 $core.method({
 selector: "setUp",
-protocol: 'running',
+protocol: "running",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -81,11 +84,11 @@ $globals.AsyncTest);
 
 
 
-$core.addClass('GUITest', $globals.AsyncTest, [], 'OndafSimulator-Tests');
+$core.addClass("GUITest", $globals.AsyncTest, [], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
 selector: "assertNumberOf:equals:",
-protocol: 'gui testing',
+protocol: "gui testing",
 fn: function (aSelector,aNumber){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -109,7 +112,7 @@ $globals.GUITest);
 $core.addMethod(
 $core.method({
 selector: "assertPageContains:",
-protocol: 'gui testing',
+protocol: "gui testing",
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -133,7 +136,7 @@ $globals.GUITest);
 $core.addMethod(
 $core.method({
 selector: "assertPageDoesNotContain:",
-protocol: 'gui testing',
+protocol: "gui testing",
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -157,7 +160,7 @@ $globals.GUITest);
 $core.addMethod(
 $core.method({
 selector: "clickOn:",
-protocol: 'gui testing',
+protocol: "gui testing",
 fn: function (aSelector){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -181,7 +184,7 @@ $globals.GUITest);
 $core.addMethod(
 $core.method({
 selector: "clickOnText:",
-protocol: 'gui testing',
+protocol: "gui testing",
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -205,7 +208,7 @@ $globals.GUITest);
 $core.addMethod(
 $core.method({
 selector: "elementWithText:",
-protocol: 'gui testing',
+protocol: "gui testing",
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -242,7 +245,7 @@ $globals.GUITest);
 $core.addMethod(
 $core.method({
 selector: "numberOfVisibleElementsWithText:",
-protocol: 'gui testing',
+protocol: "gui testing",
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -271,7 +274,7 @@ $globals.GUITest);
 $core.addMethod(
 $core.method({
 selector: "setUp",
-protocol: 'running',
+protocol: "running",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -303,7 +306,7 @@ $globals.GUITest);
 $core.addMethod(
 $core.method({
 selector: "visibleElementsWithText:",
-protocol: 'gui testing',
+protocol: "gui testing",
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -331,11 +334,11 @@ $globals.GUITest);
 
 
 
-$core.addClass('ExamTextViewTest', $globals.GUITest, [], 'OndafSimulator-Tests');
+$core.addClass("ExamTextViewTest", $globals.GUITest, [], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
 selector: "test01ShowsTheTextTitle",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView;
@@ -362,7 +365,7 @@ $globals.ExamTextViewTest);
 $core.addMethod(
 $core.method({
 selector: "test02ShowsTheTextNumberAndTotalNumber",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView;
@@ -389,7 +392,7 @@ $globals.ExamTextViewTest);
 $core.addMethod(
 $core.method({
 selector: "test03TheContinueButtonIsHiddenByDefault",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView,continueVisible;
@@ -417,7 +420,7 @@ $globals.ExamTextViewTest);
 $core.addMethod(
 $core.method({
 selector: "test04TheContinueButtonIsShownWhenCheckingTheCheckbox",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView,continueVisible;
@@ -451,7 +454,7 @@ $globals.ExamTextViewTest);
 $core.addMethod(
 $core.method({
 selector: "test05ShowsTheCompletedText",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView;
@@ -479,7 +482,7 @@ $globals.ExamTextViewTest);
 $core.addMethod(
 $core.method({
 selector: "test06ShowsTheWordsToComplete",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView;
@@ -508,7 +511,7 @@ $globals.ExamTextViewTest);
 $core.addMethod(
 $core.method({
 selector: "test07CanProvideTheAnswers",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView,inputs;
@@ -551,7 +554,7 @@ $globals.ExamTextViewTest);
 $core.addMethod(
 $core.method({
 selector: "test08CanDisplaySeconds",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView;
@@ -579,7 +582,7 @@ $globals.ExamTextViewTest);
 $core.addMethod(
 $core.method({
 selector: "test09ByDefaultSecondsAreNotDisplayed",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView;
@@ -606,7 +609,7 @@ $globals.ExamTextViewTest);
 $core.addMethod(
 $core.method({
 selector: "test10CanShowTheResults",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView,inputs;
@@ -660,7 +663,7 @@ $globals.ExamTextViewTest);
 $core.addMethod(
 $core.method({
 selector: "test11ContinuesWhenContinueClicked",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView,executed;
@@ -698,7 +701,7 @@ $globals.ExamTextViewTest);
 $core.addMethod(
 $core.method({
 selector: "test12RemovesButtonsWhenContinueClicked",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examTextView;
@@ -734,11 +737,11 @@ $globals.ExamTextViewTest);
 
 
 
-$core.addClass('HeaderTest', $globals.GUITest, [], 'OndafSimulator-Tests');
+$core.addClass("HeaderTest", $globals.GUITest, [], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
 selector: "test01ByDefaultItDoesNotStartTheExam",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examStarted;
@@ -772,7 +775,7 @@ $globals.HeaderTest);
 $core.addMethod(
 $core.method({
 selector: "test02WhenStartExamIsClickedItStartsTheExam",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var examStarted;
@@ -807,7 +810,7 @@ $globals.HeaderTest);
 $core.addMethod(
 $core.method({
 selector: "test03ShowsStartExamAndResetButtons",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -836,7 +839,7 @@ $globals.HeaderTest);
 $core.addMethod(
 $core.method({
 selector: "test04DefineBlockToExecuteOnNewExam",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var executed;
@@ -870,11 +873,11 @@ $globals.HeaderTest);
 
 
 
-$core.addClass('OndafSimulatorTest', $globals.GUITest, [], 'OndafSimulator-Tests');
+$core.addClass("OndafSimulatorTest", $globals.GUITest, [], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
 selector: "test01",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -908,7 +911,7 @@ $globals.OndafSimulatorTest);
 $core.addMethod(
 $core.method({
 selector: "test02",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -948,7 +951,7 @@ $globals.OndafSimulatorTest);
 $core.addMethod(
 $core.method({
 selector: "test03",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var inputs;
@@ -1002,7 +1005,7 @@ $globals.OndafSimulatorTest);
 $core.addMethod(
 $core.method({
 selector: "test04",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var inputs;
@@ -1137,7 +1140,7 @@ $globals.OndafSimulatorTest);
 $core.addMethod(
 $core.method({
 selector: "test05",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var inputs;
@@ -1174,7 +1177,7 @@ $globals.OndafSimulatorTest);
 $core.addMethod(
 $core.method({
 selector: "test06",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var inputs,timer;
@@ -1224,11 +1227,11 @@ $globals.OndafSimulatorTest);
 
 
 
-$core.addClass('ResultViewTest', $globals.GUITest, [], 'OndafSimulator-Tests');
+$core.addClass("ResultViewTest", $globals.GUITest, [], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
 selector: "test01ShowResultInfo",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1264,11 +1267,11 @@ $globals.ResultViewTest);
 
 
 
-$core.addClass('TextCardTest', $globals.GUITest, [], 'OndafSimulator-Tests');
+$core.addClass("TextCardTest", $globals.GUITest, [], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
 selector: "test01TheTitleIsShown",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1292,11 +1295,11 @@ $globals.TextCardTest);
 
 
 
-$core.addClass('TextFileDropTargetTest', $globals.GUITest, ['droppedText', 'fileDropper'], 'OndafSimulator-Tests');
+$core.addClass("TextFileDropTargetTest", $globals.GUITest, ["droppedText", "fileDropper"], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
 selector: "setUp",
-protocol: 'running',
+protocol: "running",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1328,7 +1331,7 @@ $globals.TextFileDropTargetTest);
 $core.addMethod(
 $core.method({
 selector: "test01ReadsDroppedFile",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1371,7 +1374,7 @@ $globals.TextFileDropTargetTest);
 $core.addMethod(
 $core.method({
 selector: "test02CanDropMoreThanOneFile",
-protocol: 'tests',
+protocol: "tests",
 fn: function (){
 var self=this;
 var expected;
@@ -1431,18 +1434,18 @@ $globals.TextFileDropTargetTest);
 
 
 
-$core.addClass('TimerTest', $globals.AsyncTest, [], 'OndafSimulator-Tests');
+$core.addClass("TimerTest", $globals.AsyncTest, [], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
-selector: "test01",
-protocol: 'tests',
+selector: "test01ExecuteAnActionPeriodically",
+protocol: "tests",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 var timer1,timer2,count;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self._timeout_((150));
+$self._timeout_((150));
 count=(0);
 timer1=$recv($globals.Timer)._each_do_((50),(function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1466,12 +1469,12 @@ $recv(timer1)._stop();
 $ctx2.sendIdx["stop"]=1;
 //>>excludeEnd("ctx");
 $recv(timer2)._stop();
-return $recv(self["@ctx"])._execute_((function(){
+return $recv($self["@ctx"])._execute_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx3) {
 //>>excludeEnd("ctx");
-self._assert_equals_(count,(2));
-return self._finished();
+$self._assert_equals_(count,(2));
+return $self._finished();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)});
 //>>excludeEnd("ctx");
@@ -1487,12 +1490,12 @@ $ctx1.sendIdx["start"]=1;
 $recv(timer2)._start();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test01",{timer1:timer1,timer2:timer2,count:count},$globals.TimerTest)});
+}, function($ctx1) {$ctx1.fill(self,"test01ExecuteAnActionPeriodically",{timer1:timer1,timer2:timer2,count:count},$globals.TimerTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test01\x0a\x09| timer1 timer2 count |\x0a\x09self timeout: 150.\x0a\x09\x0a\x09count := 0.\x0a\x09timer1 := Timer each: 50  do: [ count := count + 1 ].\x0a\x09timer2 := Timer each: 110 do: [\x0a\x09\x09timer1 stop.\x0a\x09\x09timer2 stop.\x0a\x09\x09ctx execute: [ self assert: count equals: 2. self finished ]\x0a\x09].\x0a\x09\x0a\x09timer1 start.\x0a\x09timer2 start",
+source: "test01ExecuteAnActionPeriodically\x0a\x09| timer1 timer2 count |\x0a\x09self timeout: 150.\x0a\x09\x0a\x09count := 0.\x0a\x09timer1 := Timer each: 50  do: [ count := count + 1 ].\x0a\x09timer2 := Timer each: 110 do: [\x0a\x09\x09timer1 stop.\x0a\x09\x09timer2 stop.\x0a\x09\x09ctx execute: [ self assert: count equals: 2. self finished ]\x0a\x09].\x0a\x09\x0a\x09timer1 start.\x0a\x09timer2 start",
 referencedClasses: ["Timer"],
 //>>excludeEnd("ide");
 messageSends: ["timeout:", "each:do:", "+", "stop", "execute:", "assert:equals:", "finished", "start"]
@@ -1501,15 +1504,15 @@ $globals.TimerTest);
 
 $core.addMethod(
 $core.method({
-selector: "test02",
-protocol: 'tests',
+selector: "test02ExecuteAnActionOneTime",
+protocol: "tests",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 var timer1,timer2,count;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self._timeout_((150));
+$self._timeout_((150));
 count=(0);
 timer1=$recv($globals.Timer)._on_do_((50),(function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1526,12 +1529,12 @@ timer2=$recv($globals.Timer)._each_do_((110),(function(){
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
 $recv(timer2)._stop();
-return $recv(self["@ctx"])._execute_((function(){
+return $recv($self["@ctx"])._execute_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx3) {
 //>>excludeEnd("ctx");
-self._assert_equals_(count,(1));
-return self._finished();
+$self._assert_equals_(count,(1));
+return $self._finished();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)});
 //>>excludeEnd("ctx");
@@ -1547,12 +1550,12 @@ $ctx1.sendIdx["start"]=1;
 $recv(timer2)._start();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test02",{timer1:timer1,timer2:timer2,count:count},$globals.TimerTest)});
+}, function($ctx1) {$ctx1.fill(self,"test02ExecuteAnActionOneTime",{timer1:timer1,timer2:timer2,count:count},$globals.TimerTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test02\x0a\x09| timer1 timer2 count |\x0a\x09self timeout: 150.\x0a\x09\x0a\x09count := 0.\x0a\x09timer1 := Timer on: 50  do: [ count := count + 1 ].\x0a\x09timer2 := Timer each: 110 do: [\x0a\x09\x09timer2 stop.\x0a\x09\x09ctx execute: [ self assert: count equals: 1. self finished ]\x0a\x09].\x0a\x09\x0a\x09timer1 start.\x0a\x09timer2 start",
+source: "test02ExecuteAnActionOneTime\x0a\x09| timer1 timer2 count |\x0a\x09self timeout: 150.\x0a\x09\x0a\x09count := 0.\x0a\x09timer1 := Timer on: 50  do: [ count := count + 1 ].\x0a\x09timer2 := Timer each: 110 do: [\x0a\x09\x09timer2 stop.\x0a\x09\x09ctx execute: [ self assert: count equals: 1. self finished ]\x0a\x09].\x0a\x09\x0a\x09timer1 start.\x0a\x09timer2 start",
 referencedClasses: ["Timer"],
 //>>excludeEnd("ide");
 messageSends: ["timeout:", "on:do:", "+", "each:do:", "stop", "execute:", "assert:equals:", "finished", "start"]
@@ -1561,11 +1564,11 @@ $globals.TimerTest);
 
 
 
-$core.addClass('FileDropper', $globals.Object, [], 'OndafSimulator-Tests');
+$core.addClass("FileDropper", $globals.Object, [], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
 selector: "dropFileEventWith:",
-protocol: 'actions',
+protocol: "actions",
 fn: function (aFile){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1646,7 +1649,7 @@ $globals.FileDropper);
 $core.addMethod(
 $core.method({
 selector: "dropFileEventWith:and:",
-protocol: 'actions',
+protocol: "actions",
 fn: function (aFile,anotherFile){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1731,7 +1734,7 @@ $globals.FileDropper);
 $core.addMethod(
 $core.method({
 selector: "dropText:and:on:",
-protocol: 'actions',
+protocol: "actions",
 fn: function (aString,anotherString,aSelector){
 var self=this;
 var file1,file2,event;
@@ -1762,7 +1765,7 @@ $globals.FileDropper);
 $core.addMethod(
 $core.method({
 selector: "dropText:on:",
-protocol: 'actions',
+protocol: "actions",
 fn: function (aString,aSelector){
 var self=this;
 var file,event;
@@ -1789,7 +1792,7 @@ $globals.FileDropper);
 $core.addMethod(
 $core.method({
 selector: "newObject",
-protocol: 'private',
+protocol: "private",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1812,7 +1815,7 @@ $globals.FileDropper);
 $core.addMethod(
 $core.method({
 selector: "textFileWith:",
-protocol: 'actions',
+protocol: "actions",
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1834,11 +1837,11 @@ $globals.FileDropper);
 
 
 
-$core.addClass('TestTimer', $globals.Object, ['time', 'onTrigger', 'onHandler', 'handler', 'trigger', 'stopped'], 'OndafSimulator-Tests');
+$core.addClass("TestTimer", $globals.Object, ["time", "onTrigger", "onHandler", "handler", "trigger", "stopped"], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
 selector: "each:do:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (milliseconds,aBlock){
 var self=this;
 self["@trigger"]=milliseconds;
@@ -1858,7 +1861,7 @@ $globals.TestTimer);
 $core.addMethod(
 $core.method({
 selector: "initialize",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1890,7 +1893,7 @@ $globals.TestTimer);
 $core.addMethod(
 $core.method({
 selector: "stop",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
 var self=this;
 self["@stopped"]=true;
@@ -1909,7 +1912,7 @@ $globals.TestTimer);
 $core.addMethod(
 $core.method({
 selector: "stopped",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
 var self=this;
 return self["@stopped"];
@@ -1927,7 +1930,7 @@ $globals.TestTimer);
 $core.addMethod(
 $core.method({
 selector: "tick",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1951,7 +1954,7 @@ $globals.TestTimer);
 $core.addMethod(
 $core.method({
 selector: "triggerMillis",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
 var self=this;
 return self["@trigger"];
@@ -1968,11 +1971,11 @@ $globals.TestTimer);
 
 
 
-$core.addClass('WidgetPreviews', $globals.Object, [], 'OndafSimulator-Tests');
+$core.addClass("WidgetPreviews", $globals.Object, [], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
 selector: "examTextView",
-protocol: 'widgets',
+protocol: "widgets",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2002,7 +2005,7 @@ $globals.WidgetPreviews);
 $core.addMethod(
 $core.method({
 selector: "header",
-protocol: 'widgets',
+protocol: "widgets",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2042,7 +2045,7 @@ $globals.WidgetPreviews);
 $core.addMethod(
 $core.method({
 selector: "resultView",
-protocol: 'widgets',
+protocol: "widgets",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2067,7 +2070,7 @@ $globals.WidgetPreviews);
 $core.addMethod(
 $core.method({
 selector: "textCard",
-protocol: 'widgets',
+protocol: "widgets",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2092,7 +2095,7 @@ $globals.WidgetPreviews);
 $core.addMethod(
 $core.method({
 selector: "textFileDropTarget",
-protocol: 'widgets',
+protocol: "widgets",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
