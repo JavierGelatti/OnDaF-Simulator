@@ -1246,6 +1246,31 @@ $globals.OndafSimulator);
 
 $core.addMethod(
 $core.method({
+selector: "hideDropArea",
+protocol: 'action',
+fn: function (){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$recv(self["@header"])._remove();
+$recv(self["@fileDropTarget"])._hide();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"hideDropArea",{},$globals.OndafSimulator)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "hideDropArea\x0a\x09header remove.\x0a\x09fileDropTarget hide.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["remove", "hide"]
+}),
+$globals.OndafSimulator);
+
+$core.addMethod(
+$core.method({
 selector: "initialize",
 protocol: 'starting',
 fn: function (){
@@ -1295,8 +1320,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@header"])._remove();
-$recv(self["@fileDropTarget"])._hide();
+self._hideDropArea();
 self["@theExam"]=$recv(self["@examDesigner"])._designExam();
 self["@copies"]=$recv(self["@printer"])._print_(self["@theExam"]);
 $recv(self["@copies"])._do_((function(each){
@@ -1328,10 +1352,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09header remove.\x0a\x09fileDropTarget hide.\x0a\x09\x0a\x09theExam := examDesigner designExam.\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09copies do: [ :each | each whenFinishDo: [ self beginNextText ] ].\x0a\x09currentExam := copies readStream.\x0a\x09\x0a\x09self beginNextText",
+source: "startExam\x0a\x09self hideDropArea.\x0a\x09\x0a\x09theExam := examDesigner designExam.\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09copies do: [ :each | each whenFinishDo: [ self beginNextText ] ].\x0a\x09currentExam := copies readStream.\x0a\x09\x0a\x09self beginNextText",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["remove", "hide", "designExam", "print:", "do:", "whenFinishDo:", "beginNextText", "readStream"]
+messageSends: ["hideDropArea", "designExam", "print:", "do:", "whenFinishDo:", "beginNextText", "readStream"]
 }),
 $globals.OndafSimulator);
 

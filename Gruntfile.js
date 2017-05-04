@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
-    grunt.loadNpmTasks('grunt-execute');
+    grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('amber-dev');
 
     var path = require('path'),
@@ -12,7 +12,7 @@ module.exports = function (grunt) {
 
     // Default task.
     grunt.registerTask('default', ['amdconfig:app', 'amberc:all']);
-    grunt.registerTask('test', ['amdconfig:app', 'requirejs:test_runner', 'execute:test_runner', 'clean:test_runner']);
+    grunt.registerTask('test', ['amdconfig:app', 'requirejs:test_runner', 'exec:test_runner', 'clean:test_runner']);
     grunt.registerTask('devel', ['amdconfig:app', 'requirejs:devel']);
     grunt.registerTask('deploy', ['amdconfig:app', 'requirejs:deploy']);
 
@@ -52,14 +52,14 @@ module.exports = function (grunt) {
                     mainConfigFile: "config.js",
                     rawText: {
                         "amber/compatibility": "/*stub*/",
-                        "amber/Platform": "/*stub*/",
-                        "app": 'define(["deploy"],function(x){return x});'
+                        "amber/Platform": "define()", //eg. nothing, TODO remove
+                        "app": 'define(["deploy", "amber_core/Platform-Browser"],function(x){return x});'
                     },
                     pragmas: {
                         excludeIdeData: true,
                         excludeDebugContexts: true
                     },
-                    include: ['config', 'config-browser', 'node_modules/requirejs/require', 'app', 'amber/lazypack'],
+                    include: ['config', 'config-browser', 'amber/Platform' /*TODO remove*/, 'node_modules/requirejs/require', 'app', 'amber/lazypack'],
                     optimize: "uglify2",
                     out: "the.js"
                 }
@@ -69,10 +69,11 @@ module.exports = function (grunt) {
                     mainConfigFile: "config.js",
                     rawText: {
                         "amber/compatibility": "/*stub*/",
-                        "amber/Platform": "/*stub*/",
-                        "app": 'define(["devel"],function(x){return x});'
+                        "amber/Platform": "define()", //eg. nothing, TODO remove
+                        "amber_core/_platform_HaX_": "require.config({map:{'*':{'amber/Platform':'app'}}});", // TODO remove
+                        "app": 'define(["devel", "amber_core/Platform-Browser"],function(x){return x});'
                     },
-                    include: ['config', 'config-browser', 'node_modules/requirejs/require', 'app'],
+                    include: ['config', 'config-browser', 'amber_core/_platform_HaX_' /*TODO remove*/, 'node_modules/requirejs/require', 'app'],
                     exclude: ['devel'],
                     out: "the.js"
                 }
@@ -81,8 +82,9 @@ module.exports = function (grunt) {
                 options: {
                     mainConfigFile: "config.js",
                     rawText: {
+                        "amber/Platform": "define()", //eg. nothing, TODO remove
                         "app": "(" + function () {
-                            define(["testing", "amber_devkit/NodeTestRunner"], function (amber) {
+                            define(["testing", "amber_core/Platform-Node", "amber_devkit/NodeTestRunner"], function (amber) {
                                 amber.initialize().then(function () {
                                     amber.globals.NodeTestRunner._main();
                                 });
@@ -102,10 +104,8 @@ module.exports = function (grunt) {
             }
         },
 
-        execute: {
-            test_runner: {
-                src: ['test_runner.js']
-            }
+        exec: {
+            test_runner: 'node test_runner.js'
         },
 
         clean: {

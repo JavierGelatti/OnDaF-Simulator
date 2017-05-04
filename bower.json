@@ -1,41 +1,41 @@
 {
-    "name": "ondafsimulator",
-    "description": "An application that helps students practice for the onDaF online test",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "/*.js",
-        "/*.html",
-        "test",
-        "tests"
-    ],
-    "authors": [
-        {
-            "name": "Facundo Javier Gelatti",
-            "email": "javiergelatti@gmail.com"
-        }
-    ],
-    "homepage": "https://github.com/javierGelatti/OnDaF-Simulator",
-    "keywords": [
-        "Amber",
-        "Smalltalk"
-    ],
-    "license": [
-        "MIT"
-    ],
-    "private": false,
-    "dependencies": {
-        "amber": "^0.16.1",
-        "amber-compat-es2015": "^0.1.5",
-        "amber-contrib-jquery": "^0.2.0",
-        "amber-contrib-web": "^0.3.0",
-        "domite": "^0.4.0",
-        "silk": "^0.2.0"
-    },
-    "devDependencies": {
-        "amber-contrib-legacy": "^0.3.0",
-        "amber-ide-starter-dialog": "^0.1.0",
-        "helios": "^0.6.0"
+  "name": "ondafsimulator",
+  "description": "An application that helps students practice for the onDaF online test",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/*.js",
+    "/*.html",
+    "test",
+    "tests"
+  ],
+  "authors": [
+    {
+      "name": "Facundo Javier Gelatti",
+      "email": "javiergelatti@gmail.com"
     }
+  ],
+  "homepage": "https://github.com/javierGelatti/OnDaF-Simulator",
+  "keywords": [
+    "Amber",
+    "Smalltalk"
+  ],
+  "license": [
+    "MIT"
+  ],
+  "private": false,
+  "dependencies": {
+    "amber": "^0.19.0",
+    "amber-compat-es2015": "^0.1.5",
+    "amber-contrib-jquery": "^0.4.0",
+    "amber-contrib-web": "^0.5.0",
+    "domite": "^0.7.0",
+    "silk": "^0.3.0"
+  },
+  "devDependencies": {
+    "amber-contrib-legacy": "^0.5.0",
+    "amber-ide-starter-dialog": "^0.1.0",
+    "helios": "^0.8.0"
+  }
 }

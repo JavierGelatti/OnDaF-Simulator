@@ -268,9 +268,13 @@ doSilkTAG
 	'#output-list' asSilk LI: 'Silk TAG: added me!!'
 !
 
-startExam
+hideDropArea
 	header remove.
 	fileDropTarget hide.
+!
+
+startExam
+	self hideDropArea.
 	
 	theExam := examDesigner designExam.
 	copies := printer print: theExam.

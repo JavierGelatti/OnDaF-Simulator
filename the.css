@@ -135,4 +135,5 @@ div.result span.score > span {
 div.result span.score > span:first-child,
 div.result span.score > span:last-child {
     font-weight: bold;
+    /* color: red; */
 }
