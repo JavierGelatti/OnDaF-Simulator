@@ -263,8 +263,20 @@ GUITest subclass: #OndafSimulatorTest
 
 !OndafSimulatorTest methodsFor: 'private'!
 
+assertCorrectInputs: aNumberOfInputs
+	self assert: '.correct' asJQuery length equals: aNumberOfInputs
+!
+
+assertIncorrectInputs: aNumberOfInputs
+	self assert: '.incorrect' asJQuery length equals: aNumberOfInputs
+!
+
 assertNumberOfInputsEquals: aNumber
 	self assert: 'input[type="text"]' asJQuery length equals: aNumber
+!
+
+assertTextsShown: aNumberOfTexts
+	self assert: '.text:visible:not(.result)' asJQuery length equals: aNumberOfTexts
 !
 
 completeExamWith: answers
@@ -311,7 +323,7 @@ setUp
 
 !OndafSimulatorTest methodsFor: 'tests'!
 
-test01
+test01ShowsTextTitleOnDrop
 	self dropTextWithTitle: 'Beispiel Text'.
 	
 	self afterThat: [
@@ -319,7 +331,7 @@ test01
 	]
 !
 
-test02
+test02ShowTextAndInputsAccordingToDroppedText
 	self dropTextWithTitle: 'Beispiel Text' contents: 'Hello wor{ld}.'.
 	
 	self afterThat: [
@@ -332,7 +344,7 @@ test02
 	]
 !
 
-test03
+test03ComputesTheResultAfterFinishingTheExam
 	self dropTextWithContents: 'Hello wor{ld}. This is an exam{ple}.'.
 	
 	self afterThat: [
@@ -341,11 +353,17 @@ test03
 		self completeExamWith: #('ld' 'wrong').
 		self finishText.
 		
-		self assertPageContains: '50'
+		self assertPageContains: 'Ergebnis'.
+		self assertPageContains: '50 %'.
+		self assertPageContains: 'A2 (oder unter)'.
+		
+		self assertTextsShown: 1.
+		self assertIncorrectInputs: 1.
+		self assertCorrectInputs: 1.
 	]
 !
 
-test04
+test04SupportsMultipleTexts
 	| inputs |
 	self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.
 	self dropTextWithTitle: 'Beispiel Text 2' contents: 'Second text. This is the sec{ond} text.'.
@@ -357,7 +375,6 @@ test04
 		self assertPageDoesNotContain: 'Second text'.
 		
 		self completeExamWith: #('ld' 'wrong').
-		
 		self finishText.
 		
 		self assertPageContains: 'Second text'.
@@ -365,20 +382,19 @@ test04
 		self assertPageDoesNotContain: 'Ergebnis'.
 		
 		self completeExamWith: #('ond').
-		
 		self finishText.
 		
 		self assertPageContains: 'Ergebnis'.
 		self assertPageContains: '66.67 %'.
 		self assertPageContains: 'B1'.
 		
-		self assert: '.text:visible:not(.result)' asJQuery length equals: 2.
-		self assert: '.incorrect' asJQuery length equals: 1.
-		self assert: '.correct' asJQuery length equals: 2.
+		self assertTextsShown: 2.
+		self assertIncorrectInputs: 1.
+		self assertCorrectInputs: 2.
 	]
 !
 
-test05
+test05CanResetToANewExam
 	| inputs |
 	self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.
 	

@@ -876,6 +876,54 @@ $globals.HeaderTest);
 $core.addClass("OndafSimulatorTest", $globals.GUITest, ["lastInputCompleted"], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
+selector: "assertCorrectInputs:",
+protocol: "private",
+fn: function (aNumberOfInputs){
+var self=this,$self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$self._assert_equals_($recv(".correct"._asJQuery())._length(),aNumberOfInputs);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"assertCorrectInputs:",{aNumberOfInputs:aNumberOfInputs},$globals.OndafSimulatorTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aNumberOfInputs"],
+source: "assertCorrectInputs: aNumberOfInputs\x0a\x09self assert: '.correct' asJQuery length equals: aNumberOfInputs",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["assert:equals:", "length", "asJQuery"]
+}),
+$globals.OndafSimulatorTest);
+
+$core.addMethod(
+$core.method({
+selector: "assertIncorrectInputs:",
+protocol: "private",
+fn: function (aNumberOfInputs){
+var self=this,$self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$self._assert_equals_($recv(".incorrect"._asJQuery())._length(),aNumberOfInputs);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"assertIncorrectInputs:",{aNumberOfInputs:aNumberOfInputs},$globals.OndafSimulatorTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aNumberOfInputs"],
+source: "assertIncorrectInputs: aNumberOfInputs\x0a\x09self assert: '.incorrect' asJQuery length equals: aNumberOfInputs",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["assert:equals:", "length", "asJQuery"]
+}),
+$globals.OndafSimulatorTest);
+
+$core.addMethod(
+$core.method({
 selector: "assertNumberOfInputsEquals:",
 protocol: "private",
 fn: function (aNumber){
@@ -892,6 +940,30 @@ return self;
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["aNumber"],
 source: "assertNumberOfInputsEquals: aNumber\x0a\x09self assert: 'input[type=\x22text\x22]' asJQuery length equals: aNumber",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["assert:equals:", "length", "asJQuery"]
+}),
+$globals.OndafSimulatorTest);
+
+$core.addMethod(
+$core.method({
+selector: "assertTextsShown:",
+protocol: "private",
+fn: function (aNumberOfTexts){
+var self=this,$self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$self._assert_equals_($recv(".text:visible:not(.result)"._asJQuery())._length(),aNumberOfTexts);
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"assertTextsShown:",{aNumberOfTexts:aNumberOfTexts},$globals.OndafSimulatorTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aNumberOfTexts"],
+source: "assertTextsShown: aNumberOfTexts\x0a\x09self assert: '.text:visible:not(.result)' asJQuery length equals: aNumberOfTexts",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["assert:equals:", "length", "asJQuery"]
@@ -1123,7 +1195,7 @@ $globals.OndafSimulatorTest);
 
 $core.addMethod(
 $core.method({
-selector: "test01",
+selector: "test01ShowsTextTitleOnDrop",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1142,12 +1214,12 @@ return $self._assertPageContains_("Beispiel Text");
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test01",{},$globals.OndafSimulatorTest)});
+}, function($ctx1) {$ctx1.fill(self,"test01ShowsTextTitleOnDrop",{},$globals.OndafSimulatorTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test01\x0a\x09self dropTextWithTitle: 'Beispiel Text'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self assertPageContains: 'Beispiel Text'\x0a\x09]",
+source: "test01ShowsTextTitleOnDrop\x0a\x09self dropTextWithTitle: 'Beispiel Text'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self assertPageContains: 'Beispiel Text'\x0a\x09]",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["dropTextWithTitle:", "afterThat:", "assertPageContains:"]
@@ -1156,7 +1228,7 @@ $globals.OndafSimulatorTest);
 
 $core.addMethod(
 $core.method({
-selector: "test02",
+selector: "test02ShowTextAndInputsAccordingToDroppedText",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1182,12 +1254,12 @@ return $self._assertNumberOfInputsEquals_((1));
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test02",{},$globals.OndafSimulatorTest)});
+}, function($ctx1) {$ctx1.fill(self,"test02ShowTextAndInputsAccordingToDroppedText",{},$globals.OndafSimulatorTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test02\x0a\x09self dropTextWithTitle: 'Beispiel Text' contents: 'Hello wor{ld}.'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self startExam.\x0a\x09\x09\x0a\x09\x09self assertPageDoesNotContain: 'Start exam'.\x0a\x09\x09self assertPageContains: 'Beispiel Text'.\x0a\x09\x09self assertPageContains: 'Hello wor'.\x0a\x09\x09self assertNumberOfInputsEquals: 1.\x0a\x09]",
+source: "test02ShowTextAndInputsAccordingToDroppedText\x0a\x09self dropTextWithTitle: 'Beispiel Text' contents: 'Hello wor{ld}.'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self startExam.\x0a\x09\x09\x0a\x09\x09self assertPageDoesNotContain: 'Start exam'.\x0a\x09\x09self assertPageContains: 'Beispiel Text'.\x0a\x09\x09self assertPageContains: 'Hello wor'.\x0a\x09\x09self assertNumberOfInputsEquals: 1.\x0a\x09]",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["dropTextWithTitle:contents:", "afterThat:", "startExam", "assertPageDoesNotContain:", "assertPageContains:", "assertNumberOfInputsEquals:"]
@@ -1196,7 +1268,7 @@ $globals.OndafSimulatorTest);
 
 $core.addMethod(
 $core.method({
-selector: "test03",
+selector: "test03ComputesTheResultAfterFinishingTheExam",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1211,28 +1283,39 @@ return $core.withContext(function($ctx2) {
 $self._startExam();
 $self._completeExamWith_(["ld", "wrong"]);
 $self._finishText();
-return $self._assertPageContains_("50");
+$self._assertPageContains_("Ergebnis");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["assertPageContains:"]=1;
+//>>excludeEnd("ctx");
+$self._assertPageContains_("50 %");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["assertPageContains:"]=2;
+//>>excludeEnd("ctx");
+$self._assertPageContains_("A2 (oder unter)");
+$self._assertTextsShown_((1));
+$self._assertIncorrectInputs_((1));
+return $self._assertCorrectInputs_((1));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test03",{},$globals.OndafSimulatorTest)});
+}, function($ctx1) {$ctx1.fill(self,"test03ComputesTheResultAfterFinishingTheExam",{},$globals.OndafSimulatorTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test03\x0a\x09self dropTextWithContents: 'Hello wor{ld}. This is an exam{ple}.'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self startExam.\x0a\x09\x09\x0a\x09\x09self completeExamWith: #('ld' 'wrong').\x0a\x09\x09self finishText.\x0a\x09\x09\x0a\x09\x09self assertPageContains: '50'\x0a\x09]",
+source: "test03ComputesTheResultAfterFinishingTheExam\x0a\x09self dropTextWithContents: 'Hello wor{ld}. This is an exam{ple}.'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self startExam.\x0a\x09\x09\x0a\x09\x09self completeExamWith: #('ld' 'wrong').\x0a\x09\x09self finishText.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Ergebnis'.\x0a\x09\x09self assertPageContains: '50 %'.\x0a\x09\x09self assertPageContains: 'A2 (oder unter)'.\x0a\x09\x09\x0a\x09\x09self assertTextsShown: 1.\x0a\x09\x09self assertIncorrectInputs: 1.\x0a\x09\x09self assertCorrectInputs: 1.\x0a\x09]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["dropTextWithContents:", "afterThat:", "startExam", "completeExamWith:", "finishText", "assertPageContains:"]
+messageSends: ["dropTextWithContents:", "afterThat:", "startExam", "completeExamWith:", "finishText", "assertPageContains:", "assertTextsShown:", "assertIncorrectInputs:", "assertCorrectInputs:"]
 }),
 $globals.OndafSimulatorTest);
 
 $core.addMethod(
 $core.method({
-selector: "test04",
+selector: "test04SupportsMultipleTexts",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1240,7 +1323,6 @@ var inputs;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $2,$1,$4,$3;
 $self._dropTextWithTitle_contents_("Beispiel Text 1","First text. Hello wor{ld}. This is an exam{ple}.");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["dropTextWithTitle:contents:"]=1;
@@ -1287,52 +1369,30 @@ $self._assertPageContains_("66.67 %");
 $ctx2.sendIdx["assertPageContains:"]=5;
 //>>excludeEnd("ctx");
 $self._assertPageContains_("B1");
-$2=".text:visible:not(.result)"._asJQuery();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["asJQuery"]=1;
-//>>excludeEnd("ctx");
-$1=$recv($2)._length();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["length"]=1;
-//>>excludeEnd("ctx");
-$self._assert_equals_($1,(2));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["assert:equals:"]=1;
-//>>excludeEnd("ctx");
-$4=".incorrect"._asJQuery();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["asJQuery"]=2;
-//>>excludeEnd("ctx");
-$3=$recv($4)._length();
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["length"]=2;
-//>>excludeEnd("ctx");
-$self._assert_equals_($3,(1));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx2.sendIdx["assert:equals:"]=2;
-//>>excludeEnd("ctx");
-return $self._assert_equals_($recv(".correct"._asJQuery())._length(),(2));
+$self._assertTextsShown_((2));
+$self._assertIncorrectInputs_((1));
+return $self._assertCorrectInputs_((2));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test04",{inputs:inputs},$globals.OndafSimulatorTest)});
+}, function($ctx1) {$ctx1.fill(self,"test04SupportsMultipleTexts",{inputs:inputs},$globals.OndafSimulatorTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test04\x0a\x09| inputs |\x0a\x09self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.\x0a\x09self dropTextWithTitle: 'Beispiel Text 2' contents: 'Second text. This is the sec{ond} text.'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self startExam.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'First text'.\x0a\x09\x09self assertPageDoesNotContain: 'Second text'.\x0a\x09\x09\x0a\x09\x09self completeExamWith: #('ld' 'wrong').\x0a\x09\x09\x0a\x09\x09self finishText.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Second text'.\x0a\x09\x09self assertPageContains: 'Text 2 von 2'.\x0a\x09\x09self assertPageDoesNotContain: 'Ergebnis'.\x0a\x09\x09\x0a\x09\x09self completeExamWith: #('ond').\x0a\x09\x09\x0a\x09\x09self finishText.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Ergebnis'.\x0a\x09\x09self assertPageContains: '66.67 %'.\x0a\x09\x09self assertPageContains: 'B1'.\x0a\x09\x09\x0a\x09\x09self assert: '.text:visible:not(.result)' asJQuery length equals: 2.\x0a\x09\x09self assert: '.incorrect' asJQuery length equals: 1.\x0a\x09\x09self assert: '.correct' asJQuery length equals: 2.\x0a\x09]",
+source: "test04SupportsMultipleTexts\x0a\x09| inputs |\x0a\x09self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.\x0a\x09self dropTextWithTitle: 'Beispiel Text 2' contents: 'Second text. This is the sec{ond} text.'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self startExam.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'First text'.\x0a\x09\x09self assertPageDoesNotContain: 'Second text'.\x0a\x09\x09\x0a\x09\x09self completeExamWith: #('ld' 'wrong').\x0a\x09\x09self finishText.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Second text'.\x0a\x09\x09self assertPageContains: 'Text 2 von 2'.\x0a\x09\x09self assertPageDoesNotContain: 'Ergebnis'.\x0a\x09\x09\x0a\x09\x09self completeExamWith: #('ond').\x0a\x09\x09self finishText.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Ergebnis'.\x0a\x09\x09self assertPageContains: '66.67 %'.\x0a\x09\x09self assertPageContains: 'B1'.\x0a\x09\x09\x0a\x09\x09self assertTextsShown: 2.\x0a\x09\x09self assertIncorrectInputs: 1.\x0a\x09\x09self assertCorrectInputs: 2.\x0a\x09]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["dropTextWithTitle:contents:", "afterThat:", "startExam", "assertPageContains:", "assertPageDoesNotContain:", "completeExamWith:", "finishText", "assert:equals:", "length", "asJQuery"]
+messageSends: ["dropTextWithTitle:contents:", "afterThat:", "startExam", "assertPageContains:", "assertPageDoesNotContain:", "completeExamWith:", "finishText", "assertTextsShown:", "assertIncorrectInputs:", "assertCorrectInputs:"]
 }),
 $globals.OndafSimulatorTest);
 
 $core.addMethod(
 $core.method({
-selector: "test05",
+selector: "test05CanResetToANewExam",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1354,12 +1414,12 @@ return $self._assertPageContains_("New exam");
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test05",{inputs:inputs},$globals.OndafSimulatorTest)});
+}, function($ctx1) {$ctx1.fill(self,"test05CanResetToANewExam",{inputs:inputs},$globals.OndafSimulatorTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test05\x0a\x09| inputs |\x0a\x09self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self newExam.\x0a\x09\x09self assertPageDoesNotContain: 'Beispiel Text 1'.\x0a\x09\x09self assertPageContains: 'New exam'.\x0a\x09]",
+source: "test05CanResetToANewExam\x0a\x09| inputs |\x0a\x09self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self newExam.\x0a\x09\x09self assertPageDoesNotContain: 'Beispiel Text 1'.\x0a\x09\x09self assertPageContains: 'New exam'.\x0a\x09]",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["dropTextWithTitle:contents:", "afterThat:", "newExam", "assertPageDoesNotContain:", "assertPageContains:"]
