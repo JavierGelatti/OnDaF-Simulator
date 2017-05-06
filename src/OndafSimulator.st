@@ -248,10 +248,9 @@ beginNextText
 		| result |
 		result := theExam evaluate: copies on: (ResultView newIn: '#content').
 		result giveToStudent.
-		^ nil
-	].
-
-	currentExam next giveToStudent.
+	] ifFalse: [
+		currentExam next giveToStudent.
+	]
 !
 
 hideDropArea

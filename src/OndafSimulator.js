@@ -1131,23 +1131,23 @@ $core.method({
 selector: "beginNextText",
 protocol: "action",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
-$1=$recv(self["@currentExam"])._atEnd();
+$1=$recv($self["@currentExam"])._atEnd();
 if($core.assert($1)){
 var result;
-result=$recv(self["@theExam"])._evaluate_on_(self["@copies"],$recv($globals.ResultView)._newIn_("#content"));
+result=$recv($self["@theExam"])._evaluate_on_($self["@copies"],$recv($globals.ResultView)._newIn_("#content"));
 result;
 $recv(result)._giveToStudent();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["giveToStudent"]=1;
 //>>excludeEnd("ctx");
-return nil;
-};
-$recv($recv(self["@currentExam"])._next())._giveToStudent();
+} else {
+$recv($recv($self["@currentExam"])._next())._giveToStudent();
+}
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"beginNextText",{},$globals.OndafSimulator)});
@@ -1155,10 +1155,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "beginNextText\x0a\x09currentExam atEnd ifTrue: [\x0a\x09\x09| result |\x0a\x09\x09result := theExam evaluate: copies on: (ResultView newIn: '#content').\x0a\x09\x09result giveToStudent.\x0a\x09\x09^ nil\x0a\x09].\x0a\x0a\x09currentExam next giveToStudent.",
+source: "beginNextText\x0a\x09currentExam atEnd ifTrue: [\x0a\x09\x09| result |\x0a\x09\x09result := theExam evaluate: copies on: (ResultView newIn: '#content').\x0a\x09\x09result giveToStudent.\x0a\x09] ifFalse: [\x0a\x09\x09currentExam next giveToStudent.\x0a\x09]",
 referencedClasses: ["ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["ifTrue:", "atEnd", "evaluate:on:", "newIn:", "giveToStudent", "next"]
+messageSends: ["ifTrue:ifFalse:", "atEnd", "evaluate:on:", "newIn:", "giveToStudent", "next"]
 }),
 $globals.OndafSimulator);
 
