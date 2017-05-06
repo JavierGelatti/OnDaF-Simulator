@@ -93,7 +93,7 @@ $globals.ExamDesignerTest);
 
 $core.addMethod(
 $core.method({
-selector: "test01",
+selector: "test01DesignExamWithOneText",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -112,12 +112,12 @@ anExam=$recv($self["@theExamDesigner"])._designExam();
 $self._assert_equals_($recv(anExam)._numberOfTexts(),(1));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test01",{anExam:anExam},$globals.ExamDesignerTest)});
+}, function($ctx1) {$ctx1.fill(self,"test01DesignExamWithOneText",{anExam:anExam},$globals.ExamDesignerTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test01\x0a\x09| anExam |\x0a\x09theExamDesigner considerText: 'Title', String lf, 'Content'.\x0a\x09anExam := theExamDesigner designExam.\x0a\x09self assert: anExam numberOfTexts equals: 1.",
+source: "test01DesignExamWithOneText\x0a\x09| anExam |\x0a\x09theExamDesigner considerText: 'Title', String lf, 'Content'.\x0a\x09anExam := theExamDesigner designExam.\x0a\x09self assert: anExam numberOfTexts equals: 1.",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
 messageSends: ["considerText:", ",", "lf", "designExam", "assert:equals:", "numberOfTexts"]
@@ -126,7 +126,7 @@ $globals.ExamDesignerTest);
 
 $core.addMethod(
 $core.method({
-selector: "test02",
+selector: "test02DesignExamWithMultipleTexts",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -162,12 +162,12 @@ anExam=$recv($self["@theExamDesigner"])._designExam();
 $self._assert_equals_($recv(anExam)._numberOfTexts(),(2));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test02",{anExam:anExam},$globals.ExamDesignerTest)});
+}, function($ctx1) {$ctx1.fill(self,"test02DesignExamWithMultipleTexts",{anExam:anExam},$globals.ExamDesignerTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test02\x0a\x09| anExam |\x0a\x09theExamDesigner considerText: 'Title A', String lf, 'Content 1'.\x0a\x09theExamDesigner considerText: 'Title B', String lf, 'Content 2'.\x0a\x09anExam := theExamDesigner designExam.\x0a\x09self assert: anExam numberOfTexts equals: 2.",
+source: "test02DesignExamWithMultipleTexts\x0a\x09| anExam |\x0a\x09theExamDesigner considerText: 'Title A', String lf, 'Content 1'.\x0a\x09theExamDesigner considerText: 'Title B', String lf, 'Content 2'.\x0a\x09anExam := theExamDesigner designExam.\x0a\x09self assert: anExam numberOfTexts equals: 2.",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
 messageSends: ["considerText:", ",", "lf", "designExam", "assert:equals:", "numberOfTexts"]
@@ -176,7 +176,7 @@ $globals.ExamDesignerTest);
 
 $core.addMethod(
 $core.method({
-selector: "test03",
+selector: "test03InformTheTextTitlesAsTheyAreConsidered",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -221,12 +221,12 @@ $recv($5)._considerText_($6);
 $self._assert_equals_($recv(titles)._asArray(),["Title A", "Title B"]);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test03",{titles:titles},$globals.ExamDesignerTest)});
+}, function($ctx1) {$ctx1.fill(self,"test03InformTheTextTitlesAsTheyAreConsidered",{titles:titles},$globals.ExamDesignerTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test03\x0a\x09| titles |\x0a\x09titles := OrderedCollection new.\x0a\x09\x0a\x09theExamDesigner informProgressTo: [ :title | titles add: title ].\x0a\x09theExamDesigner considerText: 'Title A', String lf, 'Content 1'.\x0a\x09theExamDesigner considerText: 'Title B', String lf, 'Content 2'.\x0a\x09\x0a\x09self assert: titles asArray equals: #('Title A' 'Title B').",
+source: "test03InformTheTextTitlesAsTheyAreConsidered\x0a\x09| titles |\x0a\x09titles := OrderedCollection new.\x0a\x09\x0a\x09theExamDesigner informProgressTo: [ :title | titles add: title ].\x0a\x09theExamDesigner considerText: 'Title A', String lf, 'Content 1'.\x0a\x09theExamDesigner considerText: 'Title B', String lf, 'Content 2'.\x0a\x09\x0a\x09self assert: titles asArray equals: #('Title A' 'Title B').",
 referencedClasses: ["OrderedCollection", "String"],
 //>>excludeEnd("ide");
 messageSends: ["new", "informProgressTo:", "add:", "considerText:", ",", "lf", "assert:equals:", "asArray"]
@@ -239,7 +239,7 @@ $core.addClass("ExamPrinterTest", $globals.TestCase, ["examCreator", "theExam", 
 $core.addMethod(
 $core.method({
 selector: "givenExamWithText:",
-protocol: "as yet unclassified",
+protocol: "given",
 fn: function (text1){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -263,7 +263,7 @@ $globals.ExamPrinterTest);
 $core.addMethod(
 $core.method({
 selector: "givenExamWithText:and:",
-protocol: "as yet unclassified",
+protocol: "given",
 fn: function (text1,text2){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -287,7 +287,7 @@ $globals.ExamPrinterTest);
 $core.addMethod(
 $core.method({
 selector: "printedText",
-protocol: "as yet unclassified",
+protocol: "private",
 fn: function (){
 var self=this,$self=this;
 var allText;
@@ -332,7 +332,7 @@ $globals.ExamPrinterTest);
 $core.addMethod(
 $core.method({
 selector: "setUp",
-protocol: "as yet unclassified",
+protocol: "running",
 fn: function (){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -359,8 +359,8 @@ $globals.ExamPrinterTest);
 
 $core.addMethod(
 $core.method({
-selector: "test01",
-protocol: "as yet unclassified",
+selector: "test01CopyExamOnPrinter",
+protocol: "tests",
 fn: function (){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -380,12 +380,12 @@ $ctx1.sendIdx["assert:equals:"]=1;
 $self._assert_equals_($self._printedText(),"Texts: 1 |Title A (30s)| And the text said: he_ wor_ . ");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test01",{},$globals.ExamPrinterTest)});
+}, function($ctx1) {$ctx1.fill(self,"test01CopyExamOnPrinter",{},$globals.ExamPrinterTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test01\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09self assert: copies size equals: 1.\x0a\x09self assert: self printedText equals: 'Texts: 1 |Title A (30s)| And the text said: he_ wor_ . '.",
+source: "test01CopyExamOnPrinter\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09self assert: copies size equals: 1.\x0a\x09self assert: self printedText equals: 'Texts: 1 |Title A (30s)| And the text said: he_ wor_ . '.",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
 messageSends: ["givenExamWithText:", ",", "lf", "print:", "assert:equals:", "size", "printedText"]
@@ -394,39 +394,8 @@ $globals.ExamPrinterTest);
 
 $core.addMethod(
 $core.method({
-selector: "test02CopyExamOnPrinter",
-protocol: "as yet unclassified",
-fn: function (){
-var self=this,$self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-var $1;
-$1=$recv("Title A".__comma($recv($globals.String)._lf())).__comma("And the text said: he{llo} wor{ld}.");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx[","]=1;
-//>>excludeEnd("ctx");
-$self._givenExamWithText_($1);
-$self["@copies"]=$recv($self["@printer"])._print_($self["@theExam"]);
-$self._assert_equals_($self._printedText(),"Texts: 1 |Title A (30s)| And the text said: he_ wor_ . ");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test02CopyExamOnPrinter",{},$globals.ExamPrinterTest)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "test02CopyExamOnPrinter\x0a\x09self givenExamWithText: 'Title A', String lf, 'And the text said: he{llo} wor{ld}.'.\x0a\x09\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09self assert: self printedText equals: 'Texts: 1 |Title A (30s)| And the text said: he_ wor_ . '.",
-referencedClasses: ["String"],
-//>>excludeEnd("ide");
-messageSends: ["givenExamWithText:", ",", "lf", "print:", "assert:equals:", "printedText"]
-}),
-$globals.ExamPrinterTest);
-
-$core.addMethod(
-$core.method({
-selector: "test03CopyExamWithMultipleTexts",
-protocol: "as yet unclassified",
+selector: "test02CopyExamWithMultipleTexts",
+protocol: "tests",
 fn: function (){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -454,12 +423,12 @@ $self["@copies"]=$recv($self["@printer"])._print_($self["@theExam"]);
 $self._assert_equals_($self._printedText(),"Texts: 2 |Title A (30s)| he_ wor_ |Title B (15s)| loca_ ");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test03CopyExamWithMultipleTexts",{},$globals.ExamPrinterTest)});
+}, function($ctx1) {$ctx1.fill(self,"test02CopyExamWithMultipleTexts",{},$globals.ExamPrinterTest)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test03CopyExamWithMultipleTexts\x0a\x09self givenExamWithText: 'Title A', String lf, 'he{llo} wor{ld}'\x0a\x09                   and: 'Title B', String lf, 'loca{tion}'.\x0a\x09\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09self assert: self printedText equals: 'Texts: 2 |Title A (30s)| he_ wor_ |Title B (15s)| loca_ '.",
+source: "test02CopyExamWithMultipleTexts\x0a\x09self givenExamWithText: 'Title A', String lf, 'he{llo} wor{ld}'\x0a\x09                   and: 'Title B', String lf, 'loca{tion}'.\x0a\x09\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09self assert: self printedText equals: 'Texts: 2 |Title A (30s)| he_ wor_ |Title B (15s)| loca_ '.",
 referencedClasses: ["String"],
 //>>excludeEnd("ide");
 messageSends: ["givenExamWithText:and:", ",", "lf", "print:", "assert:equals:", "printedText"]
@@ -939,7 +908,7 @@ $globals.ExamTest);
 $core.addClass("InterpreterText", $globals.TestCase, [], "OndafSimulator-Core-Tests");
 $core.addMethod(
 $core.method({
-selector: "test1",
+selector: "test01InterpretEmptyText",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -952,12 +921,12 @@ aText=$recv(anInterpreter)._interpretText_("");
 $self._assert_equals_($recv(aText)._title(),"");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test1",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
+}, function($ctx1) {$ctx1.fill(self,"test01InterpretEmptyText",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test1\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: ''.\x0a\x09self assert: aText title equals: ''.",
+source: "test01InterpretEmptyText\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: ''.\x0a\x09self assert: aText title equals: ''.",
 referencedClasses: ["CTestInterpreter"],
 //>>excludeEnd("ide");
 messageSends: ["new", "interpretText:", "assert:equals:", "title"]
@@ -966,7 +935,7 @@ $globals.InterpreterText);
 
 $core.addMethod(
 $core.method({
-selector: "test2",
+selector: "test02InterpretTextTitle",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -979,12 +948,12 @@ aText=$recv(anInterpreter)._interpretText_("The Title");
 $self._assert_equals_($recv(aText)._title(),"The Title");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test2",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
+}, function($ctx1) {$ctx1.fill(self,"test02InterpretTextTitle",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test2\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: 'The Title'.\x0a\x09self assert: aText title equals: 'The Title'.",
+source: "test02InterpretTextTitle\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: 'The Title'.\x0a\x09self assert: aText title equals: 'The Title'.",
 referencedClasses: ["CTestInterpreter"],
 //>>excludeEnd("ide");
 messageSends: ["new", "interpretText:", "assert:equals:", "title"]
@@ -993,7 +962,7 @@ $globals.InterpreterText);
 
 $core.addMethod(
 $core.method({
-selector: "test3",
+selector: "test03TrimSpacesOfTextTitle",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1006,12 +975,12 @@ aText=$recv(anInterpreter)._interpretText_("    The Title   ");
 $self._assert_equals_($recv(aText)._title(),"The Title");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test3",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
+}, function($ctx1) {$ctx1.fill(self,"test03TrimSpacesOfTextTitle",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test3\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: '    The Title   '.\x0a\x09self assert: aText title equals: 'The Title'.",
+source: "test03TrimSpacesOfTextTitle\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: '    The Title   '.\x0a\x09self assert: aText title equals: 'The Title'.",
 referencedClasses: ["CTestInterpreter"],
 //>>excludeEnd("ide");
 messageSends: ["new", "interpretText:", "assert:equals:", "title"]
@@ -1020,7 +989,7 @@ $globals.InterpreterText);
 
 $core.addMethod(
 $core.method({
-selector: "test4",
+selector: "test04IgnoreLineBreaksBeforeAndAfterTitle",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1044,12 +1013,12 @@ aText=$recv($1)._interpretText_($2);
 $self._assert_equals_($recv(aText)._title(),"The Title");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test4",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
+}, function($ctx1) {$ctx1.fill(self,"test04IgnoreLineBreaksBeforeAndAfterTitle",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test4\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: String lf, ' The Title ', String lf.\x0a\x09self assert: aText title equals: 'The Title'.",
+source: "test04IgnoreLineBreaksBeforeAndAfterTitle\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: String lf, ' The Title ', String lf.\x0a\x09self assert: aText title equals: 'The Title'.",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
 messageSends: ["new", "interpretText:", ",", "lf", "assert:equals:", "title"]
@@ -1058,7 +1027,7 @@ $globals.InterpreterText);
 
 $core.addMethod(
 $core.method({
-selector: "test5",
+selector: "test05InterpretTextContentWithOneLine",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1081,12 +1050,12 @@ $ctx1.sendIdx["assert:equals:"]=1;
 $self._assert_equals_($recv(aText)._contentAsString(),"The content");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test5",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
+}, function($ctx1) {$ctx1.fill(self,"test05InterpretTextContentWithOneLine",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test5\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: 'The Title', String lf, 'The content'.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The content'",
+source: "test05InterpretTextContentWithOneLine\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: 'The Title', String lf, 'The content'.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The content'",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
 messageSends: ["new", "interpretText:", ",", "lf", "assert:equals:", "title", "contentAsString"]
@@ -1095,7 +1064,7 @@ $globals.InterpreterText);
 
 $core.addMethod(
 $core.method({
-selector: "test6",
+selector: "test06TrimTextContent",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1118,12 +1087,12 @@ $ctx1.sendIdx["assert:equals:"]=1;
 $self._assert_equals_($recv(aText)._contentAsString(),"The content");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test6",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
+}, function($ctx1) {$ctx1.fill(self,"test06TrimTextContent",{anInterpreter:anInterpreter,aText:aText},$globals.InterpreterText)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test6\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: 'The Title', String lf, '   The content  '.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The content'",
+source: "test06TrimTextContent\x0a\x09| anInterpreter aText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09aText := anInterpreter interpretText: 'The Title', String lf, '   The content  '.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The content'",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
 messageSends: ["new", "interpretText:", ",", "lf", "assert:equals:", "title", "contentAsString"]
@@ -1132,7 +1101,7 @@ $globals.InterpreterText);
 
 $core.addMethod(
 $core.method({
-selector: "test7",
+selector: "test07InterpretTextContentWithMultipleLines",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1167,12 +1136,12 @@ $ctx1.sendIdx["assert:equals:"]=1;
 $self._assert_equals_($recv(aText)._contentAsString(),"The content More content");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test7",{anInterpreter:anInterpreter,aText:aText,stringText:stringText},$globals.InterpreterText)});
+}, function($ctx1) {$ctx1.fill(self,"test07InterpretTextContentWithMultipleLines",{anInterpreter:anInterpreter,aText:aText,stringText:stringText},$globals.InterpreterText)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test7\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String lf , 'The content' , String lf, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: \x09'The content More content'",
+source: "test07InterpretTextContentWithMultipleLines\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String lf , 'The content' , String lf, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: \x09'The content More content'",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
 messageSends: ["new", ",", "lf", "interpretText:", "assert:equals:", "title", "contentAsString"]
@@ -1181,7 +1150,7 @@ $globals.InterpreterText);
 
 $core.addMethod(
 $core.method({
-selector: "test8",
+selector: "test08InterpretTextContentWithWordsToComplete",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1216,12 +1185,12 @@ $ctx1.sendIdx["assert:equals:"]=1;
 $self._assert_equals_($recv(aText)._contentAsString(),"The cont{ent} More content");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test8",{anInterpreter:anInterpreter,aText:aText,stringText:stringText},$globals.InterpreterText)});
+}, function($ctx1) {$ctx1.fill(self,"test08InterpretTextContentWithWordsToComplete",{anInterpreter:anInterpreter,aText:aText,stringText:stringText},$globals.InterpreterText)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test8\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String lf , 'The cont{ent}' , String lf, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The cont{ent} More content'",
+source: "test08InterpretTextContentWithWordsToComplete\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String lf , 'The cont{ent}' , String lf, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The cont{ent} More content'",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
 messageSends: ["new", ",", "lf", "interpretText:", "assert:equals:", "title", "contentAsString"]
@@ -1230,7 +1199,7 @@ $globals.InterpreterText);
 
 $core.addMethod(
 $core.method({
-selector: "test9",
+selector: "test09TitleCanBeSeparatedWithMultipleReturns",
 protocol: "tests",
 fn: function (){
 var self=this,$self=this;
@@ -1273,12 +1242,12 @@ $ctx1.sendIdx["assert:equals:"]=1;
 $self._assert_equals_($recv(aText)._contentAsString(),"The cont{ent} More content");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"test9",{anInterpreter:anInterpreter,aText:aText,stringText:stringText},$globals.InterpreterText)});
+}, function($ctx1) {$ctx1.fill(self,"test09TitleCanBeSeparatedWithMultipleReturns",{anInterpreter:anInterpreter,aText:aText,stringText:stringText},$globals.InterpreterText)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test9\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String lf, String lf , 'The cont{ent}' , String lf, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The cont{ent} More content'",
+source: "test09TitleCanBeSeparatedWithMultipleReturns\x0a\x09| anInterpreter aText stringText |\x0a\x09anInterpreter := CTestInterpreter new.\x0a\x09stringText := 'The Title' , String lf, String lf , 'The cont{ent}' , String lf, 'More content'.\x0a\x09aText := anInterpreter interpretText: stringText.\x0a\x09self assert: aText title equals: 'The Title'.\x0a\x09self assert: aText contentAsString equals: 'The cont{ent} More content'",
 referencedClasses: ["CTestInterpreter", "String"],
 //>>excludeEnd("ide");
 messageSends: ["new", ",", "lf", "interpretText:", "assert:equals:", "title", "contentAsString"]
@@ -2261,7 +2230,7 @@ $core.addClass("ResultTableTest", $globals.TestCase, [], "OndafSimulator-Core-Te
 $core.addMethod(
 $core.method({
 selector: "assertPercentage:isLevel:",
-protocol: "as yet unclassified",
+protocol: "assertions",
 fn: function (percentage,expectedLevel){
 var self=this,$self=this;
 var aLevel;
@@ -2287,7 +2256,7 @@ $globals.ResultTableTest);
 $core.addMethod(
 $core.method({
 selector: "test01DetermineLevelFromPercentage",
-protocol: "as yet unclassified",
+protocol: "tests",
 fn: function (){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2953,7 +2922,7 @@ $core.addClass("TextCopyTest", $globals.TestCase, ["spyView", "copy"], "OndafSim
 $core.addMethod(
 $core.method({
 selector: "setUp",
-protocol: "as yet unclassified",
+protocol: "running",
 fn: function (){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2992,7 +2961,7 @@ $globals.TextCopyTest);
 $core.addMethod(
 $core.method({
 selector: "test01",
-protocol: "as yet unclassified",
+protocol: "tests",
 fn: function (){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -3016,7 +2985,7 @@ $globals.TextCopyTest);
 $core.addMethod(
 $core.method({
 selector: "test02",
-protocol: "as yet unclassified",
+protocol: "tests",
 fn: function (){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -3041,7 +3010,7 @@ $globals.TextCopyTest);
 $core.addMethod(
 $core.method({
 selector: "test03",
-protocol: "as yet unclassified",
+protocol: "tests",
 fn: function (){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -3067,7 +3036,7 @@ $globals.TextCopyTest);
 $core.addMethod(
 $core.method({
 selector: "test04",
-protocol: "as yet unclassified",
+protocol: "tests",
 fn: function (){
 var self=this,$self=this;
 var executed;
@@ -3100,7 +3069,7 @@ $globals.TextCopyTest);
 $core.addMethod(
 $core.method({
 selector: "test05",
-protocol: "as yet unclassified",
+protocol: "tests",
 fn: function (){
 var self=this,$self=this;
 var expectedAnswers;
@@ -3129,7 +3098,7 @@ $globals.TextCopyTest);
 $core.addMethod(
 $core.method({
 selector: "test06",
-protocol: "as yet unclassified",
+protocol: "tests",
 fn: function (){
 var self=this,$self=this;
 var resultStream;
@@ -3159,7 +3128,7 @@ $globals.TextCopyTest);
 $core.addMethod(
 $core.method({
 selector: "test07",
-protocol: "as yet unclassified",
+protocol: "tests",
 fn: function (){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -3185,7 +3154,7 @@ $globals.TextCopyTest);
 $core.addMethod(
 $core.method({
 selector: "test08",
-protocol: "as yet unclassified",
+protocol: "tests",
 fn: function (){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
