@@ -1164,23 +1164,23 @@ $globals.OndafSimulator);
 
 $core.addMethod(
 $core.method({
-selector: "hideDropArea",
+selector: "finishExamDesign",
 protocol: "action",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@header"])._remove();
-$recv(self["@fileDropTarget"])._hide();
+$recv($self["@header"])._remove();
+$recv($self["@fileDropTarget"])._hide();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"hideDropArea",{},$globals.OndafSimulator)});
+}, function($ctx1) {$ctx1.fill(self,"finishExamDesign",{},$globals.OndafSimulator)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "hideDropArea\x0a\x09header remove.\x0a\x09fileDropTarget hide.",
+source: "finishExamDesign\x0a\x09header remove.\x0a\x09fileDropTarget hide.",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["remove", "hide"]
@@ -1234,14 +1234,14 @@ $core.method({
 selector: "startExam",
 protocol: "action",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self._hideDropArea();
-self["@theExam"]=$recv(self["@examDesigner"])._designExam();
-self["@copies"]=$recv(self["@printer"])._print_(self["@theExam"]);
-$recv(self["@copies"])._do_((function(each){
+$self._finishExamDesign();
+$self["@theExam"]=$recv($self["@examDesigner"])._designExam();
+$self["@copies"]=$recv($self["@printer"])._print_($self["@theExam"]);
+$recv($self["@copies"])._do_((function(each){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -1249,7 +1249,7 @@ return $recv(each)._whenFinishDo_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx3) {
 //>>excludeEnd("ctx");
-return self._beginNextText();
+return $self._beginNextText();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx3.sendIdx["beginNextText"]=1;
 //>>excludeEnd("ctx");
@@ -1261,8 +1261,8 @@ $ctx3.sendIdx["beginNextText"]=1;
 }, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
-self["@currentExam"]=$recv(self["@copies"])._readStream();
-self._beginNextText();
+$self["@currentExam"]=$recv($self["@copies"])._readStream();
+$self._beginNextText();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"startExam",{},$globals.OndafSimulator)});
@@ -1270,10 +1270,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "startExam\x0a\x09self hideDropArea.\x0a\x09\x0a\x09theExam := examDesigner designExam.\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09copies do: [ :each | each whenFinishDo: [ self beginNextText ] ].\x0a\x09currentExam := copies readStream.\x0a\x09\x0a\x09self beginNextText",
+source: "startExam\x0a\x09self finishExamDesign.\x0a\x09\x0a\x09theExam := examDesigner designExam.\x0a\x09copies := printer print: theExam.\x0a\x09\x0a\x09copies do: [ :each | each whenFinishDo: [ self beginNextText ] ].\x0a\x09currentExam := copies readStream.\x0a\x09\x0a\x09self beginNextText",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["hideDropArea", "designExam", "print:", "do:", "whenFinishDo:", "beginNextText", "readStream"]
+messageSends: ["finishExamDesign", "designExam", "print:", "do:", "whenFinishDo:", "beginNextText", "readStream"]
 }),
 $globals.OndafSimulator);
 

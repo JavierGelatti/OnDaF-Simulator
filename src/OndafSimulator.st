@@ -253,13 +253,13 @@ beginNextText
 	]
 !
 
-hideDropArea
+finishExamDesign
 	header remove.
 	fileDropTarget hide.
 !
 
 startExam
-	self hideDropArea.
+	self finishExamDesign.
 	
 	theExam := examDesigner designExam.
 	copies := printer print: theExam.
