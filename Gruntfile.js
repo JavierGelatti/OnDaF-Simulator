@@ -61,7 +61,7 @@ module.exports = function (grunt) {
                     },
                     include: ['config', 'config-browser', 'node_modules/requirejs/require', 'app', 'amber/lazypack'],
                     optimize: "uglify2",
-                    out: "the.js"
+                    out: "docs/the.js"
                 }
             },
             devel: {
