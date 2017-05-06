@@ -26,11 +26,11 @@
   <script type='text/javascript'>
       require(['app'], function (amber) {
           amber.initialize({
-            //used for all new packages in IDE
             'transport.defaultAmdNamespace': "amber-ondafsimulator"
           }).then(function () {
-              require('amber/helpers').popupHelios();
-              //require(["amber-ide-starter-dialog"], function (dlg) { dlg.start(); });
+              require(["amber-ide-starter-dialog"], function (dlg) {
+                  require('amber/helpers').popupHelios();
+              });
               amber.globals.OndafSimulator._start();
           });
       });

@@ -7,6 +7,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('amber-dev');
 
+    // To minify the HTML
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+
     var path = require('path'),
         helpers = require('amber-dev').helpers;
 
@@ -14,7 +17,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['amdconfig:app', 'amberc:all']);
     grunt.registerTask('test', ['amdconfig:app', 'requirejs:test_runner', 'exec:test_runner', 'clean:test_runner']);
     grunt.registerTask('devel', ['amdconfig:app', 'requirejs:devel']);
-    grunt.registerTask('deploy', ['amdconfig:app', 'requirejs:deploy']);
+    grunt.registerTask('deploy', ['amdconfig:app', 'requirejs:deploy', 'htmlmin:dist']);
 
     // Project configuration.
     grunt.initConfig({
@@ -42,6 +45,18 @@ module.exports = function (grunt) {
         },
 
         amdconfig: {app: {dest: 'config.js'}},
+
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: {
+                    'docs/index.html': 'index.html' // 'destination': 'source'
+                }
+            }
+        },
 
         requirejs: {
             options: {
