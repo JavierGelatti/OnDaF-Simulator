@@ -1,23 +1,26 @@
-define("amber-ondafsimulator/OndafSimulator", ["amber/boot"
+define(["amber/boot"
 //>>excludeStart("imports", pragmas.excludeImports);
 , "amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"
 //>>excludeEnd("imports");
-, "amber_core/Kernel-Objects", "amber/web/Web", "amber_core/Kernel-Methods", "amber_core/Kernel-Collections"], function($boot
+, "amber/web/Web", "amber_core/Kernel-Collections", "amber_core/Kernel-Methods", "amber_core/Kernel-Objects"], function($boot
 //>>excludeStart("imports", pragmas.excludeImports);
 
 //>>excludeEnd("imports");
 ){"use strict";
-var $core=$boot.api,nil=$boot.nil,$recv=$boot.asReceiver,$globals=$boot.globals;
-$core.addPackage('OndafSimulator');
+if(!$boot.nilAsReceiver)$boot.nilAsReceiver=$boot.nil;
+if(!("nilAsValue" in $boot))$boot.nilAsValue=$boot.nilAsReceiver;
+var $core=$boot.api,nil=$boot.nilAsValue,$nil=$boot.nilAsReceiver,$recv=$boot.asReceiver,$globals=$boot.globals;
+if(!$boot.nilAsClass)$boot.nilAsClass=$boot.dnu;
+$core.addPackage("OndafSimulator");
 $core.packages["OndafSimulator"].innerEval = function (expr) { return eval(expr); };
 $core.packages["OndafSimulator"].imports = ["amber/jquery/Wrappers-JQuery", "amber/web/Web", "silk/Silk"];
 $core.packages["OndafSimulator"].transport = {"type":"amd","amdNamespace":"amber-ondafsimulator"};
 
-$core.addClass('ExamPrinterTray', $globals.Object, ['selector'], 'OndafSimulator');
+$core.addClass("ExamPrinterTray", $globals.Object, ["selector"], "OndafSimulator");
 $core.addMethod(
 $core.method({
 selector: "newCopy:of:titled:withTime:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (textNumber,totalTexts,aString,aTimeInSeconds){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -40,7 +43,7 @@ $globals.ExamPrinterTray);
 $core.addMethod(
 $core.method({
 selector: "selector:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aSelector){
 var self=this;
 self["@selector"]=aSelector;
@@ -60,7 +63,7 @@ $globals.ExamPrinterTray);
 $core.addMethod(
 $core.method({
 selector: "newOn:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aSelector){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -81,14 +84,14 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["selector:", "new", "yourself"]
 }),
-$globals.ExamPrinterTray.klass);
+$globals.ExamPrinterTray.a$cls);
 
 
-$core.addClass('ExamTextView', $globals.Widget, ['title', 'content', 'continueCheckbox', 'continueButton', 'inputs', 'container', 'textNumber', 'numberOfTexts', 'infoSeconds', 'continueAction', 'renderArea', 'actions'], 'OndafSimulator');
+$core.addClass("ExamTextView", $globals.Widget, ["title", "content", "continueCheckbox", "continueButton", "inputs", "container", "textNumber", "numberOfTexts", "infoSeconds", "continueAction", "renderArea", "actions"], "OndafSimulator");
 $core.addMethod(
 $core.method({
 selector: "addText:",
-protocol: 'building',
+protocol: "building",
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -120,7 +123,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "addWordToComplete:",
-protocol: 'building',
+protocol: "building",
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -178,7 +181,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "answers",
-protocol: 'actions',
+protocol: "actions",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -209,7 +212,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "consumeResults:",
-protocol: 'actions',
+protocol: "actions",
 fn: function (resultStream){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -233,7 +236,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "continue",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -258,7 +261,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "hide",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -282,7 +285,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "initialize",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -318,7 +321,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "initializeWithTitle:selector:number:of:",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (aString,aSelector,aNumber,totalNumber){
 var self=this;
 self["@title"]=aString;
@@ -340,7 +343,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "onContinueCheckboxChanged",
-protocol: 'private',
+protocol: "private",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -373,7 +376,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "render",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -397,7 +400,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "renderActionsOn:",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -508,7 +511,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "renderContentOn:",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -551,7 +554,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "renderInfoOn:",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -616,7 +619,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "renderOn:",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -688,7 +691,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "renderTitleOn:",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -715,7 +718,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "show",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -739,7 +742,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "showResults:",
-protocol: 'actions',
+protocol: "actions",
 fn: function (results){
 var self=this;
 var classes;
@@ -785,7 +788,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "showSeconds:",
-protocol: 'actions',
+protocol: "actions",
 fn: function (seconds){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -809,7 +812,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "whenContinueDo:",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (aBlock){
 var self=this;
 self["@continueAction"]=aBlock;
@@ -829,7 +832,7 @@ $globals.ExamTextView);
 $core.addMethod(
 $core.method({
 selector: "newIn:title:text:of:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aSelector,aString,number,totalNumber){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -850,14 +853,14 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initializeWithTitle:selector:number:of:", "new", "yourself"]
 }),
-$globals.ExamTextView.klass);
+$globals.ExamTextView.a$cls);
 
 
-$core.addClass('Header', $globals.Widget, ['startExamHandler', 'headerElement', 'newExamHandler'], 'OndafSimulator');
+$core.addClass("Header", $globals.Widget, ["startExamHandler", "headerElement", "newExamHandler"], "OndafSimulator");
 $core.addMethod(
 $core.method({
 selector: "initialize",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -891,7 +894,7 @@ $globals.Header);
 $core.addMethod(
 $core.method({
 selector: "remove",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -915,7 +918,7 @@ $globals.Header);
 $core.addMethod(
 $core.method({
 selector: "renderOn:",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -973,7 +976,7 @@ $globals.Header);
 $core.addMethod(
 $core.method({
 selector: "whenNewExam:",
-protocol: 'events',
+protocol: "events",
 fn: function (aBlock){
 var self=this;
 self["@newExamHandler"]=aBlock;
@@ -992,7 +995,7 @@ $globals.Header);
 $core.addMethod(
 $core.method({
 selector: "whenStartExam:",
-protocol: 'events',
+protocol: "events",
 fn: function (aBlock){
 var self=this;
 self["@startExamHandler"]=aBlock;
@@ -1010,11 +1013,11 @@ $globals.Header);
 
 
 
-$core.addClass('OndafSimulator', $globals.Object, ['fileDropTarget', 'examDesigner', 'theExam', 'header', 'printer', 'currentExam', 'copies'], 'OndafSimulator');
+$core.addClass("OndafSimulator", $globals.Object, ["fileDropTarget", "examDesigner", "theExam", "header", "printer", "currentExam", "copies"], "OndafSimulator");
 $core.addMethod(
 $core.method({
 selector: "addText:",
-protocol: 'action',
+protocol: "action",
 fn: function (aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1038,7 +1041,7 @@ $globals.OndafSimulator);
 $core.addMethod(
 $core.method({
 selector: "addToList:",
-protocol: 'action',
+protocol: "action",
 fn: function (aTitle){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1062,9 +1065,9 @@ $globals.OndafSimulator);
 $core.addMethod(
 $core.method({
 selector: "augmentPage",
-protocol: 'starting',
+protocol: "starting",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -1074,7 +1077,7 @@ $recv($1)._whenStartExam_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return self._startExam();
+return $self._startExam();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1098,13 +1101,13 @@ $3="body"._asJQuery();
 $ctx1.sendIdx["asJQuery"]=2;
 //>>excludeEnd("ctx");
 $recv($1)._appendToJQuery_($3);
-self["@header"]=$recv($1)._yourself();
+$self["@header"]=$recv($1)._yourself();
 $recv($recv($recv($globals.HTMLCanvas)._onJQuery_("body"._asJQuery()))._section())._id_("content");
-self["@fileDropTarget"]=$recv($globals.TextFileDropTarget)._newIn_handler_("#content",(function(txt){
+$self["@fileDropTarget"]=$recv($globals.TextFileDropTarget)._newIn_handler_("#content",(function(txt){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return self._addText_(txt);
+return $self._addText_(txt);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({txt:txt},$ctx1,3)});
 //>>excludeEnd("ctx");
@@ -1116,7 +1119,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09\x22'#amber-with' asJQuery click: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x22\x0a\x09\x0a\x09header := Header new\x0a\x09\x09whenStartExam: [ self startExam ];\x0a\x09\x09whenNewExam: [ 'body' asJQuery empty. OndafSimulator start ];\x0a\x09\x09appendToJQuery: 'body' asJQuery;\x0a\x09\x09yourself.\x0a\x09\x0a\x09(HTMLCanvas onJQuery: 'body' asJQuery) section id: 'content'.\x0a\x09\x09\x0a\x09fileDropTarget := TextFileDropTarget\x0a\x09\x09newIn: '#content'\x0a\x09\x09handler: [ :txt | self addText: txt ]",
+source: "augmentPage\x0a\x09header := Header new\x0a\x09\x09whenStartExam: [ self startExam ];\x0a\x09\x09whenNewExam: [ 'body' asJQuery empty. OndafSimulator start ];\x0a\x09\x09appendToJQuery: 'body' asJQuery;\x0a\x09\x09yourself.\x0a\x09\x0a\x09(HTMLCanvas onJQuery: 'body' asJQuery) section id: 'content'.\x0a\x09\x09\x0a\x09fileDropTarget := TextFileDropTarget\x0a\x09\x09newIn: '#content'\x0a\x09\x09handler: [ :txt | self addText: txt ]",
 referencedClasses: ["Header", "OndafSimulator", "HTMLCanvas", "TextFileDropTarget"],
 //>>excludeEnd("ide");
 messageSends: ["whenStartExam:", "new", "startExam", "whenNewExam:", "empty", "asJQuery", "start", "appendToJQuery:", "yourself", "id:", "section", "onJQuery:", "newIn:handler:", "addText:"]
@@ -1126,7 +1129,7 @@ $globals.OndafSimulator);
 $core.addMethod(
 $core.method({
 selector: "beginNextText",
-protocol: 'action',
+protocol: "action",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1161,93 +1164,8 @@ $globals.OndafSimulator);
 
 $core.addMethod(
 $core.method({
-selector: "doAmberWith",
-protocol: 'action',
-fn: function (){
-var self=this;
-var tag;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-tag=$recv($recv($globals.HTMLCanvas)._onJQuery_("#output-list"._asJQuery()))._root();
-$recv(tag)._with_((function(html){
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx2) {
-//>>excludeEnd("ctx");
-return $recv($recv(html)._li())._with_("Amber Web #with: added me!");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx2) {$ctx2.fillBlock({html:html},$ctx1,1)});
-//>>excludeEnd("ctx");
-}));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.sendIdx["with:"]=1;
-//>>excludeEnd("ctx");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"doAmberWith",{tag:tag},$globals.OndafSimulator)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "doAmberWith\x0a\x09| tag |\x0a\x09tag := (HTMLCanvas onJQuery: '#output-list' asJQuery) root.\x0a\x09tag with: [ :html | html li with: 'Amber Web #with: added me!' ]",
-referencedClasses: ["HTMLCanvas"],
-//>>excludeEnd("ide");
-messageSends: ["root", "onJQuery:", "asJQuery", "with:", "li"]
-}),
-$globals.OndafSimulator);
-
-$core.addMethod(
-$core.method({
-selector: "doJQueryAppend",
-protocol: 'action',
-fn: function (){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv("#output-list"._asJQuery())._append_("<li>jQuery append added me!</li>");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"doJQueryAppend",{},$globals.OndafSimulator)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "doJQueryAppend\x0a\x09'#output-list' asJQuery append: '<li>jQuery append added me!</li>'",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["append:", "asJQuery"]
-}),
-$globals.OndafSimulator);
-
-$core.addMethod(
-$core.method({
-selector: "doSilkTAG",
-protocol: 'action',
-fn: function (){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv("#output-list"._asSilk())._LI_("Silk TAG: added me!");
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"doSilkTAG",{},$globals.OndafSimulator)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "doSilkTAG\x0a\x09'#output-list' asSilk LI: 'Silk TAG: added me!'",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["LI:", "asSilk"]
-}),
-$globals.OndafSimulator);
-
-$core.addMethod(
-$core.method({
 selector: "hideDropArea",
-protocol: 'action',
+protocol: "action",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1272,7 +1190,7 @@ $globals.OndafSimulator);
 $core.addMethod(
 $core.method({
 selector: "initialize",
-protocol: 'starting',
+protocol: "starting",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1314,7 +1232,7 @@ $globals.OndafSimulator);
 $core.addMethod(
 $core.method({
 selector: "startExam",
-protocol: 'action',
+protocol: "action",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1360,11 +1278,11 @@ messageSends: ["hideDropArea", "designExam", "print:", "do:", "whenFinishDo:", "
 $globals.OndafSimulator);
 
 
-$globals.OndafSimulator.klass.iVarNames = ['currentInstance'];
+$globals.OndafSimulator.a$cls.iVarNames = ["currentInstance"];
 $core.addMethod(
 $core.method({
 selector: "current",
-protocol: 'starting',
+protocol: "starting",
 fn: function (){
 var self=this;
 return self["@currentInstance"];
@@ -1377,12 +1295,12 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []
 }),
-$globals.OndafSimulator.klass);
+$globals.OndafSimulator.a$cls);
 
 $core.addMethod(
 $core.method({
 selector: "start",
-protocol: 'starting',
+protocol: "starting",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1403,14 +1321,14 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["new", "empty", "asJQuery", "augmentPage", "current"]
 }),
-$globals.OndafSimulator.klass);
+$globals.OndafSimulator.a$cls);
 
 
-$core.addClass('ResultView', $globals.Widget, ['score', 'totalScore', 'percentage', 'level', 'container'], 'OndafSimulator');
+$core.addClass("ResultView", $globals.Widget, ["score", "totalScore", "percentage", "level", "container"], "OndafSimulator");
 $core.addMethod(
 $core.method({
 selector: "container:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aContainer){
 var self=this;
 self["@container"]=aContainer;
@@ -1429,7 +1347,7 @@ $globals.ResultView);
 $core.addMethod(
 $core.method({
 selector: "level:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aLevel){
 var self=this;
 self["@level"]=aLevel;
@@ -1448,7 +1366,7 @@ $globals.ResultView);
 $core.addMethod(
 $core.method({
 selector: "percentage:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aPercentage){
 var self=this;
 self["@percentage"]=aPercentage;
@@ -1467,7 +1385,7 @@ $globals.ResultView);
 $core.addMethod(
 $core.method({
 selector: "renderOn:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1589,7 +1507,7 @@ $globals.ResultView);
 $core.addMethod(
 $core.method({
 selector: "renderScore:of:percentage:level:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aScore,aTotalScore,aPercentage,aLevel){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1617,7 +1535,7 @@ $globals.ResultView);
 $core.addMethod(
 $core.method({
 selector: "score:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aScore){
 var self=this;
 self["@score"]=aScore;
@@ -1636,7 +1554,7 @@ $globals.ResultView);
 $core.addMethod(
 $core.method({
 selector: "totalScore:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aScore){
 var self=this;
 self["@totalScore"]=aScore;
@@ -1656,7 +1574,7 @@ $globals.ResultView);
 $core.addMethod(
 $core.method({
 selector: "newIn:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aSelector){
 var self=this;
 var container;
@@ -1683,14 +1601,14 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["asJQuery", "prepend:", "container:", "new", "yourself"]
 }),
-$globals.ResultView.klass);
+$globals.ResultView.a$cls);
 
 
-$core.addClass('TextCard', $globals.Widget, ['card', 'title'], 'OndafSimulator');
+$core.addClass("TextCard", $globals.Widget, ["card", "title"], "OndafSimulator");
 $core.addMethod(
 $core.method({
 selector: "initializeWith:",
-protocol: 'initialization',
+protocol: "initialization",
 fn: function (aTitle){
 var self=this;
 self["@title"]=aTitle;
@@ -1709,7 +1627,7 @@ $globals.TextCard);
 $core.addMethod(
 $core.method({
 selector: "renderOn:",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1737,7 +1655,7 @@ $globals.TextCard);
 $core.addMethod(
 $core.method({
 selector: "newIn:title:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aSelector,aString){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1759,14 +1677,14 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["initializeWith:", "new", "appendToJQuery:", "asJQuery", "yourself"]
 }),
-$globals.TextCard.klass);
+$globals.TextCard.a$cls);
 
 
-$core.addClass('TextFileDropTarget', $globals.Widget, ['dropArea', 'handler'], 'OndafSimulator');
+$core.addClass("TextFileDropTarget", $globals.Widget, ["dropArea", "handler"], "OndafSimulator");
 $core.addMethod(
 $core.method({
 selector: "handleDrop:",
-protocol: 'private',
+protocol: "private",
 fn: function (files){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1818,7 +1736,7 @@ $globals.TextFileDropTarget);
 $core.addMethod(
 $core.method({
 selector: "handler:",
-protocol: 'events',
+protocol: "events",
 fn: function (aBlock){
 var self=this;
 self["@handler"]=aBlock;
@@ -1837,7 +1755,7 @@ $globals.TextFileDropTarget);
 $core.addMethod(
 $core.method({
 selector: "hide",
-protocol: 'actions',
+protocol: "actions",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1861,7 +1779,7 @@ $globals.TextFileDropTarget);
 $core.addMethod(
 $core.method({
 selector: "renderOn:",
-protocol: 'rendering',
+protocol: "rendering",
 fn: function (html){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1956,7 +1874,7 @@ $globals.TextFileDropTarget);
 $core.addMethod(
 $core.method({
 selector: "newIn:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aSelector){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1976,12 +1894,12 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["newIn:handler:"]
 }),
-$globals.TextFileDropTarget.klass);
+$globals.TextFileDropTarget.a$cls);
 
 $core.addMethod(
 $core.method({
 selector: "newIn:handler:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aSelector,aBlock){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2003,14 +1921,14 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["handler:", "new", "appendToJQuery:", "asJQuery", "yourself"]
 }),
-$globals.TextFileDropTarget.klass);
+$globals.TextFileDropTarget.a$cls);
 
 
-$core.addClass('Timer', $globals.Object, ['action', 'delay', 'intervalId'], 'OndafSimulator');
+$core.addClass("Timer", $globals.Object, ["action", "delay", "intervalId"], "OndafSimulator");
 $core.addMethod(
 $core.method({
 selector: "action:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (aBlock){
 var self=this;
 self["@action"]=aBlock;
@@ -2029,7 +1947,7 @@ $globals.Timer);
 $core.addMethod(
 $core.method({
 selector: "milliseconds:",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (someMillis){
 var self=this;
 self["@delay"]=someMillis;
@@ -2048,7 +1966,7 @@ $globals.Timer);
 $core.addMethod(
 $core.method({
 selector: "start",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2072,7 +1990,7 @@ $globals.Timer);
 $core.addMethod(
 $core.method({
 selector: "stop",
-protocol: 'as yet unclassified',
+protocol: "as yet unclassified",
 fn: function (){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2097,7 +2015,7 @@ $globals.Timer);
 $core.addMethod(
 $core.method({
 selector: "each:do:",
-protocol: 'instance creation',
+protocol: "instance creation",
 fn: function (milliseconds,aBlock){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -2119,12 +2037,12 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["milliseconds:", "new", "action:", "yourself"]
 }),
-$globals.Timer.klass);
+$globals.Timer.a$cls);
 
 $core.addMethod(
 $core.method({
 selector: "on:do:",
-protocol: 'instance creation',
+protocol: "instance creation",
 fn: function (milliseconds,aBlock){
 var self=this;
 var newTimer;
@@ -2157,12 +2075,12 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["milliseconds:", "new", "yourself", "action:", "value", "stop"]
 }),
-$globals.Timer.klass);
+$globals.Timer.a$cls);
 
 $core.addMethod(
 $core.method({
 selector: "ofNative:",
-protocol: '*OndafSimulator',
+protocol: "*OndafSimulator",
 fn: function (aCollection){
 var self=this;
 var newArray;
@@ -2196,12 +2114,12 @@ referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["new:", "length", "to:do:", "at:put:", "at:", "-"]
 }),
-$globals.Array.klass);
+$globals.Array.a$cls);
 
 $core.addMethod(
 $core.method({
 selector: "newWithValues:",
-protocol: '*OndafSimulator',
+protocol: "*OndafSimulator",
 fn: function (aCollection){
 var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
