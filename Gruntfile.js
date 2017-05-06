@@ -52,14 +52,14 @@ module.exports = function (grunt) {
                     mainConfigFile: "config.js",
                     rawText: {
                         "amber/compatibility": "/*stub*/",
-                        "amber/Platform": "define()", //eg. nothing, TODO remove
-                        "app": 'define(["deploy", "amber_core/Platform-Browser"],function(x){return x});'
+                        "amber/Platform": "/*stub*/",
+                        "app": 'define(["deploy"],function(x){return x});'
                     },
                     pragmas: {
                         excludeIdeData: true,
                         excludeDebugContexts: true
                     },
-                    include: ['config', 'config-browser', 'amber/Platform' /*TODO remove*/, 'node_modules/requirejs/require', 'app', 'amber/lazypack'],
+                    include: ['config', 'config-browser', 'node_modules/requirejs/require', 'app', 'amber/lazypack'],
                     optimize: "uglify2",
                     out: "the.js"
                 }
