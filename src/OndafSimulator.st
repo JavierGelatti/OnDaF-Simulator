@@ -6,8 +6,12 @@ Object subclass: #ExamPrinterTray
 
 !ExamPrinterTray methodsFor: 'as yet unclassified'!
 
-newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds 
-	^ CTestTextCopy newWithView: (ExamTextView newIn: selector title: aString text: textNumber of: totalTexts)
+newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds
+	| examView |
+	examView := ExamTextView newIn: selector title: aString text: textNumber of: totalTexts.
+	^ (CTestTextCopy newWithView: examView)
+		time: aTimeInSeconds;
+		yourself
 !
 
 selector: aSelector
@@ -91,6 +95,10 @@ onContinueCheckboxChanged
 	(continueCheckbox is: ':checked')
 		ifTrue: [ continueButton css: 'visibility' value: 'visible' ]
 		ifFalse: [ continueButton css: 'visibility' value: 'hidden' ]
+!
+
+time: ignored
+	" TODO: implement this "
 ! !
 
 !ExamTextView methodsFor: 'rendering'!
@@ -230,7 +238,7 @@ renderOn: html
 ! !
 
 Object subclass: #OndafSimulator
-	instanceVariableNames: 'fileDropTarget examDesigner theExam header printer currentExam copies'
+	instanceVariableNames: 'fileDropTarget examDesigner theExam header printer currentExam copies timer timerProvider'
 	package: 'OndafSimulator'!
 
 !OndafSimulator methodsFor: 'action'!
@@ -244,12 +252,18 @@ addToList: aTitle
 !
 
 beginNextText
+	timer stop.
+	
 	currentExam atEnd ifTrue: [
 		| result |
 		result := theExam evaluate: copies on: (ResultView newIn: '#content').
 		result giveToStudent.
 	] ifFalse: [
-		currentExam next giveToStudent.
+		| text |
+		text := currentExam next.
+		timer := timerProvider on: (text timeInSeconds * 1000) do: [ self beginNextText ].
+		timer start.
+		text giveToStudent.
 	]
 !
 
@@ -288,10 +302,16 @@ augmentPage
 
 initialize
 	super initialize.
+	timerProvider := Timer.
+	timer := timerProvider new.
 	examDesigner := ExamDesigner new.
 	printer := CTestPrinter newWithTray: (ExamPrinterTray newOn: '#content').
 	examDesigner
 		informProgressTo: [ :title | self addToList: title ]
+!
+
+timerProvider: aTimerProvider
+	timerProvider := aTimerProvider
 ! !
 
 OndafSimulator class instanceVariableNames: 'currentInstance'!

@@ -22,21 +22,26 @@ $core.method({
 selector: "newCopy:of:titled:withTime:",
 protocol: "as yet unclassified",
 fn: function (textNumber,totalTexts,aString,aTimeInSeconds){
-var self=this;
+var self=this,$self=this;
+var examView;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-return $recv($globals.CTestTextCopy)._newWithView_($recv($globals.ExamTextView)._newIn_title_text_of_(self["@selector"],aString,textNumber,totalTexts));
+var $1;
+examView=$recv($globals.ExamTextView)._newIn_title_text_of_($self["@selector"],aString,textNumber,totalTexts);
+$1=$recv($globals.CTestTextCopy)._newWithView_(examView);
+$recv($1)._time_(aTimeInSeconds);
+return $recv($1)._yourself();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"newCopy:of:titled:withTime:",{textNumber:textNumber,totalTexts:totalTexts,aString:aString,aTimeInSeconds:aTimeInSeconds},$globals.ExamPrinterTray)});
+}, function($ctx1) {$ctx1.fill(self,"newCopy:of:titled:withTime:",{textNumber:textNumber,totalTexts:totalTexts,aString:aString,aTimeInSeconds:aTimeInSeconds,examView:examView},$globals.ExamPrinterTray)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["textNumber", "totalTexts", "aString", "aTimeInSeconds"],
-source: "newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds \x0a\x09^ CTestTextCopy newWithView: (ExamTextView newIn: selector title: aString text: textNumber of: totalTexts)",
-referencedClasses: ["CTestTextCopy", "ExamTextView"],
+source: "newCopy: textNumber of: totalTexts titled: aString withTime: aTimeInSeconds\x0a\x09| examView |\x0a\x09examView := ExamTextView newIn: selector title: aString text: textNumber of: totalTexts.\x0a\x09^ (CTestTextCopy newWithView: examView)\x0a\x09\x09time: aTimeInSeconds;\x0a\x09\x09yourself",
+referencedClasses: ["ExamTextView", "CTestTextCopy"],
 //>>excludeEnd("ide");
-messageSends: ["newWithView:", "newIn:title:text:of:"]
+messageSends: ["newIn:title:text:of:", "time:", "newWithView:", "yourself"]
 }),
 $globals.ExamPrinterTray);
 
@@ -811,6 +816,24 @@ $globals.ExamTextView);
 
 $core.addMethod(
 $core.method({
+selector: "time:",
+protocol: "private",
+fn: function (ignored){
+var self=this,$self=this;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["ignored"],
+source: "time: ignored\x0a\x09\x22 TODO: implement this \x22",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.ExamTextView);
+
+$core.addMethod(
+$core.method({
 selector: "whenContinueDo:",
 protocol: "rendering",
 fn: function (aBlock){
@@ -1013,17 +1036,17 @@ $globals.Header);
 
 
 
-$core.addClass("OndafSimulator", $globals.Object, ["fileDropTarget", "examDesigner", "theExam", "header", "printer", "currentExam", "copies"], "OndafSimulator");
+$core.addClass("OndafSimulator", $globals.Object, ["fileDropTarget", "examDesigner", "theExam", "header", "printer", "currentExam", "copies", "timer", "timerProvider"], "OndafSimulator");
 $core.addMethod(
 $core.method({
 selector: "addText:",
 protocol: "action",
 fn: function (aString){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-$recv(self["@examDesigner"])._considerText_(aString);
+$recv($self["@examDesigner"])._considerText_(aString);
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"addText:",{aString:aString},$globals.OndafSimulator)});
@@ -1043,7 +1066,7 @@ $core.method({
 selector: "addToList:",
 protocol: "action",
 fn: function (aTitle){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -1136,6 +1159,7 @@ var self=this,$self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 var $1;
+$recv($self["@timer"])._stop();
 $1=$recv($self["@currentExam"])._atEnd();
 if($core.assert($1)){
 var result;
@@ -1146,7 +1170,21 @@ $recv(result)._giveToStudent();
 $ctx1.sendIdx["giveToStudent"]=1;
 //>>excludeEnd("ctx");
 } else {
-$recv($recv($self["@currentExam"])._next())._giveToStudent();
+var text;
+text=$recv($self["@currentExam"])._next();
+text;
+$self["@timer"]=$recv($self["@timerProvider"])._on_do_($recv($recv(text)._timeInSeconds()).__star((1000)),(function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $self._beginNextText();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,3)});
+//>>excludeEnd("ctx");
+}));
+$self["@timer"];
+$recv($self["@timer"])._start();
+$recv(text)._giveToStudent();
 }
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -1155,10 +1193,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "beginNextText\x0a\x09currentExam atEnd ifTrue: [\x0a\x09\x09| result |\x0a\x09\x09result := theExam evaluate: copies on: (ResultView newIn: '#content').\x0a\x09\x09result giveToStudent.\x0a\x09] ifFalse: [\x0a\x09\x09currentExam next giveToStudent.\x0a\x09]",
+source: "beginNextText\x0a\x09timer stop.\x0a\x09\x0a\x09currentExam atEnd ifTrue: [\x0a\x09\x09| result |\x0a\x09\x09result := theExam evaluate: copies on: (ResultView newIn: '#content').\x0a\x09\x09result giveToStudent.\x0a\x09] ifFalse: [\x0a\x09\x09| text |\x0a\x09\x09text := currentExam next.\x0a\x09\x09timer := timerProvider on: (text timeInSeconds * 1000) do: [ self beginNextText ].\x0a\x09\x09timer start.\x0a\x09\x09text giveToStudent.\x0a\x09]",
 referencedClasses: ["ResultView"],
 //>>excludeEnd("ide");
-messageSends: ["ifTrue:ifFalse:", "atEnd", "evaluate:on:", "newIn:", "giveToStudent", "next"]
+messageSends: ["stop", "ifTrue:ifFalse:", "atEnd", "evaluate:on:", "newIn:", "giveToStudent", "next", "on:do:", "*", "timeInSeconds", "beginNextText", "start"]
 }),
 $globals.OndafSimulator);
 
@@ -1192,7 +1230,7 @@ $core.method({
 selector: "initialize",
 protocol: "starting",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
@@ -1200,17 +1238,22 @@ return $core.withContext(function($ctx1) {
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = true,
 //>>excludeEnd("ctx");
-($globals.OndafSimulator.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
+($globals.OndafSimulator.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($self, []));
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.supercall = false;
 //>>excludeEnd("ctx");;
-self["@examDesigner"]=$recv($globals.ExamDesigner)._new();
-self["@printer"]=$recv($globals.CTestPrinter)._newWithTray_($recv($globals.ExamPrinterTray)._newOn_("#content"));
-$recv(self["@examDesigner"])._informProgressTo_((function(title){
+$self["@timerProvider"]=$globals.Timer;
+$self["@timer"]=$recv($self["@timerProvider"])._new();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["new"]=1;
+//>>excludeEnd("ctx");
+$self["@examDesigner"]=$recv($globals.ExamDesigner)._new();
+$self["@printer"]=$recv($globals.CTestPrinter)._newWithTray_($recv($globals.ExamPrinterTray)._newOn_("#content"));
+$recv($self["@examDesigner"])._informProgressTo_((function(title){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return self._addToList_(title);
+return $self._addToList_(title);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({title:title},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1222,8 +1265,8 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09examDesigner := ExamDesigner new.\x0a\x09printer := CTestPrinter newWithTray: (ExamPrinterTray newOn: '#content').\x0a\x09examDesigner\x0a\x09\x09informProgressTo: [ :title | self addToList: title ]\x0a\x09",
-referencedClasses: ["ExamDesigner", "CTestPrinter", "ExamPrinterTray"],
+source: "initialize\x0a\x09super initialize.\x0a\x09timerProvider := Timer.\x0a\x09timer := timerProvider new.\x0a\x09examDesigner := ExamDesigner new.\x0a\x09printer := CTestPrinter newWithTray: (ExamPrinterTray newOn: '#content').\x0a\x09examDesigner\x0a\x09\x09informProgressTo: [ :title | self addToList: title ]\x0a\x09",
+referencedClasses: ["Timer", "ExamDesigner", "CTestPrinter", "ExamPrinterTray"],
 //>>excludeEnd("ide");
 messageSends: ["initialize", "new", "newWithTray:", "newOn:", "informProgressTo:", "addToList:"]
 }),
@@ -1277,6 +1320,25 @@ messageSends: ["finishExamDesign", "designExam", "print:", "do:", "whenFinishDo:
 }),
 $globals.OndafSimulator);
 
+$core.addMethod(
+$core.method({
+selector: "timerProvider:",
+protocol: "starting",
+fn: function (aTimerProvider){
+var self=this,$self=this;
+$self["@timerProvider"]=aTimerProvider;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aTimerProvider"],
+source: "timerProvider: aTimerProvider\x0a\x09timerProvider := aTimerProvider",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.OndafSimulator);
+
 
 $globals.OndafSimulator.a$cls.iVarNames = ["currentInstance"];
 $core.addMethod(
@@ -1284,8 +1346,8 @@ $core.method({
 selector: "current",
 protocol: "starting",
 fn: function (){
-var self=this;
-return self["@currentInstance"];
+var self=this,$self=this;
+return $self["@currentInstance"];
 
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
@@ -1302,16 +1364,16 @@ $core.method({
 selector: "start",
 protocol: "starting",
 fn: function (){
-var self=this;
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-self["@currentInstance"]=self._new();
+$self["@currentInstance"]=$self._new();
 $recv("body"._asJQuery())._empty();
-$recv(self._current())._augmentPage();
+$recv($self._current())._augmentPage();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"start",{},$globals.OndafSimulator.klass)});
+}, function($ctx1) {$ctx1.fill(self,"start",{},$globals.OndafSimulator.a$cls)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);

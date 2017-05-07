@@ -2975,7 +2975,7 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test01\x09\x09\x0a\x09self assert: spyView printedText equals: '|The title (59s)| Some Text. Plan ahea_ '",
+source: "test01\x09\x0a\x09self assert: spyView printedText equals: '|The title (59s)| Some Text. Plan ahea_ '",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["assert:equals:", "printedText"]
@@ -3175,6 +3175,30 @@ source: "test08\x09\x0a\x09copy giveToStudent.\x0a\x09copy finish.\x0a\x09\x0a\x
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["giveToStudent", "finish", "giveBackToStudent", "assert:", "wasShown"]
+}),
+$globals.TextCopyTest);
+
+$core.addMethod(
+$core.method({
+selector: "test09",
+protocol: "tests",
+fn: function (){
+var self=this,$self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+$self._assert_equals_($recv($self["@copy"])._timeInSeconds(),(59));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"test09",{},$globals.TextCopyTest)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "test09\x0a\x09self assert: copy timeInSeconds equals: 59",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["assert:equals:", "timeInSeconds"]
 }),
 $globals.TextCopyTest);
 

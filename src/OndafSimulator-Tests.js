@@ -1437,13 +1437,21 @@ var inputs,timer;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 timer=$recv($globals.TestTimer)._new();
+$recv($recv($globals.OndafSimulator)._current())._timerProvider_(timer);
 $self._dropTextWithTitle_contents_("Beispiel Text 1","First text. Hello wor{ld}. This is an exam{ple}.");
 $self._afterThat_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
+$recv(console)._log_("2");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx2.sendIdx["log:"]=1;
+//>>excludeEnd("ctx");
 $self._startExam();
-return $self._completeExamWith_(["ld", "wrong"]);
+$recv(console)._log_("!!");
+$self._completeExamWith_(["ld", "wrong"]);
+$recv(timer)._forwardTime_($recv((2).__star((15))).__plus((1)));
+return $self._assertPageContains_("Ergebnis");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -1455,10 +1463,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "test06\x0a\x09| inputs timer |\x0a\x09timer := TestTimer new.\x0a\x09\x22OndafSimulator current timer: timer.\x22\x0a\x0a\x09self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09self startExam.\x0a\x09\x09\x0a\x09\x09self completeExamWith: #('ld' 'wrong').\x0a\x09\x09\x0a\x09\x09\x22timer forwardTime: 30.\x22\x0a\x09\x09\x0a\x09\x09\x22self assertPageContains: 'Ergebnis'.\x22\x0a\x09]",
-referencedClasses: ["TestTimer"],
+source: "test06\x0a\x09| inputs timer |\x0a\x09timer := TestTimer new.\x0a\x09OndafSimulator current timerProvider: timer.\x0a\x0a\x09self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.\x0a\x09\x0a\x09self afterThat: [\x0a\x09\x09console log: '2'.\x0a\x09\x09self startExam.\x0a\x09\x09console log: '!!'.\x0a\x09\x09\x0a\x09\x09self completeExamWith: #('ld' 'wrong').\x0a\x09\x09\x0a\x09\x09timer forwardTime: (2 * 15) + 1.\x0a\x09\x09\x0a\x09\x09self assertPageContains: 'Ergebnis'.\x0a\x09]",
+referencedClasses: ["TestTimer", "OndafSimulator"],
 //>>excludeEnd("ide");
-messageSends: ["new", "dropTextWithTitle:contents:", "afterThat:", "startExam", "completeExamWith:"]
+messageSends: ["new", "timerProvider:", "current", "dropTextWithTitle:contents:", "afterThat:", "log:", "startExam", "completeExamWith:", "forwardTime:", "+", "*", "assertPageContains:"]
 }),
 $globals.OndafSimulatorTest);
 
@@ -2074,114 +2082,25 @@ $globals.FileDropper);
 
 
 
-$core.addClass("TestTimer", $globals.Object, ["time", "onTrigger", "onHandler", "handler", "trigger", "stopped"], "OndafSimulator-Tests");
+$core.addClass("TestTimer", $globals.Object, ["action"], "OndafSimulator-Tests");
 $core.addMethod(
 $core.method({
-selector: "each:do:",
+selector: "forwardTime:",
 protocol: "as yet unclassified",
-fn: function (milliseconds,aBlock){
-var self=this;
-self["@trigger"]=milliseconds;
-self["@handler"]=aBlock;
-return self;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: ["milliseconds", "aBlock"],
-source: "each: milliseconds do: aBlock\x0a\x09trigger := milliseconds.\x0a\x09handler := aBlock.\x0a\x09^ self",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.TestTimer);
-
-$core.addMethod(
-$core.method({
-selector: "initialize",
-protocol: "as yet unclassified",
-fn: function (){
-var self=this;
+fn: function (millis){
+var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-(
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = true,
-//>>excludeEnd("ctx");
-($globals.TestTimer.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($recv(self), []));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx1.supercall = false;
-//>>excludeEnd("ctx");;
-self["@stopped"]=false;
+$recv($self["@action"])._value();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.TestTimer)});
+}, function($ctx1) {$ctx1.fill(self,"forwardTime:",{millis:millis},$globals.TestTimer)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09stopped := false",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: ["initialize"]
-}),
-$globals.TestTimer);
-
-$core.addMethod(
-$core.method({
-selector: "stop",
-protocol: "as yet unclassified",
-fn: function (){
-var self=this;
-self["@stopped"]=true;
-return self;
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "stop\x0a\x09stopped := true",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.TestTimer);
-
-$core.addMethod(
-$core.method({
-selector: "stopped",
-protocol: "as yet unclassified",
-fn: function (){
-var self=this;
-return self["@stopped"];
-
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "stopped\x0a\x09^ stopped",
-referencedClasses: [],
-//>>excludeEnd("ide");
-messageSends: []
-}),
-$globals.TestTimer);
-
-$core.addMethod(
-$core.method({
-selector: "tick",
-protocol: "as yet unclassified",
-fn: function (){
-var self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-$recv(self["@handler"])._value();
-return self;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"tick",{},$globals.TestTimer)});
-//>>excludeEnd("ctx");
-},
-//>>excludeStart("ide", pragmas.excludeIdeData);
-args: [],
-source: "tick\x0a\x09handler value",
+args: ["millis"],
+source: "forwardTime: millis\x0a\x09action value",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["value"]
@@ -2190,16 +2109,87 @@ $globals.TestTimer);
 
 $core.addMethod(
 $core.method({
-selector: "triggerMillis",
+selector: "initialize",
 protocol: "as yet unclassified",
 fn: function (){
-var self=this;
-return self["@trigger"];
+var self=this,$self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+(
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = true,
+//>>excludeEnd("ctx");
+($globals.TestTimer.superclass||$boot.nilAsClass).fn.prototype._initialize.apply($self, []));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.supercall = false;
+//>>excludeEnd("ctx");;
+$self["@action"]=(function(){
+
+});
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"initialize",{},$globals.TestTimer)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "initialize\x0a\x09super initialize.\x0a\x09action := []",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["initialize"]
+}),
+$globals.TestTimer);
+
+$core.addMethod(
+$core.method({
+selector: "on:do:",
+protocol: "as yet unclassified",
+fn: function (milliseconds,aBlock){
+var self=this,$self=this;
+$self["@action"]=aBlock;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["milliseconds", "aBlock"],
+source: "on: milliseconds do: aBlock\x0a\x09action := aBlock.\x0a\x09^ self",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TestTimer);
+
+$core.addMethod(
+$core.method({
+selector: "start",
+protocol: "as yet unclassified",
+fn: function (){
+var self=this,$self=this;
+return self;
 
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "triggerMillis\x0a\x09^ trigger",
+source: "start",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.TestTimer);
+
+$core.addMethod(
+$core.method({
+selector: "stop",
+protocol: "as yet unclassified",
+fn: function (){
+var self=this,$self=this;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "stop",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: []

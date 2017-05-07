@@ -2539,6 +2539,24 @@ $globals.CTestTextCopy);
 
 $core.addMethod(
 $core.method({
+selector: "timeInSeconds",
+protocol: "accessing",
+fn: function (){
+var self=this,$self=this;
+return $self["@time"];
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "timeInSeconds\x0a\x09^ time",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.CTestTextCopy);
+
+$core.addMethod(
+$core.method({
 selector: "title:",
 protocol: "as yet unclassified",
 fn: function (aString){

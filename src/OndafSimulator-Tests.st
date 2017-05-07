@@ -408,18 +408,20 @@ test05CanResetToANewExam
 test06
 	| inputs timer |
 	timer := TestTimer new.
-	"OndafSimulator current timer: timer."
+	OndafSimulator current timerProvider: timer.
 
 	self dropTextWithTitle: 'Beispiel Text 1' contents: 'First text. Hello wor{ld}. This is an exam{ple}.'.
 	
 	self afterThat: [
+		console log: '2'.
 		self startExam.
+		console log: '!!!!'.
 		
 		self completeExamWith: #('ld' 'wrong').
 		
-		"timer forwardTime: 30."
+		timer forwardTime: (2 * 15) + 1.
 		
-		"self assertPageContains: 'Ergebnis'."
+		self assertPageContains: 'Ergebnis'.
 	]
 ! !
 
@@ -594,36 +596,29 @@ newObject
 ! !
 
 Object subclass: #TestTimer
-	instanceVariableNames: 'time onTrigger onHandler handler trigger stopped'
+	instanceVariableNames: 'action'
 	package: 'OndafSimulator-Tests'!
 
 !TestTimer methodsFor: 'as yet unclassified'!
 
-each: milliseconds do: aBlock
-	trigger := milliseconds.
-	handler := aBlock.
-	^ self
+forwardTime: millis
+	action value
 !
 
 initialize
 	super initialize.
-	stopped := false
+	action := []
+!
+
+on: milliseconds do: aBlock
+	action := aBlock.
+	^ self
+!
+
+start
 !
 
 stop
-	stopped := true
-!
-
-stopped
-	^ stopped
-!
-
-tick
-	handler value
-!
-
-triggerMillis
-	^ trigger
 ! !
 
 Object subclass: #WidgetPreviews
